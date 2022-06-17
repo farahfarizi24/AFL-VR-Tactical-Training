@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3003319447442629550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 447861765251260731}
+  - component: {fileID: -8345239932155407716}
+  m_Layer: 0
+  m_Name: RugbyPrefabNew
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &447861765251260731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3003319447442629550}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7380510506380299884}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &-8345239932155407716
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3003319447442629550}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 6eaa879b385e8c44187519982ec135a4, type: 3}
+  m_Controller: {fileID: 9100000, guid: 626bead88149f1e4780b41fdc4c9fdf4, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &2528318179903513974
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 447861765251260731}
+    m_Modifications:
+    - target: {fileID: -4216859302048453862, guid: 6eaa879b385e8c44187519982ec135a4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 6eaa879b385e8c44187519982ec135a4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.4278193
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 6eaa879b385e8c44187519982ec135a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.1890388
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 6eaa879b385e8c44187519982ec135a4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.2668056
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 6eaa879b385e8c44187519982ec135a4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 6eaa879b385e8c44187519982ec135a4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 6eaa879b385e8c44187519982ec135a4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 6eaa879b385e8c44187519982ec135a4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 6eaa879b385e8c44187519982ec135a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 6eaa879b385e8c44187519982ec135a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 6eaa879b385e8c44187519982ec135a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 6eaa879b385e8c44187519982ec135a4,
+        type: 3}
+      propertyPath: m_Name
+      value: RugbyLOD1R
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6eaa879b385e8c44187519982ec135a4, type: 3}
+--- !u!4 &7380510506380299884 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 6eaa879b385e8c44187519982ec135a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2528318179903513974}
+  m_PrefabAsset: {fileID: 0}

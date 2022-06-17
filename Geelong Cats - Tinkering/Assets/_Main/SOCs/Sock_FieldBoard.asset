@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4aa67c8a0ae4a645949bfddf1a23099, type: 3}
+  m_Name: Sock_FieldBoard
+  m_EditorClassIdentifier: 
+  EagleEyeCamera: {fileID: 0}
+  PosPinPrefab: {fileID: 8046289014485582978, guid: 3f8cf7043f407ec45a3899233b4aac47,
+    type: 3}
+  PosMarkerPrefab: {fileID: 2970436659935508161, guid: 15c3d214c77cc7f449b0b9a3a58f092b,
+    type: 3}
+  HomeTeamMaterial: {fileID: 2100000, guid: 1ea8071bf385fa7448672056c10ed717, type: 2}
+  AwayTeamMaterial: {fileID: 2100000, guid: e76883891c9df754ebdee29ec49484f5, type: 2}
+  OriginOffsetX: 0.00515
+  OriginOffsetY: 0.005
+  OriginOffsetZ: 0.00585
+  MoveMultiplier: 1
+  RotateMultiplier: 1

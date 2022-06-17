@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d1fce44efadd11f45bc7da37c27a25b4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - p_NetSpawnerSock: {fileID: 11400000, guid: 460bb09c779856049acee27d2c0ccef1, type: 2}
+  - p_LevelStateMachineSock: {fileID: 11400000, guid: 6e2eab29f3cf71d45a07ecd545797b7c,
+      type: 2}
+  - m_HomeParentSpawnLoc: {instanceID: 0}
+  - m_AwayParentSpawnLoc: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

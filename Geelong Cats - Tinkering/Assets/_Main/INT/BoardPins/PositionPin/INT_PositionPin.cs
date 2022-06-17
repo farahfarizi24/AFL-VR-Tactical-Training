@@ -1,0 +1,220 @@
+﻿using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+
+using TMPro;
+using EPOOutline;
+
+namespace com.DU.CE.INT
+{
+    public class INT_PositionPin : XRBaseInteractable, INT_IBoardLinkedPin
+    {
+        [SerializeField] private SOC_FieldBoard m_BoardSock = null;
+        [Space]
+        [SerializeField] private GameObject m_pinHead = null;
+        [SerializeField] private GameObject m_pinMesh = null;
+        [SerializeField] private GameObject m_pinArrow = null;
+        [Space]
+        [SerializeField] private TextMeshPro m_tmpTeamNumber = null;
+        [SerializeField] private MeshRenderer[] m_meshRenders = null;
+
+        // Reference to IBoardPinObject
+        private INT_IBoardLinkedPin m_pin { get => this; }
+        private INT_ILinkedPinObject m_linkedObject = null;
+
+        private bool m_islinkedObjectActive = false;
+        private bool m_isBoardOpen = false;
+
+        // Point on the field the pin points to
+        private Vector3 m_fieldPoint = Vector3.zero;
+        private XRBaseInteractor m_xrInteractor = null;
+        private Vector3 m_previousHandPosition = Vector3.zero;
+
+        // Reference to components
+        private Outlinable m_outlineComponent = null;
+
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            // Get all references
+            m_outlineComponent = GetComponent<Outlinable>();
+
+            m_pin.SwitchPin(false);
+
+            m_tmpTeamNumber.enabled = false;
+            m_pinArrow.SetActive(false);
+        }
+
+
+        #region XRBaseInteractable Callbacks
+
+        protected override void OnHoverEntered(HoverEnterEventArgs args)
+        {
+            m_outlineComponent.enabled = true;
+            m_tmpTeamNumber.enabled = true;
+            m_pinArrow.SetActive(true);
+        }
+
+        protected override void OnHoverExited(HoverExitEventArgs args)
+        {
+            m_outlineComponent.enabled = false;
+            m_tmpTeamNumber.enabled = false;
+            m_pinArrow.SetActive(false);
+        }
+
+        protected override void OnSelectEntered(SelectEnterEventArgs args)
+        {
+            //m_boardPins.M_IsPicked = true;
+
+            // Change outline to selected colour
+            m_outlineComponent.OutlineColor = Color.green;
+            m_pinHead.transform.localPosition += (0.015f * Vector3.up);
+
+            // Set reference to XR Ray Interactor
+            m_xrInteractor = args.interactor;
+
+            Vector3 controllerPosition = m_xrInteractor.transform.position;
+            m_previousHandPosition = transform.root.InverseTransformPoint(controllerPosition);
+        }
+
+
+        protected override void OnSelectExited(SelectExitEventArgs args)
+        {
+            // Change outline to highlight colour
+            m_outlineComponent.OutlineColor = Color.yellow;
+            m_pinHead.transform.localPosition -= (0.015f * Vector3.up);
+            m_pinArrow.SetActive(false);
+
+            m_previousHandPosition = Vector2.zero;
+
+            // Remove reference of interactor
+            m_xrInteractor = null;
+
+            // Update field point
+            if(!m_BoardSock.GetBoardToFieldPosition(m_pinHead.transform, out m_fieldPoint))
+            {
+                Debug.LogError("#PositionPin#--------------RaycastFailed");
+                return;
+            }
+            //Debug.Log("--------------------" + m_fieldPoint);
+
+            m_linkedObject.SetNavAgentDestination(m_fieldPoint);
+            m_linkedObject.SetRelativeYRotation(m_pinArrow.transform.localRotation.y);
+
+            //m_boardPins.M_IsPicked = false;
+        }
+
+
+        /// <summary>
+        /// Things to do when the object is held by the XR interactor
+        /// </summary>
+        /// <param name="updatePhase"></param>
+        public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
+        {
+            if (!m_xrInteractor)
+                return;
+
+            m_pinArrow.SetActive(true);
+            //Debug.Log("#BoardPin# ---------------------------");
+
+            m_pin.UpdatePosWhenHeld();
+            m_pin.UpdateRotWhenHeld();
+        }
+
+        #endregion
+
+
+
+        #region Board Pin Interface Methods
+
+
+        void INT_IBaseBoardPin.SwitchPin(bool val)
+        {
+            m_isBoardOpen = val;
+
+            colliders[0].enabled = m_islinkedObjectActive && val;
+            for (int i = 0; i < m_meshRenders.Length; i++)
+            {
+                m_meshRenders[i].enabled = m_islinkedObjectActive && val;
+            }
+        }
+
+        void INT_IBoardLinkedPin.SetObjectStatus(bool isActivated)
+        {
+            m_islinkedObjectActive = isActivated;
+
+            if (!m_isBoardOpen)
+                return;
+
+            m_pin.UpdatePinPosition();
+            m_pin.SwitchPin(true);
+        }
+
+        void INT_IBoardLinkedPin.LinkObject(Transform linkedObject)
+        {
+            m_linkedObject = linkedObject.GetComponent<INT_ILinkedPinObject>();
+            m_linkedObject.LinkPin(this);
+        }
+
+
+        void INT_IBoardLinkedPin.UpdatePinPosition()
+        {
+            // Get position of the linked object
+            Vector3 aiPosition = m_linkedObject.GetRelativeTransform().position;
+            // Change the XZ position of the AI to the Xz position of the pin
+            Vector3 tempVec = new Vector3(aiPosition.x, 0f, aiPosition.z);
+
+            // Apply position with offset
+            transform.localPosition = new Vector3(tempVec.x * m_BoardSock.OriginOffsetX, tempVec.y, tempVec.z * m_BoardSock.OriginOffsetZ);
+
+            // Get Y rotation of the linked object
+            float rotY = m_linkedObject.GetRelativeTransform().rotation.y;
+            // Apply the rotation to pin
+            m_pinArrow.transform.localRotation = Quaternion.Euler(0f, rotY, 0f);
+        }
+
+
+        void INT_IBaseBoardPin.UpdatePosWhenHeld()
+        {
+            // Get controller position
+            Vector3 controllerPosition = m_xrInteractor.transform.position;
+            // Change the origin to the pin's space
+            Vector3 newRelativeHandPosition =
+                transform.root.InverseTransformPoint(controllerPosition);
+
+            // Calculate the difference 
+            Vector3 handDifference = (m_previousHandPosition - newRelativeHandPosition);
+            // Set the new position as the previous position
+            m_previousHandPosition = newRelativeHandPosition;
+
+            Vector3 newPosition = (transform.localPosition - (handDifference * m_BoardSock.MoveMultiplier));
+            newPosition = new Vector3(
+                Mathf.Clamp(newPosition.x, -0.42f, 0.42f),
+                0f,
+                Mathf.Clamp(newPosition.z, -0.55f, 0.55f));
+
+            transform.localPosition = newPosition;
+        }
+
+
+        void INT_IBaseBoardPin.UpdateRotWhenHeld()
+        {
+            float newHandZRotation = -m_xrInteractor.transform.localRotation.z;
+
+            m_pinArrow.transform.Rotate(0f, newHandZRotation / 0.25f, 0f);
+        }
+
+        public void SetupPin(ETEAM team, int playerNo)
+        {
+            // Set the team number on the pin
+            m_tmpTeamNumber.text = playerNo.ToString();
+
+            // Setup material according to "team" info from the linked object
+            m_pinMesh.GetComponent<MeshRenderer>().material = (team == ETEAM.HOME) ?
+                m_BoardSock.HomeTeamMaterial : m_BoardSock.AwayTeamMaterial;
+        }
+
+        #endregion
+    }
+}

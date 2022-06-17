@@ -1,0 +1,194 @@
+# Blender MTL File: 'None'
+# Material Count: 17
+
+newmtl *124
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000262 0.000107 0.086901
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl *126
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.180144 0.404541 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 0.450000
+illum 9
+
+newmtl *198
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.585973 0.001687 0.000175
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Cladding_Stucco_White.jpg
+map_d C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Cladding_Stucco_White.jpg
+
+newmtl *200
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.082414 0.144972 0.271577
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Ford Stand Seats.png
+map_d C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Ford Stand Seats.png
+
+newmtl *201
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.230998 0.288816 0.680020
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 0.720000
+illum 9
+
+newmtl *202
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.827726 0.827726 0.827726
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Ford Stand Seats.png
+map_d C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Ford Stand Seats.png
+
+newmtl *3
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.003697 0.000367 0.111299
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Cladding_Stucco_White.jpg
+map_d C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Cladding_Stucco_White.jpg
+
+newmtl *5
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Metal_Aluminum_Anodized.jpg
+map_d C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Metal_Aluminum_Anodized.jpg
+
+newmtl *6
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.554227 0.598942 0.666117
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Cladding_Stucco_White.jpg
+map_d C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Cladding_Stucco_White.jpg
+
+newmtl *8
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.208360 0.246800 0.339223
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Players Stand Seats.PNG
+map_d C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Players Stand Seats.PNG
+
+newmtl *9
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.541798 0.363604 0.238828
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 0.460000
+illum 9
+
+newmtl <White>1
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Google_Earth_Snapshot
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.208360 0.193972 0.139022
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Google Earth Snapshot.jpg
+map_d C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Google Earth Snapshot.jpg
+
+newmtl Material
+Ns 323.999994
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl [Cladding_Stucco_White]
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.585973 0.585973 0.585973
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Cladding_Stucco_White.jpg
+map_d C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Cladding_Stucco_White.jpg
+
+newmtl [Metal_Aluminum_Anodized]
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.598942 0.645555 0.715465
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Metal_Aluminum_Anodized.jpg
+map_d C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Metal_Aluminum_Anodized.jpg
+
+newmtl [Metal_Corrogated_Shiny]
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.541798 0.541798 0.541798
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Metal_Corrogated_Shiny.jpg
+map_d C:\\Users\\monog\\AppData\\Local\\Temp\\Untitled(1)\\Metal_Corrogated_Shiny.jpg

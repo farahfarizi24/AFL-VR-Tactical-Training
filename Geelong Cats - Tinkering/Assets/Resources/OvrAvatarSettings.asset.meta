@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:CognitiveEmbodiment 2.0/Assets/Resources/OvrAvatarSettings.asset.meta
+guid: fec25c1a6c869624f8ffcdd96e16ec64
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+=======
+guid: 252053b4444bf514ab0bc1950ee23d82
+DefaultImporter:
+  externalObjects: {}
+>>>>>>> parent of d01347fa (Character export update):CognitiveEmbodiment 2.0/Assets/AutoHand/Packages (Setup)/SteamVR.unitypackage.meta
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

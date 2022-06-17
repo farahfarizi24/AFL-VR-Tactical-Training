@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7d2f7f70582f5fb419d155d93f50fb36
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_NetSpawnnerSock: {fileID: 11400000, guid: 460bb09c779856049acee27d2c0ccef1,
+      type: 2}
+  - m_StadiumPropertiesPrefab: {fileID: 1811574933711683681, guid: c521397a2b13fd24e9f07b2d25b99ecc,
+      type: 3}
+  - m_FieldLinesPrefab: {fileID: 4428095431653361461, guid: 647d4a7ee6c6302428ff5dd547ec82b0,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

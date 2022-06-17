@@ -1,0 +1,81 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 03.01.2020 00:14:40
+
+newmtl Kit
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.3137 0.3137 0.3137
+	Kd 0.3137 0.3137 0.3137
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Imperium\Desktop\Soccer Players EUL\Kit 4K AF.psd
+	map_Kd C:\Users\Imperium\Desktop\Soccer Players EUL\Kit 4K AF.psd
+	map_Ks D:\3d Work\FIFA clothing\Kit_SPC 4K AF.psd
+	map_bump Map__614327491_Normal_Bump.tga
+
+newmtl Head
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.7200 0.7200 0.7200
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Imperium\Desktop\Head LM\Head 4K.tga
+	map_Kd C:\Users\Imperium\Desktop\Head LM\Head 4K.tga
+	map_Ks C:\Users\Imperium\Desktop\Head LM\Head specular.jpg
+	map_d C:\Users\Imperium\Desktop\Head LM\Head 4K.tga
+	map_bump Map__614327368_Normal_Bump.tga
+
+newmtl Boots
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.4500 0.4500 0.4500
+	Ke 0.0000 0.0000 0.0000
+	map_Ka D:\3d Work\FIFA clothing\Boot 1.jpg
+	map_Kd D:\3d Work\FIFA clothing\Boot 1.jpg
+	map_Ks C:\Users\Imperium\Desktop\Soccer Players EUL\Boot SPC.jpg
+	map_bump Map__614327487_Normal_Bump.tga
+
+newmtl Skin
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.3922 0.3922 0.3922
+	Kd 0.3922 0.3922 0.3922
+	Ks 0.5400 0.5400 0.5400
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Imperium\Desktop\Body ULTRA\New\White 1.jpg
+	map_Kd C:\Users\Imperium\Desktop\Body ULTRA\New\White 1.jpg
+	map_Ks C:\Users\Imperium\Desktop\Body ULTRA\New\Body SPC.jpg
+	map_bump Map__139_Normal_Bump.tga
+
+newmtl Material__26
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.3137 0.3137 0.3137
+	Kd 0.3137 0.3137 0.3137
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka D:\Slike\3D work\Rugby Player NZ\Rugby Player\Ball.psd
+	map_Kd D:\Slike\3D work\Rugby Player NZ\Rugby Player\Ball.psd

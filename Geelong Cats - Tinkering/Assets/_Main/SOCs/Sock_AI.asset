@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7bdda51738b7a041bd9bb960c7fe8d2, type: 3}
+  m_Name: Sock_AI
+  m_EditorClassIdentifier: 
+  NoOfAI: 1
+  ais:
+  - {fileID: 5026332220181374329, guid: 634f475940bb868449a5fb6086755506, type: 3}

@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: edc9481a6637681419b3fcb9fd07c02b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - p_UserStateMachineSock: {fileID: 11400000, guid: f1dfd97f0c037074dae25b96061f9a30,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
