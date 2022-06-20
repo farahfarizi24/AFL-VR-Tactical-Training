@@ -1,30 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class CharacterAnimationScript : MonoBehaviour
 {
     // Start is called before the first frame update
 
     [SerializeField] private com.DU.CE.AI.AI_PathManager AI_Manager;
-
+    [SerializeField]    private NavMeshAgent character;
     public int CurrentAction;
     // 1 = idle , 2 = running, 3 = kicking, 4 = throwing, 
     [SerializeField] private Animator animator;
     [SerializeField]string CheckAnim;
+
+    private const string IsRunning = "IsRunning";
+    private const string IsIdle = "IsIdle";
     void Start()
     {
         animator = GetComponent<Animator>();
         CheckAnim = "None";
-        CurrentAction = 1;
+        animator.SetBool(IsIdle, true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (AI_Manager.isRunning == true)
+
+        ///Check if character is currently moving
+      
+        if (character.remainingDistance > 0.1f)
         {
-            CurrentAction = 2;
+            animator.SetBool(IsRunning, true);
+            animator.SetBool(IsIdle, false);
+        }
+        else
+        {
+            animator.SetBool(IsRunning, false);
+            animator.SetBool(IsIdle, true);
         }
     
     }
@@ -32,25 +44,6 @@ public class CharacterAnimationScript : MonoBehaviour
 
     void PlayAction()
     {
-        if (CheckAnim != "Run" && CurrentAction == 2 || CheckAnim != "Idle" && CurrentAction ==1)
-        {
-           /* switch (CurrentAction)
-            {
-                case 1:
-                    
-                    animator.SetBool("IsIdle", true);
-                    animator.SetBool("IsRunning", false);
-                    CheckAnim = "Idle";
-
-                    break;
-                case 2:
-                    animator.SetBool("IsRunning", true);
-                    animator.SetBool("IsIdle", false);
-                    CheckAnim = "Run";
-                    break;
-            }*/
-
-        }
 
 
     }
