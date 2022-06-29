@@ -12,6 +12,7 @@ TagManager:
   - CameraViews
   - Away
   - PlayerPosMark
+  - Ball
   layers:
   - Default
   - TransparentFX

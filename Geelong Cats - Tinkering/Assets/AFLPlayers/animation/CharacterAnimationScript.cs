@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class CharacterAnimationScript : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    BallCatch BallOwnershipManager;
     [SerializeField] private com.DU.CE.AI.AI_PathManager AI_Manager;
     [SerializeField]    private NavMeshAgent character;
     public int CurrentAction;
@@ -20,6 +20,10 @@ public class CharacterAnimationScript : MonoBehaviour
         animator = GetComponent<Animator>();
         CheckAnim = "None";
         animator.SetBool(IsIdle, true);
+        animator.SetBool(IsRunning, false);
+        animator.SetLayerWeight(animator.GetLayerIndex("ArmLayer"), 1f);
+        animator.SetLayerWeight(animator.GetLayerIndex("BodyLayer"), 1f);
+
     }
 
     // Update is called once per frame
@@ -38,13 +42,10 @@ public class CharacterAnimationScript : MonoBehaviour
             animator.SetBool(IsRunning, false);
             animator.SetBool(IsIdle, true);
         }
-    
+
+   
     }
 
 
-    void PlayAction()
-    {
-
-
-    }
+  
 }
