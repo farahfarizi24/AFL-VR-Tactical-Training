@@ -1483,12 +1483,12 @@ GameObject:
   - component: {fileID: 582856992}
   - component: {fileID: 582856996}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: BallCannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &582856992
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3939,7 +3939,7 @@ MonoBehaviour:
   p_NetSpawnerSock: {fileID: 11400000, guid: 460bb09c779856049acee27d2c0ccef1, type: 2}
   p_LevelStateMachineSock: {fileID: 11400000, guid: 6e2eab29f3cf71d45a07ecd545797b7c,
     type: 2}
-  m_rugbyBallPrefab: {fileID: 3264108119439838905, guid: 14a360f9c85dc1249987c3f84fdfb209,
+  m_rugbyBallPrefab: {fileID: 3264108119439838905, guid: 3dc5432a2b9ae0346a4897fbc5170759,
     type: 3}
   spawnPoint: {fileID: 1809035810}
 --- !u!4 &2074435756

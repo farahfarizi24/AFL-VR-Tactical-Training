@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class BallCatch : MonoBehaviour
 {
+    public Rigidbody rb;
+    public Rigidbody mainBodyrb;
     public Animator anim;
     [SerializeField] private bool BallCatcher;
     public GameObject BallHoldPoint;
     public GameObject BallOwnership;
+    public GameObject MainBody;
     public bool BallHolder; //to activate character animation script
     private IEnumerator Courutine;
     public float speed = 1.0f;
@@ -40,6 +43,13 @@ public class BallCatch : MonoBehaviour
        
             if (collider.gameObject.CompareTag("Ball") && BallCatcher == true)
             {
+            // turn on kinematics so player is not influenced by the ball
+            rb = collider.transform.parent.GetComponent<Rigidbody>();
+            rb.isKinematic = true;
+            mainBodyrb = MainBody.GetComponent<Rigidbody>();
+            mainBodyrb.isKinematic = true;
+
+            //change ball ownership
             BallOwnership = collider.transform.parent.gameObject;
             Debug.Log(" This person is holding Ball");
 
