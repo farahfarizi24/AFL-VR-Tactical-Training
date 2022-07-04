@@ -43,12 +43,8 @@ public class BallCatch : MonoBehaviour
        
             if (collider.gameObject.CompareTag("Ball") && BallCatcher == true)
             {
-            // turn on kinematics so player is not influenced by the ball
-            rb = collider.transform.parent.GetComponent<Rigidbody>();
-            rb.isKinematic = true;
-            mainBodyrb = MainBody.GetComponent<Rigidbody>();
-            mainBodyrb.isKinematic = true;
 
+            rb = collider.transform.parent.GetComponent<Rigidbody>();
             //change ball ownership
             BallOwnership = collider.transform.parent.gameObject;
             Debug.Log(" This person is holding Ball");
@@ -96,7 +92,13 @@ public class BallCatch : MonoBehaviour
     public void SetBallOwnership()
     {
 
-       // BallOwnership = collider.transform.parent.gameObject;
+        // turn on kinematics so player is not influenced by the ball
+       
+        rb.isKinematic = true;
+        mainBodyrb = MainBody.GetComponent<Rigidbody>();
+        mainBodyrb.isKinematic = true;
+
+        // BallOwnership = collider.transform.parent.gameObject;
         BallOwnership.transform.position = BallHoldPoint.transform.position;
         BallOwnership.transform.parent = BallHoldPoint.transform;
         anim.SetBool(HoldBall, true);
