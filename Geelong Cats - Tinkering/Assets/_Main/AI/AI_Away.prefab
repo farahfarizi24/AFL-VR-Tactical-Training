@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 891536357997476078, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 891536357997476078, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.88
+      objectReference: {fileID: 0}
     - target: {fileID: 1264741011639985666, guid: 847e8ed8699dcef4c9e80eaebab0349b,
         type: 3}
       propertyPath: _realtime

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BallCatch : MonoBehaviour
 {
-    public Rigidbody rb;
+    private Rigidbody rb = null;
     public Rigidbody mainBodyrb;
     public Animator anim;
-    [SerializeField] private bool BallCatcher;
+    [SerializeField] public bool BallCatcher;
     public GameObject BallHoldPoint;
     public GameObject BallOwnership;
     public GameObject MainBody;
@@ -15,35 +15,27 @@ public class BallCatch : MonoBehaviour
     private IEnumerator Courutine;
     public float speed = 1.0f;
     // Start is called before the first frame update
-    CharacterAnimationScript animationController;
+ 
+    public BallSensor ballSensor;
     private const string HoldBall = "HoldBall";
     void Start()
     {
-        BallCatcher = true;    }
+        BallCatcher = true;  BallHolder = false;  }
 
     // Update is called once per frame
     void Update()
     {
-        /*if (BallCatcher== true)
-        {
-            var move = speed * Time.deltaTime; //calculate the distance to move
-            BallOwnership.transform.position = Vector3.MoveTowards
-                (BallOwnership.transform.position, transform.position, move);
-
-           // if(Vector3.Distance(BallOwnership.transform.position, transform.position) < 0.001f)
-          //  {
-             //   BallOwnership.transform.position =transform.position;
-          //  }
-        }*/
+       
 
     }
 
     private void OnTriggerEnter(Collider collider)
     {
-       
-            if (collider.gameObject.CompareTag("Ball") && BallCatcher == true)
-            {
+      
 
+        if (collider.gameObject.CompareTag("Ball") && BallCatcher == true)
+            {
+            mainBodyrb = MainBody.GetComponent<Rigidbody>();
             rb = collider.transform.parent.GetComponent<Rigidbody>();
             //change ball ownership
             BallOwnership = collider.transform.parent.gameObject;
@@ -69,13 +61,19 @@ public class BallCatch : MonoBehaviour
                 Courutine = WaitForActionAnimToFinish("LowCatch");
                 StartCoroutine(Courutine);
             }
-    
-            //BallOwnership.transform.localPosition = BallHoldPoint.transform.localPosition;
 
+            //BallOwnership.transform.localPosition = BallHoldPoint.transform.localPosition;
+            //wait until Ball is triggering another sensor
+            if (ballSensor.SensorTrigger == true)
+            {
+                Debug.Log("IE numerator check sensor trigger");
+                SetBallOwnership();
+
+            }
 
             // Set Ball as a child of a hand object
-           
-            } 
+
+        } 
  
     }
 
@@ -83,11 +81,25 @@ public class BallCatch : MonoBehaviour
     {
         float animationLength = anim.GetCurrentAnimatorStateInfo(1).length + anim.GetCurrentAnimatorStateInfo(1).normalizedTime;
         //TODO on here, make ball move towards the player
+
+      
+
         yield return new WaitForSeconds(2.5f);
-        SetBallOwnership();
-        anim.ResetTrigger(TriggerName);
+       //Ball ownership is triggered from characteranimationscript.cs
+
+      
        
-        
+
+        anim.SetLayerWeight(anim.GetLayerIndex("BodyLayer"), 1f);
+        anim.SetLayerWeight(anim.GetLayerIndex("ArmLayer"), 1f);
+
+        BallCatcher = false; //stop from repeating
+
+        anim.SetLayerWeight(anim.GetLayerIndex("ActionLayer"), 0f);
+        anim.ResetTrigger(TriggerName);
+
+
+
     }
     public void SetBallOwnership()
     {
@@ -95,7 +107,7 @@ public class BallCatch : MonoBehaviour
         // turn on kinematics so player is not influenced by the ball
        
         rb.isKinematic = true;
-        mainBodyrb = MainBody.GetComponent<Rigidbody>();
+     
         mainBodyrb.isKinematic = true;
 
         // BallOwnership = collider.transform.parent.gameObject;
@@ -103,12 +115,7 @@ public class BallCatch : MonoBehaviour
         BallOwnership.transform.parent = BallHoldPoint.transform;
         anim.SetBool(HoldBall, true);
         Debug.Log("Ball ownership completed");
-        anim.SetLayerWeight(anim.GetLayerIndex("BodyLayer"), 1f);
-        anim.SetLayerWeight(anim.GetLayerIndex("ArmLayer"), 1f);
-
-        BallCatcher = false; //stop from repeating
-
-        anim.SetLayerWeight(anim.GetLayerIndex("ActionLayer"), 0f);
+     
     }
         
 

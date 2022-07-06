@@ -504,6 +504,7 @@ Transform:
   - {fileID: 5006796485843407166}
   - {fileID: 6819429395527210094}
   - {fileID: 4612394430980886328}
+  - {fileID: 7602355971702146605}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -700,7 +701,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.5
+  m_Height: 1.67
   m_BaseOffset: -0.07
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -791,10 +792,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.24
+  m_Radius: 0.15
   m_Height: 1.67
   m_Direction: 1
-  m_Center: {x: 0, y: 0.78, z: 0}
+  m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!114 &5957456613448510695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -807,6 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f892300a40da48458fa6690b7cc1576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BallOwnershipManager: {fileID: 6119059925039962438}
   AI_Manager: {fileID: 8370976140571437878}
   character: {fileID: 5766349266296414201}
   CurrentAction: 0
@@ -1961,6 +1963,82 @@ Transform:
   m_Father: {fileID: 4465069473970538301}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6174557250762160898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7602355971702146605}
+  - component: {fileID: 1949080038238349716}
+  - component: {fileID: 8774992063632001154}
+  - component: {fileID: 8609471731553624973}
+  m_Layer: 0
+  m_Name: Ballsensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7602355971702146605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6174557250762160898}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3187365453505246293}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1949080038238349716
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6174557250762160898}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.19
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &8774992063632001154
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6174557250762160898}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &8609471731553624973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6174557250762160898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1c1ed170dc5d4c43a0707171c945e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SensorTrigger: 0
 --- !u!1 &6264281060262579851
 GameObject:
   m_ObjectHideFlags: 0
@@ -2411,15 +2489,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f4e99571ce6974ab358bc765487f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  mainBodyrb: {fileID: 0}
+  mainBodyrb: {fileID: 3502626479085945962}
   anim: {fileID: 5620067586914405161}
   BallCatcher: 0
   BallHoldPoint: {fileID: 2547440208941481508}
-  BallOwnership: {fileID: 0}
+  BallOwnership: {fileID: 8501973417084610595}
   MainBody: {fileID: 1900679738785973830}
   BallHolder: 0
   speed: 1
+  ballSensor: {fileID: 8609471731553624973}
 --- !u!135 &8615705459739462447
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2431,8 +2509,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.07
-  m_Center: {x: 0, y: 0, z: 0.33}
+  m_Radius: 1.82
+  m_Center: {x: 0, y: 0, z: 0.81}
 --- !u!54 &3429909203678382049
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2902,6 +2980,12 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: a8591e260315ff144a4a73eb19c3122f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 933129fded864924fbff5f7b9f84e8e1, type: 3}
+--- !u!4 &4612394430980886328 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 933129fded864924fbff5f7b9f84e8e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 5154437055667136723}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3267105208983594846 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1522449968463491187, guid: 933129fded864924fbff5f7b9f84e8e1,
@@ -2911,12 +2995,6 @@ Transform:
 --- !u!137 &8993698528885202937 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -4947146912596642006, guid: 933129fded864924fbff5f7b9f84e8e1,
-    type: 3}
-  m_PrefabInstance: {fileID: 5154437055667136723}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4612394430980886328 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 933129fded864924fbff5f7b9f84e8e1,
     type: 3}
   m_PrefabInstance: {fileID: 5154437055667136723}
   m_PrefabAsset: {fileID: 0}
