@@ -16,13 +16,13 @@ public class CharacterAnimationScript : MonoBehaviour
     private const string IsRunning = "IsRunning";
     private const string IsIdle = "IsIdle";
     private const string IsHoldingBall = "HoldBall";
+    public bool isBallHolder=false;
     void Start()
     {
-       
+    
         animator = GetComponent<Animator>();
        character = GetComponent<NavMeshAgent>();
-        animator.SetBool(IsIdle, true);
-        animator.SetBool(IsRunning, false);
+        ToggleIdle();
         animator.SetLayerWeight(animator.GetLayerIndex("ArmLayer"), 1f);
         animator.SetLayerWeight(animator.GetLayerIndex("BodyLayer"), 1f);
 
@@ -32,12 +32,12 @@ public class CharacterAnimationScript : MonoBehaviour
     void Update()
     {
 
+
         ///Check if character is currently moving
-      
-        
-        if (character.remainingDistance > 0.1f)
+
+        /*     if (character.remainingDistance > 0.1f)
         {
-         
+         i
             animator.SetBool(IsRunning, true);
             animator.SetBool(IsIdle, false);
             CheckBallOwnership();
@@ -51,16 +51,46 @@ public class CharacterAnimationScript : MonoBehaviour
 
             CheckBallOwnership();
         }
+*/
+
+        if (character.velocity != Vector3.zero)
+        {
+            ToggleRun();
+        }else
+        {
+            ToggleIdle();
+        }
 
    
     }
 
+    public void ToggleRun()
+    {
+       // if (character.remainingDistance > 0.1f)
+            animator.SetBool(IsRunning, true);
+        animator.SetBool(IsIdle, false);
+        CheckBallOwnership();
+
+        Debug.Log("Run Toggled");
+    }
+
+    public void ToggleIdle()
+    {
+        Debug.Log("Idle Toggled");
+        animator.SetBool(IsRunning, false);
+        animator.SetBool(IsIdle, true);
+
+        CheckBallOwnership();
+
+    }
+
     public void CheckBallOwnership()
     {
-        if ( BallOwnershipManager.BallHolder == false)
+        if ( isBallHolder==true && BallOwnershipManager.BallHolder == false)
         {
             Debug.Log("HOLDBALL FALSE");
             animator.SetBool(IsHoldingBall, false);
+            isBallHolder = false;
         }
     }
 

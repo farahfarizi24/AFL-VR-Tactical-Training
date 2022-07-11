@@ -36,7 +36,8 @@ public class BallCatch : MonoBehaviour
         if (collider.gameObject.CompareTag("Ball") && BallCatcher == true)
             {
             mainBodyrb = MainBody.GetComponent<Rigidbody>();
-            rb = collider.transform.parent.GetComponent<Rigidbody>();
+            rb = collider.GetComponentInParent<Rigidbody>();
+           // rb = collider.transform.parent.GetComponent<Rigidbody>();
             //change ball ownership
             BallOwnership = collider.transform.parent.gameObject;
             Debug.Log(" This person is holding Ball");

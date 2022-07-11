@@ -814,6 +814,7 @@ MonoBehaviour:
   CurrentAction: 0
   animator: {fileID: 5620067586914405161}
   CheckAnim: 
+  isBallHolder: 0
 --- !u!1 &1901316391205175895
 GameObject:
   m_ObjectHideFlags: 0
