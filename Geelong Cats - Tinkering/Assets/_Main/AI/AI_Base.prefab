@@ -2454,8 +2454,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5006796485843407166}
-  - component: {fileID: 6119059925039962438}
   - component: {fileID: 8615705459739462447}
+  - component: {fileID: 6119059925039962438}
   - component: {fileID: 3429909203678382049}
   m_Layer: 11
   m_Name: AttachPoint
@@ -2478,6 +2478,19 @@ Transform:
   m_Father: {fileID: 3187365453505246293}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &8615705459739462447
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8501973417084610595}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.82
+  m_Center: {x: 0, y: 0, z: 0.81}
 --- !u!114 &6119059925039962438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2499,19 +2512,6 @@ MonoBehaviour:
   BallHolder: 0
   speed: 1
   ballSensor: {fileID: 8609471731553624973}
---- !u!135 &8615705459739462447
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8501973417084610595}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.82
-  m_Center: {x: 0, y: 0, z: 0.81}
 --- !u!54 &3429909203678382049
 Rigidbody:
   m_ObjectHideFlags: 0

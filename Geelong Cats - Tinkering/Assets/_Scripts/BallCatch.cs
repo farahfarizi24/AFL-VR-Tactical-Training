@@ -15,53 +15,40 @@ public class BallCatch : MonoBehaviour
     private IEnumerator Courutine;
     public float speed = 1.0f;
     // Start is called before the first frame update
- 
+
     public BallSensor ballSensor;
     private const string HoldBall = "HoldBall";
     void Start()
     {
-        BallCatcher = true;  BallHolder = false;  }
+        //BallCatcher = true;
+        BallHolder = false; }
 
     // Update is called once per frame
     void Update()
     {
-       
+
 
     }
 
     private void OnTriggerEnter(Collider collider)
     {
-      
+        if (collider.gameObject.CompareTag("BallDestination")) { BallCatcher = true; Debug.Log("Ball Destination entered, catcher true"); }
 
         if (collider.gameObject.CompareTag("Ball") && BallCatcher == true)
-            {
+        {
             mainBodyrb = MainBody.GetComponent<Rigidbody>();
             rb = collider.GetComponentInParent<Rigidbody>();
-           // rb = collider.transform.parent.GetComponent<Rigidbody>();
+         
             //change ball ownership
             BallOwnership = collider.transform.parent.gameObject;
-            Debug.Log(" This person is holding Ball");
+            //Debug.Log(" This person is holding Ball");
 
             BallHolder = true;
 
-            anim.SetLayerWeight(anim.GetLayerIndex("ActionLayer"), 1f);
-            anim.SetLayerWeight(anim.GetLayerIndex("ArmLayer"), 0f);
-            anim.SetLayerWeight(anim.GetLayerIndex("BodyLayer"), 0f);
-            Debug.Log("Layerweight complete");
+            //  Debug.Log("Layerweight complete");
 
-            if(BallOwnership.transform.position.y> 1.5)
-            {
-                anim.SetTrigger("HighCatch");
-                Courutine = WaitForActionAnimToFinish("HighCatch");
-                StartCoroutine(Courutine);
-            }
-            else
-            {
-
-                anim.SetTrigger("LowCatch");
-                Courutine = WaitForActionAnimToFinish("LowCatch");
-                StartCoroutine(Courutine);
-            }
+            SetCatchingAnim();
+      
 
             //BallOwnership.transform.localPosition = BallHoldPoint.transform.localPosition;
             //wait until Ball is triggering another sensor
@@ -74,13 +61,38 @@ public class BallCatch : MonoBehaviour
 
             // Set Ball as a child of a hand object
 
-        } 
- 
+        }
+
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+     //   if (other.gameObject.CompareTag("BallDestination")) { BallCatcher = false; Debug.Log("Ball Destination exited, catcher false"); }
+       
+    }
+    public void SetCatchingAnim(){
+
+        anim.SetLayerWeight(anim.GetLayerIndex("ActionLayer"), 1f);
+        anim.SetLayerWeight(anim.GetLayerIndex("ArmLayer"), 0f);
+        anim.SetLayerWeight(anim.GetLayerIndex("BodyLayer"), 0f);
+
+        if (BallOwnership.transform.position.y > 1.5)
+        {
+            anim.SetTrigger("HighCatch");
+            Courutine = WaitForActionAnimToFinish("HighCatch");
+            StartCoroutine(Courutine);
+        }
+        else
+        {
+
+            anim.SetTrigger("LowCatch");
+            Courutine = WaitForActionAnimToFinish("LowCatch");
+            StartCoroutine(Courutine);
+        }
+    }
     IEnumerator WaitForActionAnimToFinish(string TriggerName)
     {
-        float animationLength = anim.GetCurrentAnimatorStateInfo(1).length + anim.GetCurrentAnimatorStateInfo(1).normalizedTime;
+       // float animationLength = anim.GetCurrentAnimatorStateInfo(1).length + anim.GetCurrentAnimatorStateInfo(1).normalizedTime;
         //TODO on here, make ball move towards the player
 
       

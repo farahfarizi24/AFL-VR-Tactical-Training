@@ -8,7 +8,7 @@ public class BallSensor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SensorTrigger = false;
     }
 
     // Update is called once per frame

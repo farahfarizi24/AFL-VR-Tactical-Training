@@ -18,9 +18,10 @@ public class BallKickerManager : MonoBehaviour
     public AudioSource audioSource;
     public Transform endPoint;
     public Color lineCanShootMaterial, lineCantShootMaterial, lineInvisible;
-
+    // SphereCollider ColliderCursor = null;
     // Private Variables
 
+    private GameObject EndPointCursor = null;
     private GameObject ball;
     private GameObject cursorInstance = null;
     private int lineSegment = 30;
@@ -111,6 +112,7 @@ public class BallKickerManager : MonoBehaviour
             if (cursorInstance == null)
             {
                 cursorInstance = Instantiate(cursorPrefab, Vector3.zero, Quaternion.identity);
+           //     ColliderCursor = cursorInstance.GetComponent<SphereCollider>();
             }
 
             // Does the raycast for the projectile hit a collider within the specified range?
@@ -119,21 +121,29 @@ public class BallKickerManager : MonoBehaviour
                 Debug.DrawRay(shootPoint.position, shootPoint.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
 
                 endPoint.position = hit.point;
-
+               
                 Vector3 vo = CalculateVelocty(endPoint.position, shootPoint.position, flightTime);
 
                 ChangeLineColor(lineCanShootMaterial);
                 Visualize(vo, cursorInstance.transform.position); // Include the cursor position as the final nodes for the line visual position
-
+              //  ColliderCursor.isTrigger = true;
+             //   ColliderCursor.enabled = true;
 
                 transform.rotation = Quaternion.LookRotation(vo);
 
                 if (buttonReleased)
                 {
+
+
                     // Kick the ball
+                    EndPointCursor = Instantiate(cursorPrefab, endPoint.position, Quaternion.identity);
+                    EndPointCursor.GetComponent<Collider>().enabled = true;
                     StartCoroutine(Kick(vo));
+                   // EndPointCursor.GetComponent<Collider>().enabled = false;
                     buttonReleased = false;
                     buttonHeld = false;
+                   
+              //      ColliderCursor.enabled = false;
                 }
 
             }
@@ -180,6 +190,7 @@ public class BallKickerManager : MonoBehaviour
         audioSource.Play();
         ball = null;
         cursorInstance.SetActive(false);
+        Destroy(EndPointCursor);
         yield return null;
     }
 
