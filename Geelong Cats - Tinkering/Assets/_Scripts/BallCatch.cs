@@ -15,7 +15,7 @@ public class BallCatch : MonoBehaviour
     private IEnumerator Courutine;
     public float speed = 1.0f;
     // Start is called before the first frame update
-
+    public GameObject BallDestination;
     public BallSensor ballSensor;
     private const string HoldBall = "HoldBall";
     void Start()
@@ -32,7 +32,10 @@ public class BallCatch : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("BallDestination")) { BallCatcher = true; Debug.Log("Ball Destination entered, catcher true"); }
+        if (collider.gameObject.CompareTag("BallDestination")) { BallCatcher = true; Debug.Log("Ball Destination entered, catcher true");
+            BallDestination = collider.gameObject;
+            SetCatchingAnim();
+        }
 
         if (collider.gameObject.CompareTag("Ball") && BallCatcher == true)
         {
@@ -47,7 +50,7 @@ public class BallCatch : MonoBehaviour
 
             //  Debug.Log("Layerweight complete");
 
-            SetCatchingAnim();
+            
       
 
             //BallOwnership.transform.localPosition = BallHoldPoint.transform.localPosition;
@@ -76,7 +79,7 @@ public class BallCatch : MonoBehaviour
         anim.SetLayerWeight(anim.GetLayerIndex("ArmLayer"), 0f);
         anim.SetLayerWeight(anim.GetLayerIndex("BodyLayer"), 0f);
 
-        if (BallOwnership.transform.position.y > 1.5)
+        if (BallDestination.transform.position.y > 1.5)
         {
             anim.SetTrigger("HighCatch");
             Courutine = WaitForActionAnimToFinish("HighCatch");
@@ -110,7 +113,7 @@ public class BallCatch : MonoBehaviour
 
         anim.SetLayerWeight(anim.GetLayerIndex("ActionLayer"), 0f);
         anim.ResetTrigger(TriggerName);
-
+        
 
 
     }
