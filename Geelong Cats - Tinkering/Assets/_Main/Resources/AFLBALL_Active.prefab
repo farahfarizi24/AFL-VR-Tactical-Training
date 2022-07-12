@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 3242873773852711433}
   - component: {fileID: 8875590976279404431}
   m_Layer: 10
-  m_Name: INT_RugbyBall 1
+  m_Name: AFLBALL_Active
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
