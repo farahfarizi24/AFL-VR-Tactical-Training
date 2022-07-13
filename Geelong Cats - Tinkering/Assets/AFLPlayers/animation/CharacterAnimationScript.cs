@@ -33,26 +33,6 @@ public class CharacterAnimationScript : MonoBehaviour
     {
 
 
-        ///Check if character is currently moving
-
-        /*     if (character.remainingDistance > 0.1f)
-        {
-         i
-            animator.SetBool(IsRunning, true);
-            animator.SetBool(IsIdle, false);
-            CheckBallOwnership();
-
-        }
-        else
-        {
-
-            animator.SetBool(IsRunning, false);
-            animator.SetBool(IsIdle, true);
-
-            CheckBallOwnership();
-        }
-*/
-
         if (character.velocity != Vector3.zero)
         {
             ToggleRun();
