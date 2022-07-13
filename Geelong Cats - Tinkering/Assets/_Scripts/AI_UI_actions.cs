@@ -57,14 +57,22 @@ public class AI_UI_actions : MonoBehaviour
             StartCoroutine(TaskCourutine);
         }else if(task == "handball")
         {
-
+            anim.SetTrigger("Handball");
+            TaskCourutine = WaitForActionToFinish("Handball");
+            StartCoroutine(TaskCourutine);
         }
     }
 
 
     IEnumerator WaitForActionToFinish(string triggername)
     {
-        yield return new WaitForSeconds(2.5f);
+        if(triggername == "Kick")
+        {
+            yield return new WaitForSeconds(2.5f);
+        }else if(triggername == "Handball"){
+            yield return new WaitForSeconds(1.0f);
+        }
+     
 
 
         anim.SetLayerWeight(anim.GetLayerIndex("BodyLayer"), 1f);

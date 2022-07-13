@@ -34,11 +34,15 @@ namespace com.DU.CE.AI
             m_manager.OnHoverChanged(false);
         }
 
-
+        protected override void OnActivated(ActivateEventArgs args)
+        {
+            base.OnActivated(args);
+            Debug.Log("trigger pressed");
+        }
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
             base.OnSelectEntered(args);
-
+            Debug.Log("Grabpressed");
             m_manager.M_NCModel.isSelected = true;
 
             m_interactor = args.interactor as USER_CustomRayInteractor;
