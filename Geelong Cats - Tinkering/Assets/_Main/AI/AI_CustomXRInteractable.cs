@@ -7,6 +7,7 @@ using System;
 
 namespace com.DU.CE.AI
 {
+
     public class AI_CustomXRInteractable : XRGrabInteractable
     {
         [SerializeField] private InputActionProperty m_rightPathPlace;
@@ -14,16 +15,36 @@ namespace com.DU.CE.AI
 
         private AI_Avatar m_manager;
         private USER_CustomRayInteractor m_interactor = null;
-
+        public GameObject ActionUI;
+        //trigger code
+        public InputActionReference toggleReference = null;
         protected override void Awake()
         {
             base.Awake();
+            toggleReference.action.started += SelectAI;
 
             m_manager = GetComponentInParent<AI_Avatar>();
         }
 
+        private void OnDestroy()
+        {
+            toggleReference.action.started -= SelectAI;
+        }
+
+        private void SelectAI(InputAction.CallbackContext context)
+        {
+           // context.ReadValueAsButton
+            bool isActive = !ActionUI.gameObject.activeSelf;
+             
+            ActionUI.gameObject.SetActive(isActive);
+            Debug.Log("Trigger is presed");
+        }
         #region XR Callbacks
 
+
+       
+        
+        
         protected override void OnHoverEntered(HoverEnterEventArgs args)
         {
             m_manager.OnHoverChanged(true);
@@ -34,11 +55,8 @@ namespace com.DU.CE.AI
             m_manager.OnHoverChanged(false);
         }
 
-        protected override void OnActivated(ActivateEventArgs args)
-        {
-            base.OnActivated(args);
-            Debug.Log("trigger pressed");
-        }
+        
+
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
             base.OnSelectEntered(args);

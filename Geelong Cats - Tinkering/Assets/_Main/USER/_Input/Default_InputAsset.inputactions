@@ -366,6 +366,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SelectAI",
+                    "type": "Button",
+                    "id": "5832cd7d-d89b-4663-b46c-3b0f53a1a890",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -542,6 +551,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "KickBen2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a0cd50c-0e92-4aba-9600-d83a00312332",
+                    "path": "<OculusTouchController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "SelectAI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
