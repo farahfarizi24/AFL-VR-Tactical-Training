@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class AI_UI_actions : MonoBehaviour
 {
+    public GameObject baseUI;
     public Button Kicking;
     public Button Handball;
     public Button Move;
@@ -15,6 +16,7 @@ public class AI_UI_actions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        baseUI.SetActive(false);
         Button kickbtn = Kicking.GetComponent<Button>();
         kickbtn.onClick.AddListener(KickingTaskOnClick);
 

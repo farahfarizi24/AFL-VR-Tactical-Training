@@ -3303,6 +3303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b197eda4fe6cc46a70eedbfba87183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseUI: {fileID: 2221386843639240627}
   Kicking: {fileID: 8543553749646431617}
   Handball: {fileID: 914933026252285494}
   Move: {fileID: 8244931755080929094}

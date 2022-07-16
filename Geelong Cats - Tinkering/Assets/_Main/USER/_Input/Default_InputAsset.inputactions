@@ -557,7 +557,7 @@
                 {
                     "name": "",
                     "id": "1a0cd50c-0e92-4aba-9600-d83a00312332",
-                    "path": "<OculusTouchController>{RightHand}/triggerPressed",
+                    "path": "<OculusTouchController>{RightHand}/primaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
