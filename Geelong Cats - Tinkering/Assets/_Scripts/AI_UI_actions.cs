@@ -12,7 +12,7 @@ public class AI_UI_actions : MonoBehaviour
     public Button Move;
     public Animator anim;
     private IEnumerator TaskCourutine;
-
+    public AI_BallKicker AI_ballkick;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +31,10 @@ public class AI_UI_actions : MonoBehaviour
     {
 
         Debug.Log("--- Kick initiated");
+        AI_ballkick.SetTarget();
         PerformTask("kicking");
+        //Kick action
+
     }
    
     void HandballTaskOnClick()

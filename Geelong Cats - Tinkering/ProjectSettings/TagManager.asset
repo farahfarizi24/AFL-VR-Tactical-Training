@@ -14,6 +14,7 @@ TagManager:
   - PlayerPosMark
   - Ball
   - BallDestination
+  - Pointer
   layers:
   - Default
   - TransparentFX

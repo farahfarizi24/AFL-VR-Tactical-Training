@@ -112,7 +112,7 @@ public class BallKickerManager : MonoBehaviour
             if (cursorInstance == null)
             {
                 cursorInstance = Instantiate(cursorPrefab, Vector3.zero, Quaternion.identity);
-           //     ColliderCursor = cursorInstance.GetComponent<SphereCollider>();
+     
             }
 
             // Does the raycast for the projectile hit a collider within the specified range?

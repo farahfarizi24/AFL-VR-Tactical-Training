@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5923408189634761873}
   - component: {fileID: 4887887019401864089}
   - component: {fileID: 7273034554252852202}
-  - component: {fileID: 228687486822884218}
+  - component: {fileID: 8798157278838997298}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: BallDestination
@@ -82,7 +82,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7917572956267666808}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!135 &228687486822884218
+--- !u!135 &8798157278838997298
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -113,6 +113,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3289739800395676736, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: lineVisual
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3289739800395676736, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: shootPoint
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4612394430980886328, guid: 847e8ed8699dcef4c9e80eaebab0349b,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -147,6 +157,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8150493822586266335, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8370976140571437878, guid: 847e8ed8699dcef4c9e80eaebab0349b,
         type: 3}
@@ -258,11 +273,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f892300a40da48458fa6690b7cc1576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BallOwnershipManager: {fileID: 0}
   AI_Manager: {fileID: 8065632420401049514}
   character: {fileID: 5459347472915209061}
   CurrentAction: 0
   animator: {fileID: 6213615295234265013}
   CheckAnim: 
+  isBallHolder: 0
 --- !u!1001 &8011547567930675789
 PrefabInstance:
   m_ObjectHideFlags: 0
