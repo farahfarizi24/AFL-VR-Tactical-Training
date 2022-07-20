@@ -133,6 +133,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LeftTriggerPress",
+                    "type": "Button",
+                    "id": "922a931d-a4b0-40b1-8734-0d75189161b2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -232,6 +241,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "FaceButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5f56d3e9-99d9-4b3a-aa87-02b8b004550e",
+                    "path": "<OculusTouchController>{LeftHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "LeftTriggerPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -371,6 +391,15 @@
                     "name": "SelectAI",
                     "type": "Button",
                     "id": "5832cd7d-d89b-4663-b46c-3b0f53a1a890",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightTriggerPress",
+                    "type": "Button",
+                    "id": "0fac12d5-2645-4f86-b683-c79552bb7607",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -562,6 +591,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "SelectAI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0e6842b-4ba9-45cf-9768-09025ebfa095",
+                    "path": "<OculusTouchController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "RightTriggerPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

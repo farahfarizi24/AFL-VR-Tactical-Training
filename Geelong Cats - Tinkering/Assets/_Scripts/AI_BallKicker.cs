@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.XR.Interaction.Toolkit;
+using System;
 public class AI_BallKicker : MonoBehaviour
 {
 
@@ -16,6 +17,8 @@ public class AI_BallKicker : MonoBehaviour
     private int lineSegment = 30;
    [SerializeField] private GameObject cursorInstance=null; 
     private GameObject EndPointCursor = null;
+    public InputActionReference RightTrigger=null;
+    public InputActionReference LeftTrigger = null;
     public BallCatch ThisAIBallOwnership;
     public Color lineCanShootMaterial, lineCantShootMaterial, lineInvisible;
     // Start is called before the first frame update
@@ -25,6 +28,34 @@ public class AI_BallKicker : MonoBehaviour
         CheckBall();
     }
     
+    private void Awake()
+    {
+
+        RightTrigger.action.started += RightTriggerPress;
+        LeftTrigger.action.started += LeftTriggerPress;
+    }
+    private void OnDestroy()
+    {
+
+
+        RightTrigger.action.started -= RightTriggerPress;
+        LeftTrigger.action.started -= LeftTriggerPress;
+    }
+
+    private void RightTriggerPress(InputAction.CallbackContext context)
+    {
+       
+            Debug.Log("LAUNCHBALL");
+        
+      
+    }
+    private void LeftTriggerPress(InputAction.CallbackContext context)
+    {
+       
+            cursorInstance.transform.GetChild(0).gameObject.SetActive(false);
+        
+        
+    }
     public void CheckBall()
     {
         if(ThisAIBallOwnership.BallHolder == true)
@@ -53,6 +84,9 @@ public class AI_BallKicker : MonoBehaviour
             ///Get cursor,
             cursorInstance = GameObject.FindGameObjectWithTag("Pointer");
             cursorInstance.transform.GetChild(0).gameObject.SetActive(true);
+
+
+            ///IF button trigger is pressed then launch ball
 
             ////BEN CODE
 
@@ -90,6 +124,7 @@ public class AI_BallKicker : MonoBehaviour
           //  }
         }
     }
+  
 
     void Visualize(Vector3 vo, Vector3 finalPos)
     {

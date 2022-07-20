@@ -123,6 +123,18 @@ PrefabInstance:
       propertyPath: shootPoint
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3289739800395676736, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: LeftTrigger
+      value: 
+      objectReference: {fileID: -9022803619979799435, guid: 7a77aace10269d04b82d49a70f7cee77,
+        type: 3}
+    - target: {fileID: 3289739800395676736, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: RightTrigger
+      value: 
+      objectReference: {fileID: 6163281524240053765, guid: 7a77aace10269d04b82d49a70f7cee77,
+        type: 3}
     - target: {fileID: 4612394430980886328, guid: 847e8ed8699dcef4c9e80eaebab0349b,
         type: 3}
       propertyPath: m_LocalPosition.y

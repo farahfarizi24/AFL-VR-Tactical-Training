@@ -1431,6 +1431,11 @@ MonoBehaviour:
   lineVisual: {fileID: 6598934947501983861}
   HaveBall: 0
   flightTime: 1
+  cursorInstance: {fileID: 0}
+  RightTrigger: {fileID: 6163281524240053765, guid: 7a77aace10269d04b82d49a70f7cee77,
+    type: 3}
+  LeftTrigger: {fileID: -9022803619979799435, guid: 7a77aace10269d04b82d49a70f7cee77,
+    type: 3}
   ThisAIBallOwnership: {fileID: 6119059925039962438}
   lineCanShootMaterial: {r: 1, g: 1, b: 1, a: 0}
   lineCantShootMaterial: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 0}
