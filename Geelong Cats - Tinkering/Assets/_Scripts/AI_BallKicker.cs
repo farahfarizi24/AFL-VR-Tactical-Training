@@ -7,124 +7,139 @@ using System;
 public class AI_BallKicker : MonoBehaviour
 {
 
-    public GameObject cursorPrefab;
+    //public GameObject cursorPrefab;
     public Transform shootPoint;
-    public Transform endPoint;
+    private  Transform endPoint;
+   
     public LineRenderer lineVisual;
     public bool HaveBall;
     public float flightTime = 1f;
 
     private int lineSegment = 30;
    [SerializeField] private GameObject cursorInstance=null; 
-    private GameObject EndPointCursor = null;
-    public InputActionReference RightTrigger=null;
-    public InputActionReference LeftTrigger = null;
+   private GameObject EndPointCursor = null;
+    public InputActionReference RightTrigger;
+    public InputActionReference LeftTrigger ;
     public BallCatch ThisAIBallOwnership;
     public Color lineCanShootMaterial, lineCantShootMaterial, lineInvisible;
+    public GameObject ballObject;
+    public GameObject BallAttach;
+    public bool TargetSet = false;
+    //For kinematic equations
+    private Rigidbody ball;
+    public float h = 3;
+    public float gravity = -1;
+    private Transform ShootTarget;
+
     // Start is called before the first frame update
     void Start()
     {
-        //get haveball
+
+   
         CheckBall();
     }
     
     private void Awake()
     {
+        
 
-        RightTrigger.action.started += RightTriggerPress;
-        LeftTrigger.action.started += LeftTriggerPress;
+            RightTrigger.action.started += RightTriggerPress;
+            LeftTrigger.action.started += LeftTriggerPress;
+        
+
     }
     private void OnDestroy()
     {
 
-
+    
         RightTrigger.action.started -= RightTriggerPress;
         LeftTrigger.action.started -= LeftTriggerPress;
     }
 
     private void RightTriggerPress(InputAction.CallbackContext context)
     {
-       
+       if(cursorInstance!= null)
+        {
             Debug.Log("LAUNCHBALL");
-        
+            LaunchBall();
+        }
+            
       
     }
     private void LeftTriggerPress(InputAction.CallbackContext context)
     {
        
             cursorInstance.transform.GetChild(0).gameObject.SetActive(false);
-        
-        
+
+
     }
     public void CheckBall()
     {
-        if(ThisAIBallOwnership.BallHolder == true)
+        if (ThisAIBallOwnership.BallHolder == true)
         {
             HaveBall = true;
         }
         else
         {
-            HaveBall=false;
+            HaveBall = false;
         }
     }
+
+    
     public void SetTarget()
     {
         CheckBall();
         if (HaveBall)
         {
-            // Bit shift the index of the layer (19) to get a bit mask
-            int layerMask = 1 << 19;
 
-            // This would cast rays only against colliders in layer 19.
-            // But instead we want to collide against everything except layer 19.
-            layerMask = ~layerMask;
-
-            RaycastHit hit;
 
             ///Get cursor,
             cursorInstance = GameObject.FindGameObjectWithTag("Pointer");
             cursorInstance.transform.GetChild(0).gameObject.SetActive(true);
 
-
-            ///IF button trigger is pressed then launch ball
-
-            ////BEN CODE
-
-      /*
-            if (Physics.Raycast(shootPoint.position, shootPoint.TransformDirection(Vector3.forward), out hit, 75f, layerMask))
-            {
-                Debug.DrawRay(shootPoint.position, shootPoint.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-
-                endPoint.position = hit.point;
-
-                Vector3 vo = CalculateVelocty(endPoint.position, shootPoint.position, flightTime);
-
-                ChangeLineColor(lineCanShootMaterial);
-              //  Visualize(vo, cursorInstance.transform.position); // Include the cursor position as the final nodes for the line visual position
-                                                                  //  ColliderCursor.isTrigger = true;
-                                                                  //   ColliderCursor.enabled = true;
-
-             //   transform.rotation = Quaternion.LookRotation(vo);
-                /////// THIS WILL NEED TO BE CHANGED AS WE NEED THE END POINT CURSOR TO ACTUALLY MATCHES THE point
-              /*  if (buttonReleased)
-                {
+         
 
 
-                    // Kick the ball
-                    EndPointCursor = Instantiate(cursorPrefab, endPoint.position, Quaternion.identity);
-                    EndPointCursor.GetComponent<Collider>().enabled = true;
-                    StartCoroutine(Kick(vo));
-                  
-                    buttonReleased = false;
-                    buttonHeld = false;
-
-                 
-                }*/
-              /////////////////////////////
-          //  }
         }
     }
   
+    void LaunchBall()
+    {
+        ballObject = BallAttach.transform.GetChild(0).gameObject;
+
+        //Unparent ball from the current object
+        ballObject.transform.parent=null;
+        //get rigidbody of ballobject
+        // tag AI for not ballownership
+        ThisAIBallOwnership.BallHolder = false ;
+        ball = ballObject.GetComponent<Rigidbody>();
+        ball.isKinematic = false;
+        //   GameObject ballObject = transform.parent.FindChild.tag(tag)
+
+        //Get target for shooting
+        if (TargetSet == false)
+        {
+
+            ShootTarget = cursorInstance.transform;
+            TargetSet = true;
+        }
+        Physics.gravity = Vector3.up * gravity;
+        ball.useGravity = true;
+        
+        ball.velocity = CalculateLaunchVelocity();
+        Debug.Log("Launch Velocity =" + CalculateLaunchVelocity());
+    }
+
+    Vector3 CalculateLaunchVelocity()
+    {
+        float displacementY = ShootTarget.position.y - ball.position.y;
+        Vector3 displacementXZ = new Vector3(ShootTarget.position.x - ball.position.x, 0, ShootTarget.position.z - ball.position.z);
+        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * h);
+        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * h / gravity) + Mathf.Sqrt(2 * (displacementY - h) / gravity));
+        return velocityXZ + velocityY;
+    }
+
+    /*
 
     void Visualize(Vector3 vo, Vector3 finalPos)
     {
@@ -160,10 +175,7 @@ public class AI_BallKicker : MonoBehaviour
         lineVisual.startColor = col;
     }
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
     Vector3 CalculatePosInTime(Vector3 vo, float time)
     {
         Vector3 Vxz = vo;
@@ -175,5 +187,5 @@ public class AI_BallKicker : MonoBehaviour
         result.y = sY;
 
         return result;
-    }
+    }*/
 }

@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 8875590976279404431}
   m_Layer: 10
   m_Name: AFLBALL_Active
-  m_TagString: Untagged
+  m_TagString: BallContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

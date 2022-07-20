@@ -1424,10 +1424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8accf0fee4fa19842a9ba389009e2728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorPrefab: {fileID: 7917572956267666808, guid: d595f210128179943a0c8fec634cd5ff,
-    type: 3}
   shootPoint: {fileID: 527307152277626956}
-  endPoint: {fileID: 5571982759070816536}
   lineVisual: {fileID: 6598934947501983861}
   HaveBall: 0
   flightTime: 1
@@ -1440,6 +1437,10 @@ MonoBehaviour:
   lineCanShootMaterial: {r: 1, g: 1, b: 1, a: 0}
   lineCantShootMaterial: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 0}
   lineInvisible: {r: 0, g: 0, b: 0, a: 0}
+  ballObject: {fileID: 0}
+  BallAttach: {fileID: 2547440208941481508}
+  h: 25
+  gravity: -18
 --- !u!1 &3340024521912346465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2245,7 +2246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8166146894551523917
 Transform:
   m_ObjectHideFlags: 0
