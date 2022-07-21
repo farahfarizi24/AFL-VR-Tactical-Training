@@ -122,14 +122,15 @@ public class BallCatch : MonoBehaviour
     {
 
         // turn on kinematics so player is not influenced by the ball
-       
-        rb.isKinematic = true;
-     
-        mainBodyrb.isKinematic = true;
+      
 
         // BallOwnership = collider.transform.parent.gameObject;
         BallOwnership.transform.position = BallHoldPoint.transform.position;
         BallOwnership.transform.parent = BallHoldPoint.transform;
+
+        rb.isKinematic = true;
+
+        mainBodyrb.isKinematic = true;
         anim.SetBool(HoldBall, true);
         Debug.Log("Ball ownership completed");
      

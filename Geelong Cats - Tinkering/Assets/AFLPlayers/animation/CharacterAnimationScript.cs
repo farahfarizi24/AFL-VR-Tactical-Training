@@ -66,12 +66,18 @@ public class CharacterAnimationScript : MonoBehaviour
 
     public void CheckBallOwnership()
     {
+
         if ( isBallHolder==true && BallOwnershipManager.BallHolder == false)
         {
-            Debug.Log("HOLDBALL FALSE");
-            animator.SetBool(IsHoldingBall, false);
-            isBallHolder = false;
+            NotHoldingBall();
         }
+    }
+
+    public void NotHoldingBall()
+    {
+        Debug.Log("HOLDBALL FALSE");
+        animator.SetBool(IsHoldingBall, false);
+        isBallHolder = false;
     }
 
 

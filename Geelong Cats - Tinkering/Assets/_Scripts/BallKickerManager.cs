@@ -189,6 +189,7 @@ public class BallKickerManager : MonoBehaviour
         buttonHeld = false;
         audioSource.Play();
         ball = null;
+
         cursorInstance.SetActive(false);
         Destroy(EndPointCursor);
         yield return null;

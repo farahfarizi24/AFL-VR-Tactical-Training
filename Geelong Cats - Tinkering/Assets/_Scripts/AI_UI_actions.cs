@@ -32,7 +32,7 @@ public class AI_UI_actions : MonoBehaviour
 
         Debug.Log("--- Kick initiated");
         AI_ballkick.SetTarget();
-        PerformTask("kicking");
+       // PerformTask("kicking");
         //Kick action
 
     }
@@ -60,6 +60,7 @@ public class AI_UI_actions : MonoBehaviour
             anim.SetTrigger("Kick");
             TaskCourutine = WaitForActionToFinish("Kick");
             StartCoroutine(TaskCourutine);
+
         }else if(task == "handball")
         {
             anim.SetTrigger("Handball");
@@ -73,8 +74,11 @@ public class AI_UI_actions : MonoBehaviour
     {
         if(triggername == "Kick")
         {
-            yield return new WaitForSeconds(2.5f);
-        }else if(triggername == "Handball"){
+            yield return new WaitForSeconds(1.5f);
+            const string IsHoldingBall = "HoldBall";
+            anim.SetBool(IsHoldingBall, false);
+        }
+        else if(triggername == "Handball"){
             yield return new WaitForSeconds(1.0f);
         }
      
@@ -83,6 +87,7 @@ public class AI_UI_actions : MonoBehaviour
         anim.SetLayerWeight(anim.GetLayerIndex("BodyLayer"), 1f);
         anim.SetLayerWeight(anim.GetLayerIndex("ArmLayer"), 1f);
         anim.SetLayerWeight(anim.GetLayerIndex("ActionLayer"), 0f);
+       
         anim.ResetTrigger(triggername);
 
         //OVER HERE PERFORM THE kicking action and unparent the ball

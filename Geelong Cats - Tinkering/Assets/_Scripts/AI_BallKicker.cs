@@ -10,11 +10,11 @@ public class AI_BallKicker : MonoBehaviour
     //public GameObject cursorPrefab;
     public Transform shootPoint;
     private  Transform endPoint;
-   
+    public AI_UI_actions KickingAnimScript;
     public LineRenderer lineVisual;
     public bool HaveBall;
     public float flightTime = 1f;
-
+  //  public CharacterAnimationScript CharaAnim;
     private int lineSegment = 30;
    [SerializeField] private GameObject cursorInstance=null; 
    private GameObject EndPointCursor = null;
@@ -30,7 +30,7 @@ public class AI_BallKicker : MonoBehaviour
     public float h = 3;
     public float gravity = -1;
     private Transform ShootTarget;
-
+    private GameObject cursorCollider;
     // Start is called before the first frame update
     void Start()
     {
@@ -96,8 +96,9 @@ public class AI_BallKicker : MonoBehaviour
             ///Get cursor,
             cursorInstance = GameObject.FindGameObjectWithTag("Pointer");
             cursorInstance.transform.GetChild(0).gameObject.SetActive(true);
+            cursorCollider = cursorInstance.transform.GetChild(0).gameObject;
 
-         
+
 
 
         }
@@ -105,6 +106,8 @@ public class AI_BallKicker : MonoBehaviour
   
     void LaunchBall()
     {
+        cursorCollider.GetComponent<Collider>().enabled = true;
+ 
         ballObject = BallAttach.transform.GetChild(0).gameObject;
 
         //Unparent ball from the current object
@@ -112,6 +115,10 @@ public class AI_BallKicker : MonoBehaviour
         //get rigidbody of ballobject
         // tag AI for not ballownership
         ThisAIBallOwnership.BallHolder = false ;
+        //Move ball towards the kick point(shoot point) and play the animation//
+
+         
+        ///////////////////////////////////////////
         ball = ballObject.GetComponent<Rigidbody>();
         ball.isKinematic = false;
         //   GameObject ballObject = transform.parent.FindChild.tag(tag)
@@ -123,34 +130,46 @@ public class AI_BallKicker : MonoBehaviour
             ShootTarget = cursorInstance.transform;
             TargetSet = true;
         }
-        Physics.gravity = Vector3.up * gravity;
-        ball.useGravity = true;
+
+        Vector3 vo = CalculateVelocty(ShootTarget.position, shootPoint.position, flightTime);
+        StartCoroutine(Kick(vo));
+
+
+    }
+
+    private IEnumerator Kick(Vector3 vo)
+    {
+        Debug.Log("Ball released");
+
+        // Wait so ball has time to be released from hands
+
+        ///ADD CODE FOR THE KICKING AND BALL MOVEMENT HERE
+        KickingAnimScript.PerformTask("kicking");
+        yield return new WaitForSeconds(1.5f);
+        Debug.Log("Ball kicked");
+     
+      
+        ball.transform.position = shootPoint.position;
+      
+        Rigidbody obj = ball.GetComponent<Rigidbody>();
         
-        ball.velocity = CalculateLaunchVelocity();
-        Debug.Log("Launch Velocity =" + CalculateLaunchVelocity());
+        obj.velocity = vo;
+
+        //  audioSource.Play();
+        ball = null;
+
+        
+        
+        cursorCollider.GetComponent<Collider>().enabled = false;
+        cursorCollider.SetActive(false);
+        cursorInstance = null;
+        //cursorInstance.SetActive(false);
+        yield return null;
     }
 
-    Vector3 CalculateLaunchVelocity()
-    {
-        float displacementY = ShootTarget.position.y - ball.position.y;
-        Vector3 displacementXZ = new Vector3(ShootTarget.position.x - ball.position.x, 0, ShootTarget.position.z - ball.position.z);
-        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * h);
-        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * h / gravity) + Mathf.Sqrt(2 * (displacementY - h) / gravity));
-        return velocityXZ + velocityY;
-    }
+   
 
-    /*
-
-    void Visualize(Vector3 vo, Vector3 finalPos)
-    {
-        for (int i = 0; i < lineSegment; i++)
-        {
-            Vector3 pos = CalculatePosInTime(vo, (i / (float)lineSegment) * flightTime);
-            lineVisual.SetPosition(i, pos);
-        }
-
-        lineVisual.SetPosition(lineSegment, finalPos);
-    }
+    
     Vector3 CalculateVelocty(Vector3 target, Vector3 origin, float time)
     {
         Vector3 distance = target - origin;
@@ -169,23 +188,5 @@ public class AI_BallKicker : MonoBehaviour
 
         return result;
     }
-    private void ChangeLineColor(Color col)
-    {
-        lineVisual.endColor = col;
-        lineVisual.startColor = col;
-    }
-    // Update is called once per frame
- 
-    Vector3 CalculatePosInTime(Vector3 vo, float time)
-    {
-        Vector3 Vxz = vo;
-        Vxz.y = 0f;
 
-        Vector3 result = shootPoint.position + vo * time;
-        float sY = (-0.5f * Mathf.Abs(Physics.gravity.y) * (time * time)) + (vo.y * time) + shootPoint.position.y;
-
-        result.y = sY;
-
-        return result;
-    }*/
 }
