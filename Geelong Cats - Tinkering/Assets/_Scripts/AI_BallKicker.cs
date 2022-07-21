@@ -145,6 +145,7 @@ public class AI_BallKicker : MonoBehaviour
 
         ///ADD CODE FOR THE KICKING AND BALL MOVEMENT HERE
         KickingAnimScript.PerformTask("kicking");
+        //wait until perfect time to move ball to position
         yield return new WaitForSeconds(1.5f);
         Debug.Log("Ball kicked");
      
