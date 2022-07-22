@@ -58,10 +58,26 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 498efb7a5610bd342bb48a98c1befaeb, type: 2}
+    - target: {fileID: 1649065787109332290, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'Bip001'\n\tTransform 'Bip001 R Foot'\n\tTransform
+        'Bip001 R Hand'\n\tTransform 'Bip001 R Finger1'\n\tTransform 'Bip001 L Finger11'\n\tTransform
+        'Bip001 R Finger11'\n\tTransform 'Bip001 L Finger3'\n\tTransform 'Bip001
+        R Toe0'\n\tTransform 'Bip001 Spine1'\n\tTransform 'Bip001 L Finger2'\n\tand
+        more ...\n\tFrom animation clip 'mixamo.com'"
+      objectReference: {fileID: 0}
     - target: {fileID: 1900679738785973830, guid: 847e8ed8699dcef4c9e80eaebab0349b,
         type: 3}
       propertyPath: m_Name
       value: AI_Home
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900679738785973830, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Home
       objectReference: {fileID: 0}
     - target: {fileID: 2523761527098341344, guid: 847e8ed8699dcef4c9e80eaebab0349b,
         type: 3}
