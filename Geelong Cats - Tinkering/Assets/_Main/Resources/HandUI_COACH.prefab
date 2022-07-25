@@ -6442,7 +6442,7 @@ MonoBehaviour:
   newAnimator: {fileID: 6005784689011430574}
   animButton: {fileID: 4460866589393055350}
   animToggle: {fileID: 0}
-  newPanel: {fileID: 1859934225752506106}
+  newPanel: {fileID: 8015567831939116151}
   oldAnimText: Panel Fading BG
   newAnimText: Panel Opening Standart
 --- !u!1001 &1978638563059412737
@@ -6476,6 +6476,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 708284229733585379, guid: 222323e316596c849b83bcb1b165fbf3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 708284229733585379, guid: 222323e316596c849b83bcb1b165fbf3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 708284229733585379, guid: 222323e316596c849b83bcb1b165fbf3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11500000, guid: 3fd2cd22f7d538d47a15107e8b4394ec,
+        type: 3}
+    - target: {fileID: 708284229733585379, guid: 222323e316596c849b83bcb1b165fbf3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 812669690128033286, guid: 222323e316596c849b83bcb1b165fbf3,
         type: 3}
@@ -6712,6 +6733,25 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &8641244186532256701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8015567831939116151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7951c64acb0fa62458bf30a60089fe2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 0
+  m_CheckFor2DOcclusion: 0
+  m_CheckFor3DOcclusion: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RaycastTriggerInteraction: 1
 --- !u!1001 &5294485472009611300
 PrefabInstance:
   m_ObjectHideFlags: 0

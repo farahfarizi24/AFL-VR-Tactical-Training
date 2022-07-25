@@ -721,7 +721,7 @@ GameObject:
   - component: {fileID: 9033432290594657195}
   - component: {fileID: 4978131562556652866}
   m_Layer: 5
-  m_Name: Set_Scenario3
+  m_Name: Set_Scenario4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3568,6 +3568,7 @@ GameObject:
   - component: {fileID: 812669690128033286}
   - component: {fileID: 7831694913317298350}
   - component: {fileID: 3487549876121728683}
+  - component: {fileID: 1628655276660621653}
   m_Layer: 0
   m_Name: UI_Coach_SetupScenario
   m_TagString: Untagged
@@ -3678,6 +3679,26 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1628655276660621653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8379102360089969526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fd2cd22f7d538d47a15107e8b4394ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScenarioEditor: {fileID: 0}
+  ScenarioButton:
+  - {fileID: 708284229733585379}
+  - {fileID: 5708016543753268599}
+  - {fileID: 6429487165687032061}
+  - {fileID: 1228713037817612735}
+  - {fileID: 4266122227618816249}
+  - {fileID: 6965558026852262125}
 --- !u!1 &8523011909780282512
 GameObject:
   m_ObjectHideFlags: 0
@@ -3844,7 +3865,7 @@ GameObject:
   - component: {fileID: 9173995654011052670}
   - component: {fileID: 4532927871943776140}
   m_Layer: 5
-  m_Name: Set_Scenario3
+  m_Name: Set_Scenario6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4279,7 +4300,7 @@ GameObject:
   - component: {fileID: 4189074301294731956}
   - component: {fileID: 8352967965311623201}
   m_Layer: 5
-  m_Name: Set_Scenario3
+  m_Name: Set_Scenario5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

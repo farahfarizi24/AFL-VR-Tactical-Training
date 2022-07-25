@@ -1841,10 +1841,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3827713413229500774, guid: af3fc7529ea819545b0ccdb7e85f329b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6763768185053936011, guid: af3fc7529ea819545b0ccdb7e85f329b,
         type: 3}
       propertyPath: m_Name
       value: ScenarioCreationUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763768185053936011, guid: af3fc7529ea819545b0ccdb7e85f329b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763768185053936011, guid: af3fc7529ea819545b0ccdb7e85f329b,
+        type: 3}
+      propertyPath: m_TagString
+      value: ScenarioEditor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af3fc7529ea819545b0ccdb7e85f329b, type: 3}

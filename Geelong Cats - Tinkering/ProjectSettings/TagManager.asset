@@ -16,6 +16,7 @@ TagManager:
   - BallDestination
   - Pointer
   - BallContainer
+  - ScenarioEditor
   layers:
   - Default
   - TransparentFX
