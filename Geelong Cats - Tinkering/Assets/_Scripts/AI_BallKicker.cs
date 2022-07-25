@@ -35,7 +35,7 @@ public class AI_BallKicker : MonoBehaviour
     void Start()
     {
 
-   
+        cursorInstance = GameObject.FindGameObjectWithTag("Pointer");
         CheckBall();
     }
     
@@ -94,7 +94,7 @@ public class AI_BallKicker : MonoBehaviour
 
 
             ///Get cursor,
-            cursorInstance = GameObject.FindGameObjectWithTag("Pointer");
+          //  cursorInstance = GameObject.FindGameObjectWithTag("Pointer");
             cursorInstance.transform.GetChild(0).gameObject.SetActive(true);
             cursorCollider = cursorInstance.transform.GetChild(0).gameObject;
 
