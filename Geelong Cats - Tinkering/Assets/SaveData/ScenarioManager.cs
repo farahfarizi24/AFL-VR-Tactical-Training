@@ -1,62 +1,65 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using UnityEngine;
-public class ScenarioComponent : MonoBehaviour
+
+[CreateAssetMenu(menuName = "Scenario/manager")]
+public class ScenarioManager : ScriptableObject
 {
     public GameObject homePlayerPrefab;
     public GameObject awayPlayerPrefab;
 
-    string filePath;
+    public Action<ScenarioData> OnChangeScenario;
+    public Action<GameObject, Vector3, Quaternion> OnChangePlayerPosition;
 
-    void Awake()
+    public int currentScenarioNum = 1;
+
+    string filePath = Application.persistentDataPath + "/gamedate.txt";
+
+    public void TestingSave()
     {
-        //update the field once the persistent path exists.
-        //
-
-        ///This means it reads file called gamedata
-        filePath = Application.persistentDataPath + "/gamedate.txt";
-        Debug.Log(filePath);
+        SaveScenario(currentScenarioNum);
     }
-    // Start is called before the first frame update
-    void Start()
+    public void TestingLoad()
     {
-
+        LoadScenario(currentScenarioNum);
+    }
+    public void SelecetScenario(int scenarioNum)
+    {
+        currentScenarioNum = scenarioNum;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SaveScenario(int scenarioNum)
     {
-
-    }
-    public void FindAllPlayer()
-    {
+        var scenarioIndex = scenarioNum - 1;
         var homeplayers = GameObject.FindGameObjectsWithTag("Home");
-
         var awayPlayers = GameObject.FindGameObjectsWithTag("Away");
 
-        var players = homeplayers.Concat(awayPlayers).ToArray();
+        //var players = homeplayers.Concat(awayPlayers).ToArray();
 
-        var scenarios = new ScenarioContainer();
+        var scenarios = loadData();
         var scenario = new ScenarioData();
-        scenario.ScenarioNumber = 1;
+        scenario.ScenarioNumber = scenarioNum;
         scenario.addHomePlayers(homeplayers);
-        scenarios.scenarios.Add(scenario);
-        var scenario2 = new ScenarioData();
-        scenario2.ScenarioNumber = 2;
-        scenario2.addAwayPlayers(awayPlayers);
-        scenarios.scenarios.Add(scenario2);
+        scenario.addAwayPlayers(awayPlayers);
+        scenarios.scenarios[scenarioIndex] = scenario;
 
         writeData(scenarios);
     }
-    public void LoadScenario()
+    public void LoadScenario(int scenarioNum)
     {
         var scenarios = loadData();
-        clearnPlayers();
-        SetPlayers(scenarios, 1);
-        CreatePlayers(scenarios, 2);
-
+        var scenario = scenarios.scenarios[scenarioNum - 1];
+        if (scenario == null)
+        {
+            Debug.Log("scenario" + scenarioNum.ToString() + " is empty.");
+            return;
+        }
+        OnChangeScenario?.Invoke(scenario);
+        SetPlayers(scenario);
     }
+
     private void writeData(ScenarioContainer scenarios)
     {
         if (File.Exists(filePath))
@@ -72,6 +75,10 @@ public class ScenarioComponent : MonoBehaviour
     }
     private ScenarioContainer loadData()
     {
+        if (!File.Exists(filePath))
+        {
+            return new ScenarioContainer();
+        }
         XmlSerializer serializer = new XmlSerializer(typeof(ScenarioContainer));
         StreamReader reader = new StreamReader(filePath);
         ScenarioContainer deserialized = (ScenarioContainer)serializer.Deserialize(reader.BaseStream);
@@ -99,25 +106,22 @@ public class ScenarioComponent : MonoBehaviour
         }
     }
     // Set Position for existing players
-    private void SetPlayers(ScenarioContainer scenarios, int scenarioNum)
+    private void SetPlayers(ScenarioData scenario)
     {
 
-        foreach (var scenario in scenarios.scenarios)
+        foreach (var player in scenario.homeplayers)
         {
-            if (scenario.ScenarioNumber == scenarioNum)
-            {
-                foreach (var player in scenario.homeplayers)
-                {
-                    var playerObject = GameObject.Find(player.name);
-                    player.initPlayer(playerObject);
-                }
-                foreach (var player in scenario.awayplayers)
-                {
-                    var playerObject = GameObject.Find(player.name);
-                    player.initPlayer(playerObject);
-                }
-            }
+            var playerObject = GameObject.Find(player.name);
+            //player.initPlayer(playerObject);
+            OnChangePlayerPosition?.Invoke(playerObject, player.position, player.rotation);
         }
+        foreach (var player in scenario.awayplayers)
+        {
+            var playerObject = GameObject.Find(player.name);
+            //player.initPlayer(playerObject);
+            OnChangePlayerPosition?.Invoke(playerObject, player.position, player.rotation);
+        }
+
     }
     private void clearnPlayers()
     {

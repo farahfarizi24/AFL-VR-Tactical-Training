@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
+    //TODO: pathPoints using Queue<Vector3>
     [XmlElement("position")]
     public Vector3 position;
 

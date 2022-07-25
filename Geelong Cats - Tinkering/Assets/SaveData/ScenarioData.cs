@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScenarioContainer
 {
     [XmlArray("scenarios"), XmlArrayItem("scenario")]
-    public List<ScenarioData> scenarios = new List<ScenarioData>();
+    public ScenarioData[] scenarios = new ScenarioData[6];
 
 }
 
