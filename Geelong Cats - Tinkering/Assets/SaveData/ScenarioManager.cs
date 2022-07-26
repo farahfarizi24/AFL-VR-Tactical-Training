@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
@@ -123,18 +124,68 @@ public class ScenarioManager : ScriptableObject
         }
 
     }
-    private void clearnPlayers()
-    {
-        var homeplayers = GameObject.FindGameObjectsWithTag("Home");
 
+    //TODO: create and remove extra players, then move players to scenario setting
+    private void initalizePlayers(ScenarioData scenario)
+    {
+
+
+    }
+    private void analyseScenario()
+    {
+        var scenarios = loadData();
+        var scenario = scenarios.scenarios[currentScenarioNum - 1];
+        //check current players number
+        var homeplayers = GameObject.FindGameObjectsWithTag("Home");
         var awayPlayers = GameObject.FindGameObjectsWithTag("Away");
 
-        var players = homeplayers.Concat(awayPlayers).ToArray();
-
-        foreach (var player in players)
+        if (scenario.homeplayers.Count != homeplayers.Length)
         {
-            Destroy(player);
+            findDiffPlayers(homeplayers, scenario.homeplayers);
+        }
+        if (scenario.awayplayers.Count != awayPlayers.Length)
+        {
+            findDiffPlayers(awayPlayers, scenario.awayplayers);
         }
     }
+    private void findDiffPlayers(GameObject[] currentPlayers, List<PlayerData> scenarioPlayers)
+    {
+        var playersName = currentPlayers.Select(player => player.name).ToArray();
+        var playersNameDiff = playersName.Except(scenarioPlayers.Select(player => player.name).ToArray()).ToArray();
+        if (scenarioPlayers.Count > currentPlayers.Length)
+        {
+            //create new players using player data by a spawner
+            foreach (var playerName in playersNameDiff)
+            {
+                var playerData = scenarioPlayers.First(player => player.name == playerName);
+                var newPlayer = Instantiate(homePlayerPrefab);
+                playerData.initPlayer(newPlayer);
+            }
+        }
+        else
+        {
+            foreach (var playerName in playersNameDiff)
+            {
+                Destroy(currentPlayers.First(player => player.name == playerName));
+            }
+        }
+    }
+    public void TestMovePlayer()
+    {
+        var homeplayers = GameObject.FindGameObjectsWithTag("Home");
+        foreach (var player in homeplayers)
+        {
+            //player.GetComponent< AI_PathManager>().SetPoints = destination;
+            //player.GetComponent<AI_Avatar>().SetDestination(destination);
 
+        }
+    }
+    private void MovePlayer(Vector3 destination, GameObject player)
+    {
+        //using the AI_Avatar script to move the player
+
+
+        //player.GetComponent< AI_PathManager>().SetPoints = destination;
+        //player.GetComponent<AI_Avatar>().SetDestination(destination);
+    }
 }
