@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 891536357997476078, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 891536357997476078, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.88
+      objectReference: {fileID: 0}
     - target: {fileID: 1264741011639985666, guid: 847e8ed8699dcef4c9e80eaebab0349b,
         type: 3}
       propertyPath: _realtime
@@ -103,6 +113,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3289739800395676736, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: lineVisual
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3289739800395676736, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: shootPoint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3289739800395676736, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: LeftTrigger
+      value: 
+      objectReference: {fileID: -9022803619979799435, guid: 7a77aace10269d04b82d49a70f7cee77,
+        type: 3}
+    - target: {fileID: 3289739800395676736, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: RightTrigger
+      value: 
+      objectReference: {fileID: 6163281524240053765, guid: 7a77aace10269d04b82d49a70f7cee77,
+        type: 3}
     - target: {fileID: 4612394430980886328, guid: 847e8ed8699dcef4c9e80eaebab0349b,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -137,6 +169,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8150493822586266335, guid: 847e8ed8699dcef4c9e80eaebab0349b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8370976140571437878, guid: 847e8ed8699dcef4c9e80eaebab0349b,
         type: 3}
@@ -173,7 +210,8 @@ PrefabInstance:
       propertyPath: m_textInfo.characterCount
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5957456613448510695, guid: 847e8ed8699dcef4c9e80eaebab0349b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 847e8ed8699dcef4c9e80eaebab0349b, type: 3}
 --- !u!1 &118744677996937946 stripped
 GameObject:
@@ -247,11 +285,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f892300a40da48458fa6690b7cc1576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BallOwnershipManager: {fileID: 0}
   AI_Manager: {fileID: 8065632420401049514}
   character: {fileID: 5459347472915209061}
   CurrentAction: 0
   animator: {fileID: 6213615295234265013}
   CheckAnim: 
+  isBallHolder: 0
 --- !u!1001 &8011547567930675789
 PrefabInstance:
   m_ObjectHideFlags: 0

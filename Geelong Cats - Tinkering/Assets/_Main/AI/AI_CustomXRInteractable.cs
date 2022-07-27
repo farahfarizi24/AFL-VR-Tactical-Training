@@ -7,6 +7,7 @@ using System;
 
 namespace com.DU.CE.AI
 {
+
     public class AI_CustomXRInteractable : XRGrabInteractable
     {
         [SerializeField] private InputActionProperty m_rightPathPlace;
@@ -14,31 +15,58 @@ namespace com.DU.CE.AI
 
         private AI_Avatar m_manager;
         private USER_CustomRayInteractor m_interactor = null;
-
+        public GameObject ActionUI;
+        public bool isOnHover=false;
+        //trigger code
+        public InputActionReference toggleReference = null;
         protected override void Awake()
         {
             base.Awake();
+            toggleReference.action.started += SelectAI;
 
             m_manager = GetComponentInParent<AI_Avatar>();
         }
 
+        private void OnDestroy()
+        {
+            toggleReference.action.started -= SelectAI;
+        }
+
+        private void SelectAI(InputAction.CallbackContext context)
+        {
+            if(isOnHover){
+                // context.ReadValueAsButton
+                bool isActive = !ActionUI.gameObject.activeSelf;
+
+                ActionUI.gameObject.SetActive(isActive);
+                Debug.Log("Button is is presed");
+            }
+         
+        }
         #region XR Callbacks
 
+
+       
+        
+        
         protected override void OnHoverEntered(HoverEnterEventArgs args)
         {
             m_manager.OnHoverChanged(true);
+            isOnHover = true;
         }
 
         protected override void OnHoverExited(HoverExitEventArgs args)
         {
             m_manager.OnHoverChanged(false);
+            isOnHover = false;
         }
 
+        
 
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
             base.OnSelectEntered(args);
-
+            Debug.Log("Grabpressed");
             m_manager.M_NCModel.isSelected = true;
 
             m_interactor = args.interactor as USER_CustomRayInteractor;

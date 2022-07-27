@@ -5,9 +5,9 @@ using UnityEngine.AI;
 public class CharacterAnimationScript : MonoBehaviour
 {
     // Start is called before the first frame update
-
+   [SerializeField] private BallCatch BallOwnershipManager;
     [SerializeField] private com.DU.CE.AI.AI_PathManager AI_Manager;
-    [SerializeField]    private NavMeshAgent character;
+    [SerializeField]    public NavMeshAgent character;
     public int CurrentAction;
     // 1 = idle , 2 = running, 3 = kicking, 4 = throwing, 
     [SerializeField] private Animator animator;
@@ -15,36 +15,70 @@ public class CharacterAnimationScript : MonoBehaviour
 
     private const string IsRunning = "IsRunning";
     private const string IsIdle = "IsIdle";
+    private const string IsHoldingBall = "HoldBall";
+    public bool isBallHolder=false;
     void Start()
     {
+    
         animator = GetComponent<Animator>();
-        CheckAnim = "None";
-        animator.SetBool(IsIdle, true);
+       character = GetComponent<NavMeshAgent>();
+        ToggleIdle();
+        animator.SetLayerWeight(animator.GetLayerIndex("ArmLayer"), 1f);
+        animator.SetLayerWeight(animator.GetLayerIndex("BodyLayer"), 1f);
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        ///Check if character is currently moving
-      
-        if (character.remainingDistance > 0.1f)
+
+        if (character.velocity != Vector3.zero)
         {
-            animator.SetBool(IsRunning, true);
-            animator.SetBool(IsIdle, false);
-        }
-        else
+            ToggleRun();
+        }else
         {
-            animator.SetBool(IsRunning, false);
-            animator.SetBool(IsIdle, true);
+            ToggleIdle();
         }
-    
+
+   
     }
 
+    public void ToggleRun()
+    {
+       // if (character.remainingDistance > 0.1f)
+            animator.SetBool(IsRunning, true);
+        animator.SetBool(IsIdle, false);
+        CheckBallOwnership();
 
-    void PlayAction()
+        Debug.Log("Run Toggled");
+    }
+
+    public void ToggleIdle()
+    {
+        Debug.Log("Idle Toggled");
+        animator.SetBool(IsRunning, false);
+        animator.SetBool(IsIdle, true);
+
+        CheckBallOwnership();
+
+    }
+
+    public void CheckBallOwnership()
     {
 
-
+        if ( isBallHolder==true && BallOwnershipManager.BallHolder == false)
+        {
+            NotHoldingBall();
+        }
     }
+
+    public void NotHoldingBall()
+    {
+        Debug.Log("HOLDBALL FALSE");
+        animator.SetBool(IsHoldingBall, false);
+        isBallHolder = false;
+    }
+
+
 }

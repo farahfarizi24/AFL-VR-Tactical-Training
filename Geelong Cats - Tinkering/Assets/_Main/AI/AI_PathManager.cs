@@ -50,7 +50,7 @@ namespace com.DU.CE.AI
                    
                     Debug.Log("----------Setting Destination " + pathPoints.Peek());
                     isRunning = true;
-                    Debug.Log("Should be running");
+                    animScript.ToggleRun();
                     navMeshAgent.SetDestination(pathPoints.Dequeue());
                    
 
@@ -59,6 +59,7 @@ namespace com.DU.CE.AI
                // animScript.CurrentAction = 1;
                 yield return null;
             }
+            isRunning = false;
             //StopCoroutine(UpdatePathing());
         }
 

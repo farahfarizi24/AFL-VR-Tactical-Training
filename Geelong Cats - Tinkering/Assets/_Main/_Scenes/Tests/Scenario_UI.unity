@@ -789,6 +789,7 @@ MonoBehaviour:
     type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!114 &1191185365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -825,6 +826,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8539623492603895813, guid: 883b9cebf6ca29b459cfaacc9317d3ff,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8539623492603895814, guid: 883b9cebf6ca29b459cfaacc9317d3ff,
         type: 3}
       propertyPath: m_Pivot.x
@@ -908,7 +914,7 @@ PrefabInstance:
     - target: {fileID: 8539623492603895814, guid: 883b9cebf6ca29b459cfaacc9317d3ff,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.0209
       objectReference: {fileID: 0}
     - target: {fileID: 8539623492603895814, guid: 883b9cebf6ca29b459cfaacc9317d3ff,
         type: 3}
@@ -940,6 +946,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1787174704}
+    - target: {fileID: 8539623492603895819, guid: 883b9cebf6ca29b459cfaacc9317d3ff,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 883b9cebf6ca29b459cfaacc9317d3ff, type: 3}
 --- !u!1001 &1463133613
@@ -2529,11 +2540,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1802566440}
     m_Modifications:
+    - target: {fileID: 498903910888907453, guid: a981e4cda69a0164babd49d4144857b5,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2767905820231359102, guid: a981e4cda69a0164babd49d4144857b5,
         type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1787174704}
+    - target: {fileID: 3890985837648142020, guid: a981e4cda69a0164babd49d4144857b5,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3890985837648142022, guid: a981e4cda69a0164babd49d4144857b5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 3890985837648142026, guid: a981e4cda69a0164babd49d4144857b5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3890985837648142027, guid: a981e4cda69a0164babd49d4144857b5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3890985837648142027, guid: a981e4cda69a0164babd49d4144857b5,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262472240920955009, guid: a981e4cda69a0164babd49d4144857b5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4358257709723186388, guid: a981e4cda69a0164babd49d4144857b5,
         type: 3}
       propertyPath: m_IsActive
@@ -2657,12 +2703,12 @@ PrefabInstance:
     - target: {fileID: 5286052436106587728, guid: a981e4cda69a0164babd49d4144857b5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -29
       objectReference: {fileID: 0}
     - target: {fileID: 5286052436106587728, guid: a981e4cda69a0164babd49d4144857b5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 5286052436106587728, guid: a981e4cda69a0164babd49d4144857b5,
         type: 3}
@@ -2684,5 +2730,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_Coach
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4262472240920955009, guid: a981e4cda69a0164babd49d4144857b5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a981e4cda69a0164babd49d4144857b5, type: 3}

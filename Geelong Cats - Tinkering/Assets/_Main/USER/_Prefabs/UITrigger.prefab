@@ -48,18 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsUIOpen: 0
-  m_GripAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Grip
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: a53310e4-40d5-4fac-b3fb-de608019112d
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-    m_Reference: {fileID: -6131295136447488360, guid: 7a77aace10269d04b82d49a70f7cee77,
-      type: 3}
+  UI_Grip: {fileID: -9022803619979799435, guid: 7a77aace10269d04b82d49a70f7cee77,
+    type: 3}
   m_LocalUser: {fileID: 0}
 --- !u!33 &4969130641650165714
 MeshFilter:

@@ -12,6 +12,11 @@ TagManager:
   - CameraViews
   - Away
   - PlayerPosMark
+  - Ball
+  - BallDestination
+  - Pointer
+  - BallContainer
+  - ScenarioEditor
   layers:
   - Default
   - TransparentFX

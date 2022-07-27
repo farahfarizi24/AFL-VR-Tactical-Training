@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 8accf0fee4fa19842a9ba389009e2728
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - cursorPrefab: {instanceID: 0}
+  - shootPoint: {instanceID: 0}
+  - endPoint: {instanceID: 0}
+  - lineVisual: {instanceID: 0}
+  - cursorInstance: {instanceID: 0}
+  - RightTrigger: {fileID: 6163281524240053765, guid: 7a77aace10269d04b82d49a70f7cee77,
+      type: 3}
+  - LeftTrigger: {fileID: -9022803619979799435, guid: 7a77aace10269d04b82d49a70f7cee77,
+      type: 3}
+  - ThisAIBallOwnership: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
