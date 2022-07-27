@@ -1,3 +1,5 @@
+using com.DU.CE.AI;
+using com.DU.CE.INT;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,18 +13,34 @@ public class ScenarioManager : ScriptableObject
     public GameObject homePlayerPrefab;
     public GameObject awayPlayerPrefab;
 
+    public SOC_AI soc_ai_instance;
+
     public Action<ScenarioData> OnChangeScenario;
     public Action<GameObject, Vector3, Quaternion> OnChangePlayerPosition;
 
     public int currentScenarioNum = 1;
 
-    string filePath = Application.persistentDataPath + "/gamedate.txt";
-
+    string filePath;
+    private void OnEnable()
+    {
+        filePath = Application.persistentDataPath + "/gamedate.txt";
+        Debug.Log(filePath);
+    }
     public void TestingSave()
+    {
+        SelecetScenario(1);
+        SaveScenario();
+    }
+    public void TestingLoad()
+    {
+        SelecetScenario(1);
+        LoadScenario();
+    }
+    public void SaveScenario()
     {
         SaveScenario(currentScenarioNum);
     }
-    public void TestingLoad()
+    public void LoadScenario()
     {
         LoadScenario(currentScenarioNum);
     }
@@ -141,29 +159,50 @@ public class ScenarioManager : ScriptableObject
 
         if (scenario.homeplayers.Count != homeplayers.Length)
         {
-            findDiffPlayers(homeplayers, scenario.homeplayers);
+            findDiffPlayers(homeplayers, scenario.homeplayers, true);
         }
         if (scenario.awayplayers.Count != awayPlayers.Length)
         {
-            findDiffPlayers(awayPlayers, scenario.awayplayers);
+            findDiffPlayers(awayPlayers, scenario.awayplayers, false);
         }
     }
-    private void findDiffPlayers(GameObject[] currentPlayers, List<PlayerData> scenarioPlayers)
+    private void findDiffPlayers(GameObject[] currentPlayers, List<PlayerData> scenarioPlayers, bool isHomeTeam)
     {
-        var playersName = currentPlayers.Select(player => player.name).ToArray();
-        var playersNameDiff = playersName.Except(scenarioPlayers.Select(player => player.name).ToArray()).ToArray();
+        var currentPlayersName = currentPlayers.Select(player => player.name).ToArray();
+        var scenarioPlayersName = scenarioPlayers.Select(player => player.name).ToArray();
+
+        string[] playersNameDiff;
         if (scenarioPlayers.Count > currentPlayers.Length)
         {
+            playersNameDiff = scenarioPlayersName.Except(currentPlayersName).ToArray();
             //create new players using player data by a spawner
             foreach (var playerName in playersNameDiff)
             {
                 var playerData = scenarioPlayers.First(player => player.name == playerName);
-                var newPlayer = Instantiate(homePlayerPrefab);
-                playerData.initPlayer(newPlayer);
+
+                GameObject emptyGO = new GameObject();
+                emptyGO.transform.position = playerData.position;
+                emptyGO.transform.rotation = playerData.rotation;
+
+
+                if (isHomeTeam)
+                {
+                    GameObject newPlayer = Instantiate(homePlayerPrefab);
+                    playerData.initPlayer(newPlayer);
+                    soc_ai_instance?.UIActivateHomeAI(emptyGO.transform);
+                }
+                else
+                {
+                    GameObject newPlayer = Instantiate(awayPlayerPrefab);
+                    playerData.initPlayer(newPlayer);
+                    soc_ai_instance?.UIActivateAwayAI(emptyGO.transform);
+                }
+
             }
         }
         else
         {
+            playersNameDiff = currentPlayersName.Except(scenarioPlayersName).ToArray();
             foreach (var playerName in playersNameDiff)
             {
                 Destroy(currentPlayers.First(player => player.name == playerName));
@@ -172,13 +211,20 @@ public class ScenarioManager : ScriptableObject
     }
     public void TestMovePlayer()
     {
+        analyseScenario();
         var homeplayers = GameObject.FindGameObjectsWithTag("Home");
         foreach (var player in homeplayers)
         {
-            //player.GetComponent< AI_PathManager>().SetPoints = destination;
-            //player.GetComponent<AI_Avatar>().SetDestination(destination);
-
+            player.GetComponent<AI_Avatar>().Activate(true);
+            player.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(new Vector3(0, 0, 0));
         }
+    }
+    public void TestCreatePlayer()
+    {
+        GameObject emptyGO = new GameObject();
+
+        soc_ai_instance?.UIActivateHomeAI(emptyGO.transform);
+
     }
     private void MovePlayer(Vector3 destination, GameObject player)
     {

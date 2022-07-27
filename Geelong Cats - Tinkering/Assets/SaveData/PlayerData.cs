@@ -12,7 +12,6 @@ public class PlayerData
     [XmlElement("rotation")]
     public Quaternion rotation;
 
-
     [XmlAttribute("name")]
     public string name;
 

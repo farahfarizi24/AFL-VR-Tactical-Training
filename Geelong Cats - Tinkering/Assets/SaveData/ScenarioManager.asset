@@ -16,4 +16,5 @@ MonoBehaviour:
     type: 3}
   awayPlayerPrefab: {fileID: 118744677996937946, guid: 634f475940bb868449a5fb6086755506,
     type: 3}
+  soc_ai_instance: {fileID: 11400000, guid: 9aa6e2419d2441e4bbb477c63eb92c48, type: 2}
   currentScenarioNum: 0

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -139,6 +139,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 740856152967635614, guid: 634f475940bb868449a5fb6086755506,
+        type: 3}
+      propertyPath: _realtime
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 740856152967635614, guid: 634f475940bb868449a5fb6086755506,
         type: 3}
@@ -279,6 +284,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682733917777388900, guid: 7f2e6bbf1688cbb4abeeafbfd6d9d42a,
+        type: 3}
+      propertyPath: _realtime
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3682733917777388900, guid: 7f2e6bbf1688cbb4abeeafbfd6d9d42a,
         type: 3}
@@ -567,7 +577,7 @@ RectTransform:
   m_Children:
   - {fileID: 1703696648}
   m_Father: {fileID: 1893232455}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -687,6 +697,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 740856152967635614, guid: 634f475940bb868449a5fb6086755506,
         type: 3}
+      propertyPath: _realtime
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 740856152967635614, guid: 634f475940bb868449a5fb6086755506,
+        type: 3}
       propertyPath: _viewUUID
       value: ba2fc8a0-d17f-4a35-80ff-facbb93a2712
       objectReference: {fileID: 0}
@@ -779,6 +794,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 740856152967635614, guid: 634f475940bb868449a5fb6086755506,
+        type: 3}
+      propertyPath: _realtime
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 740856152967635614, guid: 634f475940bb868449a5fb6086755506,
         type: 3}
@@ -986,7 +1006,7 @@ RectTransform:
   m_Children:
   - {fileID: 454680812}
   m_Father: {fileID: 1893232455}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1039,7 +1059,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 977109d7993bcb64c8e0989d0a64bcd7, type: 2}
         m_TargetAssemblyTypeName: ScenarioManager, Assembly-CSharp
-        m_MethodName: TestingLoad
+        m_MethodName: TestMovePlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1374,8 +1394,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 545921791}
   - {fileID: 1599726492}
+  - {fileID: 545921791}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
