@@ -832,7 +832,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4040774176470036023}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 977109d7993bcb64c8e0989d0a64bcd7, type: 2}
+        m_TargetAssemblyTypeName: ScenarioManager, Assembly-CSharp
+        m_MethodName: SelecetScenario
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6017152001722583884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,7 +1173,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8434607692049030122}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 977109d7993bcb64c8e0989d0a64bcd7, type: 2}
+        m_TargetAssemblyTypeName: ScenarioManager, Assembly-CSharp
+        m_MethodName: SelecetScenario
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &118589458855401705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2971,7 +2995,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6208523942504096876}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 977109d7993bcb64c8e0989d0a64bcd7, type: 2}
+        m_TargetAssemblyTypeName: ScenarioManager, Assembly-CSharp
+        m_MethodName: SelecetScenario
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4062118878746074490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3699,6 +3735,7 @@ MonoBehaviour:
   - {fileID: 1228713037817612735}
   - {fileID: 4266122227618816249}
   - {fileID: 6965558026852262125}
+  UI: {fileID: 0}
 --- !u!1 &8523011909780282512
 GameObject:
   m_ObjectHideFlags: 0
@@ -3976,7 +4013,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4093760013101842263}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 977109d7993bcb64c8e0989d0a64bcd7, type: 2}
+        m_TargetAssemblyTypeName: ScenarioManager, Assembly-CSharp
+        m_MethodName: SelecetScenario
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &848572143210820982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4231,7 +4280,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4868704256664547021}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 977109d7993bcb64c8e0989d0a64bcd7, type: 2}
+        m_TargetAssemblyTypeName: ScenarioManager, Assembly-CSharp
+        m_MethodName: SelecetScenario
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1569740678892947686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4411,7 +4472,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4545312937113991457}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 977109d7993bcb64c8e0989d0a64bcd7, type: 2}
+        m_TargetAssemblyTypeName: ScenarioManager, Assembly-CSharp
+        m_MethodName: SelecetScenario
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4000555122474293200
 MonoBehaviour:
   m_ObjectHideFlags: 0
