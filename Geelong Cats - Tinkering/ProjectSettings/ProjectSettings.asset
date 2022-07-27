@@ -153,8 +153,11 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: -8046500816360776188, guid: 3fa549c52d252524a8435ead24931610, type: 2}
   - {fileID: 9201001201733580783, guid: 57406b8abb662a34bad901e85198afa2, type: 2}
-  - {fileID: 11400000, guid: 688a51a31b363914c9602ec687924d4a, type: 2}
   - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -263,7 +266,7 @@ PlayerSettings:
   useCustomBaseGradleTemplate: 0
   useCustomGradlePropertiesTemplate: 0
   useCustomProguardFile: 0
-  AndroidTargetArchitectures: 1
+  AndroidTargetArchitectures: 2
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
@@ -614,7 +617,9 @@ PlayerSettings:
   switchPlayerConnectionEnabled: 1
   switchUseNewStyleFilepaths: 0
   switchUseMicroSleepForYield: 1
+  switchEnableRamDiskSupport: 0
   switchMicroSleepForYieldTime: 25
+  switchRamDiskSpaceSize: 12
   ps4NPAgeRating: 12
   ps4NPTitleSecret: 
   ps4NPTrophyPackPath: 
@@ -715,7 +720,8 @@ PlayerSettings:
     7: SRP_OUTLINE;NORMCORE
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Android: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}
