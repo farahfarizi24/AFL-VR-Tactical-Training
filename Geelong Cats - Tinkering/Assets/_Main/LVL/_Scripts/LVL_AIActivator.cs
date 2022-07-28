@@ -2,6 +2,7 @@
 using UnityEngine;
 
 using com.DU.CE.AI;
+using System;
 
 namespace com.DU.CE.LVL
 {
@@ -28,13 +29,46 @@ namespace com.DU.CE.LVL
         private void OnEnable()
         {
             m_aiSock.OnActivateAI += ActivateAI;
+            m_aiSock.OnActivateAIByNum += ActiveteByNum;
+            m_aiSock.OnDisableAIByNum += DisableByNum;
+            m_aiSock.OnTeamSizeChanged += ChangeSize;
         }
+
+
 
         private void OnDisable()
         {
             m_aiSock.OnActivateAI -= ActivateAI;
+            m_aiSock.OnActivateAIByNum -= ActiveteByNum;
+            m_aiSock.OnDisableAIByNum -= DisableByNum;
+            m_aiSock.OnTeamSizeChanged -= ChangeSize;
+        }
+        private void ChangeSize(ETEAM team, int size)
+        {
+            if (team == ETEAM.HOME)
+            {
+                m_currentHomeIndex = size;
+            }
+            else
+            {
+                m_currentAwayIndex = size;
+            }
         }
 
+        private void DisableByNum(ETEAM team, int num)
+        {
+            AI_Avatar ai;
+            if (team.Equals(ETEAM.HOME))
+            {
+                ai = m_aiSpawnner.HomePool[num].GetComponent<AI_Avatar>();
+            }
+            else
+            {
+                ai = m_aiSpawnner.AwayPool[num].GetComponent<AI_Avatar>();
+            }
+
+            ai.ChangeNetworkActivation(false);
+        }
 
         internal void SetupForPlayer()
         {
@@ -49,6 +83,24 @@ namespace com.DU.CE.LVL
             }
 
             enabled = false;
+        }
+        private void ActiveteByNum(ETEAM team, int num, Transform location)
+        {
+            AI_Avatar ai;
+            if (team.Equals(ETEAM.HOME))
+            {
+                ai = m_aiSpawnner.HomePool[num].GetComponent<AI_Avatar>();
+            }
+            else
+            {
+                ai = m_aiSpawnner.AwayPool[num].GetComponent<AI_Avatar>();
+            }
+
+            ai.ChangeNetworkActivation(true);
+
+            ai.transform.position = location.position;
+            ai.transform.rotation = location.rotation;
+
         }
 
 

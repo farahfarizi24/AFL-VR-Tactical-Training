@@ -75,7 +75,9 @@ public class ScenarioManager : ScriptableObject
             Debug.Log("scenario" + scenarioNum.ToString() + " is empty.");
             return;
         }
+        currentScenarioNum = scenarioNum;
         OnChangeScenario?.Invoke(scenario);
+        analyseScenario(scenario);
         SetPlayers(scenario);
     }
 
@@ -104,26 +106,7 @@ public class ScenarioManager : ScriptableObject
         reader.Close();
         return deserialized;
     }
-    private void CreatePlayers(ScenarioContainer scenarios, int scenarioNum)
-    {
-        foreach (var scenario in scenarios.scenarios)
-        {
-            if (scenario.ScenarioNumber == scenarioNum)
-            {
-                foreach (var player in scenario.homeplayers)
-                {
-                    GameObject newPlayer = Instantiate(homePlayerPrefab);
-                    player.initPlayer(newPlayer);
 
-                }
-                foreach (var player in scenario.awayplayers)
-                {
-                    GameObject newPlayer = Instantiate(awayPlayerPrefab);
-                    player.initPlayer(newPlayer);
-                }
-            }
-        }
-    }
     // Set Position for existing players
     private void SetPlayers(ScenarioData scenario)
     {
@@ -131,40 +114,50 @@ public class ScenarioManager : ScriptableObject
         foreach (var player in scenario.homeplayers)
         {
             var playerObject = GameObject.Find(player.name);
-            //player.initPlayer(playerObject);
+
             OnChangePlayerPosition?.Invoke(playerObject, player.position, player.rotation);
+            playerObject.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(player.position);
         }
         foreach (var player in scenario.awayplayers)
         {
             var playerObject = GameObject.Find(player.name);
-            //player.initPlayer(playerObject);
             OnChangePlayerPosition?.Invoke(playerObject, player.position, player.rotation);
+            playerObject.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(player.position);
         }
 
     }
-
-    //TODO: create and remove extra players, then move players to scenario setting
-    private void initalizePlayers(ScenarioData scenario)
+    private GameObject[] findActivedPlayers(string tag)
     {
-
-
+        var allplayers = GameObject.FindGameObjectsWithTag(tag);
+        List<GameObject> activedPlayers = new List<GameObject>();
+        foreach (var player in allplayers)
+        {
+            if (player.GetComponent<AI_Avatar>().M_NCModel.isActivated == true)
+            {
+                activedPlayers.Add(player);
+            }
+        }
+        return activedPlayers.ToArray();
     }
-    private void analyseScenario()
+
+    private void analyseScenario(ScenarioData scenario)
     {
-        var scenarios = loadData();
-        var scenario = scenarios.scenarios[currentScenarioNum - 1];
+
         //check current players number
-        var homeplayers = GameObject.FindGameObjectsWithTag("Home");
-        var awayPlayers = GameObject.FindGameObjectsWithTag("Away");
+        var homeplayers = findActivedPlayers("Home");
+        var awayPlayers = findActivedPlayers("Away");
 
         if (scenario.homeplayers.Count != homeplayers.Length)
         {
             findDiffPlayers(homeplayers, scenario.homeplayers, true);
+            soc_ai_instance?.ChangeHomeTeamSize(scenario.homeplayers.Count);
         }
         if (scenario.awayplayers.Count != awayPlayers.Length)
         {
             findDiffPlayers(awayPlayers, scenario.awayplayers, false);
+            soc_ai_instance?.ChangeHomeTeamSize(scenario.awayplayers.Count);
         }
+
     }
     private void findDiffPlayers(GameObject[] currentPlayers, List<PlayerData> scenarioPlayers, bool isHomeTeam)
     {
@@ -175,28 +168,23 @@ public class ScenarioManager : ScriptableObject
         if (scenarioPlayers.Count > currentPlayers.Length)
         {
             playersNameDiff = scenarioPlayersName.Except(currentPlayersName).ToArray();
-            //create new players using player data by a spawner
             foreach (var playerName in playersNameDiff)
             {
                 var playerData = scenarioPlayers.First(player => player.name == playerName);
 
                 GameObject emptyGO = new GameObject();
-                emptyGO.transform.position = playerData.position;
+                emptyGO.transform.position = new Vector3(-88.4151306f, 1.18533289f, 9.39408302f);
                 emptyGO.transform.rotation = playerData.rotation;
-
 
                 if (isHomeTeam)
                 {
-                    GameObject newPlayer = Instantiate(homePlayerPrefab);
-                    playerData.initPlayer(newPlayer);
-                    soc_ai_instance?.UIActivateHomeAI(emptyGO.transform);
+                    soc_ai_instance?.UIActivateHomeAIByNum(emptyGO.transform, playerData.number);
                 }
                 else
                 {
-                    GameObject newPlayer = Instantiate(awayPlayerPrefab);
-                    playerData.initPlayer(newPlayer);
-                    soc_ai_instance?.UIActivateAwayAI(emptyGO.transform);
+                    soc_ai_instance?.UIActivateAwayAIByNum(emptyGO.transform, playerData.number);
                 }
+                Destroy(emptyGO);
 
             }
         }
@@ -205,17 +193,25 @@ public class ScenarioManager : ScriptableObject
             playersNameDiff = currentPlayersName.Except(scenarioPlayersName).ToArray();
             foreach (var playerName in playersNameDiff)
             {
-                Destroy(currentPlayers.First(player => player.name == playerName));
+                //TODO: go to the leave point and then disable networking
+                var playerNumber = currentPlayers.First(player => player.name == playerName).GetComponent<AI_Avatar>().M_NCModel.number;
+                if (isHomeTeam)
+                {
+                    soc_ai_instance?.DisableHomeAIByNum(playerNumber);
+                }
+                else
+                {
+                    soc_ai_instance?.DisableAwayAIByNum(playerNumber);
+                }
             }
         }
     }
     public void TestMovePlayer()
     {
-        analyseScenario();
-        var homeplayers = GameObject.FindGameObjectsWithTag("Home");
+        var homeplayers = findActivedPlayers("Home");
         foreach (var player in homeplayers)
         {
-            player.GetComponent<AI_Avatar>().Activate(true);
+            //This is world position
             player.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(new Vector3(0, 0, 0));
         }
     }
@@ -224,14 +220,7 @@ public class ScenarioManager : ScriptableObject
         GameObject emptyGO = new GameObject();
 
         soc_ai_instance?.UIActivateHomeAI(emptyGO.transform);
+        Destroy(emptyGO);
 
-    }
-    private void MovePlayer(Vector3 destination, GameObject player)
-    {
-        //using the AI_Avatar script to move the player
-
-
-        //player.GetComponent< AI_PathManager>().SetPoints = destination;
-        //player.GetComponent<AI_Avatar>().SetDestination(destination);
     }
 }

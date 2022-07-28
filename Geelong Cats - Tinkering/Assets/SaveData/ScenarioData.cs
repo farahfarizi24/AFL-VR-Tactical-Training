@@ -1,3 +1,4 @@
+using com.DU.CE.AI;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
@@ -32,9 +33,13 @@ public class ScenarioData
     {
         foreach (GameObject player in players)
         {
-            var dataPlayer = new PlayerData();
-            dataPlayer.getDataFromPlayer(player);
-            targetList.Add(dataPlayer);
+            if (player.GetComponent<AI_Avatar>().M_NCModel.isActivated == true)
+            {
+                var dataPlayer = new PlayerData();
+                dataPlayer.getDataFromPlayer(player);
+                targetList.Add(dataPlayer);
+            }
+
         }
     }
 }

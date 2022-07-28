@@ -10,17 +10,17 @@ public class ScenarioCreation_UI : MonoBehaviour
     public GameObject ScenarioEditor = null;
     public Button[] ScenarioButton = new Button[6];
     public USER_UISwitcher UI;
- 
+
 
     // Start is called before the first frame update
     void Start()
-
     {
-        Button SC1 = ScenarioButton[0].GetComponent<Button>();
-        SC1.onClick.AddListener(ScenarioTask);
-
-        Button SC2 = ScenarioButton[1].GetComponent<Button>();
-        SC2.onClick.AddListener(ScenarioTask);
+        // listening the button click event
+        foreach (Button btn in ScenarioButton)
+        {
+            Button SC1 = btn.GetComponent<Button>();
+            SC1.onClick.AddListener(ScenarioTask);
+        }
 
     }
 
@@ -34,7 +34,7 @@ public class ScenarioCreation_UI : MonoBehaviour
 
             ScenarioEditor = GameObject.FindWithTag("ScenarioEditor");
             ScenarioEditor = ScenarioEditor.transform.GetChild(0).gameObject;
-           
+
             //Turn off current gameobject
         }
         ScenarioEditor.SetActive(true);
@@ -43,6 +43,6 @@ public class ScenarioCreation_UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

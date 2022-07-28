@@ -1,3 +1,4 @@
+using com.DU.CE.AI;
 using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
@@ -15,18 +16,16 @@ public class PlayerData
     [XmlAttribute("name")]
     public string name;
 
+    [XmlAttribute("number")]
+    public int number;
+
 
     public void getDataFromPlayer(GameObject player)
     {
         position = player.transform.position;
         rotation = player.transform.rotation;
         name = player.name;
-    }
-    public void initPlayer(GameObject player)
-    {
-        player.transform.position = position;
-        player.transform.rotation = rotation;
-        player.name = name;
+        number = player.GetComponent<AI_Avatar>().M_NCModel.number;
     }
 
 }
