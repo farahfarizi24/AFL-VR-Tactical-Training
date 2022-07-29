@@ -28,7 +28,9 @@ namespace com.DU.CE.NET
         public Transform LocalAvatar { get; private set; }
         public Transform Coach { get; private set; }
         public List<Transform> Players = new List<Transform>();
-
+        ///ADD ADDITIONAL COACH///
+        ///
+        public List<Transform> AdditionalCoach = new List<Transform>();
         internal void SetLocalAvatar(Transform _localAvatarTransform)
         {
             Debug.Log("#Network Manager#----------Local player created");
@@ -41,6 +43,17 @@ namespace com.DU.CE.NET
             Debug.Log("#Network Manager#----------Coach clone created");
 
             Coach = _coachTransform;
+        }
+
+        /// <summary>
+        /// new addition to have an additional coach
+        /// </summary>
+       
+        internal void AddCoachToList (Transform _coachTransform)
+        {
+
+            Debug.Log("Additional coach created");
+            AdditionalCoach.Add(_coachTransform);
         }
 
         internal void AddPlayerToList(Transform _playerTransform)
@@ -56,6 +69,7 @@ namespace com.DU.CE.NET
             LocalAvatar = null;
             Coach = null;
             Players.Clear();
+            AdditionalCoach.Clear();
         }
     }
 }

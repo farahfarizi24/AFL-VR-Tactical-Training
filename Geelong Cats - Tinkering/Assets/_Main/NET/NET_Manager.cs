@@ -101,8 +101,10 @@ namespace com.DU.CE.NET
                     m_NetManagerSock.SetCoach(avatar.transform);
                 else
                 {
-                    NCRealtime.Disconnect();
-                    m_NetManagerSock.Disconnect(1, "A coach is already in room");
+                    m_NetManagerSock.AddCoachToList(avatar.transform);
+                    ///////CHANGE THIS SO WE CAN HAVE MORE THAN ONCE COACH
+                    // NCRealtime.Disconnect();
+                    // m_NetManagerSock.Disconnect(1, "A coach is already in room");
                     return;
                 }
             }
