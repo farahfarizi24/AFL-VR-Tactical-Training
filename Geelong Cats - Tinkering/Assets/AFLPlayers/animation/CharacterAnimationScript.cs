@@ -1,27 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 public class CharacterAnimationScript : MonoBehaviour
 {
     // Start is called before the first frame update
-   [SerializeField] private BallCatch BallOwnershipManager;
+    [SerializeField] private BallCatch BallOwnershipManager;
     [SerializeField] private com.DU.CE.AI.AI_PathManager AI_Manager;
-    [SerializeField]    public NavMeshAgent character;
+    [SerializeField] public NavMeshAgent character;
     public int CurrentAction;
     // 1 = idle , 2 = running, 3 = kicking, 4 = throwing, 
     [SerializeField] private Animator animator;
-    [SerializeField]string CheckAnim;
+    [SerializeField] string CheckAnim;
 
     private const string IsRunning = "IsRunning";
     private const string IsIdle = "IsIdle";
     private const string IsHoldingBall = "HoldBall";
-    public bool isBallHolder=false;
+    public bool isBallHolder = false;
+
+    private Vector3 previous;
+    private float speed;
+
     void Start()
     {
-    
+
         animator = GetComponent<Animator>();
-       character = GetComponent<NavMeshAgent>();
+        character = GetComponent<NavMeshAgent>();
         ToggleIdle();
         animator.SetLayerWeight(animator.GetLayerIndex("ArmLayer"), 1f);
         animator.SetLayerWeight(animator.GetLayerIndex("BodyLayer"), 1f);
@@ -31,23 +33,33 @@ public class CharacterAnimationScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        updateVelocity();
 
-
-        if (character.velocity != Vector3.zero)
+        if (speed > 0.01f)
         {
             ToggleRun();
-        }else
+        }
+        else
         {
             ToggleIdle();
         }
 
-   
+
+    }
+
+    private void updateVelocity()
+    {
+        // calculate velocity by position
+        speed = ((transform.position - previous).magnitude) / Time.deltaTime;
+        previous = transform.position;
+        Debug.Log("speed" + speed.ToString());
+
     }
 
     public void ToggleRun()
     {
-       // if (character.remainingDistance > 0.1f)
-            animator.SetBool(IsRunning, true);
+        // if (character.remainingDistance > 0.1f)
+        animator.SetBool(IsRunning, true);
         animator.SetBool(IsIdle, false);
         CheckBallOwnership();
 
@@ -67,7 +79,7 @@ public class CharacterAnimationScript : MonoBehaviour
     public void CheckBallOwnership()
     {
 
-        if ( isBallHolder==true && BallOwnershipManager.BallHolder == false)
+        if (isBallHolder == true && BallOwnershipManager.BallHolder == false)
         {
             NotHoldingBall();
         }
