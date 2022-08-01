@@ -830,8 +830,8 @@ MonoBehaviour:
   _interpolate: 1
   _syncPosition: 1
   _syncRotation: 1
-  _syncScale: 1
-  _syncVelocity: 1
+  _syncScale: 0
+  _syncVelocity: 0
   _maintainOwnershipWhileSleeping: 1
 --- !u!54 &3502626479085945962
 Rigidbody:
