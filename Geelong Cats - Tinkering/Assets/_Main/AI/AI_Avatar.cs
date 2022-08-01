@@ -1,14 +1,11 @@
-﻿using UnityEngine;
-using UnityEngine.AI;
-
-using TMPro;
-using Normal.Realtime;
-
-using EPOOutline;
-
-using com.DU.CE.NET.NCM;
+﻿using com.DU.CE.INT;
 using com.DU.CE.LVL;
-using com.DU.CE.INT;
+using com.DU.CE.NET.NCM;
+using EPOOutline;
+using Normal.Realtime;
+using TMPro;
+using UnityEngine;
+using UnityEngine.AI;
 
 namespace com.DU.CE.AI
 {
@@ -84,6 +81,7 @@ namespace com.DU.CE.AI
                 m_team = (ETEAM)model.team;
                 m_teamNumber = model.number;
                 m_numberText.SetText(model.number.ToString());
+                Activate(currentModel.isActivated);
             }
 
             //base.OnRealtimeModelReplaced(previousModel, currentModel);
@@ -127,7 +125,7 @@ namespace com.DU.CE.AI
             m_teamNumber = model.number;
             // Set teamnumber on number overhead display
             m_numberText.SetText(model.number.ToString());
-            
+
             m_linkedPin.SetupPin(m_team, m_teamNumber);
         }
 
