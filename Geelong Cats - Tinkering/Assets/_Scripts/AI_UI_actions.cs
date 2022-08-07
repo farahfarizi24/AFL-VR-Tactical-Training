@@ -6,9 +6,10 @@ using UnityEngine.EventSystems;
 
 public class AI_UI_actions : MonoBehaviour
 {
+    public GameObject ThisUserObject=null;
     public GameObject baseUI;
     public Button Kicking;
-    public Button Handball;
+    public Button Possess;
     public Button Move;
     public Animator anim;
     private IEnumerator TaskCourutine;
@@ -20,11 +21,11 @@ public class AI_UI_actions : MonoBehaviour
         Button kickbtn = Kicking.GetComponent<Button>();
         kickbtn.onClick.AddListener(KickingTaskOnClick);
 
-        Button handballbtn = Handball.GetComponent<Button>();
-        kickbtn.onClick.AddListener(HandballTaskOnClick);
+        Button possessbtn = Possess.GetComponent<Button>();
+       possessbtn.onClick.AddListener(PossessTaskOnClick);
 
         Button movebtn = Move.GetComponent<Button>();
-        kickbtn.onClick.AddListener(MoveTaskOnclick);
+        movebtn.onClick.AddListener(MoveTaskOnclick);
     }
 
     void KickingTaskOnClick()
@@ -37,10 +38,21 @@ public class AI_UI_actions : MonoBehaviour
 
     }
    
-    void HandballTaskOnClick()
+    void PossessTaskOnClick()
     {
-        Debug.Log("--- Handball initiated");
-
+        Debug.Log("--- Possess initiated");
+        GameObject ThisAIObject = transform.parent.parent.gameObject;
+        ThisUserObject = GameObject.FindGameObjectWithTag("Player");
+        ThisUserObject.transform.position = new Vector3
+            (ThisAIObject.transform.position.x,
+             ThisUserObject.transform.position.y, ThisAIObject.transform.position.z);
+       //CHECK HOW DO THE AI GET DESTROYED BY Mike probably it was getting deactivated not destroyed
+       //Instead of destroy, disable player object. Put notification that atm it's currently possessing player
+       // Give them ability to stop possessing player perhaps press "A" again to stop
+        // Destroy(ThisAIObject);
+        // Destroy(transform.parent.parent.gameObject);
+        // Move playable player here
+        // disable this AI
     }
 
     void MoveTaskOnclick()

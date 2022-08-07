@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5487294735332826695}
   - component: {fileID: 4500734064820004758}
   - component: {fileID: 180724073202332358}
+  - component: {fileID: 1740648225392649418}
   m_Layer: 5
   m_Name: ScenarioCreationUI
   m_TagString: Untagged
@@ -105,6 +106,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+--- !u!225 &1740648225392649418
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6763768185053936011}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &6706687987665663877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112,6 +125,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3775080154933372406}
     m_Modifications:
+    - target: {fileID: 11387803019813863, guid: 7661d12394cea8d418e75758da4186ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 86634956843986137, guid: 7661d12394cea8d418e75758da4186ec,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -122
+      objectReference: {fileID: 0}
+    - target: {fileID: 86634956843986137, guid: 7661d12394cea8d418e75758da4186ec,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -94
+      objectReference: {fileID: 0}
+    - target: {fileID: 472814592868966905, guid: 7661d12394cea8d418e75758da4186ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1196754786373148150, guid: 7661d12394cea8d418e75758da4186ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1772071045332510397, guid: 7661d12394cea8d418e75758da4186ec,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1772071045332510397, guid: 7661d12394cea8d418e75758da4186ec,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -94
+      objectReference: {fileID: 0}
     - target: {fileID: 5228823106277810282, guid: 7661d12394cea8d418e75758da4186ec,
         type: 3}
       propertyPath: m_Pivot.x
@@ -217,10 +265,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6613501507336489078, guid: 7661d12394cea8d418e75758da4186ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7142214599091673374, guid: 7661d12394cea8d418e75758da4186ec,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 224
+      objectReference: {fileID: 0}
     - target: {fileID: 7497424797307645667, guid: 7661d12394cea8d418e75758da4186ec,
         type: 3}
       propertyPath: m_Name
       value: ScenarioEditor
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177876335665052816, guid: 7661d12394cea8d418e75758da4186ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7661d12394cea8d418e75758da4186ec, type: 3}
