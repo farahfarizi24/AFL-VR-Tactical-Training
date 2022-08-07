@@ -16,10 +16,10 @@ namespace Autohand
         {
             get {
                 if(_transformRuler == null)
-                    _transformRuler = new GameObject().transform;
+                    _transformRuler = new GameObject() { name = "Ruler" }.transform;
 
-                if (_transformRuler.parent != null)
-                    _transformRuler.parent = null;
+                if (_transformRuler.parent != transformParent)
+                    _transformRuler.parent = transformParent;
 
                 if (_transformRuler.localScale != Vector3.one)
                     _transformRuler.localScale = Vector3.one;
@@ -37,7 +37,7 @@ namespace Autohand
             get {
                 if (_transformRulerChild == null)
                 {
-                    _transformRulerChild = new GameObject().transform;
+                    _transformRulerChild = new GameObject() { name = "RulerChild" }.transform;
                     _transformRulerChild.parent = _transformRuler;
                 }
 
@@ -51,6 +51,27 @@ namespace Autohand
             }
         }
 
+        static Transform _transformParent = null;
+
+        // Holds all the Auto Hand Generated GameObjects
+        public static Transform transformParent {
+            get {
+                if(Application.isEditor)
+                    return null;
+
+                if(_transformParent == null)
+                    _transformParent = new GameObject() { name="Auto Hand Generated" }.transform;
+
+                return _transformParent;
+            }
+        }
+
+        public static void RotateAround(this Transform target, Transform center, Quaternion deltaRotation) {
+            transformRuler.SetPositionAndRotation(center.position, center.rotation);
+            transformRulerChild.SetPositionAndRotation(target.position, target.rotation);
+            transformRuler.rotation *= deltaRotation;
+            target.SetPositionAndRotation(transformRulerChild.position, transformRulerChild.rotation);
+        }
 
         public static float Round(this float value, int digits)
         {
@@ -162,7 +183,12 @@ namespace Autohand
         }
 
 
+
 #if UNITY_EDITOR
+
+        public static void TextDebug(this Vector3 vector3, string name = "") {
+            Debug.Log(name + ": " + vector3.x + ", " + vector3.y + ", " + vector3.z);
+        }
 
         public static GUIStyle LabelStyle(TextAnchor textAnchor = TextAnchor.MiddleLeft, FontStyle fontStyle = FontStyle.Normal, int fontSize = 13) {
             var style = new GUIStyle(GUI.skin.label);
@@ -183,6 +209,13 @@ namespace Autohand
         }
 
 #endif
+        
+        public static LayerMask GetPhysicsLayerMask(int currentLayer) {
+            int finalMask = 0;
+            for (int i=0; i<32; i++) {
+                if (!Physics.GetIgnoreLayerCollision(currentLayer, i)) finalMask = finalMask | (1 << i);
+            }
+            return finalMask;
+        }
     }
-
 }
