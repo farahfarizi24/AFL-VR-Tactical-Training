@@ -472,11 +472,20 @@ namespace Autohand {
             body.solverIterations = 200;
             body.solverVelocityIterations = 200;
 
-            if(parentOnGrab) {
-                body.transform.parent = hand.transform.parent;
-                foreach(var jointedBody in jointedBodies) {
-                    jointedBody.transform.parent = hand.transform.parent;
-                    if(jointedBody.gameObject.HasGrabbable(out var grab))
+
+            if (parentOnGrab) {
+                // FindHandParent ParentHand = hand.transform.parent.gameObject.GetComponent<FindHandParent>();
+                //  GameObject ThisHandParent = ParentHand.HandParent;
+                //THIS SHOULD BE PARENTED TO THE ROOT OF THE OBJECT
+                body.transform.parent = hand.transform.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent;
+               // body.transform.parent = hand.transform.parent;
+
+                //body.transform.parent = ThisHandParent.transform;
+                foreach (var jointedBody in jointedBodies){
+                    jointedBody.transform.parent = hand.transform.parent.parent.parent.parent.parent.parent.parent.parent.parent.parent;
+                    //jointedBody.transform.parent = hand.transform.parent;
+                    if (jointedBody.gameObject.HasGrabbable(out var grab))
+
                         grab.heldBodyJointed = true;
                 }
             }
