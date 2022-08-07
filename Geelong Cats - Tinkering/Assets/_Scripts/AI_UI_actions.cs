@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class AI_UI_actions : MonoBehaviour
 {
+    public GameObject PossessionPrompt;
     public GameObject ThisUserObject=null;
+    public GameObject ThisObjParent = null;
+    public GameObject ThisAIObject = null;
+    public bool CurrentlyPossessing;
     public GameObject baseUI;
     public Button Kicking;
     public Button Possess;
@@ -14,6 +19,8 @@ public class AI_UI_actions : MonoBehaviour
     public Animator anim;
     private IEnumerator TaskCourutine;
     public AI_BallKicker AI_ballkick;
+    public GameObject child = null;
+    public InputActionReference RightTrigger;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +35,24 @@ public class AI_UI_actions : MonoBehaviour
         movebtn.onClick.AddListener(MoveTaskOnclick);
     }
 
+    private void Awake()
+    {
+        RightTrigger.action.started += PossessionExit;
+    }
+    private void PossessionExit(InputAction.CallbackContext context)
+    {
+        if(context.started && CurrentlyPossessing)
+        {
+          
+            ThisAIObject.transform.SetParent(ThisObjParent.transform);
+            PossessionPrompt.SetActive(false);
+            ThisAIObject = null;
+            ThisObjParent = null;
+            CurrentlyPossessing = false;
+            child.SetActive(true);
+            child = null;
+        }
+    }
     void KickingTaskOnClick()
     {
 
@@ -37,26 +62,26 @@ public class AI_UI_actions : MonoBehaviour
         //Kick action
 
     }
-   
+
+ 
     void PossessTaskOnClick()
     {
         Debug.Log("--- Possess initiated");
-        GameObject ThisAIObject = transform.parent.parent.gameObject;
+      ThisAIObject = transform.parent.parent.gameObject;
         ThisUserObject = GameObject.FindGameObjectWithTag("Player");
         ThisUserObject.transform.position = new Vector3
             (ThisAIObject.transform.position.x,
              ThisUserObject.transform.position.y, ThisAIObject.transform.position.z);
 
         //transform rotation
+        //Parent AI object to user object so they move together
+        ThisObjParent = ThisAIObject.transform.parent.gameObject;
         ThisAIObject.transform.SetParent(ThisUserObject.transform);
-
-       //CHECK HOW DO THE AI GET DESTROYED BY Mike probably it was getting deactivated not destroyed
-       //Instead of destroy, disable player object. Put notification that atm it's currently possessing player
-       // Give them ability to stop possessing player perhaps press "A" again to stop 
-        // Destroy(ThisAIObject);
-        // Destroy(transform.parent.parent.gameObject);
-        // Move playable player here
-        // disable this AI
+        //disable the body of theUser Object
+        child = GameObject.FindGameObjectWithTag("PlayerBody");
+        child.SetActive(false);
+        CurrentlyPossessing = true;
+        PossessionPrompt.SetActive(true);
     }
 
     void MoveTaskOnclick()

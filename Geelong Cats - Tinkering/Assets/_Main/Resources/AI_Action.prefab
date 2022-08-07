@@ -1549,9 +1549,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisUserObject: {fileID: 0}
+  ThisObjParent: {fileID: 0}
+  ThisAIObject: {fileID: 0}
+  CurrentlyPossessing: 0
   baseUI: {fileID: 5320303816823272216}
   Kicking: {fileID: 2420327922793574698}
   Possess: {fileID: 6607916517151097501}
   Move: {fileID: 2696976738400857069}
   anim: {fileID: 0}
   AI_ballkick: {fileID: 0}
+  child: {fileID: 0}
+  RightTrigger: {fileID: 6163281524240053765, guid: 7a77aace10269d04b82d49a70f7cee77,
+    type: 3}
