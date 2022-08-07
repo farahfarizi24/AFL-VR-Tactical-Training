@@ -18,6 +18,7 @@ TagManager:
   - BallContainer
   - ScenarioEditor
   - ActivePlayer
+  - PlayerBody
   layers:
   - Default
   - TransparentFX
