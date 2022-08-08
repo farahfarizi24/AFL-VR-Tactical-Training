@@ -71,10 +71,11 @@ public class AI_UI_actions : MonoBehaviour
         ThisUserObject = GameObject.FindGameObjectWithTag("Player");
         ThisUserObject.transform.position = new Vector3
             (ThisAIObject.transform.position.x,
-             ThisUserObject.transform.position.y, ThisAIObject.transform.position.z);
+             ThisUserObject.transform.position.y, ThisAIObject.transform.position.z+0.5f);
 
         //transform rotation
         //Parent AI object to user object so they move together
+        ThisUserObject.transform.rotation = ThisAIObject.transform.rotation;
         ThisObjParent = ThisAIObject.transform.parent.gameObject;
         ThisAIObject.transform.SetParent(ThisUserObject.transform);
         //disable the body of theUser Object
