@@ -128,7 +128,7 @@ namespace com.DU.CE.INT
         {
             m_NetComponent.GetOwnership();
 
-            GetComponent<Rigidbody>().isKinematic = true;
+            //GetComponent<Rigidbody>().isKinematic = true;
             transform.position = m_rugbyBallSpawnPoint.position;
             transform.rotation = m_rugbyBallSpawnPoint.rotation;
         }
