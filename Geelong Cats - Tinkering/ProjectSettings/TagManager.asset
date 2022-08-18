@@ -19,6 +19,8 @@ TagManager:
   - ScenarioEditor
   - ActivePlayer
   - PlayerBody
+  - LeftHandController
+  - RightHandController
   layers:
   - Default
   - TransparentFX
