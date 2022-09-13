@@ -201,6 +201,7 @@ namespace Autohand {
                 }
             }
             else if(pulling && primaryHand.holdingObj == null) {
+                Debug.Log("pulling true, hand is not holding object");
                 if(useFlickPull) {
                     TryFlickPull();
                 }
@@ -257,6 +258,7 @@ namespace Autohand {
         public virtual void SelectTarget() {
             if(targetingDistanceGrabbable != null) {
                 pulling = true;
+                Debug.Log("Pulling is true");
                 startPullPosition = primaryHand.transform.localPosition;
                 lastRotation = transform.rotation;
                 selectionHit = hit;
@@ -287,6 +289,7 @@ namespace Autohand {
         }
 
         public virtual void ActivatePull() {
+            Debug.Log("Activate pull start");
             if(selectingDistanceGrabbable) {
                 OnPull?.Invoke(primaryHand, selectingDistanceGrabbable.grabbable);
                 selectingDistanceGrabbable.OnPull?.Invoke(primaryHand, selectingDistanceGrabbable.grabbable);
@@ -301,6 +304,7 @@ namespace Autohand {
                 else {
                     catchAssistRoutine = StartCoroutine(StartCatchAssist(selectingDistanceGrabbable, selectedEstimatedRadius));
                     catchAsistGrabbable = selectingDistanceGrabbable;
+                    Debug.Log("Select distance grababble called");
                     selectingDistanceGrabbable.SetTarget(primaryHand.palmTransform);
                 }
 

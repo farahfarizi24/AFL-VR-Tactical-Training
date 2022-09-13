@@ -1,0 +1,123 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
+using System;
+using com.DU.CE.USER;
+
+namespace com.DU.CE.AI
+{
+    public class INT_BallCatch : XRGrabInteractable
+    {
+        [SerializeField] private InputActionProperty m_rightHand;
+        [SerializeField] private InputActionProperty m_leftHand;
+        public GameObject Ball;
+        [SerializeField]private GameObject RightHandController;
+       [SerializeField] private GameObject LeftHandController;
+        // private AI_Avatar m_manager;
+        private USER_CustomRayInteractor m_interactor = null;
+        //public ParentToHand ParentToHandScript;
+        public bool isOnHover = false;
+        public InputActionReference toggleReference = null;
+
+
+        protected override void Awake()
+        {
+            base.Awake();
+            toggleReference.action.started += GetBall;
+            RightHandController = GameObject.FindGameObjectWithTag("RightHandController");
+            LeftHandController = GameObject.FindGameObjectWithTag("LeftHandController");
+
+        }
+
+        private void OnDestroy()
+        {
+            toggleReference.action.started -= GetBall;
+        }
+
+        private void GetBall(InputAction.CallbackContext context)
+        {
+            if (isOnHover)
+            {
+
+                // PARENT THE BALL
+
+                Debug.Log("Ready to grab ball");
+            }
+
+        }
+        #region XR Callbacks
+
+
+
+        protected override void OnHoverEntered(HoverEnterEventArgs args)
+        {
+            //  m_manager.OnHoverChanged(true);
+            Debug.Log("Ball Hover");
+            isOnHover = true;
+        }
+
+        protected override void OnHoverExited(HoverExitEventArgs args)
+        {
+            //  m_manager.OnHoverChanged(false);
+            isOnHover = false;
+        }
+
+        protected override void OnSelectEntered(SelectEnterEventArgs args)
+        {
+
+            base.OnSelectEntered(args);
+            Debug.Log("Ball Grab pressed");
+
+
+            m_interactor = args.interactor as USER_CustomRayInteractor;
+
+            if (m_interactor.Hand.Equals(EUSERHAND.LEFT))
+            {
+
+             //   ParentToHandScript.SetToLeftHand();
+                Ball.transform.parent = LeftHandController.transform;
+              
+                m_leftHand.action.performed += OnLeftHandGrab;
+               
+            }
+            else
+            {
+             //   ParentToHandScript.SetToRightHand();
+                Ball.transform.parent = RightHandController.transform;
+             ;
+                m_rightHand.action.performed += OnRigthHandGrab;
+            }
+        }
+
+        protected override void OnSelectExited(SelectExitEventArgs args)
+        {
+            base.OnSelectExited(args);
+
+            if (m_interactor.Hand.Equals(EUSERHAND.LEFT))
+            {
+                m_rightHand.action.performed -= OnRigthHandGrab;
+            }
+            else
+            {
+                m_leftHand.action.performed -= OnLeftHandGrab;
+            }
+            m_interactor = null;
+        }
+
+        private void OnRigthHandGrab(InputAction.CallbackContext obj)
+        {
+          
+            throw new NotImplementedException();
+        }
+
+        private void OnLeftHandGrab(InputAction.CallbackContext obj)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+    }
+
+}
