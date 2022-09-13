@@ -4364,19 +4364,6 @@ PrefabInstance:
       propertyPath: DefaultLineLength
       value: 3
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
-=======
-    - target: {fileID: 407196670026689517, guid: 17fc4b1346fbd6848b418c5597b77190,
-        type: 3}
-      propertyPath: m_InteractionManager
-      value: 
-      objectReference: {fileID: 20745318}
-    - target: {fileID: 407196670026689517, guid: 17fc4b1346fbd6848b418c5597b77190,
-        type: 3}
-      propertyPath: m_RaycastMask.m_Bits
-      value: 73248
-      objectReference: {fileID: 0}
->>>>>>> Stashed changes
     - target: {fileID: 407196670026689518, guid: 17fc4b1346fbd6848b418c5597b77190,
         type: 3}
       propertyPath: m_SelectActionValue.m_Action.m_Id

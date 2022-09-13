@@ -9,14 +9,7 @@ namespace Autohand{
         public bool ignoreMe;
         
         [Header("Pull")]
-<<<<<<< Updated upstream
         public bool instantPull = false;
-=======
-        public bool instantPull;
-
-
-        public DistanceGrabType grabType;
->>>>>>> Stashed changes
 
         [Header("Velocity Shoot")]
         [Range(0.4f, 1.1f)]
@@ -83,15 +76,10 @@ namespace Autohand{
         }
     
         void FixedUpdate(){
-<<<<<<< Updated upstream
             if(!instantPull){
-=======
-            Debug.Log("Fixed Update is run;");
-            if(!instantPull && grabType == DistanceGrabType.Velocity) {
->>>>>>> Stashed changes
                 if (target == null)
-                 return;
-                Debug.Log("InstantPull Run");
+                    return;
+
                 InitialVelocityPushToHand();
                 if(rotate)
                     FollowHandRotation();
@@ -153,7 +141,7 @@ namespace Autohand{
             return new Vector3(vx, vy, vz);
         }
 
-        public void SetTarget(Transform theObject) { Debug.Log("Set target is run"); ; target = theObject; pullStarted = true; }
+        public void SetTarget(Transform theObject) { target = theObject; pullStarted = true; }
         public void CancelTarget() { target = null; pullStarted = false; }
     }
 }
