@@ -10,6 +10,7 @@ namespace com.DU.CE.NET
 {
     public class NET_Manager : MonoBehaviour
     {
+        public GameObject CoachInterface;
         [SerializeField] private GameObject m_CoachNCLocalAvatarPrefab;
         [SerializeField] private GameObject m_PlayerNCLocalAvatarPrefab;
 
@@ -98,13 +99,18 @@ namespace com.DU.CE.NET
             if (avatar.GetComponent<NET_LocalAvatar>().UserRole.Equals(EUSERROLE.COACH))
             {
                 if(m_NetManagerSock.Coach == null)
+                {
                     m_NetManagerSock.SetCoach(avatar.transform);
+                    ///Set the UI, spawn it somehwere.
+                    Instantiate(CoachInterface, new Vector3(0, 1.5f, 0.91f), Quaternion.identity);
+                }
+       
                 else
                 {
-                    m_NetManagerSock.AddCoachToList(avatar.transform);
+                    //m_NetManagerSock.AddCoachToList(avatar.transform);
                     ///////CHANGE THIS SO WE CAN HAVE MORE THAN ONCE COACH
-                    // NCRealtime.Disconnect();
-                    // m_NetManagerSock.Disconnect(1, "A coach is already in room");
+                     NCRealtime.Disconnect();
+                     m_NetManagerSock.Disconnect(1, "A coach is already in room");
                     return;
                 }
             }
