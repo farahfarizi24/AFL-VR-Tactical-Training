@@ -11,6 +11,7 @@ namespace com.DU.CE.NET
     public class NET_Manager : MonoBehaviour
     {
         public GameObject CoachInterface;
+        public GameObject ConnectionUI;
         [SerializeField] private GameObject m_CoachNCLocalAvatarPrefab;
         [SerializeField] private GameObject m_PlayerNCLocalAvatarPrefab;
 
@@ -103,6 +104,9 @@ namespace com.DU.CE.NET
                     m_NetManagerSock.SetCoach(avatar.transform);
                     ///Set the UI, spawn it somehwere.
                     Instantiate(CoachInterface, new Vector3(0, 1.5f, 0.91f), Quaternion.identity);
+                    //hide coach avatar
+                    //hide menu UI
+                    ConnectionUI.SetActive(false);
                 }
        
                 else
