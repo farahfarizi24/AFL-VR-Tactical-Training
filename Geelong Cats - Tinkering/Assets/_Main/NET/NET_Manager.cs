@@ -102,11 +102,7 @@ namespace com.DU.CE.NET
                 if(m_NetManagerSock.Coach == null)
                 {
                     m_NetManagerSock.SetCoach(avatar.transform);
-                    ///Set the UI, spawn it somehwere.
-                    Instantiate(CoachInterface, new Vector3(0, 1.5f, 0.91f), Quaternion.identity);
-                    //hide coach avatar
-                    //hide menu UI
-                    ConnectionUI.SetActive(false);
+                   
                 }
        
                 else
@@ -144,6 +140,7 @@ namespace com.DU.CE.NET
             // If Coach Disconnects
             if (avatar.GetComponent<NET_LocalAvatar>().UserRole.Equals(EUSERROLE.COACH))
             {
+                //remove this so player can enter without coach
                 NCRealtime.Disconnect();
                 SceneManager.LoadScene(0);
             }

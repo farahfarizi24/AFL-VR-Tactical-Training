@@ -10,6 +10,7 @@ namespace com.DU.CE.USER
     public class SOC_User : ScriptableObject
     {
         [SerializeField] private SOC_AUserUI m_UserUISock;
+        public GameObject CoachInterface;
         public SOC_AUserUI UISock
         {
             get
@@ -39,6 +40,12 @@ namespace com.DU.CE.USER
         public void UIChangeUserName(TextMeshProUGUI _nameField)
         {
             OnUserNameChange?.Invoke(_nameField.text);
+            Debug.Log("Field name entered");
+            if (UserRole == EUSERROLE.COACH)
+            {
+                CoachInterface = Resources.Load("UI_ForCoach") as GameObject;
+                Instantiate(CoachInterface, new Vector3(0, 1.5f, 0.91f), Quaternion.identity);
+            }
         }
 
 
