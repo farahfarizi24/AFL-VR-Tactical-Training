@@ -3,7 +3,10 @@ guid: ab4dcdbb9ad3648459b04fd643109dad
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_UserUISock: {instanceID: 0}
+  - CoachInterface: {fileID: 8132845917947366610, guid: 10f20793e3d706e42bdf81e69ab5d37e,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

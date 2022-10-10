@@ -12,7 +12,7 @@ namespace com.DU.CE.NET
     public class NET_LocalAvatar : RealtimeComponent<NCM_UserProperties>
     {
         public EUSERROLE UserRole { get => m_localAvatar.Role; }
-
+      
         private USER_LocalUser m_localAvatar = null;
         private SOC_User m_UserSock = null;
 
@@ -53,6 +53,8 @@ namespace com.DU.CE.NET
 
                 // Register for events so we'll know if the color changes later
                 currentModel.userNameDidChange += OnUserNameChange;
+                 
+                
             }
         }
 

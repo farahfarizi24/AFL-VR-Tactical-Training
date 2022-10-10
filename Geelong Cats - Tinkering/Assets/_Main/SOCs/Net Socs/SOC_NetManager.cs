@@ -22,7 +22,7 @@ namespace com.DU.CE.NET
         internal void Disconnect(int _messageID, string _message)
         {
             OnDisconnected?.Invoke(_messageID, _message);
-        } 
+        }
 
 
         public Transform LocalAvatar { get; private set; }
@@ -41,7 +41,8 @@ namespace com.DU.CE.NET
         internal void SetCoach(Transform _coachTransform)
         {
             Debug.Log("#Network Manager#----------Coach clone created");
-
+         
+           
             Coach = _coachTransform;
         }
 

@@ -7,6 +7,8 @@ namespace com.DU.CE.LVL
     public class LVL_Manager : MonoBehaviour
     {
         [Header("SOCs")]
+        public GameObject CoachInterface;
+       // public GameObject ConnectionUI;
         [SerializeField] private SOC_LvlStateMachine m_StateMachineSock = null;
         [SerializeField] private SOC_NetManager m_NetManagerSock = null;
         [SerializeField] private SOC_StadiumProperties m_StadiumPropertiesSock = null;
@@ -41,7 +43,12 @@ namespace com.DU.CE.LVL
 
                     // Spawn field
                     m_StadiumPropertiesSock.SetupFieldLines(EUSERROLE.COACH);
-
+                    Debug.Log("Field set");
+                    ///Set the UI, spawn it somehwere.
+                    //Instantiate(CoachInterface, new Vector3(0, 1.5f, 0.91f), Quaternion.identity);
+                    //hide coach avatar
+                    //hide menu UI
+         //           ConnectionUI.SetActive(false);
                     break;
             }
         }
@@ -51,6 +58,7 @@ namespace com.DU.CE.LVL
             if(m_NetManagerSock.LocalAvatar.GetComponent<NET_LocalAvatar>().UserRole == EUSERROLE.COACH)
             {
                 m_StateMachineSock.OnRequestStateChange(ELVLSTATE.ONCONNECT_COACH);
+
             }
             else
             {

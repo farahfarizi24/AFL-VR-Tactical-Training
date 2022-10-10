@@ -45,7 +45,9 @@ namespace com.DU.CE.USER
             {
                 CoachInterface = Resources.Load("UI_ForCoach") as GameObject;
                 Instantiate(CoachInterface, new Vector3(0, 1.5f, 0.91f), Quaternion.identity);
+                //GameObject CoachPosition = tag
             }
+            
         }
 
 
