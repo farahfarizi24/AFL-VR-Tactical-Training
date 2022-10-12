@@ -1519,6 +1519,58 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2039444261087488344}
     m_Modifications:
+    - target: {fileID: 1294589748826481491, guid: bb088cf4688707942af7ec413136cdbd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294589748826481491, guid: bb088cf4688707942af7ec413136cdbd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294589748826481491, guid: bb088cf4688707942af7ec413136cdbd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294589748826481491, guid: bb088cf4688707942af7ec413136cdbd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e4bd6b8cd1c4e64989a64c427c32952,
+        type: 2}
+    - target: {fileID: 1294589748826481491, guid: bb088cf4688707942af7ec413136cdbd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 409f75c0562bbfc40a52160583b981ba,
+        type: 2}
+    - target: {fileID: 1294589748826481491, guid: bb088cf4688707942af7ec413136cdbd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetNCLocalAvatarPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294589748826481491, guid: bb088cf4688707942af7ec413136cdbd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ToggleBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294589748826481491, guid: bb088cf4688707942af7ec413136cdbd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: SOC_StadiumProperties, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294589748826481491, guid: bb088cf4688707942af7ec413136cdbd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294589748826481491, guid: bb088cf4688707942af7ec413136cdbd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2904889044962787093, guid: bb088cf4688707942af7ec413136cdbd,
         type: 3}
       propertyPath: m_Pivot.x

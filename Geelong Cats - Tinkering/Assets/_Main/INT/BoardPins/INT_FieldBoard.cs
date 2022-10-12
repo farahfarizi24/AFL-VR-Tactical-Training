@@ -15,7 +15,7 @@ namespace com.DU.CE.INT
         [SerializeField] private SOC_FieldBoard m_BoardSock = null;
         internal SOC_FieldBoard BoardSock { get => m_BoardSock; }
 
-        [SerializeField] private USER_LocalUser m_LocalUser;
+       public USER_LocalUser m_LocalUser;
         [SerializeField] private InputActionProperty m_RightPlacementInputAction;
         [SerializeField] private InputActionProperty m_LeftPlacementInputAction;
         [SerializeField] private GameObject m_PlaneMesh;
@@ -34,12 +34,16 @@ namespace com.DU.CE.INT
         {
             base.Awake();
 
-            m_boardPins = GetComponent<INT_BoardPins>();
 
+            m_LocalUser = GameObject.FindGameObjectWithTag("coach").GetComponent<USER_LocalUser>();
             m_UserUISock = m_LocalUser.UserSock.UISock;
 
-            if (m_LocalUser.Role.Equals(EUSERROLE.PLAYER))
-                m_StadiumProperties.OnSetupPlayer += SetupPlayer;
+            m_boardPins = GetComponent<INT_BoardPins>();
+
+              if (m_LocalUser.Role.Equals(EUSERROLE.PLAYER))
+               m_StadiumProperties.OnSetupPlayer += SetupPlayer;
+
+           // SetupPlayer();
         }
 
         private void SetupPlayer()
