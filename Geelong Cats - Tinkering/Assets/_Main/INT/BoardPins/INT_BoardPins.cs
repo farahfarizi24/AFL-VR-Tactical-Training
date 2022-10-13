@@ -16,14 +16,14 @@ namespace com.DU.CE.INT
         public int noOfPositionPins = 0;
         public int noOfMarkerPins = 0;
 
-        private bool m_isBoardEnabled = false;
-        private INT_FieldBoard m_FieldBoard;
-        
+        [SerializeField] private bool m_isBoardEnabled = false;
+        [SerializeField] private INT_FieldBoard m_FieldBoard;
+
         // List of all pins
-        private List<INT_IBaseBoardPin> m_boardPins = new List<INT_IBaseBoardPin>();
+        [SerializeField] private List<INT_IBaseBoardPin> m_boardPins = new List<INT_IBaseBoardPin>();
 
         // Array of all the position pins
-        private List<INT_IBoardLinkedPin> m_boardPosPins = new List<INT_IBoardLinkedPin>();
+        [SerializeField] private List<INT_IBoardLinkedPin> m_boardPosPins = new List<INT_IBoardLinkedPin>();
 
 
         #region Monobehaviour Callbacks

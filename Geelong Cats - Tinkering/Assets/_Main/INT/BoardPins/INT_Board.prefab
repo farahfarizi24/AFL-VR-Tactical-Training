@@ -176,6 +176,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 1
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -187,6 +190,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -231,6 +240,9 @@ MonoBehaviour:
   m_TeleportationProvider: {fileID: 0}
   m_MatchOrientation: 0
   m_TeleportTrigger: 0
+  m_Teleporting:
+    m_PersistentCalls:
+      m_Calls: []
   m_TeleportAnchorTransform: {fileID: 8058044817785499182}
   OriginOffsetX: 0.00515
   OriginOffsetY: 0.00585
@@ -931,6 +943,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 8192
+  m_InteractionLayers:
+    m_Bits: 1
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 6744490659597694757, guid: a47aed44180605b459c3f261b5add3e7,
     type: 3}
   m_FirstHoverEntered:
@@ -971,6 +986,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
+    m_PersistentCalls:
+      m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -1024,6 +1045,7 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: 8926486925354503118, guid: 7a77aace10269d04b82d49a70f7cee77,
       type: 3}
   m_LeftPlacementInputAction:
@@ -1036,6 +1058,7 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: 7677083064514532826, guid: 7a77aace10269d04b82d49a70f7cee77,
       type: 3}
   m_PlaneMesh: {fileID: 8058044819756968251}
@@ -1051,12 +1074,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbbb611a58a7fee41ac2db91894bc2c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_aiSock: {fileID: 11400000, guid: 9aa6e2419d2441e4bbb477c63eb92c48, type: 2}
   m_parentofPins: {fileID: 8058044819479777121}
   m_parentofMarkerPins: {fileID: 8058044819519979629}
-  noOfAvatars: 0
+  m_aiSock: {fileID: 11400000, guid: 9aa6e2419d2441e4bbb477c63eb92c48, type: 2}
+  noOfPins: 0
   noOfPositionPins: 0
   noOfMarkerPins: 0
+  m_isBoardEnabled: 0
+  m_FieldBoard: {fileID: 0}
 --- !u!1 &8058044819662067725
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,7 +1093,7 @@ GameObject:
   - component: {fileID: 8058044819662067724}
   m_Layer: 27
   m_Name: INT_Board
-  m_TagString: Untagged
+  m_TagString: board
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

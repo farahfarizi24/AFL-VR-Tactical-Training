@@ -10,7 +10,8 @@ public class ScenarioCreation_UI : MonoBehaviour
 {
     public GameObject ScenarioEditor = null;
     public GameObject FieldViewMenu;
-
+    public GameObject boardObject = null;
+    public GameObject boardContainer;
     public int scenario=0;
     public Button CreateScenario;
     public Button LoadScenario;
@@ -83,9 +84,13 @@ public class ScenarioCreation_UI : MonoBehaviour
         {
             ScenarioEditorObj.SetActive(true);
             SelectScenarioMenuObj.SetActive(false);
+            boardObject = GameObject.FindGameObjectWithTag("board");
+            boardObject.transform.SetParent(boardContainer.gameObject.transform);//make it current game object child
+            boardObject.transform.localPosition = new Vector3(0.0f, 0.0f,-3.0f);
             //create scenario according to the current  index, so need to pass the value of which index it is
             //Also show the menu for scenario creation
-        }else if (state == 2)
+        }
+        else if (state == 2)
         {
             //loadscenario according to the current  index, so need to pass the value of which index it is
         }

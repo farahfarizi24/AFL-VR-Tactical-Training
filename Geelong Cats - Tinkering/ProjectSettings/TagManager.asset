@@ -21,6 +21,8 @@ TagManager:
   - PlayerBody
   - LeftHandController
   - RightHandController
+  - coach
+  - board
   layers:
   - Default
   - TransparentFX

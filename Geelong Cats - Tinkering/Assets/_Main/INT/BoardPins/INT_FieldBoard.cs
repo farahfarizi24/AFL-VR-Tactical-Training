@@ -49,6 +49,7 @@ namespace com.DU.CE.INT
         private void SetupPlayer()
         {
             bool isBoardOpen = m_StadiumProperties.isBoardOpen;
+           // isBoardOpen = true;
             m_boardPins.SetupPlayer(isBoardOpen, m_StadiumProperties.MarkerPositions);
 
             UIToggleFieldBoard(isBoardOpen);
