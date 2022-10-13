@@ -23,6 +23,9 @@ TagManager:
   - RightHandController
   - coach
   - board
+  - CoachObjectContainer
+  - HomeSpawnLoc
+  - AwaySpawnLoc
   layers:
   - Default
   - TransparentFX

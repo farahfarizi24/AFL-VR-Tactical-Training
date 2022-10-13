@@ -7,6 +7,8 @@ MonoImporter:
   - m_UserUISock: {instanceID: 0}
   - CoachInterface: {fileID: 8132845917947366610, guid: 10f20793e3d706e42bdf81e69ab5d37e,
       type: 3}
+  - CoachObjectContainer: {fileID: 9206978246344472488, guid: adf6202df4affaf4b98ee2276a8a1bae,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

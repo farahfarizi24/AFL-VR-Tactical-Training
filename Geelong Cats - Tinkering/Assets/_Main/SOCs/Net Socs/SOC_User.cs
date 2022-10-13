@@ -11,6 +11,7 @@ namespace com.DU.CE.USER
     {
         [SerializeField] private SOC_AUserUI m_UserUISock;
         public GameObject CoachInterface;
+       private GameObject CoachObjectContainer;
         public SOC_AUserUI UISock
         {
             get
@@ -46,6 +47,10 @@ namespace com.DU.CE.USER
                 CoachInterface = Resources.Load("UI_ForCoach") as GameObject;
                 Instantiate(CoachInterface, new Vector3(0, 1.5f, 0.91f), Quaternion.identity);
                 //GameObject CoachPosition = tag
+                GameObject CoachObject = GameObject.FindGameObjectWithTag("Player");
+                CoachObjectContainer = GameObject.FindGameObjectWithTag("CoachObjectContainer");
+                CoachObject.transform.SetParent(CoachObjectContainer.transform);
+                CoachObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
             }
             
         }
