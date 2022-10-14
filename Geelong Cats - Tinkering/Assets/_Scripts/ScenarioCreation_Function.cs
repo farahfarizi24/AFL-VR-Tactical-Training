@@ -13,7 +13,8 @@ public class ScenarioCreation_Function : MonoBehaviour
     public SOC_AI AISock = null;
     public Transform HomeTeamLocation=null;
     public Transform AwayTeamLocation = null;
-
+    private int AwayAICounter=0;
+    private int HomeAICounter =0;
 
     /// <summary>
     ///  Under is the button
@@ -37,12 +38,18 @@ public class ScenarioCreation_Function : MonoBehaviour
 
     private void CreateAwayAI()
     {
-        AISock.UIActivateHomeAI(HomeTeamLocation);
+        AwayAICounter++;
+        Vector3 temp = new Vector3(AwayAICounter,AwayTeamLocation.position.y,AwayTeamLocation.position.z);
+        AwayTeamLocation.position = temp;
+       AISock.UIActivateAwayAI(AwayTeamLocation);
     }
 
     private void CreateHomeAI()
     {
-        AISock.UIActivateAwayAI(AwayTeamLocation);
+        HomeAICounter++;
+        Vector3 temp = new Vector3(HomeAICounter, HomeTeamLocation.position.y, HomeTeamLocation.position.z);
+        HomeTeamLocation.position = temp;
+        AISock.UIActivateHomeAI(HomeTeamLocation);
     }
 
     // Update is called once per frame
