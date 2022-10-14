@@ -8,7 +8,7 @@ using System;
 
 public class ScenarioCreation_UI : MonoBehaviour
 {
-    public GameObject ScenarioEditor = null;
+
     public GameObject FieldViewMenu;
     public GameObject boardObject = null;
     public GameObject boardContainer;
@@ -17,7 +17,9 @@ public class ScenarioCreation_UI : MonoBehaviour
     public Button LoadScenario;
     public Button BackButton;
     public Button selectButton;
+    //this button is the button not the menu
     public Button FieldViewButton;
+    //this one is the one being shown during field view
     public Button ActivateUIButton;
     public Dropdown ScenarioSelector;
 
@@ -30,7 +32,7 @@ public class ScenarioCreation_UI : MonoBehaviour
    // public USER_UISwitcher UI;
     List<string> scenarios = new List<string>();
    public int TotalScenarioNumber=20;
-
+    public List <bool> LastUILayout = new List<bool>();
 
     // Start is called before the first frame update
     void Start()
@@ -63,13 +65,18 @@ public class ScenarioCreation_UI : MonoBehaviour
 
     private void activateUI()
     {
+
+        //load the value from the list
+
+        ScenarioMenuObj.SetActive(LastUILayout[0]);
+        SelectScenarioMenuObj.SetActive(LastUILayout[1]);
+        ScenarioEditorObj.SetActive(LastUILayout[2]);
+        Logo.SetActive(LastUILayout[3]);
+        LastUILayout.Clear();
+
         gameObject.GetComponent<Image>().enabled = true;
-        //set from beginning again;
         FieldViewMenu.SetActive(false);
-        ScenarioMenuObj.SetActive(true);
-        SelectScenarioMenuObj.SetActive(false);
-        Logo.SetActive(true);
-        FieldViewMenu.SetActive(true);
+        FieldViewButton.gameObject.SetActive(true);
        
     }
 
@@ -101,9 +108,20 @@ public class ScenarioCreation_UI : MonoBehaviour
     private void FieldViewEvent()
     {
         FieldViewMenu.SetActive(false);
+        //below to save the last screen active
+        LastUILayout.Clear();
+        LastUILayout.Add(ScenarioMenuObj.activeSelf);
+        LastUILayout.Add(SelectScenarioMenuObj.activeSelf);
+        LastUILayout.Add(ScenarioEditorObj.activeSelf);
+        LastUILayout.Add(Logo.activeSelf);
+
+        //now change everthing into inactive and activate the field view menu
+
         Logo.SetActive(false);
         ScenarioMenuObj.SetActive(false);
         SelectScenarioMenuObj.SetActive(false);
+        ScenarioEditorObj.SetActive(false);
+        FieldViewButton.gameObject.SetActive(false);
         FieldViewMenu.SetActive(true);
         gameObject.GetComponent<Image>().enabled=false;
   

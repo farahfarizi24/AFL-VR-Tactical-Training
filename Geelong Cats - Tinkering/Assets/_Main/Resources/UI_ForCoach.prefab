@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7631382005139806505}
   - component: {fileID: 1337421308740038794}
   m_Layer: 5
-  m_Name: FieldView
+  m_Name: UI_ForFieldView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1029,7 +1029,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fd2cd22f7d538d47a15107e8b4394ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScenarioEditor: {fileID: 392913909681640987}
   FieldViewMenu: {fileID: 63083303279928671}
   boardObject: {fileID: 0}
   boardContainer: {fileID: 270949210813179776}
@@ -1047,6 +1046,7 @@ MonoBehaviour:
   ScenarioEditorObj: {fileID: 392913909681640987}
   Logo: {fileID: 3162849661114884822}
   TotalScenarioNumber: 20
+  LastUILayout: 
 --- !u!1 &8165581004641010735
 GameObject:
   m_ObjectHideFlags: 0
