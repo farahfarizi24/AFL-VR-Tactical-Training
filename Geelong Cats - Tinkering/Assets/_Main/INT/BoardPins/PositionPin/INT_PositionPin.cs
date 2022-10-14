@@ -32,6 +32,11 @@ namespace com.DU.CE.INT
         // Reference to components
         private Outlinable m_outlineComponent = null;
 
+        //For Mouse drag
+        private Vector3 screenPoint;
+        private Vector3 offset;
+        private GameObject CameraObject;
+
 
         protected override void Awake()
         {
@@ -56,6 +61,65 @@ namespace com.DU.CE.INT
             m_pinArrow.SetActive(true);
         }
 
+        private void OnMouseOver()
+        {
+            m_outlineComponent.enabled = true;
+            m_tmpTeamNumber.enabled = true;
+            m_pinArrow.SetActive(true);
+        }
+
+        private void OnMouseExit()
+        {
+
+            m_outlineComponent.enabled = false;
+            m_tmpTeamNumber.enabled = false;
+            m_pinArrow.SetActive(false);
+        }
+
+
+        private void OnMouseDown()
+        {
+            m_outlineComponent.OutlineColor = Color.green;
+            m_pinHead.transform.localPosition += (0.015f * Vector3.up);
+            
+            //get camera
+            GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+            screenPoint = camera.GetComponent<Camera>().WorldToScreenPoint(gameObject.transform.position);
+            offset = gameObject.transform.position - camera.GetComponent<Camera>().ScreenToWorldPoint
+                (new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+
+        }
+
+        private void OnMouseDrag()
+        {
+            Vector3 currentscreenpoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+            GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+            Vector3 currentPositon = camera.GetComponent<Camera>().ScreenToWorldPoint(currentscreenpoint) + offset;
+            transform.position = currentPositon;
+        }
+
+        private void OnMouseUp()
+        { // Change outline to highlight colour
+            m_outlineComponent.OutlineColor = Color.yellow;
+            m_pinHead.transform.localPosition -= (0.015f * Vector3.up);
+            m_pinArrow.SetActive(false);
+
+            m_previousHandPosition = Vector2.zero;
+
+            // Remove reference of interactor
+            m_xrInteractor = null;
+
+            // Update field point
+            if (!m_BoardSock.GetBoardToFieldPosition(m_pinHead.transform, out m_fieldPoint))
+            {
+                Debug.LogError("#PositionPin#--------------RaycastFailed");
+                return;
+            }
+            //Debug.Log("--------------------" + m_fieldPoint);
+
+            m_linkedObject.SetNavAgentDestination(m_fieldPoint);
+            m_linkedObject.SetRelativeYRotation(m_pinArrow.transform.localRotation.y);
+        }
         protected override void OnHoverExited(HoverExitEventArgs args)
         {
             m_outlineComponent.enabled = false;
