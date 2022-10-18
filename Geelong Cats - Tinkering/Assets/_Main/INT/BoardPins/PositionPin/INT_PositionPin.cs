@@ -23,7 +23,8 @@ namespace com.DU.CE.INT
 
         private bool m_islinkedObjectActive = false;
         private bool m_isBoardOpen = false;
-
+        private bool isRotating = false;
+        private bool ActionBeingPerformed = false;
         // Point on the field the pin points to
         private Vector3 m_fieldPoint = Vector3.zero;
         private XRBaseInteractor m_xrInteractor = null;
@@ -49,6 +50,9 @@ namespace com.DU.CE.INT
 
             m_tmpTeamNumber.enabled = false;
             m_pinArrow.SetActive(false);
+           
+           // m_linkedObject.SetRelativeYRotation(m_pinArrow.transform.localRotation.y);
+         
         }
 
 
@@ -56,6 +60,8 @@ namespace com.DU.CE.INT
 
         protected override void OnHoverEntered(HoverEnterEventArgs args)
         {
+          
+          //  m_pinArrow.transform.localRotation = Quaternion.Euler(0f, m_linkedObject.GetRelativeYRotation(), 0f);
             m_outlineComponent.enabled = true;
             m_tmpTeamNumber.enabled = true;
             m_pinArrow.SetActive(true);
@@ -63,25 +69,108 @@ namespace com.DU.CE.INT
 
         private void OnMouseOver()
         {
+            m_pinArrow.transform.localEulerAngles = new Vector3(0.0f, m_linkedObject.GetRelativeYRotation(), 0.0f);
             m_outlineComponent.enabled = true;
             m_tmpTeamNumber.enabled = true;
             m_pinArrow.SetActive(true);
-        }
 
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //activate it for rotation
+                m_outlineComponent.OutlineColor = Color.green;
+                m_pinHead.transform.localPosition += (0.015f * Vector3.up);
+                m_pinArrow.SetActive(true);
+                isRotating = true;
+            }
+            }
+
+        private void Update()
+        {
+            if (Input.GetKey(KeyCode.Space)&& isRotating)
+            {
+                ActionBeingPerformed = true;
+                m_outlineComponent.OutlineColor = Color.green;
+                m_pinArrow.SetActive(true);
+
+                // Get Y rotation of the linked object
+                float rotY = m_linkedObject.GetRelativeTransform().rotation.y;
+                // Apply the rotation to pin
+                m_pinArrow.transform.localRotation = Quaternion.Euler(0f, rotY, 0f);
+                //get camera object
+                GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+                Vector2 positionOnscreen = camera.GetComponent<Camera>().WorldToViewportPoint(gameObject.transform.position);
+                 Vector2 mouseOnScreen = (Vector2)camera.GetComponent<Camera>().ScreenToViewportPoint(Input.mousePosition);
+
+                //get angle between two points
+                float angle = AngleBetweenTwoPoints(positionOnscreen, mouseOnScreen);
+
+               
+
+                m_pinArrow.transform.localRotation = Quaternion.Euler(0f, angle/0.25f, 0f);
+               
+
+                //turn the pin according to the mouse
+
+
+            }
+
+            float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
+            {
+                return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
+            }
+
+            //this one is where the rotation is updated
+            if (Input.GetKeyUp(KeyCode.Space)&& isRotating)
+            {
+                ActionBeingPerformed = false;
+                isRotating = false;
+                // Change outline to highlight colour
+                m_outlineComponent.OutlineColor = Color.yellow;
+                m_pinHead.transform.localPosition -= (0.015f * Vector3.up);
+                m_pinArrow.SetActive(false);
+
+                m_previousHandPosition = Vector2.zero;
+                // float newHandZRotation = -m_xrInteractor.transform.localRotation.z;
+
+                //  m_pinArrow.transform.Rotate(0f, newHandZRotation / 0.25f, 0f);
+                // Update field point
+                if (!m_BoardSock.GetBoardToFieldPosition(m_pinHead.transform, out m_fieldPoint))
+                {
+                    Debug.LogError("#PositionPin#--------------RaycastFailed");
+                    return;
+                }
+                //Debug.Log("--------------------" + m_fieldPoint);
+
+                m_linkedObject.SetNavAgentDestination(m_fieldPoint);
+             
+                m_linkedObject.SetRelativeYRotation(m_pinArrow.transform.localEulerAngles.y);
+                Debug.Log("New Y relative rotation" + m_linkedObject.GetRelativeYRotation());
+               
+
+                // m_pinArrow.transform.localEulerAngles = new Vector3(0.0f, m_linkedObject.GetRelativeYRotation(), 0.0f);
+
+            }
+        }
+      
         private void OnMouseExit()
         {
 
             m_outlineComponent.enabled = false;
             m_tmpTeamNumber.enabled = false;
-            m_pinArrow.SetActive(false);
+            // m_pinArrow.SetActive(false);
+            if (!ActionBeingPerformed)
+            {
+                m_pinArrow.SetActive(false);
+            }
         }
 
 
         private void OnMouseDown()
         {
+           
             m_outlineComponent.OutlineColor = Color.green;
             m_pinHead.transform.localPosition += (0.015f * Vector3.up);
-            
+            m_pinArrow.SetActive(true); 
             //get camera
             GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
             screenPoint = camera.GetComponent<Camera>().WorldToScreenPoint(gameObject.transform.position);
@@ -92,6 +181,7 @@ namespace com.DU.CE.INT
 
         private void OnMouseDrag()
         {
+            ActionBeingPerformed = true;
             Vector3 currentscreenpoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
             GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
             Vector3 currentPositon = camera.GetComponent<Camera>().ScreenToWorldPoint(currentscreenpoint) + offset;
@@ -103,7 +193,7 @@ namespace com.DU.CE.INT
             m_outlineComponent.OutlineColor = Color.yellow;
             m_pinHead.transform.localPosition -= (0.015f * Vector3.up);
             m_pinArrow.SetActive(false);
-
+            ActionBeingPerformed = false;
             m_previousHandPosition = Vector2.zero;
 
             // Remove reference of interactor
@@ -118,7 +208,7 @@ namespace com.DU.CE.INT
             //Debug.Log("--------------------" + m_fieldPoint);
 
             m_linkedObject.SetNavAgentDestination(m_fieldPoint);
-            m_linkedObject.SetRelativeYRotation(m_pinArrow.transform.localRotation.y);
+                  m_linkedObject.SetRelativeYRotation(m_pinArrow.transform.localRotation.y);
         }
         protected override void OnHoverExited(HoverExitEventArgs args)
         {
@@ -166,7 +256,7 @@ namespace com.DU.CE.INT
             m_linkedObject.SetNavAgentDestination(m_fieldPoint);
             m_linkedObject.SetRelativeYRotation(m_pinArrow.transform.localRotation.y);
 
-            //m_boardPins.M_IsPicked = false;
+        // m_boardPins.M_IsPicked = false;
         }
 
 

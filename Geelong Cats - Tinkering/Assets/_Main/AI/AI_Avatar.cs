@@ -205,9 +205,17 @@ namespace com.DU.CE.AI
             m_navMeshAgent.SetDestination(_destinationInXY);
         }
 
+
         void INT_ILinkedPinObject.SetRelativeYRotation(float rotY)
         {
             m_rotationY = rotY;
+            gameObject.transform.eulerAngles = new Vector3(0.0f, m_rotationY, 0.0f);
+        }
+
+        float INT_ILinkedPinObject.GetRelativeYRotation()
+        {
+            m_rotationY = gameObject.transform.eulerAngles.y; 
+            return m_rotationY;
         }
 
         #endregion

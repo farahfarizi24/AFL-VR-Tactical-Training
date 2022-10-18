@@ -35,5 +35,6 @@ namespace com.DU.CE.INT
 
         void SetNavAgentDestination(Vector3 _destinationInXY);
         void SetRelativeYRotation(float rotY);
+        float GetRelativeYRotation();
     }
 }
