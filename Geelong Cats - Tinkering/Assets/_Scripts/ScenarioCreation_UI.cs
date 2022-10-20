@@ -90,6 +90,8 @@ public class ScenarioCreation_UI : MonoBehaviour
         if (state == 1)
         {
             ScenarioEditorObj.SetActive(true);
+            //pass scenarionumber
+            ScenarioEditorObj.GetComponent<ScenarioCreation_Function>().ScenarioNumber = scenario;
             SelectScenarioMenuObj.SetActive(false);
             boardObject = GameObject.FindGameObjectWithTag("board");
             boardObject.transform.SetParent(boardContainer.gameObject.transform);//make it current game object child
@@ -154,25 +156,4 @@ public class ScenarioCreation_UI : MonoBehaviour
 
     }
 
-   // void ScenarioTask()
-   // {
-        //ScenarioEditor = GameObject.FindGameObjectWithTag("ScenarioEditor");
-        //ScenarioEditor.gameObject.SetActive(true);
-        /*Debug.Log("ButtonClick");
-        if (ScenarioEditor == null)
-        {
-
-            ScenarioEditor = GameObject.FindWithTag("ScenarioEditor");
-            ScenarioEditor = ScenarioEditor.transform.GetChild(0).gameObject;
-
-            //Turn off current gameobject
-        }
-        ScenarioEditor.SetActive(true);
-        UI.ToggleUI(false);*/
-   // }
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

@@ -115,14 +115,14 @@ public class ScenarioManager : ScriptableObject
         {
             var playerObject = GameObject.Find(player.name);
 
-            OnChangePlayerPosition?.Invoke(playerObject, player.position, player.rotation);
-            playerObject.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(player.position);
+         //   OnChangePlayerPosition?.Invoke(playerObject, player.position, player.rotation);
+         //   playerObject.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(player.position);
         }
         foreach (var player in scenario.awayplayers)
         {
             var playerObject = GameObject.Find(player.name);
-            OnChangePlayerPosition?.Invoke(playerObject, player.position, player.rotation);
-            playerObject.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(player.position);
+           // OnChangePlayerPosition?.Invoke(playerObject, player.position, player.rotation);
+         //   playerObject.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(player.position);
         }
 
     }
@@ -174,7 +174,7 @@ public class ScenarioManager : ScriptableObject
 
                 GameObject emptyGO = new GameObject();
                 emptyGO.transform.position = new Vector3(-88.4151306f, 1.18533289f, 9.39408302f);
-                emptyGO.transform.rotation = playerData.rotation;
+            //    emptyGO.transform.rotation = playerData.rotation;
 
                 if (isHomeTeam)
                 {

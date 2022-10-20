@@ -9,6 +9,7 @@ namespace com.DU.CE.INT
     [RequireComponent(typeof(INT_BoardPins))]
     public class INT_FieldBoard : XRBaseInteractable
     {
+       
         [SerializeField] private SOC_StadiumProperties m_StadiumProperties;
         internal SOC_StadiumProperties StadiumPropertiesSock { get => m_StadiumProperties; }
 
@@ -60,14 +61,14 @@ namespace com.DU.CE.INT
         protected override void OnEnable()
         {
             base.OnEnable();
-
+            
             m_StadiumProperties.OnNetworkFieldBoardToggle += UIToggleFieldBoard;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-
+      
             m_StadiumProperties.OnNetworkFieldBoardToggle -= UIToggleFieldBoard;
         }
 

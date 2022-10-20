@@ -2,16 +2,23 @@ using com.DU.CE.AI;
 using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class PlayerData
 {
     //TODO: pathPoints using Queue<Vector3>
     [XmlElement("position")]
-    public Vector3 position;
+    public List <Vector3> position = new List<Vector3>();
 
     [XmlElement("rotation")]
-    public Quaternion rotation;
+    public List <Vector3 >rotation = new List<Vector3>();
+
+    /// <summary>
+    /// Haven't been implemented
+    /// </summary>
+    [XmlAttribute("role")]
+    public string role;
 
     [XmlAttribute("name")]
     public string name;
@@ -21,11 +28,17 @@ public class PlayerData
 
 
     public void getDataFromPlayer(GameObject player)
-    {
-        position = player.transform.position;
-        rotation = player.transform.rotation;
+    {//Now you want to make sure the player has a list of position and rotation
+
+        for(int i = 0; i < 2; i++)
+        {
+            position.Add(player.GetComponent<AI_Avatar>().Position[i]);
+            rotation.Add(player.GetComponent<AI_Avatar>().Rotation[i]);
+        }
+  
         name = player.name;
         number = player.GetComponent<AI_Avatar>().M_NCModel.number;
     }
 
+ 
 }

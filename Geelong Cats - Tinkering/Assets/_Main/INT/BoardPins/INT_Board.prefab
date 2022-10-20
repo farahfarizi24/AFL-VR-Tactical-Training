@@ -1031,6 +1031,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+  directionArrow: {fileID: 0}
   m_StadiumProperties: {fileID: 11400000, guid: 409f75c0562bbfc40a52160583b981ba,
     type: 2}
   m_BoardSock: {fileID: 11400000, guid: c667c9bc33d116b4fb6664dbef8791b1, type: 2}

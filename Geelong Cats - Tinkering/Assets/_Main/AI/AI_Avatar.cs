@@ -6,7 +6,7 @@ using Normal.Realtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
-
+using System.Collections.Generic;
 namespace com.DU.CE.AI
 {
     [RequireComponent(typeof(RealtimeView))]
@@ -29,7 +29,8 @@ namespace com.DU.CE.AI
 
         private int m_teamNumber = 0;
         private ETEAM m_team = 0;
-
+        public List<Vector3> Position = new List<Vector3>();
+        public List<Vector3> Rotation = new List<Vector3>();
         private float m_rotationY = 0f;
 
         #endregion
@@ -165,7 +166,7 @@ namespace com.DU.CE.AI
                 m_linkedPin.UpdatePinPosition();
             }
         }
-
+    
         #endregion
 
 
@@ -205,6 +206,12 @@ namespace com.DU.CE.AI
             m_navMeshAgent.SetDestination(_destinationInXY);
         }
 
+        void INT_ILinkedPinObject.SetTransform(Vector3 _destinationPosition, Vector3 _destinationRotation)
+        {
+          
+            m_linkedPin.UpdateForLoad(_destinationPosition,_destinationRotation);
+        }
+
 
         void INT_ILinkedPinObject.SetRelativeYRotation(float rotY)
         {
@@ -217,6 +224,8 @@ namespace com.DU.CE.AI
             m_rotationY = gameObject.transform.eulerAngles.y; 
             return m_rotationY;
         }
+
+       
 
         #endregion
     }

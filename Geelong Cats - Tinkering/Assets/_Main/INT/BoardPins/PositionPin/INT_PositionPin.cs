@@ -55,7 +55,7 @@ namespace com.DU.CE.INT
          
         }
 
-
+        
         #region XRBaseInteractable Callbacks
 
         protected override void OnHoverEntered(HoverEnterEventArgs args)
@@ -311,6 +311,23 @@ namespace com.DU.CE.INT
             m_linkedObject.LinkPin(this);
         }
 
+        void INT_IBoardLinkedPin.UpdateForLoad(Vector3 _destinationPosition, Vector3 destinationRotation)
+        {
+            Vector3 aiPosition = _destinationPosition;
+            // Change the XZ position of the AI to the Xz position of the pin
+            Vector3 tempVec = new Vector3(aiPosition.x, 0f, aiPosition.z);
+
+            transform.localPosition = new Vector3(tempVec.x * m_BoardSock.OriginOffsetX, tempVec.y, tempVec.z * m_BoardSock.OriginOffsetZ);
+
+
+            // Get Y rotation of the linked object
+            float rotY = destinationRotation.y;
+            // Apply the rotation to pin
+            m_pinArrow.transform.localRotation = Quaternion.Euler(0f, rotY, 0f);
+
+          //  transform.localPosition = _destinationPosition;
+           // m_pinArrow.transform.localRotation = Quaternion.Euler(destinationRotation);
+        }
 
         void INT_IBoardLinkedPin.UpdatePinPosition()
         {
@@ -351,7 +368,7 @@ namespace com.DU.CE.INT
             transform.localPosition = newPosition;
         }
 
-
+      
         void INT_IBaseBoardPin.UpdateRotWhenHeld()
         {
             float newHandZRotation = -m_xrInteractor.transform.localRotation.z;

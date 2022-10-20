@@ -24,6 +24,7 @@ namespace com.DU.CE.INT
 
         void SetObjectStatus(bool activatedStatus);
         void UpdatePinPosition();
+        void UpdateForLoad(Vector3 _destinationpPosition, Vector3 destinationRotation);
     }
 
 
@@ -32,9 +33,10 @@ namespace com.DU.CE.INT
         void LinkPin(INT_IBoardLinkedPin pin);
 
         Transform GetRelativeTransform();
-
+        void SetTransform(Vector3 _destinationPosition, Vector3 _destinationRotation);
         void SetNavAgentDestination(Vector3 _destinationInXY);
         void SetRelativeYRotation(float rotY);
         float GetRelativeYRotation();
+   
     }
 }
