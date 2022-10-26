@@ -7,6 +7,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
+using System.Collections;
+
 namespace com.DU.CE.AI
 {
     [RequireComponent(typeof(RealtimeView))]
@@ -26,24 +28,26 @@ namespace com.DU.CE.AI
         [Space]
         [SerializeField] private TextMeshPro m_numberText = null;
         [SerializeField] private Outlinable m_outline = null;
-
+        public bool NavMeshCount;//to see when the navmesh is finish
+        private bool NavMeshIsRunning;
         private int m_teamNumber = 0;
         private ETEAM m_team = 0;
-        public List<Vector3> Position = new List<Vector3>();
-        public List<Vector3> Rotation = new List<Vector3>();
+       // public List<Vector3> Position = new List<Vector3>();
+        //public List<Vector3> Rotation = new List<Vector3>();
         private float m_rotationY = 0f;
-
+        public string state = "";
         #endregion
 
         public int M_PlayerNumber { get => m_teamNumber; }
         public ETEAM M_Team { get => m_team; }
 
         public NCM_AvatarModel M_NCModel { get => model; }
-
+        public List<Vector3> AvatarPosition = new List<Vector3>();
+        public List<Vector3> AvatarRotation = new List<Vector3>();
         // These methods are used to sync the data to the client models
         // They are called when the value stores in the realtime model changes.
         #region NormCore Callbacks
-
+       
 
         protected override void OnRealtimeModelReplaced(NCM_AvatarModel previousModel, NCM_AvatarModel currentModel)
         {
@@ -88,7 +92,43 @@ namespace com.DU.CE.AI
             //base.OnRealtimeModelReplaced(previousModel, currentModel);
         }
 
+        void Update()
 
+        {
+            if (M_NCModel.isActivated)
+            {
+                
+
+
+                if (NavMeshIsRunning & m_navMeshAgent.remainingDistance < 0.1f)
+                {
+                    Debug.Log("NAVMESH REMAIN DISTANCE IS " + m_navMeshAgent.remainingDistance);
+
+
+                    if (state == "Init")
+                    {
+                        state = "";
+                      gameObject.transform.eulerAngles = AvatarRotation[0];
+                        NavMeshCount = true;
+
+                    }
+                   else if (state == "Final")
+                    {
+                       NavMeshCount = true;
+                     gameObject.transform.eulerAngles = AvatarRotation[1];
+                      state = "";
+
+             }
+
+                    NavMeshIsRunning = false;
+
+
+
+                }
+
+
+            }
+        }
         public void ChangeNetworkActivation(bool _toggle)
         {
             model.isActivated = _toggle;
@@ -201,15 +241,57 @@ namespace com.DU.CE.AI
         {
             // Unpause nav mesh agent
             m_navMeshAgent.isStopped = false;
-
+          
             // Set the destination for the path agent
             m_navMeshAgent.SetDestination(_destinationInXY);
+
+
+           
         }
 
-        void INT_ILinkedPinObject.SetTransform(Vector3 _destinationPosition, Vector3 _destinationRotation)
+        void INT_ILinkedPinObject.SetInitPosition()
         {
           
-            m_linkedPin.UpdateForLoad(_destinationPosition,_destinationRotation);
+            m_linkedPin.UpdateForLoad(AvatarPosition[0],AvatarRotation[0]);
+           
+           
+            m_navMeshAgent.SetDestination(AvatarPosition[0]);
+            m_navMeshAgent.isStopped = false;
+            NavMeshCount = false;
+
+            
+            state = "Init";
+            StartCoroutine(WaitForNavmeshToStart());
+        }
+
+
+        IEnumerator WaitForNavmeshToStart()
+        {
+            yield return new WaitForSeconds(2);
+            NavMeshIsRunning = true;
+        }
+        void INT_ILinkedPinObject.SetFinalPosition()
+        {
+        
+            m_linkedPin.UpdateForLoad(AvatarPosition[1], AvatarRotation[1]);
+            m_navMeshAgent.SetDestination(AvatarPosition[1]);
+            m_navMeshAgent.isStopped = false;
+            Debug.Log("Setting final position");
+           
+            NavMeshCount = false;
+
+            state = "Final";
+           // StartCoroutine(WaitForNavmeshToStart());
+        }
+
+        void INT_ILinkedPinObject.SetScenarioTransform(Vector3 _initPosi, Vector3 _initRot, Vector3 _finalPosi, Vector3 _finalRot)
+        {
+            AvatarPosition.Clear();
+            AvatarRotation.Clear();
+            AvatarPosition.Add(_initPosi);
+            AvatarPosition.Add(_finalPosi);
+            AvatarRotation.Add(_initRot);
+            AvatarRotation.Add(_finalRot);
         }
 
 
@@ -225,6 +307,8 @@ namespace com.DU.CE.AI
             return m_rotationY;
         }
 
+
+     
        
 
         #endregion

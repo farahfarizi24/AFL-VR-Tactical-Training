@@ -52,7 +52,7 @@ public class CharacterAnimationScript : MonoBehaviour
         // calculate velocity by position
         speed = ((transform.position - previous).magnitude) / Time.deltaTime;
         previous = transform.position;
-        Debug.Log("speed" + speed.ToString());
+       // Debug.Log("speed" + speed.ToString());
 
     }
 

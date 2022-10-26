@@ -32,8 +32,8 @@ public class PlayerData
 
         for(int i = 0; i < 2; i++)
         {
-            position.Add(player.GetComponent<AI_Avatar>().Position[i]);
-            rotation.Add(player.GetComponent<AI_Avatar>().Rotation[i]);
+            position.Add(player.GetComponent<AI_Avatar>().AvatarPosition[i]);
+            rotation.Add(player.GetComponent<AI_Avatar>().AvatarRotation[i]);
         }
   
         name = player.name;

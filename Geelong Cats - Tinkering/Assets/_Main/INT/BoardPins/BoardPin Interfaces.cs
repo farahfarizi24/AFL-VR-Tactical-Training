@@ -33,10 +33,14 @@ namespace com.DU.CE.INT
         void LinkPin(INT_IBoardLinkedPin pin);
 
         Transform GetRelativeTransform();
-        void SetTransform(Vector3 _destinationPosition, Vector3 _destinationRotation);
+
+        void SetScenarioTransform(Vector3 _initPosi, Vector3 _initRot, Vector3 _finalPosi, Vector3 _finalRot);
+        void SetInitPosition();
         void SetNavAgentDestination(Vector3 _destinationInXY);
         void SetRelativeYRotation(float rotY);
         float GetRelativeYRotation();
+
+        void SetFinalPosition();
    
     }
 }

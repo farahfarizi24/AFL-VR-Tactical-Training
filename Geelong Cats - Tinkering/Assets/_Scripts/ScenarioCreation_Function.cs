@@ -13,6 +13,8 @@ using System.Linq;
 
 public class ScenarioCreation_Function : MonoBehaviour
     {
+    [SerializeField]private int IsPlayerReady = 0;
+    public bool ScenarioRunToggle = false;
         public SOC_AI AISock = null;
         public Transform HomeTeamLocation = null;
         public Transform AwayTeamLocation = null;
@@ -23,15 +25,16 @@ public class ScenarioCreation_Function : MonoBehaviour
     ///  Under is the list of variable to be stored for each AI
     ///
     public Action<ScenarioData> OnChangeScenario;
-    [SerializeField] private List<Vector3> AwayAIInitialPosition = new List<Vector3>();
-        [SerializeField] private List<Vector3> AwayAIFinalPosition = new List<Vector3>();
-        [SerializeField] private List<Vector3> AwayAIInitialRotation = new List<Vector3>();
-        [SerializeField] private List<Vector3> AwayAIFinalRotation = new List<Vector3>();
+ public List<GameObject> AIObject = new List<GameObject>();
+    private List<Vector3> AwayAIInitialPosition = new List<Vector3>();
+         private List<Vector3> AwayAIFinalPosition = new List<Vector3>();
+     private List<Vector3> AwayAIInitialRotation = new List<Vector3>();
+        private List<Vector3> AwayAIFinalRotation = new List<Vector3>();
 
-        [SerializeField] private List<Vector3> HomeAIInitialPosition = new List<Vector3>();
-        [SerializeField] private List<Vector3> HomeAIFinalPosition = new List<Vector3>();
-        [SerializeField] private List<Vector3> HomeAIInitialRotation = new List<Vector3>();
-        [SerializeField] private List<Vector3> HomeAIFinalRotation = new List<Vector3>();
+       private List<Vector3> HomeAIInitialPosition = new List<Vector3>();
+   private List<Vector3> HomeAIFinalPosition = new List<Vector3>();
+     private List<Vector3> HomeAIInitialRotation = new List<Vector3>();
+      private List<Vector3> HomeAIFinalRotation = new List<Vector3>();
     public Action<GameObject, Vector3, Vector3> OnChangePlayerPosition;
 
     private List<String> AwayAIRole = new List<string>();
@@ -118,10 +121,21 @@ public class ScenarioCreation_Function : MonoBehaviour
                 
                     HomeAIInitialPosition.Add(activePlayers[i].transform.position);
                    HomeAIInitialRotation.Add(activePlayers[i].transform.eulerAngles);
-                    HomePlayers[i].GetComponent<AI_Avatar>().Position.Add(HomeAIInitialPosition[i]);
-                    HomePlayers[i].GetComponent<AI_Avatar>().Rotation.Add(HomeAIInitialRotation[i]);
+                if (HomePlayers[i].GetComponent<AI_Avatar>().AvatarPosition.Count != 0)
+                {
+                    HomePlayers[i].GetComponent<AI_Avatar>().AvatarPosition[0] = HomeAIInitialPosition[i];
+                    HomePlayers[i].GetComponent<AI_Avatar>().AvatarRotation[0] = HomeAIInitialRotation[i];
 
                 }
+                else
+                {
+
+                    HomePlayers[i].GetComponent<AI_Avatar>().AvatarPosition.Add(HomeAIInitialPosition[i]);
+                    HomePlayers[i].GetComponent<AI_Avatar>().AvatarRotation.Add(HomeAIInitialRotation[i]);
+                }
+               
+
+            }
 
                 //Now clear the list from home player and add the away player
 
@@ -142,9 +156,20 @@ public class ScenarioCreation_Function : MonoBehaviour
                  
                     AwayAIInitialPosition.Add(activePlayers[i].transform.position);
                     AwayAIInitialRotation.Add(activePlayers[i].transform.eulerAngles);
-                    AwayPlayers[i].GetComponent<AI_Avatar>().Position.Add(AwayAIInitialPosition[i]);
-                    AwayPlayers[i].GetComponent<AI_Avatar>().Rotation.Add(AwayAIInitialRotation[i]);
+                if (AwayPlayers[i].GetComponent<AI_Avatar>().AvatarPosition.Count() !=0)
+                {
+                    AwayPlayers[i].GetComponent<AI_Avatar>().AvatarPosition[0] = AwayAIInitialPosition[i];
+                    AwayPlayers[i].GetComponent<AI_Avatar>().AvatarRotation[0] = AwayAIInitialRotation[i];
+
                 }
+                else
+                {
+                    AwayPlayers[i].GetComponent<AI_Avatar>().AvatarPosition.Add(AwayAIInitialPosition[i]);
+                    AwayPlayers[i].GetComponent<AI_Avatar>().AvatarRotation.Add(AwayAIInitialRotation[i]);
+                }
+
+
+            }
 
                 //clear state again
                 activePlayers.Clear();
@@ -174,8 +199,20 @@ public class ScenarioCreation_Function : MonoBehaviour
                 {
                     HomeAIFinalPosition.Add(activePlayers[i].transform.position);
                     HomeAIFinalRotation.Add(activePlayers[i].transform.eulerAngles);
-                HomePlayers[i].GetComponent<AI_Avatar>().Position.Add(HomeAIFinalPosition[i]);
-                HomePlayers[i].GetComponent<AI_Avatar>().Rotation.Add(HomeAIFinalRotation[i]);
+
+                if (HomePlayers[i].GetComponent<AI_Avatar>().AvatarPosition.Count() > 1)
+                {
+                     HomePlayers[i].GetComponent<AI_Avatar>().AvatarPosition[1] = HomeAIFinalPosition[i];
+                   HomePlayers[i].GetComponent<AI_Avatar>().AvatarRotation[1] = HomeAIFinalRotation[i];
+                
+
+                }
+                else
+                {
+                    HomePlayers[i].GetComponent<AI_Avatar>().AvatarPosition.Add(HomeAIFinalPosition[i]);
+                    HomePlayers[i].GetComponent<AI_Avatar>().AvatarRotation.Add(HomeAIFinalRotation[i]);
+                }
+
 
 
             }
@@ -198,8 +235,21 @@ public class ScenarioCreation_Function : MonoBehaviour
                 {
                     AwayAIFinalPosition.Add(activePlayers[i].transform.position);
                     AwayAIFinalRotation.Add(activePlayers[i].transform.eulerAngles);
-                AwayPlayers[i].GetComponent<AI_Avatar>().Position.Add(AwayAIFinalPosition[i]);
-                AwayPlayers[i].GetComponent<AI_Avatar>().Rotation.Add(AwayAIFinalRotation[i]);
+
+                if (AwayPlayers[i].GetComponent<AI_Avatar>().AvatarPosition.Count() > 1)
+                {
+                    AwayPlayers[i].GetComponent<AI_Avatar>().AvatarPosition[1] = AwayAIFinalPosition[i];
+                    AwayPlayers[i].GetComponent<AI_Avatar>().AvatarRotation[1] = AwayAIFinalRotation[i];
+                    //AwayPlayers[i].GetComponent<AI_Avatar>().AvatarPosition.Add(AwayAIFinalPosition[i]);
+                   //AwayPlayers[i].GetComponent<AI_Avatar>().AvatarRotation.Add(AwayAIFinalRotation[i]);
+                }
+                else
+                {
+
+                    AwayPlayers[i].GetComponent<AI_Avatar>().AvatarPosition.Add(AwayAIFinalPosition[i]);
+                    AwayPlayers[i].GetComponent<AI_Avatar>().AvatarRotation.Add(AwayAIFinalRotation[i]);
+                }
+                  
             }
 
                 //clear state again
@@ -278,8 +328,11 @@ public class ScenarioCreation_Function : MonoBehaviour
         //currentScenarioNum = scenarioNum;
         OnChangeScenario?.Invoke(scenario);
         analyseScenario(scenario);
+
         SetPlayers(scenario);
     }
+
+    //This function analyse how many active players are present and load them into each avatar
     private void analyseScenario(ScenarioData scenario)
     {
 
@@ -298,6 +351,27 @@ public class ScenarioCreation_Function : MonoBehaviour
             AISock?.ChangeHomeTeamSize(scenario.awayplayers.Count);
         }
 
+        foreach (var player in scenario.homeplayers)
+        {
+            var playerObject = GameObject.Find(player.name);
+
+            //OnChangePlayerPosition?.Invoke(playerObject, player.position[0], player.rotation[0]);
+            playerObject.GetComponent<INT_ILinkedPinObject>().SetScenarioTransform(
+                player.position[0], player.rotation[0], player.position[1], player.rotation[1]
+                );
+          //  playerObject.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(player.position[0]);
+
+        }
+        foreach (var player in scenario.awayplayers)
+        {
+            var playerObject = GameObject.Find(player.name);
+          //  OnChangePlayerPosition?.Invoke(playerObject, player.position[0], player.rotation[0]);
+            playerObject.GetComponent<INT_ILinkedPinObject>().SetScenarioTransform(
+          player.position[0], player.rotation[0], player.position[1], player.rotation[1]
+         );
+            // playerObject.GetComponent<INT_ILinkedPinObject>().SetTransform(player.position[0], player.rotation[0]);
+          //  playerObject.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(player.position[0]);
+        }
     }
 
     private void findDiffPlayers(GameObject[] currentPlayers, List<PlayerData> scenarioPlayers, bool isHomeTeam)
@@ -364,27 +438,104 @@ public class ScenarioCreation_Function : MonoBehaviour
 
     private void SetPlayers(ScenarioData scenario)
     {
-
+        AwayAICounter = 0;
+        HomeAICounter = 0;
+        AIObject.Clear();
         foreach (var player in scenario.homeplayers)
         {
             var playerObject = GameObject.Find(player.name);
 
-            OnChangePlayerPosition?.Invoke(playerObject, player.position[0], player.rotation[0]);
-           playerObject.GetComponent<INT_ILinkedPinObject>().SetTransform(player.position[0], player.rotation[0]);
-             playerObject.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(player.position[0]);
-           
+           OnChangePlayerPosition?.Invoke(playerObject, player.position[0], player.rotation[0]);
+            playerObject.GetComponent<INT_ILinkedPinObject>().SetInitPosition();
+            HomeAICounter += 1;
+            AIObject.Add(playerObject);
         }
         foreach (var player in scenario.awayplayers)
         {
             var playerObject = GameObject.Find(player.name);
-          OnChangePlayerPosition?.Invoke(playerObject, player.position[0], player.rotation[0]);
-        
-           playerObject.GetComponent<INT_ILinkedPinObject>().SetTransform(player.position[0], player.rotation[0]);
-            playerObject.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(player.position[0]);
+        OnChangePlayerPosition?.Invoke(playerObject, player.position[0], player.rotation[0]);
+
+
+            playerObject.GetComponent<INT_ILinkedPinObject>().SetInitPosition();
+            AwayAICounter += 1;
+            AIObject.Add(playerObject);
+
         }
+        ScenarioRunToggle = true;
+       
 
     }
 
+
+    #region Scenario Play
+
+    private void Update()
+    {
+        if (ScenarioRunToggle)
+        {
+            CheckIfAIReady();
+            //you want to check index on whether they have finished the prep or not
+        }
+    }
+    //When run button is pressed
+
+    private void CheckIfAIReady()
+    {
+        IsPlayerReady = 0;
+        for (int i = 0; i < AIObject.Count(); i++)
+        {
+            if (AIObject[i].GetComponent<AI_Avatar>().NavMeshCount == true)
+            {
+                IsPlayerReady = IsPlayerReady + 1;
+            }
+         
+           
+        }
+
+        if (IsPlayerReady == AIObject.Count())
+        {
+            DeployScenario();
+            ScenarioRunToggle = false;
+        }
+    }
+    private void DeployScenario()
+    {
+        StartCoroutine(StartScenarioCoroutine());
+        
+    }
+
+    IEnumerator StartScenarioCoroutine()
+    {
+        yield return new WaitForSeconds(5);
+        foreach (var player in AIObject)
+        {
+            var playerObject = GameObject.Find(player.name);
+
+         OnChangePlayerPosition?.Invoke(playerObject, player.GetComponent<AI_Avatar>().AvatarPosition[1], 
+             player.GetComponent<AI_Avatar>().AvatarRotation[1]);
+            playerObject.GetComponent<INT_ILinkedPinObject>().SetFinalPosition();
+          //  HomeAICounter += 1;
+           // AIObject.Add(playerObject);
+        }
+        /*
+        for (int i = 0; i < AIObject.Count(); i++)
+        {
+            Debug.Log("COURUTINE LOOP IS RUN ");
+            OnChangePlayerPosition?.Invoke(AIObject[i], AIObject[i].GetComponent<AI_Avatar>().AvatarPosition[1],
+                AIObject[i].GetComponent<AI_Avatar>().AvatarRotation[1]);
+
+
+
+
+            AIObject[i].GetComponent<INT_ILinkedPinObject>().SetFinalPosition();
+
+        }*/
+
+        
+        
+    }
+
+    #endregion
     /// <summary>
     /// /CREATING AI
     /// </summary>
