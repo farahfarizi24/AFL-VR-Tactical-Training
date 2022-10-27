@@ -27,10 +27,11 @@ public class ScenarioCreation_UI : MonoBehaviour
     public GameObject ScenarioMenuObj;
     public GameObject SelectScenarioMenuObj;
     public GameObject ScenarioEditorObj;
+    public GameObject RunScenarioMenu;
     public GameObject Logo;
     //public Button[] ScenarioButton = new Button[6];
    // public USER_UISwitcher UI;
-    List<string> scenarios = new List<string>();
+    public List<string> scenarios = new List<string>();
    public int TotalScenarioNumber=20;
     public List <bool> LastUILayout = new List<bool>();
 
@@ -98,9 +99,11 @@ public class ScenarioCreation_UI : MonoBehaviour
             boardObject.transform.localPosition = new Vector3(0.0f, 0.0f,-3.0f);
             //create scenario according to the current  index, so need to pass the value of which index it is
             //Also show the menu for scenario creation
+            state = 0;
         }
         else if (state == 2)
         {
+
             //loadscenario according to the current  index, so need to pass the value of which index it is
         }
 
@@ -141,10 +144,15 @@ public class ScenarioCreation_UI : MonoBehaviour
     {
         Logo.SetActive(false);
         ScenarioMenuObj.SetActive(false);
-        SelectScenarioMenuObj.SetActive(true);
-        state = 2;
+        RunScenarioMenu.SetActive(true);
+        gameObject.GetComponent<Image>().enabled = false;
+        FieldViewMenu.SetActive(false);
+        FieldViewButton.gameObject.SetActive(false);
+        //  FieldViewEvent();
+        // SelectScenarioMenuObj.SetActive(true);
+        //state = 2;
         //Set trained player
-        FieldViewEvent();
+
     }
 
     private void CreateNewScenario()

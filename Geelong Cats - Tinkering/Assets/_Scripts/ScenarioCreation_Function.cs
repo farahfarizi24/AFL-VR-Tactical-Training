@@ -82,8 +82,9 @@ public class ScenarioCreation_Function : MonoBehaviour
             throw new NotImplementedException();
         }
 
-        private void QuickRunScenario()
+        public void QuickRunScenario()
         {
+       
         LoadScenario(ScenarioNumber);
         }
 
@@ -240,8 +241,7 @@ public class ScenarioCreation_Function : MonoBehaviour
                 {
                     AwayPlayers[i].GetComponent<AI_Avatar>().AvatarPosition[1] = AwayAIFinalPosition[i];
                     AwayPlayers[i].GetComponent<AI_Avatar>().AvatarRotation[1] = AwayAIFinalRotation[i];
-                    //AwayPlayers[i].GetComponent<AI_Avatar>().AvatarPosition.Add(AwayAIFinalPosition[i]);
-                   //AwayPlayers[i].GetComponent<AI_Avatar>().AvatarRotation.Add(AwayAIFinalRotation[i]);
+    
                 }
                 else
                 {
@@ -324,6 +324,10 @@ public class ScenarioCreation_Function : MonoBehaviour
         {
             Debug.Log("scenario" + scenarioNum.ToString() + " is empty.");
             return;
+        }
+        else
+        {
+            Debug.Log("scenario" + scenarioNum.ToString() + " is loaded");
         }
         //currentScenarioNum = scenarioNum;
         OnChangeScenario?.Invoke(scenario);
