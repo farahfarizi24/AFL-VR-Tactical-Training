@@ -1310,7 +1310,6 @@ GameObject:
   - component: {fileID: 7602017700443121140}
   - component: {fileID: 4637322805461685068}
   - component: {fileID: 3601612169022601567}
-  - component: {fileID: 1515493255484787279}
   m_Layer: 0
   m_Name: UIComp_ScenarioMaker
   m_TagString: Untagged
@@ -1407,38 +1406,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1515493255484787279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2491493160714155386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ab14df80c75e1e4aa86af45a9be5857, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AISock: {fileID: 11400000, guid: 9aa6e2419d2441e4bbb477c63eb92c48, type: 2}
-  HomeTeamLocation: {fileID: 0}
-  AwayTeamLocation: {fileID: 0}
-  AwayAIInitialPosition: []
-  AwayAIFinalPosition: []
-  AwayAIInitialRotation: []
-  AwayAIFinalRotation: []
-  HomeAIInitialPosition: []
-  HomeAIFinalPosition: []
-  HomeAIInitialRotation: []
-  HomeAIFinalRotation: []
-  ScenarioNumber: 0
-  BallTargetAINum: 0
-  HomeCreate: {fileID: 8863232754551461960}
-  AwayCreate: {fileID: 6115758036661691828}
-  SaveFinalPosition: {fileID: 3075175183346811855}
-  SaveInitialPosition: {fileID: 7442767513087544683}
-  RunScenario: {fileID: 4683341609436774373}
-  BallTarget: {fileID: 4504946453888156586}
-  SaveEntireScenario: {fileID: 2970654388589344638}
 --- !u!1 &2603920702234805473
 GameObject:
   m_ObjectHideFlags: 0

@@ -1031,7 +1031,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  directionArrow: {fileID: 0}
   m_StadiumProperties: {fileID: 11400000, guid: 409f75c0562bbfc40a52160583b981ba,
     type: 2}
   m_BoardSock: {fileID: 11400000, guid: c667c9bc33d116b4fb6664dbef8791b1, type: 2}
@@ -1108,12 +1107,12 @@ Transform:
   m_GameObject: {fileID: 8058044819662067725}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0.75}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.14577, y: 1.14577, z: 1.14577}
   m_Children:
   - {fileID: 8058044819551641277}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
 --- !u!1 &8058044819756968251
 GameObject:
   m_ObjectHideFlags: 0

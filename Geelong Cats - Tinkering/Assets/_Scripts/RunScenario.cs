@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class RunScenario : MonoBehaviour
 {
 
@@ -10,13 +11,23 @@ public class RunScenario : MonoBehaviour
     public ScenarioCreation_UI ScenarioCreation;
     public ScenarioCreation_Function ScenarioLoader;
 
-
+    public bool IsScenarioRunning;
+    public Dropdown QueueDropdown;
+    public Button AddScenarioBtn;
+    public Toggle randomiseToggle;
+    public Button RunQueue;
+    public GameObject ScenarioLookupFeedback;
+    public GameObject QueueText;
+        public Button ResetQueue;
 
     public Dropdown ScenarioDropdown;
     public Button SelectButton;
     public int scenarioNumber;
+    public int ScenarioIndex;
     public GameObject PlayScenarioMenu;
     public GameObject ViewFieldMenu;
+    public GameObject QueueMenu;
+    public List<int> ScenarioOnQueue = new List<int>();
     public Button QueueScenarios;
     public Button PlayScenarios;
     public Button MainMenu;
@@ -35,9 +46,14 @@ public class RunScenario : MonoBehaviour
         QueueScenarios.onClick.AddListener(QueueScenarioMenu);
         PlayScenarios.onClick.AddListener(LoadScenario);
         MainMenu.onClick.AddListener(OpenMainMenu);
+        AddScenarioBtn.onClick.AddListener(SelectScenarioToAdd);
         //add dropdown option
         ScenarioDropdown.ClearOptions();
         ScenarioDropdown.AddOptions(ScenarioCreation.scenarios);
+        QueueDropdown.ClearOptions();
+        QueueDropdown.AddOptions(ScenarioCreation.scenarios
+            );
+
 
     }
 
@@ -54,7 +70,9 @@ public class RunScenario : MonoBehaviour
 
     private void QueueScenarioMenu()
     {
-        throw new NotImplementedException();
+        QueueMenu.SetActive(true);
+        LoadScenarioMenu.SetActive(false);
+
     }
 
     private void LoadScenario()
@@ -67,6 +85,51 @@ public class RunScenario : MonoBehaviour
         
     }
 
+    public void AddScenarioToQueue(int _ScenarioNumber, bool scenarioDetected)
+    {
+        if (scenarioDetected)
+        {
+            ScenarioOnQueue.Add(_ScenarioNumber);
+            string ScenarioList = "Addded Scenario:";
+            string temp="";
+           for (int i = 0; i < ScenarioOnQueue.Count; i++)
+           {
+                int ScenarioTemp = ScenarioOnQueue[i] + 1;
+                temp=temp + "\n"+ "Scenario " + ScenarioTemp;
+           }
+
+            ScenarioList = ScenarioList + temp;
+
+            QueueText.GetComponent<TextMeshProUGUI>().
+              SetText(ScenarioList);
+        }
+        else
+        {
+            StartCoroutine(FeedbackCourutine(_ScenarioNumber));
+
+        }
+
+
+    }
+
+    IEnumerator FeedbackCourutine(int _ScenarioNumber)
+    {
+        ScenarioLookupFeedback.SetActive(true);
+        int scenarioTemp = scenarioNumber + 1;
+        ScenarioLookupFeedback.GetComponent<TextMeshProUGUI>().
+              SetText("Scenario" + scenarioTemp.ToString() + " is not existed.");
+        yield return new WaitForSeconds(3);
+
+        ScenarioLookupFeedback.SetActive(false);
+
+    }
+
+    private void SelectScenarioToAdd()
+    {
+        scenarioNumber = QueueDropdown.value;
+        ScenarioLoader.ScenarioNumber = scenarioNumber;
+        ScenarioLoader.ScenarioLookup(ScenarioLoader.ScenarioNumber);
+    }
     private void SelectScenarioToRun()
     {
         scenarioNumber = ScenarioDropdown.value;
@@ -75,9 +138,32 @@ public class RunScenario : MonoBehaviour
         
     }
 
+    
+
+    public void RunThisQueue()
+    {
+        //first check if the current index is bigger than total scenario in the list or not
+
+        if(ScenarioIndex<= ScenarioOnQueue.Count)
+        {
+            scenarioNumber = ScenarioOnQueue[ScenarioIndex];
+            ScenarioLoader.ScenarioNumber = scenarioNumber;
+            ScenarioLoader.LoadScenario(ScenarioLoader.ScenarioNumber);
+            IsScenarioRunning = true;
+            ScenarioIndex++;//add one for the next run
+        }
+        else
+        {
+            Debug.Log("All scenario has finished");
+        }
+
+    }
     // Update is called once per frame
     void Update()
     {
-        
+        if (IsScenarioRunning == true)
+        {
+            //check when it's finished running; and run the queue again
+        }
     }
 }

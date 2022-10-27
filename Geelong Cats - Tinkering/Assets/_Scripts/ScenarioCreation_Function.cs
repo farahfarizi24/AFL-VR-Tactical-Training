@@ -6,10 +6,10 @@ using UnityEngine.UI;
 using com.DU.CE.AI;
 using System.Xml.Serialization;
 using System.IO;
-using com.DU.CE.NET;
-using com.DU.CE.USER;
+
 using System;
 using System.Linq;
+
 
 public class ScenarioCreation_Function : MonoBehaviour
     {
@@ -21,6 +21,7 @@ public class ScenarioCreation_Function : MonoBehaviour
         private int AwayAICounter = 0;
         private int HomeAICounter = 0;
     string filePath;
+    public RunScenario RunScenarioScript;
     /// <summary>
     ///  Under is the list of variable to be stored for each AI
     ///
@@ -53,7 +54,7 @@ public class ScenarioCreation_Function : MonoBehaviour
         public Button AwayCreate;
         public Button SaveFinalPosition;
         public Button SaveInitialPosition;
-        public Button RunScenario;
+        public Button RunScenarioBTN;
         public Button BallTarget;
     public Button SaveEntireScenario;
 
@@ -69,7 +70,7 @@ public class ScenarioCreation_Function : MonoBehaviour
             AwayCreate.onClick.AddListener(CreateAwayAI);
             SaveFinalPosition.onClick.AddListener(delegate { SaveLocationAndPosition("Final"); });
             SaveInitialPosition.onClick.AddListener(delegate { SaveLocationAndPosition("Initial"); });
-            RunScenario.onClick.AddListener(QuickRunScenario);
+            RunScenarioBTN.onClick.AddListener(QuickRunScenario);
             BallTarget.onClick.AddListener(SetBallTarget);
             SaveEntireScenario.onClick.AddListener(delegate { SaveScenario(ScenarioNumber); });
 
@@ -334,6 +335,24 @@ public class ScenarioCreation_Function : MonoBehaviour
         analyseScenario(scenario);
 
         SetPlayers(scenario);
+    }
+
+    public void ScenarioLookup(int scenarioNum)
+    {
+        var scenarios = loadData();
+        var scenario = scenarios.scenarios[scenarioNum];
+        if (scenario == null)
+        {
+            Debug.Log("scenario" + scenarioNum.ToString() + " is not existed.");
+            RunScenarioScript.AddScenarioToQueue(scenarioNum, false);
+            return;
+        }
+        else
+        {
+            RunScenarioScript.AddScenarioToQueue(scenarioNum, true);
+            Debug.Log("scenario" + scenarioNum.ToString() + " is existed");
+            return;
+        }
     }
 
     //This function analyse how many active players are present and load them into each avatar
