@@ -11,11 +11,12 @@ public class RunScenario : MonoBehaviour
     public ScenarioCreation_UI ScenarioCreation;
     public ScenarioCreation_Function ScenarioLoader;
 
+    public bool IsQueueOn;
     public bool IsScenarioRunning;
     public Dropdown QueueDropdown;
     public Button AddScenarioBtn;
     public Toggle randomiseToggle;
-    public Button RunQueue;
+    public Button RunQueueBtn;
     public GameObject ScenarioLookupFeedback;
     public GameObject QueueText;
         public Button ResetQueue;
@@ -47,6 +48,8 @@ public class RunScenario : MonoBehaviour
         PlayScenarios.onClick.AddListener(LoadScenario);
         MainMenu.onClick.AddListener(OpenMainMenu);
         AddScenarioBtn.onClick.AddListener(SelectScenarioToAdd);
+        RunQueueBtn.onClick.AddListener(RunQueue);
+
         //add dropdown option
         ScenarioDropdown.ClearOptions();
         ScenarioDropdown.AddOptions(ScenarioCreation.scenarios);
@@ -57,6 +60,7 @@ public class RunScenario : MonoBehaviour
 
     }
 
+ 
     private void OpenMainMenu()
     {
         ViewFieldMenu.SetActive(true);
@@ -138,26 +142,29 @@ public class RunScenario : MonoBehaviour
         
     }
 
-    
 
-    public void RunThisQueue()
+    public void RunQueue()
     {
+
         //first check if the current index is bigger than total scenario in the list or not
 
-        if(ScenarioIndex<= ScenarioOnQueue.Count)
+        if (ScenarioIndex < ScenarioOnQueue.Count)
         {
+            QueueMenu.SetActive(false);
             scenarioNumber = ScenarioOnQueue[ScenarioIndex];
             ScenarioLoader.ScenarioNumber = scenarioNumber;
             ScenarioLoader.LoadScenario(ScenarioLoader.ScenarioNumber);
             IsScenarioRunning = true;
             ScenarioIndex++;//add one for the next run
+            IsQueueOn = true;
         }
         else
         {
+            IsQueueOn = false;
             Debug.Log("All scenario has finished");
         }
-
     }
+  
     // Update is called once per frame
     void Update()
     {

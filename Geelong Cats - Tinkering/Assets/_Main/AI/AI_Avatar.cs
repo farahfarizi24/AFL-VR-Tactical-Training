@@ -114,9 +114,10 @@ namespace com.DU.CE.AI
                     }
                    else if (state == "Final")
                     {
-                       NavMeshCount = true;
+                        state = "";
+                        NavMeshCount = true;
                      gameObject.transform.eulerAngles = AvatarRotation[1];
-                      state = "";
+                      
 
              }
 
@@ -277,10 +278,11 @@ namespace com.DU.CE.AI
             m_navMeshAgent.SetDestination(AvatarPosition[1]);
             m_navMeshAgent.isStopped = false;
             Debug.Log("Setting final position");
-           
+            
             NavMeshCount = false;
-
             state = "Final";
+            StartCoroutine(WaitForNavmeshToStart());
+          
            // StartCoroutine(WaitForNavmeshToStart());
         }
 

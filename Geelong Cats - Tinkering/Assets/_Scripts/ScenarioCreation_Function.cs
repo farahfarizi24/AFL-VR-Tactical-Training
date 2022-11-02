@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using com.DU.CE.AI;
 using System.Xml.Serialization;
 using System.IO;
-
+using TMPro;
 using System;
 using System.Linq;
 
@@ -14,6 +14,7 @@ using System.Linq;
 public class ScenarioCreation_Function : MonoBehaviour
     {
     [SerializeField]private int IsPlayerReady = 0;
+    public bool ScenarioCompletedToggle = false;
     public bool ScenarioRunToggle = false;
         public SOC_AI AISock = null;
         public Transform HomeTeamLocation = null;
@@ -482,7 +483,7 @@ public class ScenarioCreation_Function : MonoBehaviour
             playerObject.GetComponent<INT_ILinkedPinObject>().SetInitPosition();
             AwayAICounter += 1;
             AIObject.Add(playerObject);
-
+            
         }
         ScenarioRunToggle = true;
        
@@ -490,7 +491,7 @@ public class ScenarioCreation_Function : MonoBehaviour
     }
 
 
-    #region Scenario Play
+
 
     private void Update()
     {
@@ -499,9 +500,82 @@ public class ScenarioCreation_Function : MonoBehaviour
             CheckIfAIReady();
             //you want to check index on whether they have finished the prep or not
         }
+        if (ScenarioCompletedToggle)
+        {
+            CheckIfScenarioFinished();
+        }
+
     }
     //When run button is pressed
 
+
+    #region Scenario Run Methods
+    private void CheckIfScenarioFinished()
+    {
+        IsPlayerReady = 0;
+
+
+        for (int i = 0; i < AIObject.Count(); i++)
+        {
+            if (AIObject[i].GetComponent<AI_Avatar>().NavMeshCount == true)
+            {
+                IsPlayerReady = IsPlayerReady + 1;
+            }
+
+
+        }
+
+        if (IsPlayerReady == AIObject.Count())
+        {
+            ScenarioCompletedToggle=false;
+            StartCoroutine(PerformFinalCountdown());
+           
+         
+           
+        }
+
+    }
+
+    //This method is run to put the final timer before scenario is finished
+
+    float ActionCountdown=10;
+    public GameObject TimerTxt;
+    
+    IEnumerator PerformFinalCountdown()
+    {
+        if (TimerTxt.activeSelf != true)
+        {
+
+            TimerTxt.SetActive(true);
+            for (ActionCountdown = 10; ActionCountdown > 0; ActionCountdown -= Time.deltaTime)
+            {
+                string text = "Time left: " + ActionCountdown;
+                TimerTxt.GetComponent<TextMeshProUGUI>().
+             SetText(text);
+
+                yield return null;
+            }
+
+            AnalysePerformance();
+            TimerTxt.SetActive(false);
+        }
+    }
+
+    private void AnalysePerformance()
+    {
+        Debug.Log("Is ball being held by correct person");
+
+        // if ball is being held by correct person put a prompt sasying that they do well
+        //else tell them which one is good give them ability to replay while having the trail and highlight on
+
+        //This run the next in line for the queue;
+       
+        RunScenarioScript.RunQueue();
+    }
+
+    #endregion
+
+    #region Initial position methods
     private void CheckIfAIReady()
     {
         IsPlayerReady = 0;
@@ -530,6 +604,7 @@ public class ScenarioCreation_Function : MonoBehaviour
     IEnumerator StartScenarioCoroutine()
     {
         yield return new WaitForSeconds(5);
+        Debug.Log("Start Scenario Coroutine");
         foreach (var player in AIObject)
         {
             var playerObject = GameObject.Find(player.name);
@@ -537,22 +612,10 @@ public class ScenarioCreation_Function : MonoBehaviour
          OnChangePlayerPosition?.Invoke(playerObject, player.GetComponent<AI_Avatar>().AvatarPosition[1], 
              player.GetComponent<AI_Avatar>().AvatarRotation[1]);
             playerObject.GetComponent<INT_ILinkedPinObject>().SetFinalPosition();
-          //  HomeAICounter += 1;
-           // AIObject.Add(playerObject);
+      
         }
-        /*
-        for (int i = 0; i < AIObject.Count(); i++)
-        {
-            Debug.Log("COURUTINE LOOP IS RUN ");
-            OnChangePlayerPosition?.Invoke(AIObject[i], AIObject[i].GetComponent<AI_Avatar>().AvatarPosition[1],
-                AIObject[i].GetComponent<AI_Avatar>().AvatarRotation[1]);
-
-
-
-
-            AIObject[i].GetComponent<INT_ILinkedPinObject>().SetFinalPosition();
-
-        }*/
+        ScenarioCompletedToggle = true;
+  
 
         
         
