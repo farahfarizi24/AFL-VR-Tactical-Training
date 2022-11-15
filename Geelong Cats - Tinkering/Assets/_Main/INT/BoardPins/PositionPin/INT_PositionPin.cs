@@ -8,11 +8,13 @@ namespace com.DU.CE.INT
 {
     public class INT_PositionPin : XRBaseInteractable, INT_IBoardLinkedPin
     {
+
         [SerializeField] private SOC_FieldBoard m_BoardSock = null;
         [Space]
         [SerializeField] private GameObject m_pinHead = null;
         [SerializeField] private GameObject m_pinMesh = null;
         [SerializeField] private GameObject m_pinArrow = null;
+        public GameObject PinBody = null;
         [Space]
         [SerializeField] private TextMeshPro m_tmpTeamNumber = null;
         [SerializeField] private MeshRenderer[] m_meshRenders = null;
@@ -37,8 +39,8 @@ namespace com.DU.CE.INT
         private Vector3 screenPoint;
         private Vector3 offset;
         private GameObject CameraObject;
-
-
+        public ScenarioCreation_Function ScenarioScript = null;
+        public GameObject ScenarioS;
         protected override void Awake()
         {
             base.Awake();
@@ -50,9 +52,10 @@ namespace com.DU.CE.INT
 
             m_tmpTeamNumber.enabled = false;
             m_pinArrow.SetActive(false);
-           
-           // m_linkedObject.SetRelativeYRotation(m_pinArrow.transform.localRotation.y);
-         
+        
+          //  ScenarioScript = GameObject.FindGameObjectWithTag("CoachUI").GetComponent<ScenarioCreation_Function>();
+            // m_linkedObject.SetRelativeYRotation(m_pinArrow.transform.localRotation.y);
+
         }
 
         
@@ -69,6 +72,7 @@ namespace com.DU.CE.INT
 
         private void OnMouseOver()
         {
+            ScenarioS = GameObject.FindGameObjectWithTag("CoachUI");
             m_pinArrow.transform.localEulerAngles = new Vector3(0.0f, m_linkedObject.GetRelativeYRotation(), 0.0f);
             m_outlineComponent.enabled = true;
             m_tmpTeamNumber.enabled = true;
@@ -76,11 +80,14 @@ namespace com.DU.CE.INT
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                
+                    m_outlineComponent.OutlineColor = Color.green;
+                    m_pinHead.transform.localPosition += (0.015f * Vector3.up);
+                    m_pinArrow.SetActive(true);
+                    isRotating = true;
+               
                 //activate it for rotation
-                m_outlineComponent.OutlineColor = Color.green;
-                m_pinHead.transform.localPosition += (0.015f * Vector3.up);
-                m_pinArrow.SetActive(true);
-                isRotating = true;
+            
             }
             }
 
@@ -167,48 +174,77 @@ namespace com.DU.CE.INT
 
         private void OnMouseDown()
         {
+            ScenarioScript = GameObject.FindGameObjectWithTag("CoachUI").GetComponent<ScenarioCreation_Function>();
+            if (ScenarioScript.BallTargetting == true)
+            {
+                return;
+
+            }
+            else
+            {
+                m_outlineComponent.OutlineColor = Color.green;
+                m_pinHead.transform.localPosition += (0.015f * Vector3.up);
+                m_pinArrow.SetActive(true);
+                //get camera
+                GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+                screenPoint = camera.GetComponent<Camera>().WorldToScreenPoint(gameObject.transform.position);
+                offset = gameObject.transform.position - camera.GetComponent<Camera>().ScreenToWorldPoint
+                    (new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+            }
            
-            m_outlineComponent.OutlineColor = Color.green;
-            m_pinHead.transform.localPosition += (0.015f * Vector3.up);
-            m_pinArrow.SetActive(true); 
-            //get camera
-            GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-            screenPoint = camera.GetComponent<Camera>().WorldToScreenPoint(gameObject.transform.position);
-            offset = gameObject.transform.position - camera.GetComponent<Camera>().ScreenToWorldPoint
-                (new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+           
 
         }
 
         private void OnMouseDrag()
         {
-            ActionBeingPerformed = true;
-            Vector3 currentscreenpoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-            GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-            Vector3 currentPositon = camera.GetComponent<Camera>().ScreenToWorldPoint(currentscreenpoint) + offset;
-            transform.position = currentPositon;
+            if (ScenarioScript.BallTargetting == true)
+            {
+                return;
+
+            }
+            else
+            {
+                ActionBeingPerformed = true;
+                Vector3 currentscreenpoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+                GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+                Vector3 currentPositon = camera.GetComponent<Camera>().ScreenToWorldPoint(currentscreenpoint) + offset;
+                transform.position = currentPositon;
+            }
+
+          
         }
 
         private void OnMouseUp()
         { // Change outline to highlight colour
-            m_outlineComponent.OutlineColor = Color.yellow;
-            m_pinHead.transform.localPosition -= (0.015f * Vector3.up);
-            m_pinArrow.SetActive(false);
-            ActionBeingPerformed = false;
-            m_previousHandPosition = Vector2.zero;
-
-            // Remove reference of interactor
-            m_xrInteractor = null;
-
-            // Update field point
-            if (!m_BoardSock.GetBoardToFieldPosition(m_pinHead.transform, out m_fieldPoint))
+            if (ScenarioScript.BallTargetting == true)
             {
-                Debug.LogError("#PositionPin#--------------RaycastFailed");
-                return;
+                m_linkedObject.SetBallReceiver(true);
+                ScenarioScript.SetBallTarget();
+                 
             }
-            //Debug.Log("--------------------" + m_fieldPoint);
+            else
+            {
+                m_outlineComponent.OutlineColor = Color.yellow;
+                m_pinHead.transform.localPosition -= (0.015f * Vector3.up);
+                m_pinArrow.SetActive(false);
+                ActionBeingPerformed = false;
+                m_previousHandPosition = Vector2.zero;
 
-            m_linkedObject.SetNavAgentDestination(m_fieldPoint);
-                  m_linkedObject.SetRelativeYRotation(m_pinArrow.transform.localRotation.y);
+                // Remove reference of interactor
+                m_xrInteractor = null;
+
+                // Update field point
+                if (!m_BoardSock.GetBoardToFieldPosition(m_pinHead.transform, out m_fieldPoint))
+                {
+                    Debug.LogError("#PositionPin#--------------RaycastFailed");
+                    return;
+                }
+                //Debug.Log("--------------------" + m_fieldPoint);
+
+                m_linkedObject.SetNavAgentDestination(m_fieldPoint);
+                m_linkedObject.SetRelativeYRotation(m_pinArrow.transform.localRotation.y);
+            }
         }
         protected override void OnHoverExited(HoverExitEventArgs args)
         {
@@ -309,6 +345,13 @@ namespace com.DU.CE.INT
         {
             m_linkedObject = linkedObject.GetComponent<INT_ILinkedPinObject>();
             m_linkedObject.LinkPin(this);
+        }
+
+        void INT_IBoardLinkedPin.SetPinColour(Color32 color)
+        {
+            var Body = PinBody.GetComponent<MeshRenderer>();
+            Body.material.color = color;
+           // PinBody.GetComponent<MeshRenderer>().SetColor("_Color", color);
         }
 
         void INT_IBoardLinkedPin.UpdateForLoad(Vector3 _destinationPosition, Vector3 destinationRotation)

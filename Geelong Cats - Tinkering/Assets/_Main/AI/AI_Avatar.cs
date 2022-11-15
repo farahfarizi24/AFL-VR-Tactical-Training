@@ -27,7 +27,10 @@ namespace com.DU.CE.AI
         [SerializeField] private GameObject m_uiElementsParent = null;
         [Space]
         [SerializeField] private TextMeshPro m_numberText = null;
-        [SerializeField] private Outlinable m_outline = null;
+        //[SerializeField] private Outlinable m_outline = null;
+        public Outlinable OutlineScript;
+       // public GameObject OutlineableObject=null;
+       
         public bool NavMeshCount;//to see when the navmesh is finish
         private bool NavMeshIsRunning;
         private int m_teamNumber = 0;
@@ -36,8 +39,10 @@ namespace com.DU.CE.AI
         //public List<Vector3> Rotation = new List<Vector3>();
         private float m_rotationY = 0f;
         public string state = "";
+        public bool BallReceiver = false;
         #endregion
 
+        
         public int M_PlayerNumber { get => m_teamNumber; }
         public ETEAM M_Team { get => m_team; }
 
@@ -92,6 +97,13 @@ namespace com.DU.CE.AI
             //base.OnRealtimeModelReplaced(previousModel, currentModel);
         }
 
+        void Start()
+        {
+            //  m_outline = OutlineableObject.GetComponent<Outlinable>();
+        
+          //  m_outline.enabled = true;
+          //  m_outline.OutlineColor = Color.yellow;
+        }
         void Update()
 
         {
@@ -130,6 +142,9 @@ namespace com.DU.CE.AI
 
             }
         }
+
+        
+
         public void ChangeNetworkActivation(bool _toggle)
         {
             model.isActivated = _toggle;
@@ -175,15 +190,15 @@ namespace com.DU.CE.AI
         {
             if (value)
             {
-                m_outline.enabled = true;
-                m_outline.OutlineColor = Color.yellow;
+            //    m_outline.enabled = true;
+             //   m_outline.OutlineColor = Color.yellow;
                 m_numberText.color = Color.yellow;
 
                 LVL_SoundManager.PlayMusic("AIHover");
             }
             else
             {
-                m_outline.enabled = false;
+               // m_outline.enabled = false;
                 m_numberText.color = Color.white;
             }
         }
@@ -195,13 +210,13 @@ namespace com.DU.CE.AI
 
             if (value)
             {
-                m_outline.enabled = true;
-                m_outline.OutlineColor = Color.green;
+                //m_outline.enabled = true;
+              //  m_outline.OutlineColor = Color.green;
                 m_numberText.color = Color.green;
             }
             else
             {
-                m_outline.enabled = false;
+              //  m_outline.enabled = false;
                 m_numberText.color = Color.white;
 
                 m_linkedPin.UpdatePinPosition();
@@ -210,7 +225,20 @@ namespace com.DU.CE.AI
     
         #endregion
 
+        public void ToggleHighlights()
+        {
+            if(OutlineScript.enabled == false)
+            {
+                OutlineScript.enabled = true;  
+                OutlineScript.OutlineColor = Color.yellow;
+            }
+            else
+            {
 
+                OutlineScript.enabled = false;
+            }
+           
+        }
         /// <summary>
         /// This method is accessed by the spawnner to initialize the AI's
         /// team and team number
@@ -249,7 +277,32 @@ namespace com.DU.CE.AI
 
            
         }
+        public void ResetBallReceiver()
+        {
+            Debug.Log("RESET BALL RECEIVER");
+            BallReceiver = false;
+            Color32 col = new Color32(255, 255, 255, 255);
 
+            m_linkedPin.SetPinColour(col);
+        }
+        void INT_ILinkedPinObject.SetBallReceiver(bool status)
+        {
+            BallReceiver = status;
+            Color32 col;
+            if (BallReceiver == false)
+            {
+
+                col = new Color32(255,255,255,255);
+                
+                m_linkedPin.SetPinColour(col);
+            }
+            else
+            {
+                col = new Color32(231, 49, 203, 255);
+                m_linkedPin.SetPinColour(col);
+            }
+        }
+        
         void INT_ILinkedPinObject.SetInitPosition()
         {
           

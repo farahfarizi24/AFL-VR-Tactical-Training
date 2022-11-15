@@ -26,6 +26,8 @@ TagManager:
   - CoachObjectContainer
   - HomeSpawnLoc
   - AwaySpawnLoc
+  - CoachUI
+  - PositionPin
   layers:
   - Default
   - TransparentFX

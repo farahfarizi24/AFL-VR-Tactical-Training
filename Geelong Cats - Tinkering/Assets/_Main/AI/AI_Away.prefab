@@ -182,11 +182,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6774628830849393125, guid: 847e8ed8699dcef4c9e80eaebab0349b,
         type: 3}
-      propertyPath: m_outline
-      value: 
-      objectReference: {fileID: 7463038862664896988}
-    - target: {fileID: 6774628830849393125, guid: 847e8ed8699dcef4c9e80eaebab0349b,
-        type: 3}
       propertyPath: m_navMeshAgent
       value: 
       objectReference: {fileID: 5459347472915209061}
@@ -335,18 +330,6 @@ SkinnedMeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 2001093025860093084}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7463038862664896988 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8959706740026545472, guid: 847e8ed8699dcef4c9e80eaebab0349b,
-    type: 3}
-  m_PrefabInstance: {fileID: 2001093025860093084}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6355d2d83aea34bafac709ac74bd9a51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5000743151592706290 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6819429395527210094, guid: 847e8ed8699dcef4c9e80eaebab0349b,

@@ -160,6 +160,8 @@ public class RunScenario : MonoBehaviour
         }
         else
         {
+            QueueMenu.SetActive(true);
+            
             IsQueueOn = false;
             Debug.Log("All scenario has finished");
         }

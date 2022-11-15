@@ -58,7 +58,7 @@ public class ScenarioCreation_Function : MonoBehaviour
         public Button RunScenarioBTN;
         public Button BallTarget;
     public Button SaveEntireScenario;
-
+    public bool BallTargetting;
         // Start is called before the first frame update
         void Start()
     {
@@ -75,14 +75,36 @@ public class ScenarioCreation_Function : MonoBehaviour
             BallTarget.onClick.AddListener(SetBallTarget);
             SaveEntireScenario.onClick.AddListener(delegate { SaveScenario(ScenarioNumber); });
 
+        BallTargetting = false;
 
 
         }
 
-        private void SetBallTarget()
+        public void SetBallTarget()
         {
-            throw new NotImplementedException();
+        if (BallTargetting != true)
+        {
+            for (int i = 0; i < AIObject.Count(); i++)
+            {Deb
+                AIObject[i].GetComponent<AI_Avatar>().ResetBallReceiver();
+            }
+            BallTargetting = true;
+            BallTarget.GetComponent<Image>().color = new Color32(0,0,0,255);
         }
+        else
+        {
+            BallTargetting = false;
+            BallTarget.GetComponent<Image>().color = new Color32(0,43,92,255);
+        }
+        }
+
+    public void ResetBallTarget()
+    {
+        for (int i=0; i< AIObject.Count(); i++)
+        {
+            AIObject[i].GetComponent<AI_Avatar>().ResetBallReceiver();
+        }
+    }
 
         public void QuickRunScenario()
         {
@@ -379,22 +401,22 @@ public class ScenarioCreation_Function : MonoBehaviour
         {
             var playerObject = GameObject.Find(player.name);
 
-            //OnChangePlayerPosition?.Invoke(playerObject, player.position[0], player.rotation[0]);
             playerObject.GetComponent<INT_ILinkedPinObject>().SetScenarioTransform(
                 player.position[0], player.rotation[0], player.position[1], player.rotation[1]
                 );
-          //  playerObject.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(player.position[0]);
+
+            playerObject.GetComponent<AI_Avatar>().BallReceiver = player.BallReceiver;
+
 
         }
         foreach (var player in scenario.awayplayers)
         {
             var playerObject = GameObject.Find(player.name);
-          //  OnChangePlayerPosition?.Invoke(playerObject, player.position[0], player.rotation[0]);
             playerObject.GetComponent<INT_ILinkedPinObject>().SetScenarioTransform(
           player.position[0], player.rotation[0], player.position[1], player.rotation[1]
+
          );
-            // playerObject.GetComponent<INT_ILinkedPinObject>().SetTransform(player.position[0], player.rotation[0]);
-          //  playerObject.GetComponent<INT_ILinkedPinObject>().SetNavAgentDestination(player.position[0]);
+            playerObject.GetComponent<AI_Avatar>().BallReceiver = player.BallReceiver;
         }
     }
 

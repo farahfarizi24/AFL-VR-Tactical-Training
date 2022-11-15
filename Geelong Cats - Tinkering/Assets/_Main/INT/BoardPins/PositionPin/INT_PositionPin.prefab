@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 670224309865224971, guid: 3d5c4029e4c88fe4c963ddd79cf505e5, type: 3}
+  - {fileID: 2100000, guid: 885a153fff5dc104f82b212a7ffdbafe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 898664539883964109}
   m_Layer: 12
   m_Name: INT_PositionPin
-  m_TagString: Untagged
+  m_TagString: PositionPin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -479,6 +479,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4096
+  m_InteractionLayers:
+    m_Bits: 1
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -490,6 +493,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -535,10 +544,13 @@ MonoBehaviour:
   m_pinHead: {fileID: 4052016649498678934}
   m_pinMesh: {fileID: 6068685192285870720}
   m_pinArrow: {fileID: 6551170755266551409}
+  PinBody: {fileID: 1405135534832089018}
   m_tmpTeamNumber: {fileID: 530843656222363001}
   m_meshRenders:
   - {fileID: 6972030311663626390}
   - {fileID: 612761278084961903}
+  ScenarioScript: {fileID: 0}
+  ScenarioS: {fileID: 0}
 --- !u!114 &898664539883964109
 MonoBehaviour:
   m_ObjectHideFlags: 0

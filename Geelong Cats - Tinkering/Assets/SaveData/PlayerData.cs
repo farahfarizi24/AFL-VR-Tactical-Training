@@ -14,6 +14,8 @@ public class PlayerData
     [XmlElement("rotation")]
     public List <Vector3 >rotation = new List<Vector3>();
 
+    [XmlElement("BallReceiver")]
+    public bool BallReceiver;
     /// <summary>
     /// Haven't been implemented
     /// </summary>
@@ -30,6 +32,7 @@ public class PlayerData
     public void getDataFromPlayer(GameObject player)
     {//Now you want to make sure the player has a list of position and rotation
 
+        BallReceiver = player.GetComponent<AI_Avatar>().BallReceiver;
         for(int i = 0; i < 2; i++)
         {
             position.Add(player.GetComponent<AI_Avatar>().AvatarPosition[i]);
