@@ -22,7 +22,7 @@ public class ScenarioCreation_UI : MonoBehaviour
     //this one is the one being shown during field view
     public Button ActivateUIButton;
     public Dropdown ScenarioSelector;
-
+ 
     [SerializeField] private int state;//1 = create nnew scenario, 2 = load
     public GameObject ScenarioMenuObj;
     public GameObject SelectScenarioMenuObj;
@@ -100,6 +100,9 @@ public class ScenarioCreation_UI : MonoBehaviour
             boardObject.transform.localPosition = new Vector3(0.0f, 0.0f,-3.0f);
             //create scenario according to the current  index, so need to pass the value of which index it is
             //Also show the menu for scenario creation
+            //load Scenario
+            GetComponent<ScenarioCreation_Function>().LoadScenario(scenario);
+           // GetComponent<ScenarioCreation_Function>().SetBallHighlight();
             state = 0;
         }
      

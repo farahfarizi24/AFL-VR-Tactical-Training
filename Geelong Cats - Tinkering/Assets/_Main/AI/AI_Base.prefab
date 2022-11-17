@@ -759,9 +759,9 @@ MonoBehaviour:
   m_uiElementsParent: {fileID: 3787117773356222260}
   m_numberText: {fileID: 9058727342049093933}
   OutlineScript: {fileID: 6990851309521536129}
-  OutlineableObject: {fileID: 2480760656906927810}
   NavMeshCount: 0
   state: 
+  BallReceiver: 0
   AvatarPosition: []
   AvatarRotation: []
 --- !u!114 &8608479979525973112
@@ -3818,7 +3818,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2480760656906927810}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6355d2d83aea34bafac709ac74bd9a51, type: 3}
   m_Name: 

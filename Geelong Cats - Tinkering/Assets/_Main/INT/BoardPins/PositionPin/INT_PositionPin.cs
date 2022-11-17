@@ -221,6 +221,7 @@ namespace com.DU.CE.INT
             {
                 m_linkedObject.SetBallReceiver(true);
                 ScenarioScript.SetBallTarget();
+                m_linkedObject.SetHighlight();
                  
             }
             else

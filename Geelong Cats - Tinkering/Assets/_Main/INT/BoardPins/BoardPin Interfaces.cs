@@ -40,7 +40,8 @@ namespace com.DU.CE.INT
         void SetRelativeYRotation(float rotY);
         float GetRelativeYRotation();
         void SetBallReceiver(bool status);
-
+        void SetHighlight();
+        void ResetHighlight();
 
         void SetFinalPosition();
    

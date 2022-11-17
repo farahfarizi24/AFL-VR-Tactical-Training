@@ -6433,6 +6433,7 @@ MonoBehaviour:
   AIObject: []
   ScenarioNumber: 0
   BallTargetAINum: 0
+  ScenarioEditorObj: {fileID: 392913909681640987}
   HomeCreate: {fileID: 6692597472044874537}
   AwayCreate: {fileID: 8304619305215526613}
   SaveFinalPosition: {fileID: 958511645787103406}

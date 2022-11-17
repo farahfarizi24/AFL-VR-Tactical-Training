@@ -47,11 +47,11 @@ public class ScenarioCreation_Function : MonoBehaviour
         public int BallTargetAINum;//denotes which AI is the target for final ball position,
                                    //this will be counted the same with their Counter number
 
-
-        /// <summary>
-        /// Button 
-        /// </summary>
-        public Button HomeCreate;
+    public GameObject ScenarioEditorObj;
+    /// <summary>
+    /// Button 
+    /// </summary>
+    public Button HomeCreate;
         public Button AwayCreate;
         public Button SaveFinalPosition;
         public Button SaveInitialPosition;
@@ -84,39 +84,91 @@ public class ScenarioCreation_Function : MonoBehaviour
         {
         if (BallTargetting != true)
         {
-            for (int i = 0; i < AIObject.Count(); i++)
-            {Deb
-                AIObject[i].GetComponent<AI_Avatar>().ResetBallReceiver();
-            }
+            /*  for (int i = 0; i < AIObject.Count(); i++)
+              {
+                  AIObject[i].GetComponent<AI_Avatar>().ResetBallReceiver();
+              }*/
+            ResetBallTarget();
             BallTargetting = true;
             BallTarget.GetComponent<Image>().color = new Color32(0,0,0,255);
         }
         else
-        {
+        {//remove all the ball highlight from other players
+
+            ResetPlayerHighlight();
             BallTargetting = false;
             BallTarget.GetComponent<Image>().color = new Color32(0,43,92,255);
         }
         }
 
+    public void ResetPlayerHighlight()
+    {
+        var homeplayers = GameObject.FindGameObjectsWithTag("Home");
+        var awayPlayers = GameObject.FindGameObjectsWithTag("Away");
+
+        foreach (var player in homeplayers)
+        {
+            player.GetComponent<AI_Avatar>().UnsetHighlight();
+        }
+        foreach (var player in awayPlayers)
+        {
+            player.GetComponent<AI_Avatar>().UnsetHighlight();
+        }
+    }
+
+    public void SetPlayerHighlight()
+    {
+        var homeplayers = GameObject.FindGameObjectsWithTag("Home");
+        var awayPlayers = GameObject.FindGameObjectsWithTag("Away");
+
+        foreach (var player in homeplayers)
+        {
+            
+            if (player.GetComponent<AI_Avatar>().BallReceiver == true)
+            {
+                player.GetComponent<AI_Avatar>().UnlinkedSetHighlight();
+                Debug.Log("Set highlight");
+            }
+        }
+        foreach (var player in awayPlayers)
+        {
+          
+            if (player.GetComponent<AI_Avatar>().BallReceiver == true)
+            {
+                player.GetComponent<AI_Avatar>().UnlinkedSetHighlight();
+                Debug.Log("Set highlight");
+            }
+        }
+    }
     public void ResetBallTarget()
     {
-        for (int i=0; i< AIObject.Count(); i++)
+        var homeplayers = GameObject.FindGameObjectsWithTag("Home");
+        var awayPlayers = GameObject.FindGameObjectsWithTag("Away");
+
+        foreach(var player in homeplayers)
         {
-            AIObject[i].GetComponent<AI_Avatar>().ResetBallReceiver();
+            player.GetComponent<AI_Avatar>().ResetBallReceiver();
         }
+        foreach(var player in awayPlayers)
+        {
+            player.GetComponent<AI_Avatar>().ResetBallReceiver();
+        }
+      
     }
 
         public void QuickRunScenario()
         {
        
         LoadScenario(ScenarioNumber);
-        }
+        ScenarioRunToggle = true;
+
+    }
 
 
 
 
 
-        private void SaveLocationAndPosition(string state)
+    private void SaveLocationAndPosition(string state)
         {
 
             if (state == "Initial")
@@ -406,7 +458,10 @@ public class ScenarioCreation_Function : MonoBehaviour
                 );
 
             playerObject.GetComponent<AI_Avatar>().BallReceiver = player.BallReceiver;
-
+            if (ScenarioEditorObj.activeSelf == true)
+            {
+                SetPlayerHighlight();
+            }
 
         }
         foreach (var player in scenario.awayplayers)
@@ -417,6 +472,11 @@ public class ScenarioCreation_Function : MonoBehaviour
 
          );
             playerObject.GetComponent<AI_Avatar>().BallReceiver = player.BallReceiver;
+            if (ScenarioEditorObj.activeSelf == true)
+            {
+                SetPlayerHighlight();
+            }
+            
         }
     }
 
@@ -507,7 +567,8 @@ public class ScenarioCreation_Function : MonoBehaviour
             AIObject.Add(playerObject);
             
         }
-        ScenarioRunToggle = true;
+     //Uncomment to make scenario automatically being run
+      //  ScenarioRunToggle = true;
        
 
     }
@@ -653,7 +714,8 @@ public class ScenarioCreation_Function : MonoBehaviour
             Vector3 temp = new Vector3(AwayAICounter, AwayTeamLocation.position.y, AwayTeamLocation.position.z);
             AwayTeamLocation.position = temp;
             AISock.UIActivateAwayAI(AwayTeamLocation);
-        }
+      
+    }
 
         private void CreateHomeAI()
         {

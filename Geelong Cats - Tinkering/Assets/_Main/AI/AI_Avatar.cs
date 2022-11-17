@@ -190,7 +190,7 @@ namespace com.DU.CE.AI
         {
             if (value)
             {
-            //    m_outline.enabled = true;
+              OutlineScript.enabled = true;
              //   m_outline.OutlineColor = Color.yellow;
                 m_numberText.color = Color.yellow;
 
@@ -198,7 +198,7 @@ namespace com.DU.CE.AI
             }
             else
             {
-               // m_outline.enabled = false;
+              OutlineScript.enabled = false;
                 m_numberText.color = Color.white;
             }
         }
@@ -210,35 +210,62 @@ namespace com.DU.CE.AI
 
             if (value)
             {
-                //m_outline.enabled = true;
+               OutlineScript.enabled = true;
               //  m_outline.OutlineColor = Color.green;
                 m_numberText.color = Color.green;
             }
             else
             {
-              //  m_outline.enabled = false;
+              OutlineScript.enabled = false;
                 m_numberText.color = Color.white;
 
                 m_linkedPin.UpdatePinPosition();
             }
         }
-    
+
         #endregion
 
-        public void ToggleHighlights()
-        {
-            if(OutlineScript.enabled == false)
-            {
-                OutlineScript.enabled = true;  
-                OutlineScript.OutlineColor = Color.yellow;
-            }
-            else
-            {
 
-                OutlineScript.enabled = false;
-            }
-           
+
+        //////THis script below toggle the highlights ona nd off
+        ///
+        /// 
+        /// 
+
+        #region highlights
+
+        void INT_ILinkedPinObject.SetHighlight()
+        {
+            OutlineScript.enabled = true;
+            OutlineScript.OutlineColor = Color.yellow;
         }
+        void INT_ILinkedPinObject.ResetHighlight()
+        {
+            OutlineScript.enabled = false;
+        }
+
+        public void UnsetHighlight()
+        {
+            OutlineScript.enabled = false;
+        }
+        public void UnlinkedSetHighlight()
+        {
+            OutlineScript.OutlineColor = Color.yellow;
+            OutlineScript.enabled = true;
+            Color32 col = new Color32(231, 49, 203, 255);
+            m_linkedPin.SetPinColour(col);
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
+
         /// <summary>
         /// This method is accessed by the spawnner to initialize the AI's
         /// team and team number
