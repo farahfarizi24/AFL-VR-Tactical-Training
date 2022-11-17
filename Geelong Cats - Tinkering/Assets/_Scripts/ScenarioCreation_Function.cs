@@ -632,7 +632,8 @@ public class ScenarioCreation_Function : MonoBehaviour
             TimerTxt.SetActive(true);
             for (ActionCountdown = 10; ActionCountdown > 0; ActionCountdown -= Time.deltaTime)
             {
-                string text = "Time left: " + ActionCountdown;
+                string time = ActionCountdown.ToString("F1");
+                string text = "Time left: " + time;
                 TimerTxt.GetComponent<TextMeshProUGUI>().
              SetText(text);
 
@@ -646,14 +647,16 @@ public class ScenarioCreation_Function : MonoBehaviour
 
     private void AnalysePerformance()
     {
-        Debug.Log("Is ball being held by correct person");
-
+        Debug.Log("Is ball being held by incorrect person");
+        //Rerun the scenario with highlight
+        RunScenarioScript.RerunScenario();
+        SetPlayerHighlight();
         // if ball is being held by correct person put a prompt sasying that they do well
         //else tell them which one is good give them ability to replay while having the trail and highlight on
 
         //This run the next in line for the queue;
-       
-        RunScenarioScript.RunQueue();
+
+        // RunScenarioScript.RunQueue();
     }
 
     #endregion

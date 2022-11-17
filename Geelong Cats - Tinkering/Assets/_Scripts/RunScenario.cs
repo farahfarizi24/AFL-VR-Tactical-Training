@@ -139,10 +139,20 @@ public class RunScenario : MonoBehaviour
         scenarioNumber = ScenarioDropdown.value;
         ScenarioLoader.ScenarioNumber = scenarioNumber;
         ScenarioLoader.LoadScenario(ScenarioLoader.ScenarioNumber);
-        
+        ScenarioLoader.ScenarioRunToggle = true;
     }
 
-
+    public void RerunScenario()
+    {
+        QueueMenu.SetActive(false);
+        scenarioNumber = ScenarioOnQueue[ScenarioIndex-1];
+        ScenarioLoader.ScenarioNumber = scenarioNumber;
+        ScenarioLoader.LoadScenario(ScenarioLoader.ScenarioNumber);
+        ScenarioLoader.ScenarioRunToggle = true;
+        IsScenarioRunning = true;
+        //ScenarioIndex++;//add one for the next run
+        IsQueueOn = true;
+    }
     public void RunQueue()
     {
 
@@ -154,6 +164,7 @@ public class RunScenario : MonoBehaviour
             scenarioNumber = ScenarioOnQueue[ScenarioIndex];
             ScenarioLoader.ScenarioNumber = scenarioNumber;
             ScenarioLoader.LoadScenario(ScenarioLoader.ScenarioNumber);
+            ScenarioLoader.ScenarioRunToggle = true;
             IsScenarioRunning = true;
             ScenarioIndex++;//add one for the next run
             IsQueueOn = true;
