@@ -1,0 +1,12 @@
+These are instructions on how to install custom made materials into 3ds Max This is the material 
+(skin mental ray 2.mi) that is putted
+along with the zip file find it and copy it into these locations:
+
+If you are using 3ds Max versions 2010 or earlier:
+c:\Program Files\Autodesk\3ds Max ????\mentalray\shaders_autoload\include\
+
+If you are using 3ds Max versions 2011 or later: 
+c:\Program Files\Autodesk\3ds Max ????\mentalimages\shaders_autoload\mentalray\include\
+
+and if you are using max allong with Nvidia graphics card:
+C:\Program Files\Autodesk\3ds Max ????\NVIDIA\shaders_autoload\mentalray\include

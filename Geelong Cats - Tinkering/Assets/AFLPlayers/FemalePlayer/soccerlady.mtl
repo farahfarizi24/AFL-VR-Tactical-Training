@@ -1,0 +1,212 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 15.05.2019 15:30:31
+
+newmtl Material__105
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka Teeth_Col.jpg
+	map_Kd Teeth_Col.jpg
+	map_bump Teeth_Col.jpg
+	bump Teeth_Col.jpg
+
+newmtl Mouth_Gums
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka Teeth_Col.jpg
+	map_Kd Teeth_Col.jpg
+	map_bump Teeth_Col.jpg
+	bump Teeth_Col.jpg
+
+newmtl Material__106
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka Teeth_Col.jpg
+	map_Kd Teeth_Col.jpg
+	map_bump Teeth_Col.jpg
+	bump Teeth_Col.jpg
+
+newmtl Material__107
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka Eye_Col_Green.jpg
+	map_Kd Eye_Col_Green.jpg
+
+newmtl Material__108
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka Eye_Col_Green.jpg
+	map_Kd Eye_Col_Green.jpg
+
+newmtl Material__109
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.011765 0.011765 0.011765
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+
+newmtl Material__121
+	Ns 59.999996
+	Ni 1.500000
+	d 0.030000
+	Tr 0.970000
+	Tf 0.030000 0.030000 0.030000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.360000 0.360000 0.360000
+	Ke 0.000000 0.000000 0.000000
+
+newmtl Hair
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka Hair_Col.jpg
+	map_Kd Hair_Col.jpg
+	map_d Hair_Trans.jpg
+	map_bump Hair_Spec.jpg
+	bump Hair_Spec.jpg
+
+newmtl Body
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka Girl_Body_COL.jpg
+	map_Kd Girl_Body_COL.jpg
+	map_bump Body_Normal.jpg
+	bump Body_Normal.jpg
+
+newmtl _huScrCramponsocks_rFoot_mso
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.000000 0.000000 0.000000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_d Eva_Lash.jpg
+
+newmtl Shorts_And_Socks
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka BS1.png
+	map_Kd BS1.png
+	map_bump Shorts NRM.jpg
+	bump Shorts NRM.jpg
+
+newmtl Jersey
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka BJ1.png
+	map_Kd BJ1.png
+	map_bump Shirt NRM.jpg
+	bump Shirt NRM.jpg
+
+newmtl Shoes
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka Shoes.jpg
+	map_Kd Shoes.jpg
+	map_bump Shoes.jpg
+	bump Shoes.jpg
+
+newmtl Brazuka
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.000000 0.000000 0.000000
+	Kd 0.588000 0.588000 0.588000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka Brazuka.jpg
+	map_Kd Brazuka.jpg
+	map_bump BrazukaNRM.jpg
+	bump BrazukaNRM.jpg

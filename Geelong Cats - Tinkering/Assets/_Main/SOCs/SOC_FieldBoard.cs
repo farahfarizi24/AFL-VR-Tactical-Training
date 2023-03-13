@@ -20,10 +20,10 @@ namespace com.DU.CE.INT
         public Material AwayTeamMaterial = null;
 
         [Space]
-        public float OriginOffsetX = 0.00515f;
+     
+       public float OriginOffsetX = 0.00515f;
         public float OriginOffsetY = 0.005f;
         public float OriginOffsetZ = 0.00585f;
-
         [Space]
         public float MoveMultiplier = 1f;
         public float RotateMultiplier = 1f;
@@ -46,7 +46,8 @@ namespace com.DU.CE.INT
             // Ray which points from the pin's base on to the field render
             Ray _pinToRendRay = new Ray(_raycastFrom.position, -_raycastFrom.up);
 
-            //Debug.DrawRay(_pinToRendRay.origin, _pinToRendRay.direction, Color.cyan);
+            
+            Debug.DrawRay(_pinToRendRay.origin, _pinToRendRay.direction, Color.cyan);
 
             // Raycast to get the texture coordinate of the field render
             if (Physics.Raycast(_pinToRendRay, out _texRendHPoint, 1 << m_BOARDLAYER))
@@ -54,7 +55,7 @@ namespace com.DU.CE.INT
                 // Get texture coordinate
                 Vector3 _renderHit = _texRendHPoint.textureCoord;
 
-                //Debug.Log("#BoardPins#-------------------------Raycast hit board \n" + _renderHit + "\n" + _texRendHPoint.distance);
+                Debug.Log("#BoardPins#-------------------------Raycast hit board \n" + _renderHit + "\n" + _texRendHPoint.distance);
 
 
                 Ray _rayFromRendCam = EagleEyeCamera.ViewportPointToRay(
@@ -66,6 +67,7 @@ namespace com.DU.CE.INT
                 if (Physics.Raycast(_rayFromRendCam, out _cameraHit, 1 << m_FIELDLAYER))
                 {
                     _fieldPos = _cameraHit.point;
+                    Debug.Log("Field Position Raycast + " +_fieldPos);
                     return true;
                 }
             }
@@ -93,6 +95,18 @@ namespace com.DU.CE.INT
         public void AddMarkerOnNetwork(Transform _pinTransform)
         {
             OnUIMarkerAdd?.Invoke(_pinTransform.position);
+           
+            
         }
+
+        public event Action<Vector3> OnUIMarkerChange;
+
+        public void OnUIMarkerChanged (Vector3 _pinWorldPosition)
+        {
+            OnUIMarkerChange?.Invoke(_pinWorldPosition);
+        }
+  
+
+
     }
 }

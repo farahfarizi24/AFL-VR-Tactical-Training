@@ -36,7 +36,7 @@ namespace com.DU.CE.INT
         private void OnEnable()
         {
             m_FieldBoard.StadiumPropertiesSock.OnNetworkFieldBoardToggle += OnUIToggle;
-
+            m_FieldBoard.BoardSock.OnUIMarkerChange += OnMarkerPositionChange;
             m_FieldBoard.BoardSock.OnUIMarkerAdd += OnUIMarkerAdded;
             m_FieldBoard.StadiumPropertiesSock.OnNetworkMarkerAdd += OnNetworkMarkerAdded;
 
@@ -49,7 +49,7 @@ namespace com.DU.CE.INT
 
             m_FieldBoard.BoardSock.OnUIMarkerAdd -= OnUIMarkerAdded;
             m_FieldBoard.StadiumPropertiesSock.OnNetworkMarkerAdd -= OnNetworkMarkerAdded;
-
+            m_FieldBoard.BoardSock.OnUIMarkerChange -= OnMarkerPositionChange;
             m_FieldBoard.BoardSock.OnAIInstantiate -= InstantiatePositionPin;
         }
 
@@ -95,6 +95,12 @@ namespace com.DU.CE.INT
         private void OnUIMarkerAdded(Vector3 _uiPinWorldPosition)
         {
             Vector3 localPosition = transform.InverseTransformPoint(_uiPinWorldPosition);
+            m_FieldBoard.StadiumPropertiesSock.AddNewMarkerToNetwork(localPosition);
+        }
+
+        private void OnMarkerPositionChange (Vector3 _uiPinWorldPositon)
+        {
+            Vector3 localPosition = transform.InverseTransformPoint(_uiPinWorldPositon);
             m_FieldBoard.StadiumPropertiesSock.AddNewMarkerToNetwork(localPosition);
         }
 

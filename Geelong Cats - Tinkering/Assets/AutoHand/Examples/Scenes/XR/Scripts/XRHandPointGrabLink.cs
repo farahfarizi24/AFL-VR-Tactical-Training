@@ -29,6 +29,7 @@ namespace Autohand.Demo{
             if (link.ButtonPressed(selectInput) && !selecting) {
                 selecting = true;
                 pointGrab.SelectTarget();
+               Debug.Log("select target in point grab");
             }
             
             if (!link.ButtonPressed(selectInput) && selecting){

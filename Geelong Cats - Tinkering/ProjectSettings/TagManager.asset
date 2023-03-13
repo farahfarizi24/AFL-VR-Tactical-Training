@@ -28,6 +28,8 @@ TagManager:
   - AwaySpawnLoc
   - CoachUI
   - PositionPin
+  - MarkerPin
+  - FieldMarkerTransform
   layers:
   - Default
   - TransparentFX

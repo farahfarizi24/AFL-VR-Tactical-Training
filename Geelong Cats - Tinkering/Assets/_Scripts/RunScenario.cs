@@ -150,7 +150,7 @@ public class RunScenario : MonoBehaviour
         ScenarioLoader.LoadScenario(ScenarioLoader.ScenarioNumber);
         ScenarioLoader.ScenarioRunToggle = true;
         IsScenarioRunning = true;
-        //ScenarioIndex++;//add one for the next run
+       ScenarioIndex++;//add one for the next run
         IsQueueOn = true;
     }
     public void RunQueue()

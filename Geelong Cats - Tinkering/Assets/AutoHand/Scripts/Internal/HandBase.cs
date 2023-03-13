@@ -136,6 +136,7 @@ namespace Autohand {
 
         Grabbable HoldingObj = null;
         public Grabbable holdingObj {
+            
             get { return HoldingObj; }
             internal set { HoldingObj = value; }
         }

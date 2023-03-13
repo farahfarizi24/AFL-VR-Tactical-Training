@@ -57,8 +57,11 @@ public class ScenarioCreation_Function : MonoBehaviour
         public Button SaveInitialPosition;
         public Button RunScenarioBTN;
         public Button BallTarget;
+    public Button MarkPlayer;
+   // public Button MarkerPin;
     public Button SaveEntireScenario;
     public bool BallTargetting;
+    public bool PlayerReferenceTarrgetting;
         // Start is called before the first frame update
         void Start()
     {
@@ -73,21 +76,61 @@ public class ScenarioCreation_Function : MonoBehaviour
             SaveInitialPosition.onClick.AddListener(delegate { SaveLocationAndPosition("Initial"); });
             RunScenarioBTN.onClick.AddListener(QuickRunScenario);
             BallTarget.onClick.AddListener(SetBallTarget);
+            MarkPlayer.onClick.AddListener(SetMarkerPlayer);
+
             SaveEntireScenario.onClick.AddListener(delegate { SaveScenario(ScenarioNumber); });
 
         BallTargetting = false;
-
+        PlayerReferenceTarrgetting = false;
 
         }
 
-        public void SetBallTarget()
+
+
+    #region Marker Player
+
+    public void SetMarkerPlayer()
+    {
+        if (PlayerReferenceTarrgetting!= true)
+        {
+            ResetPlayerMarker();
+            PlayerReferenceTarrgetting = true;
+            MarkPlayer.GetComponent<Image>().color = new Color32(0, 0, 0, 255);
+        }
+        else
+        {
+            //Reset the marker symbol on top of player//
+            PlayerReferenceTarrgetting = false;
+            MarkPlayer.GetComponent<Image>().color = new Color32(0, 43, 92, 255);
+        }
+    }
+
+    public void ResetPlayerMarker()
+    {
+        var homeplayers = GameObject.FindGameObjectsWithTag("Home");
+        var awayPlayers = GameObject.FindGameObjectsWithTag("Away");
+
+        foreach (var player in homeplayers)
+        {
+            player.GetComponent<AI_Avatar>().ResetPlayerReference();
+        }
+        foreach (var player in awayPlayers)
+        {
+            player.GetComponent<AI_Avatar>().ResetPlayerReference();
+        }
+    }
+    #endregion
+
+
+
+
+
+
+
+    public void SetBallTarget()
         {
         if (BallTargetting != true)
         {
-            /*  for (int i = 0; i < AIObject.Count(); i++)
-              {
-                  AIObject[i].GetComponent<AI_Avatar>().ResetBallReceiver();
-              }*/
             ResetBallTarget();
             BallTargetting = true;
             BallTarget.GetComponent<Image>().color = new Color32(0,0,0,255);

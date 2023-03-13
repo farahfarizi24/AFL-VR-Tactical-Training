@@ -205,11 +205,14 @@ namespace Autohand {
                     }
                 }
             }
-            else if(pulling && primaryHand.holdingObj == null) {
+             if(pulling) {
+                Debug.Log("The check for pull is run");
                 if(useFlickPull) {
+                    Debug.Log("Flick pull");
                     TryFlickPull();
                 }
                 else {
+                    Debug.Log("Distance pull");
                     TryDistancePull();
                 }
             }
@@ -261,6 +264,7 @@ namespace Autohand {
 
         public virtual void SelectTarget() {
             if(targetingDistanceGrabbable != null) {
+                Debug.Log("Selecting Target is on");
                 pulling = true;
                 startPullPosition = primaryHand.transform.localPosition;
                 lastRotation = transform.rotation;
@@ -282,6 +286,7 @@ namespace Autohand {
         }
 
         public virtual void CancelSelect() {
+            Debug.Log("Cancel select is on");
             StopTargeting();
             pulling = false;
             selectingDistanceGrabbable?.grabbable.Unhighlight(primaryHand, GetSelectedMaterial(selectingDistanceGrabbable));

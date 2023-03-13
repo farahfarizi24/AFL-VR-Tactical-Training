@@ -13,6 +13,7 @@ namespace Autohand.Demo{
         primary2DAxisClick,
         primary2DAxisTouch,
 #if UNITY_2019_2_OR_NEWER
+#if UNITY_2019_2_OR_NEWER
         secondary2DAxisClick,
         secondary2DAxisTouch,
 #endif
@@ -183,3 +184,4 @@ namespace Autohand.Demo{
         }
     }
 }
+#endif

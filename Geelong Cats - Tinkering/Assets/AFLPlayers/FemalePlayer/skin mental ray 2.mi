@@ -1,0 +1,1105 @@
+#
+#  EXPERIMENTAL - NON OFFICIAL - "skinplus.mi" phenomena
+#  combines reflectivity and AO-features of mia_material
+#  with SSS skin features
+#
+
+declare phenomenon 
+    material "misss_fast_skin_phen_plus_v1" (
+        color texture  "lightmap",
+        color texture  "depthmap",
+        string         "lightmap_group",
+        scalar         "lightmap_size" default 50,
+        integer        "samples" default 64,
+        shader         "bump",
+        struct "d" {
+            color   "ambient" default 0 0 0 0 ,
+            boolean "ao_on" default on,
+            scalar  "ao_distance" default 1.0,
+            integer "ao_samples"  default 16,
+            color   "overall_color" default 1 1 1,
+            color   "diffuse_color" default .95 .95 1 ,
+            scalar  "diffuse_roughness" default 0.3,
+            scalar  "diffuse_weight" default 0.5 ,
+
+            color   "front_sss_color" default 1 0.85 0.6 ,
+            scalar  "front_sss_weight" default 0.5 ,
+            scalar  "front_sss_radius" default 8,
+            color   "mid_sss_color" default .95 0.5 0.2,
+            scalar  "mid_sss_weight" default 0.4,
+            scalar  "mid_sss_radius" default 25,
+            color   "back_sss_color" default 0.7 0.1 0.1 ,
+            scalar  "back_sss_weight" default 0.5,
+            scalar  "back_sss_radius" default 25,
+            scalar  "back_sss_depth" default 25
+        },
+        struct "r" {
+            scalar  "reflectivity"        default 1.0,
+            color   "refl_color"          default 0.75 0.9 1,
+            scalar  "brdf_90_degree_refl" default 1.0 ,
+            scalar  "brdf_0_degree_refl"  default 0.2 ,
+            scalar  "refl_gloss"          default 0.25,
+            integer "refl_samples"        default 16,
+            scalar  "refl_falloff_dist"   default 0.0,
+            scalar  "hl_vs_refl_balance"  default 1.0,
+            boolean "refl_hl_only"        default off,
+            boolean "single_env_sample"   default off,
+            shader  "environment",
+            boolean "refl_interpolate"    default off
+        },
+        struct "s" {
+            scalar  "overall_weight" default 0.8,
+            scalar  "edge_factor" default 5.0, 
+            color   "primary_spec_color" default 0.75 0.9 1,
+            scalar  "primary_weight" default 0.3,
+            scalar  "primary_edge_weight" default 0.8 ,
+            scalar  "primary_shinyness" default 5.0 ,
+
+            color   "secondary_spec_color" default 0.9 0.95 1.0 ,
+            scalar  "secondary_weight" default 0.3,
+            scalar  "secondary_edge_weight" default 0.0,
+            scalar  "secondary_shinyness" default 33.0
+        },
+        struct "i" {
+            integer "intr_grid_density"   default 2,
+            integer "intr_refl_samples"   default 2
+        },
+        struct "a" {
+            scalar  "lightmap_gamma"   default 0.75,
+            boolean "indirect" default on,
+            scalar  "scale_conversion" default 1.0,
+            scalar  "scatter_bias"     default 0.12,
+            scalar  "falloff"          default 2.0,
+            boolean "screen_composit"  default on,
+            color   "additional_color" default 0 0 0
+        },
+        integer     "mode",      # light selection mode 0..2
+        array light "lights"
+    )
+
+    shader "diffuse" "mia_material" (
+        "ao_on"           = interface "d.ao_on",
+        "ao_ambient"      = interface "d.ambient",
+        "ao_distance"     = interface "d.ao_distance",
+        "ao_samples"      = interface "d.ao_samples",
+        "diffuse"         = interface "d.diffuse_color",
+        "diffuse_roughness" = interface "d.diffuse_roughness",
+        "diffuse_weight"  1.0,
+        "ao_do_details"   true,
+
+        # No reflections 
+        "reflectivity"    0.0,
+        # No transparency
+        "transparency"    0.0,
+        
+        # Those pesky lights
+        "mode"            = interface "mode",
+        "lights"          = interface "lights",
+        
+        "additional_color" = interface "a.additional_color"
+    )
+
+    shader "old_specular" "misss_skin_specular" (
+        "overall_weight"           = interface "s.overall_weight", 
+
+        "primary_weight"           = interface "s.primary_weight",
+        "primary_edge_weight"      = interface "s.primary_edge_weight",
+        "primary_spec_color"       = interface "s.primary_spec_color",
+        "primary_shinyness"        = interface "s.primary_shinyness",
+
+        "secondary_weight"         = interface "s.secondary_weight",
+        "secondary_edge_weight"    = interface "s.secondary_edge_weight",
+        "secondary_spec_color"     = interface "s.secondary_spec_color",
+        "secondary_shinyness"      = interface "s.secondary_shinyness",
+
+        "reflect_weight"           0,
+        "reflect_edge_weight"      0, 
+        "reflect_environment_only" off,
+        "reflect_shinyness"        0,
+
+        "edge_factor"              = interface "s.edge_factor",
+
+        "mode"                     = interface "mode",
+        "lights"                   = interface "lights"
+    )
+    
+    shader "specular" "mia_material" (
+        # add in the old specularity, if interesting...
+        "additional_color" = "old_specular",
+        
+        # No diffuse
+        "diffuse_weight" 0.0,
+        
+        # Reflectivity
+        "reflectivity"             = interface "r.reflectivity",
+        "refl_color"               = interface "r.refl_color",
+        "brdf_0_degree_refl"       = interface "r.brdf_0_degree_refl",
+        "brdf_90_degree_refl"      = interface "r.brdf_90_degree_refl",
+        "brdf_fresnel"             off,
+        "brdf_curve"               = interface "s.edge_factor",
+        "refl_gloss"               = interface "r.refl_gloss",
+        "refl_gloss_samples"       = interface "r.refl_samples",
+        "hl_vs_refl_balance"       = interface "r.hl_vs_refl_balance",
+        "refl_hl_only"             = interface "r.refl_hl_only",
+        "refl_interpolate"         = interface "r.refl_interpolate",
+        "intr_grid_density"        = interface "i.intr_grid_density",
+        "intr_refl_samples"        = interface "i.intr_refl_samples",
+        "intr_refr_samples"        = interface "i.intr_refl_samples",
+        "single_env_sample"        = interface "r.single_env_sample",
+        "refl_falloff_on"         true,
+        "refl_falloff_dist"        = interface "r.refl_falloff_dist",
+        
+        # No transparency
+        "transparency"             0.0,
+        
+        # Those pesky lights...
+        "mode"                     = interface "mode",
+        "lights"                   = interface "lights"
+    )
+    
+    shader "shallowscatter" "misss_fast_shader" (
+        "lightmap"                 = interface "lightmap",
+        "depthmap"                 = interface "depthmap",
+        "diffuse_illum"            "diffuse",
+        "diffuse_color"            1 1 1 1,
+        "diffuse_weight"           = interface "d.diffuse_weight",
+        "front_sss_color"          = interface "d.front_sss_color",
+        "front_sss_weight"         = interface "d.front_sss_weight",
+        "front_sss_radius"         = interface "d.front_sss_radius",
+        "back_sss_radius"          0,
+        "back_sss_weight"          0,
+        "screen_composit"          = interface "a.screen_composit",
+        "scale_conversion"         = interface "a.scale_conversion",
+        "falloff"                  = interface "a.falloff",
+        "samples"                  = interface "samples"
+    )
+
+    shader "deepscatter" "misss_fast_shader" (
+        "lightmap"                 = interface "lightmap",
+        "depthmap"                 = interface "depthmap",
+        "bump"                     = interface "bump",
+        "diffuse_illum"            "shallowscatter",
+        "diffuse_color"            = interface "d.overall_color",
+        "diffuse_weight"           1.0,
+        "specular_illum"           "specular",
+        "screen_composit"          = interface "a.screen_composit",
+        "front_sss_color"          = interface "d.mid_sss_color",
+        "front_sss_weight"         = interface "d.mid_sss_weight",
+        "front_sss_radius"         = interface "d.mid_sss_radius",
+        "back_sss_color"           = interface "d.back_sss_color",
+        "back_sss_weight"          = interface "d.back_sss_weight",
+        "back_sss_radius"          = interface "d.back_sss_radius",
+        "back_sss_depth"           = interface "d.back_sss_depth",
+        "scale_conversion"         = interface "a.scale_conversion",
+        "falloff"                  = interface "a.falloff",
+        "samples"                  = interface "samples"
+    )
+
+    shader "lm_sample" "misss_lambert_gamma" (
+        "ambient"                  = interface "d.ambient",
+        "ambience"                 1 1 1,
+        "diffuse"                  1 1 1,
+        "indirect"                 = interface "a.indirect",
+        "diffuse_curve"            = interface "a.lightmap_gamma",
+        "mode"                     = interface "mode",
+        "lights"                   = interface "lights"
+    )
+
+    shader "lm_write"   "misss_lightmap_write" (
+        "lightmap"                 = interface "lightmap",
+        "depthmap"                 = interface "depthmap",
+        "lightmap_group"           = interface "lightmap_group",
+        "lightmap_size"            = interface "lightmap_size",
+        "scatter_bias"             = interface "a.scatter_bias",
+        "input"                    "lm_sample"
+    )
+
+    shader "env_shader" "misss_call_shader" (
+        "shader" = interface "r.environment"
+    )
+
+    material "subsurface" 
+        = "deepscatter"
+        shadow      = "specular"
+        lightmap    = "lm_write"
+        environment = "env_shader"
+    end material
+    
+    root material "subsurface"
+
+    gui "gui_misss_fast_skin_phen_plus_v1" {
+        control "Global" "Global" (
+            "uiName" "SSS Fast Skin+ (mi)",
+            "category" "Material",
+        )
+        control "lightmap" "color texture" (
+            "uiName" "Lightmap",
+            "writableTexture",
+            "hidden"
+        )
+        control "depthmap" "color texture" (
+            "uiName" "Depthmap",
+            "writableTexture",
+            "hidden"
+        )
+        control "lightmap_group" "string" (
+            "uiName" "Scatter group name",
+            "nonConnectable",
+            "value" "A"
+        ) 
+        control "lightmap_size" "scalar" (
+            "uiName" "Lightmap size (in % of render size)",
+            "nonConnectable",
+            "value" 50
+        )
+        control "samples" "integer" (
+            "uiName" "Number of samples",
+            "value" 64
+        )         
+        control "bump" "shader" (
+            "uiName" "Bump shader",
+            "value" "max_Bump",
+            "applyTypes" "bump"
+        )
+        control "d" "struct" (
+            "uiName" "3-Layer Diffuse Subsurface Scattering"
+        )
+        {           
+            control "ambient" "color" (
+                "uiName" "Ambient / Extra light",
+                "noAlpha",
+                "value" 0 0 0 0
+            )
+            control "ao_on" "boolean" (
+                "uiName" "Use AO (Ambient Occlusion)",
+                "value" 1
+            )
+            control "ao_distance" "scalar" (
+                "uiName" "Ambient Occlusion - distance",
+                "value" "25mm",
+                "units" "world"
+            )
+            control "ao_samples" "integer" (
+                "uiName" "Ambient Occlusion - samples",
+                "range" 1 1000,
+                "value" 16
+            )
+            control "overall_color" "color" (
+                "uiName" "Overall diffuse coloration",
+                "noAlpha",
+                "value" 1 1 1
+            )
+            control "diffuse_color" "color" (
+                "uiName" "Unscattered diffuse color",
+                "noAlpha",
+                "value" 0.95 0.95 1,
+            )
+            control "diffuse_roughness" "scalar" (
+                "uiName" "Diffuse Roughness (Oren Nayar)",
+                "value" 0.3,
+            )
+            control "diffuse_weight" "scalar" (
+                "uiName" "Unscattered diffuse weight",
+                "value" 0.5,
+            )
+            control "front_sss_color" "color" (
+                "uiName" "Epidermal (top) layer scatter color",
+                "noAlpha",
+                "value" 1 0.85 0.6
+            )
+            control "front_sss_weight" "scalar" (
+                "uiName" "Epidermal (top) layer scatter weight",
+                "value" 0.5
+            )
+            control "front_sss_radius" "scalar" (
+                "uiName" "Epidermal (top) layer scatter radius",
+                "value" "8mm",
+                "units" "world"
+            )
+
+            control "mid_sss_color" "color" (
+                "uiName" "Subdermal layer scatter color",
+                "noAlpha",
+                "value" 0.95 0.5 0.2
+            )
+            control "mid_sss_weight" "scalar" (
+                "uiName" "Subdermal layer scatter weight",
+                "value" 0.4
+            )
+            control "mid_sss_radius" "scalar" (
+                "uiName" "Subdermal layer scatter radius",
+                "value" "25mm",
+                "units" "world"
+            )
+
+            control "back_sss_color" "color" (
+                "uiName" "Back surface (through) scatter color",
+                "noAlpha",
+                "value" 0.7 0.1 0.1
+            )
+            control "back_sss_weight" "scalar" (
+                "uiName" "Back surface (through) scatter weight",
+                "value" 0.5
+            )
+            control "back_sss_radius" "scalar" (
+                "uiName" "Back surface (through) scatter radius",
+                "value" "25mm",
+                "units" "world"
+            )
+            control "back_sss_depth" "scalar" (
+                "uiName" "Back surface (through) scatter depth",
+                "value" "25mm",
+                "units" "world"
+            )
+        }
+        control "r" "struct" (
+            "uiName" "Reflections (from A&D material)"
+        )
+        {
+            control "reflectivity" "scalar" (
+                "uiName" "Overall Reflectivity",
+                "range" 0.0 1.0,
+                "value" 1.0
+            )
+            control "refl_color" "color" (
+                "uiName" "Reflection Color",
+                "noAlpha",
+                "value" 0.75 0.9 1
+            )
+            
+            control "brdf_90_degree_refl" "scalar" (
+                "uiName" "Edge (90 deg) reflectivity",
+                "range" 0.0 1.0,
+                "value" 1.0
+            )
+            control "brdf_0_degree_refl" "scalar" (
+                "uiName" "Facing (0 deg) reflectivity",
+                "range" 0.0 1.0,
+                "value" 0.2
+            )
+
+            control "brdf_0_degree_refl" "scalar" (
+                "uiName" "Facing (0 deg) reflectivity",
+                "range" 0.0 1.0,
+                "value" 0.2
+            )
+
+            control "refl_falloff_dist" "scalar" (
+                "uiName" "Maximum Reflection Distance",
+                "range" 0.0 9999999.0,
+                "value" "1m",
+                "units" "world"
+            )
+
+            control "refl_gloss" "scalar" (
+                "uiName" "Glossiness",
+                "range" 0.0 1.0,
+                "value" 0.25
+            )
+
+            control "refl_samples" "integer" (
+                "uiName" "Glossiness samples",
+                "range" 0 2048,
+                "value" 16
+            )
+
+            control "hl_vs_refl_balance" "scalar" (
+                "uiName" "A&D Highlight intensity",
+                "range" 0.0 2.0,
+                "value" 1.0
+            )
+
+            control "refl_hl_only" "boolean" (
+                "uiName" "'Faked' reflections via FG (VERY FAST!)",
+                "value" 0
+            )
+            control "refl_interpolate" "boolean" (
+                "uiName" "Interpolate reflections",
+                "value" 0
+            )
+            control "single_env_sample" "boolean" (
+                "uiName" "Single environment sample",
+                "value" 0
+            )
+            control "environment" "shader" (
+                "uiName" "Local environment"
+            )
+        }
+        control "i" "struct" (
+            "uiName" "Interpolation settings"
+        )
+        {        
+            control "intr_grid_density" "integer" (
+                "uiName" "Interpolation grid density",
+                "value" 2
+            )
+            control "intr_refl_samples" "integer" (
+                "uiName" "Reflection Interpolation NxN samples",
+                "value" 2
+            )
+            control "intr_refr_samples" "integer" (
+                "uiName" "Transparency Interpolation NxN samples",
+                "value" 2
+            )
+        }
+        control "s" "struct" (
+            "uiName" "2-Layer Specularity"
+        )
+        {        
+            control "overall_weight" "scalar" (
+                "uiName" "Overall specular Weight",
+                "value" 0.8
+            )
+
+            control "primary_spec_color" "color" (
+                "uiName" "Specular Color #1",
+                "noAlpha",
+                "value" 0.75 0.9 1
+            )
+            control "primary_weight" "scalar" (
+                "uiName" "Specular Weight #1",
+                "value" 0.3
+            )
+            control "primary_edge_weight" "scalar" (
+                "uiName" "Specular Edge Weight #1",
+                "value" 0.8
+            )
+            control "primary_shinyness" "scalar" (
+                "uiName" "Shininess #1",
+                "value" 5.0
+            )
+
+            control "secondary_spec_color" "color" (
+                "uiName" "Specular Color #2",
+                "noAlpha",
+                "value" .9 .95 1
+            )
+            control "secondary_weight" "scalar" (
+                "uiName" "Specular Weight #2",
+                "value" 0.3
+            )
+            control "secondary_edge_weight" "scalar" (
+                "uiName" "Specular Edge Weight #2",
+                "value" 0.0
+            )
+            control "secondary_shinyness" "scalar" (
+                "uiName" "Shininess #2",
+                "value" 33.0
+            )
+
+            control "edge_factor" "scalar" (
+                "uiName" "Edge narrowness (higher = narrower)",
+                "value" 5,
+                "range" 0 100
+            )
+        }
+        control "a" "struct" (
+            "uiName" "Advanced options"
+        )
+        {           
+            control "indirect" "boolean" (
+                "uiName" "Scatter indirect illumination",
+                "nonConnectable",
+                "value"  1,
+            )
+            control "lightmap_gamma" "scalar" (
+                "uiName" "Lightmap gamma curve",
+                "nonConnectable",
+                "value"  0.75,
+                "range"  0.0 5.0
+            )
+            control "scale_conversion" "scalar" (
+                "uiName" "Scale conversion factor",
+                "value" 1.0
+            )
+            control "scatter_bias" "scalar" (
+                "uiName" "Scatter Bias (+/- 1.0)",
+                "nonConnectable",
+                "value"  0.12,
+                "range"  -1 1
+            )
+            control "falloff" "scalar" (
+                "uiName" "Falloff strength",
+                "value" 2.0,
+                "range" -10.0 10.0
+            )
+            control "screen_composit" "boolean" (
+                "uiName" "'Screen' (soft) compositing of layers",
+                "nonConnectable",
+                "value" 1
+            )        
+            control "additional_color" "color" (
+                "uiName" "Additional Color (added to result)",
+                "value" 0 0 0
+            )        
+        }
+        control "mode" "integer" (
+            "nonConnectable",
+            "uiName" "Mode",
+            "hidden"
+        )        
+        control "lights" "array light" (
+            "uiName" "Lights",
+            "hidden"
+        )        
+    }
+end declare
+
+#
+#  EXPERIMENTAL - NON OFFICIAL - "skinplus.mi" phenomena
+#  combines reflectivity and AO-features of mia_material
+#  with SSS skin features. THIS ONE WITH DISPLACEMENT.
+#
+
+declare phenomenon 
+    material "misss_fast_skin_phen_plusdisp_v1" (
+        color texture  "lightmap",
+        color texture  "depthmap",
+        string         "lightmap_group",
+        scalar         "lightmap_size" default 50,
+        integer        "samples" default 64,
+        shader         "displace",
+        shader         "bump",
+        struct "d" {
+            color   "ambient" default 0 0 0 0 ,
+            boolean "ao_on" default on,
+            scalar  "ao_distance" default 1.0,
+            integer "ao_samples"  default 16,
+            color   "overall_color" default 1 1 1,
+            color   "diffuse_color" default .95 .95 1 ,
+            scalar  "diffuse_roughness" default 0.3,
+            scalar  "diffuse_weight" default 0.5 ,
+
+            color   "front_sss_color" default 1 0.85 0.6 ,
+            scalar  "front_sss_weight" default 0.5 ,
+            scalar  "front_sss_radius" default 8,
+            color   "mid_sss_color" default .95 0.5 0.2,
+            scalar  "mid_sss_weight" default 0.4,
+            scalar  "mid_sss_radius" default 25,
+            color   "back_sss_color" default 0.7 0.1 0.1 ,
+            scalar  "back_sss_weight" default 0.5,
+            scalar  "back_sss_radius" default 25,
+            scalar  "back_sss_depth" default 25
+        },
+        struct "r" {
+            scalar  "reflectivity"        default 1.0,
+            color   "refl_color"          default 0.75 0.9 1,
+            scalar  "brdf_90_degree_refl" default 1.0 ,
+            scalar  "brdf_0_degree_refl"  default 0.2 ,
+            scalar  "refl_gloss"          default 0.25,
+            integer "refl_samples"        default 16,
+            scalar  "refl_falloff_dist"   default 0.0,
+            scalar  "hl_vs_refl_balance"  default 1.0,
+            boolean "refl_hl_only"        default off,
+            boolean "single_env_sample"   default off,
+            shader  "environment",
+            boolean "refl_interpolate"    default off
+        },
+        struct "s" {
+            scalar  "overall_weight" default 0.8,
+            scalar  "edge_factor" default 5.0, 
+            color   "primary_spec_color" default 0.75 0.9 1,
+            scalar  "primary_weight" default 0.3,
+            scalar  "primary_edge_weight" default 0.8 ,
+            scalar  "primary_shinyness" default 5.0 ,
+
+            color   "secondary_spec_color" default 0.9 0.95 1.0 ,
+            scalar  "secondary_weight" default 0.3,
+            scalar  "secondary_edge_weight" default 0.0,
+            scalar  "secondary_shinyness" default 33.0
+        },
+        struct "i" {
+            integer "intr_grid_density"   default 2,
+            integer "intr_refl_samples"   default 2
+        },
+        struct "a" {
+            scalar  "lightmap_gamma"   default 0.75,
+            boolean "indirect" default on,
+            scalar  "scale_conversion" default 1.0,
+            scalar  "scatter_bias"     default 0.12,
+            scalar  "falloff"          default 2.0,
+            boolean "screen_composit"  default on,
+            color   "additional_color" default 0 0 0
+        },
+        integer     "mode",      # light selection mode 0..2
+        array light "lights"
+    )
+
+    shader "diffuse" "mia_material" (
+        "ao_on"           = interface "d.ao_on",
+        "ao_ambient"      = interface "d.ambient",
+        "ao_distance"     = interface "d.ao_distance",
+        "ao_samples"      = interface "d.ao_samples",
+        "diffuse"         = interface "d.diffuse_color",
+        "diffuse_roughness" = interface "d.diffuse_roughness",
+        "diffuse_weight"  1.0,
+        "ao_do_details"   true,
+
+        # No reflections 
+        "reflectivity"    0.0,
+        # No transparency
+        "transparency"    0.0,
+        
+        # Those pesky lights
+        "mode"            = interface "mode",
+        "lights"          = interface "lights",
+        
+        "additional_color" = interface "a.additional_color"
+    )
+
+    shader "old_specular" "misss_skin_specular" (
+        "overall_weight"           = interface "s.overall_weight", 
+
+        "primary_weight"           = interface "s.primary_weight",
+        "primary_edge_weight"      = interface "s.primary_edge_weight",
+        "primary_spec_color"       = interface "s.primary_spec_color",
+        "primary_shinyness"        = interface "s.primary_shinyness",
+
+        "secondary_weight"         = interface "s.secondary_weight",
+        "secondary_edge_weight"    = interface "s.secondary_edge_weight",
+        "secondary_spec_color"     = interface "s.secondary_spec_color",
+        "secondary_shinyness"      = interface "s.secondary_shinyness",
+
+        "reflect_weight"           0,
+        "reflect_edge_weight"      0, 
+        "reflect_environment_only" off,
+        "reflect_shinyness"        0,
+
+        "edge_factor"              = interface "s.edge_factor",
+
+        "mode"                     = interface "mode",
+        "lights"                   = interface "lights"
+    )
+    
+    shader "specular" "mia_material" (
+        # add in the old specularity, if interesting...
+        "additional_color" = "old_specular",
+        
+        # No diffuse
+        "diffuse_weight" 0.0,
+        
+        # Reflectivity
+        "reflectivity"             = interface "r.reflectivity",
+        "refl_color"               = interface "r.refl_color",
+        "brdf_0_degree_refl"       = interface "r.brdf_0_degree_refl",
+        "brdf_90_degree_refl"      = interface "r.brdf_90_degree_refl",
+        "brdf_fresnel"             off,
+        "brdf_curve"               = interface "s.edge_factor",
+        "refl_gloss"               = interface "r.refl_gloss",
+        "refl_gloss_samples"       = interface "r.refl_samples",
+        "hl_vs_refl_balance"       = interface "r.hl_vs_refl_balance",
+        "refl_hl_only"             = interface "r.refl_hl_only",
+        "refl_interpolate"         = interface "r.refl_interpolate",
+        "intr_grid_density"        = interface "i.intr_grid_density",
+        "intr_refl_samples"        = interface "i.intr_refl_samples",
+        "intr_refr_samples"        = interface "i.intr_refl_samples",
+        "single_env_sample"        = interface "r.single_env_sample",
+        "refl_falloff_on"         true,
+        "refl_falloff_dist"        = interface "r.refl_falloff_dist",
+        
+        # No transparency
+        "transparency"             0.0,
+        
+        # Those pesky lights...
+        "mode"                     = interface "mode",
+        "lights"                   = interface "lights"
+    )
+    
+    shader "shallowscatter" "misss_fast_shader" (
+        "lightmap"                 = interface "lightmap",
+        "depthmap"                 = interface "depthmap",
+        "diffuse_illum"            "diffuse",
+        "diffuse_color"            1 1 1 1,
+        "diffuse_weight"           = interface "d.diffuse_weight",
+        "front_sss_color"          = interface "d.front_sss_color",
+        "front_sss_weight"         = interface "d.front_sss_weight",
+        "front_sss_radius"         = interface "d.front_sss_radius",
+        "back_sss_radius"          0,
+        "back_sss_weight"          0,
+        "screen_composit"          = interface "a.screen_composit",
+        "scale_conversion"         = interface "a.scale_conversion",
+        "falloff"                  = interface "a.falloff",
+        "samples"                  = interface "samples"
+    )
+
+    shader "deepscatter" "misss_fast_shader" (
+        "lightmap"                 = interface "lightmap",
+        "depthmap"                 = interface "depthmap",
+        "bump"                     = interface "bump",
+        "diffuse_illum"            "shallowscatter",
+        "diffuse_color"            = interface "d.overall_color",
+        "diffuse_weight"           1.0,
+        "specular_illum"           "specular",
+        "screen_composit"          = interface "a.screen_composit",
+        "front_sss_color"          = interface "d.mid_sss_color",
+        "front_sss_weight"         = interface "d.mid_sss_weight",
+        "front_sss_radius"         = interface "d.mid_sss_radius",
+        "back_sss_color"           = interface "d.back_sss_color",
+        "back_sss_weight"          = interface "d.back_sss_weight",
+        "back_sss_radius"          = interface "d.back_sss_radius",
+        "back_sss_depth"           = interface "d.back_sss_depth",
+        "scale_conversion"         = interface "a.scale_conversion",
+        "falloff"                  = interface "a.falloff",
+        "samples"                  = interface "samples"
+    )
+
+    shader "lm_sample" "misss_lambert_gamma" (
+        "ambient"                  = interface "d.ambient",
+        "ambience"                 1 1 1,
+        "diffuse"                  1 1 1,
+        "indirect"                 = interface "a.indirect",
+        "diffuse_curve"            = interface "a.lightmap_gamma",
+        "mode"                     = interface "mode",
+        "lights"                   = interface "lights"
+    )
+
+    shader "lm_write"   "misss_lightmap_write" (
+        "lightmap"                 = interface "lightmap",
+        "depthmap"                 = interface "depthmap",
+        "lightmap_group"           = interface "lightmap_group",
+        "lightmap_size"            = interface "lightmap_size",
+        "scatter_bias"             = interface "a.scatter_bias",
+        "input"                    "lm_sample"
+    )
+
+    shader "env_shader" "misss_call_shader" (
+        "shader" = interface "r.environment"
+    )
+
+    shader "dis_shader" "misss_call_shader" (
+        "shader" = interface "displace"
+    )
+
+    material "subsurface" 
+        = "deepscatter"
+        shadow      = "specular"
+        lightmap    = "lm_write"
+        environment = "env_shader"
+        # Uncomment to get displacement
+        displace    = "dis_shader"
+    end material
+    
+    root material "subsurface"
+
+    gui "gui_misss_fast_skin_phen_plusdisp_v1" {
+        control "Global" "Global" (
+            "uiName" "SSS Fast Skin+ (w. Disp) (mi)",
+            "category" "Material",
+        )
+        control "lightmap" "color texture" (
+            "uiName" "Lightmap",
+            "writableTexture",
+            "hidden"
+        )
+        control "depthmap" "color texture" (
+            "uiName" "Depthmap",
+            "writableTexture",
+            "hidden"
+        )
+        control "lightmap_group" "string" (
+            "uiName" "Scatter group name",
+            "nonConnectable",
+            "value" "A"
+        ) 
+        control "lightmap_size" "scalar" (
+            "uiName" "Lightmap size (in % of render size)",
+            "nonConnectable",
+            "value" 50
+        )
+        control "samples" "integer" (
+            "uiName" "Number of samples",
+            "value" 64
+        )         
+        control "displace" "shader" (
+            "uiName" "Displacement",
+            "value" "max_Displacement"
+        )
+        control "bump" "shader" (
+            "uiName" "Bump shader",
+            "value" "max_Bump",
+            "applyTypes" "bump"
+        )
+        control "d" "struct" (
+            "uiName" "3-Layer Diffuse Subsurface Scattering"
+        )
+        {           
+            control "ambient" "color" (
+                "uiName" "Ambient / Extra light",
+                "noAlpha",
+                "value" 0 0 0 0
+            )
+            control "ao_on" "boolean" (
+                "uiName" "Use AO (Ambient Occlusion)",
+                "value" 1
+            )
+            control "ao_distance" "scalar" (
+                "uiName" "Ambient Occlusion - distance",
+                "value" "25mm",
+                "units" "world"
+            )
+            control "ao_samples" "integer" (
+                "uiName" "Ambient Occlusion - samples",
+                "range" 1 1000,
+                "value" 16
+            )
+            control "overall_color" "color" (
+                "uiName" "Overall diffuse coloration",
+                "noAlpha",
+                "value" 1 1 1
+            )
+            control "diffuse_color" "color" (
+                "uiName" "Unscattered diffuse color",
+                "noAlpha",
+                "value" 0.95 0.95 1,
+            )
+            control "diffuse_roughness" "scalar" (
+                "uiName" "Diffuse Roughness (Oren Nayar)",
+                "value" 0.3,
+            )
+            control "diffuse_weight" "scalar" (
+                "uiName" "Unscattered diffuse weight",
+                "value" 0.5,
+            )
+            control "front_sss_color" "color" (
+                "uiName" "Epidermal (top) layer scatter color",
+                "noAlpha",
+                "value" 1 0.85 0.6
+            )
+            control "front_sss_weight" "scalar" (
+                "uiName" "Epidermal (top) layer scatter weight",
+                "value" 0.5
+            )
+            control "front_sss_radius" "scalar" (
+                "uiName" "Epidermal (top) layer scatter radius",
+                "value" "8mm",
+                "units" "world"
+            )
+
+            control "mid_sss_color" "color" (
+                "uiName" "Subdermal layer scatter color",
+                "noAlpha",
+                "value" 0.95 0.5 0.2
+            )
+            control "mid_sss_weight" "scalar" (
+                "uiName" "Subdermal layer scatter weight",
+                "value" 0.4
+            )
+            control "mid_sss_radius" "scalar" (
+                "uiName" "Subdermal layer scatter radius",
+                "value" "25mm",
+                "units" "world"
+            )
+
+            control "back_sss_color" "color" (
+                "uiName" "Back surface (through) scatter color",
+                "noAlpha",
+                "value" 0.7 0.1 0.1
+            )
+            control "back_sss_weight" "scalar" (
+                "uiName" "Back surface (through) scatter weight",
+                "value" 0.5
+            )
+            control "back_sss_radius" "scalar" (
+                "uiName" "Back surface (through) scatter radius",
+                "value" "25mm",
+                "units" "world"
+            )
+            control "back_sss_depth" "scalar" (
+                "uiName" "Back surface (through) scatter depth",
+                "value" "25mm",
+                "units" "world"
+            )
+        }
+        control "r" "struct" (
+            "uiName" "Reflections (from A&D material)"
+        )
+        {
+            control "reflectivity" "scalar" (
+                "uiName" "Overall Reflectivity",
+                "range" 0.0 1.0,
+                "value" 1.0
+            )
+            control "refl_color" "color" (
+                "uiName" "Reflection Color",
+                "noAlpha",
+                "value" 0.75 0.9 1
+            )
+            
+            control "brdf_90_degree_refl" "scalar" (
+                "uiName" "Edge (90 deg) reflectivity",
+                "range" 0.0 1.0,
+                "value" 1.0
+            )
+            control "brdf_0_degree_refl" "scalar" (
+                "uiName" "Facing (0 deg) reflectivity",
+                "range" 0.0 1.0,
+                "value" 0.2
+            )
+
+            control "brdf_0_degree_refl" "scalar" (
+                "uiName" "Facing (0 deg) reflectivity",
+                "range" 0.0 1.0,
+                "value" 0.2
+            )
+
+            control "refl_falloff_dist" "scalar" (
+                "uiName" "Maximum Reflection Distance",
+                "range" 0.0 9999999.0,
+                "value" "1m",
+                "units" "world"
+            )
+
+            control "refl_gloss" "scalar" (
+                "uiName" "Glossiness",
+                "range" 0.0 1.0,
+                "value" 0.25
+            )
+
+            control "refl_samples" "integer" (
+                "uiName" "Glossiness samples",
+                "range" 0 2048,
+                "value" 16
+            )
+
+            control "hl_vs_refl_balance" "scalar" (
+                "uiName" "A&D Highlight intensity",
+                "range" 0.0 2.0,
+                "value" 1.0
+            )
+
+            control "refl_hl_only" "boolean" (
+                "uiName" "'Faked' reflections via FG (VERY FAST!)",
+                "value" 0
+            )
+            control "refl_interpolate" "boolean" (
+                "uiName" "Interpolate reflections",
+                "value" 0
+            )
+            control "single_env_sample" "boolean" (
+                "uiName" "Single environment sample",
+                "value" 0
+            )
+            control "environment" "shader" (
+                "uiName" "Local environment"
+            )
+        }
+        control "i" "struct" (
+            "uiName" "Interpolation settings"
+        )
+        {        
+            control "intr_grid_density" "integer" (
+                "uiName" "Interpolation grid density",
+                "value" 2
+            )
+            control "intr_refl_samples" "integer" (
+                "uiName" "Reflection Interpolation NxN samples",
+                "value" 2
+            )
+            control "intr_refr_samples" "integer" (
+                "uiName" "Transparency Interpolation NxN samples",
+                "value" 2
+            )
+        }
+        control "s" "struct" (
+            "uiName" "2-Layer Specularity"
+        )
+        {        
+            control "overall_weight" "scalar" (
+                "uiName" "Overall specular Weight",
+                "value" 0.8
+            )
+
+            control "primary_spec_color" "color" (
+                "uiName" "Specular Color #1",
+                "noAlpha",
+                "value" 0.75 0.9 1
+            )
+            control "primary_weight" "scalar" (
+                "uiName" "Specular Weight #1",
+                "value" 0.3
+            )
+            control "primary_edge_weight" "scalar" (
+                "uiName" "Specular Edge Weight #1",
+                "value" 0.8
+            )
+            control "primary_shinyness" "scalar" (
+                "uiName" "Shininess #1",
+                "value" 5.0
+            )
+
+            control "secondary_spec_color" "color" (
+                "uiName" "Specular Color #2",
+                "noAlpha",
+                "value" .9 .95 1
+            )
+            control "secondary_weight" "scalar" (
+                "uiName" "Specular Weight #2",
+                "value" 0.3
+            )
+            control "secondary_edge_weight" "scalar" (
+                "uiName" "Specular Edge Weight #2",
+                "value" 0.0
+            )
+            control "secondary_shinyness" "scalar" (
+                "uiName" "Shininess #2",
+                "value" 33.0
+            )
+
+            control "edge_factor" "scalar" (
+                "uiName" "Edge narrowness (higher = narrower)",
+                "value" 5,
+                "range" 0 100
+            )
+        }
+        control "a" "struct" (
+            "uiName" "Advanced options"
+        )
+        {           
+            control "indirect" "boolean" (
+                "uiName" "Scatter indirect illumination",
+                "nonConnectable",
+                "value"  1,
+            )
+            control "lightmap_gamma" "scalar" (
+                "uiName" "Lightmap gamma curve",
+                "nonConnectable",
+                "value"  0.75,
+                "range"  0.0 5.0
+            )
+            control "scale_conversion" "scalar" (
+                "uiName" "Scale conversion factor",
+                "value" 1.0
+            )
+            control "scatter_bias" "scalar" (
+                "uiName" "Scatter Bias (+/- 1.0)",
+                "nonConnectable",
+                "value"  0.12,
+                "range"  -1 1
+            )
+            control "falloff" "scalar" (
+                "uiName" "Falloff strength",
+                "value" 2.0,
+                "range" -10.0 10.0
+            )
+            control "screen_composit" "boolean" (
+                "uiName" "'Screen' (soft) compositing of layers",
+                "nonConnectable",
+                "value" 1
+            )        
+            control "additional_color" "color" (
+                "uiName" "Additional Color (added to result)",
+                "value" 0 0 0
+            )        
+        }
+        control "mode" "integer" (
+            "nonConnectable",
+            "uiName" "Mode",
+            "hidden"
+        )        
+        control "lights" "array light" (
+            "uiName" "Lights",
+            "hidden"
+        )        
+    }
+end declare
+

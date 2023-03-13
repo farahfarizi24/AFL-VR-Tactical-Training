@@ -8,7 +8,7 @@ using System;
 
 public class ScenarioCreation_UI : MonoBehaviour
 {
-
+    public GameObject UIContainer;
     public GameObject FieldViewMenu;
     public GameObject boardObject = null;
     public GameObject boardContainer;
@@ -22,13 +22,14 @@ public class ScenarioCreation_UI : MonoBehaviour
     //this one is the one being shown during field view
     public Button ActivateUIButton;
     public Dropdown ScenarioSelector;
- 
+  
     [SerializeField] private int state;//1 = create nnew scenario, 2 = load
     public GameObject ScenarioMenuObj;
     public GameObject SelectScenarioMenuObj;
     public GameObject ScenarioEditorObj;
     public GameObject RunScenarioMenu;
     public GameObject Logo;
+    public Transform ThisObjectTransform;
     //public Button[] ScenarioButton = new Button[6];
    // public USER_UISwitcher UI;
     public List<string> scenarios = new List<string>();
@@ -98,10 +99,12 @@ public class ScenarioCreation_UI : MonoBehaviour
             boardObject.transform.SetParent(boardContainer.gameObject.transform);
             //make it current game object child
             boardObject.transform.localPosition = new Vector3(0.0f, 0.0f,-3.0f);
+
             //create scenario according to the current  index, so need to pass the value of which index it is
             //Also show the menu for scenario creation
             //load Scenario
             GetComponent<ScenarioCreation_Function>().LoadScenario(scenario);
+           // UIContainer.transform.position = ThisObjectTransform.position;
            // GetComponent<ScenarioCreation_Function>().SetBallHighlight();
             state = 0;
         }
@@ -161,6 +164,7 @@ public class ScenarioCreation_UI : MonoBehaviour
         ScenarioMenuObj.SetActive(false);
         SelectScenarioMenuObj.SetActive(true);
         state = 1;
+       // ThisObjectTransform = UIContainer.transform;
 
     }
 

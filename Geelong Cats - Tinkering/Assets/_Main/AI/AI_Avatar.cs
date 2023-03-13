@@ -40,6 +40,7 @@ namespace com.DU.CE.AI
         private float m_rotationY = 0f;
         public string state = "";
         public bool BallReceiver = false;
+        public bool IsPositionReference = false;
         #endregion
 
         
@@ -304,6 +305,46 @@ namespace com.DU.CE.AI
 
            
         }
+
+        #region Player Reference
+        public void ResetPlayerReference()
+        {
+
+            Debug.Log("Reset Player Reference");
+            IsPositionReference = false;
+            //turn on and off indicator
+
+            Color32 col = new Color32(255, 255, 255, 255);
+            //UnsetHighlight();
+            m_linkedPin.UnsetPinRing();
+
+
+        }
+
+        void INT_ILinkedPinObject.SetPlayerReference(bool status)
+        {
+            IsPositionReference = status;
+            Color32 col;
+
+            if (IsPositionReference == false)
+            {
+                //  col = new Color32(255, 255, 255, 255);
+
+                //  m_linkedPin.setBasePinColour(col);
+                m_linkedPin.UnsetPinRing();
+            }
+            else
+            {
+                // UnlinkedSetHighlight();
+                // col = new Color32(144, 238, 144, 255);
+                //  m_linkedPin.setBasePinColour(col);
+                m_linkedPin.SetPinRing();
+
+            }
+        }
+
+        #endregion
+
         public void ResetBallReceiver()
         {
             Debug.Log("RESET BALL RECEIVER");

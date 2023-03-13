@@ -16,7 +16,7 @@ public class ScenarioData
     public int ScenarioNumber = 0; //denote what saved scenario number is currently running
     public int PositionNumber = 0; //denote how many position is in that scenario ???
     public Vector3 PlayerStartingPosition; //denote the expected starting position for players that is studying the scenario
-
+    public Vector3 PlayerStartingRotation;
     [XmlArray("homeplayers"), XmlArrayItem("player")]
     public List<PlayerData> homeplayers = new List<PlayerData>();
     [XmlArray("awayplayers"), XmlArrayItem("player")]

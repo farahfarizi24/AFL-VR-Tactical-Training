@@ -15,6 +15,7 @@ namespace com.DU.CE.INT
         [SerializeField] private GameObject m_pinMesh = null;
         [SerializeField] private GameObject m_pinArrow = null;
         public GameObject PinBody = null;
+        public GameObject PinRing = null;
         [Space]
         [SerializeField] private TextMeshPro m_tmpTeamNumber = null;
         [SerializeField] private MeshRenderer[] m_meshRenders = null;
@@ -49,7 +50,7 @@ namespace com.DU.CE.INT
             m_outlineComponent = GetComponent<Outlinable>();
 
             m_pin.SwitchPin(false);
-
+            PinRing.SetActive(false);
             m_tmpTeamNumber.enabled = false;
             m_pinArrow.SetActive(false);
         
@@ -190,6 +191,9 @@ namespace com.DU.CE.INT
                 screenPoint = camera.GetComponent<Camera>().WorldToScreenPoint(gameObject.transform.position);
                 offset = gameObject.transform.position - camera.GetComponent<Camera>().ScreenToWorldPoint
                     (new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+
+
+
             }
            
            
@@ -217,6 +221,12 @@ namespace com.DU.CE.INT
 
         private void OnMouseUp()
         { // Change outline to highlight colour
+            if(ScenarioScript.PlayerReferenceTarrgetting == true)
+            {
+                m_linkedObject.SetPlayerReference(true);
+                ScenarioScript.SetMarkerPlayer();
+                m_linkedObject.SetHighlight();
+            }
             if (ScenarioScript.BallTargetting == true)
             {
                 m_linkedObject.SetBallReceiver(true);
@@ -353,6 +363,22 @@ namespace com.DU.CE.INT
             var Body = PinBody.GetComponent<MeshRenderer>();
             Body.material.color = color;
            // PinBody.GetComponent<MeshRenderer>().SetColor("_Color", color);
+        }
+
+        void INT_IBoardLinkedPin.SetPinRing()
+        {
+            PinRing.SetActive(true);
+        }
+
+        void INT_IBoardLinkedPin.UnsetPinRing()
+        {
+            PinRing.SetActive(false);
+        }
+        void INT_IBoardLinkedPin.setBasePinColour(Color32 color)
+        {
+            var Ring = PinRing.GetComponent<MeshRenderer>();
+            Ring.material.color = color;
+
         }
 
         void INT_IBoardLinkedPin.UpdateForLoad(Vector3 _destinationPosition, Vector3 destinationRotation)
