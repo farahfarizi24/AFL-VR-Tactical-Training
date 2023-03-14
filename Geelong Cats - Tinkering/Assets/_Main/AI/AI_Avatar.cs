@@ -141,6 +141,13 @@ namespace com.DU.CE.AI
                 }
 
 
+                if (IsPositionReference)
+                {
+                    OutlineScript.OutlineColor = Color.green;
+                    OutlineScript.enabled = true;
+                }
+
+
             }
         }
 
@@ -324,20 +331,16 @@ namespace com.DU.CE.AI
         void INT_ILinkedPinObject.SetPlayerReference(bool status)
         {
             IsPositionReference = status;
-            Color32 col;
-
+     
             if (IsPositionReference == false)
             {
-                //  col = new Color32(255, 255, 255, 255);
-
-                //  m_linkedPin.setBasePinColour(col);
+               
                 m_linkedPin.UnsetPinRing();
             }
             else
             {
-                // UnlinkedSetHighlight();
-                // col = new Color32(144, 238, 144, 255);
-                //  m_linkedPin.setBasePinColour(col);
+             
+               
                 m_linkedPin.SetPinRing();
 
             }
