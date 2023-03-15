@@ -146,6 +146,7 @@ namespace com.DU.CE.AI
                     OutlineScript.OutlineColor = Color.green;
                     OutlineScript.enabled = true;
                 }
+               
 
 
             }
@@ -322,10 +323,26 @@ namespace com.DU.CE.AI
             //turn on and off indicator
 
             Color32 col = new Color32(255, 255, 255, 255);
-            //UnsetHighlight();
+            OutlineScript.enabled = false;
             m_linkedPin.UnsetPinRing();
 
 
+        }
+
+        public void NonlinkedPlayerReference()
+        {
+            if (IsPositionReference == false)
+            {
+
+                m_linkedPin.UnsetPinRing();
+            }
+            else
+            {
+
+
+                m_linkedPin.SetPinRing();
+
+            }
         }
 
         void INT_ILinkedPinObject.SetPlayerReference(bool status)

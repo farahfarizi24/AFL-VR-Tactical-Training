@@ -172,6 +172,11 @@ public class ScenarioCreation_Function : MonoBehaviour
                 player.GetComponent<AI_Avatar>().UnlinkedSetHighlight();
                 Debug.Log("Set highlight");
             }
+
+            if (player.GetComponent<AI_Avatar>().IsPositionReference == true)
+            {
+                player.GetComponent<AI_Avatar>().NonlinkedPlayerReference();
+            }
         }
         foreach (var player in awayPlayers)
         {
@@ -180,6 +185,11 @@ public class ScenarioCreation_Function : MonoBehaviour
             {
                 player.GetComponent<AI_Avatar>().UnlinkedSetHighlight();
                 Debug.Log("Set highlight");
+            }
+
+            if (player.GetComponent<AI_Avatar>().IsPositionReference == true)
+            {
+                player.GetComponent<AI_Avatar>().NonlinkedPlayerReference();
             }
         }
     }
@@ -223,18 +233,18 @@ public class ScenarioCreation_Function : MonoBehaviour
             //first find active homeplayer
             List<GameObject> activePlayers = new List<GameObject>();
                 var HomePlayers = GameObject.FindGameObjectsWithTag("Home");
-                foreach (var player in HomePlayers)
+            foreach (var player in HomePlayers)
+            {
+
+                if (player.GetComponent<AI_Avatar>().M_NCModel.isActivated == true)
                 {
 
-                    if (player.GetComponent<AI_Avatar>().M_NCModel.isActivated == true)
-                    {
-                      
-                        activePlayers.Add(player);
-                    }
-
-                 
-
+                    activePlayers.Add(player);
                 }
+
+
+
+            }
 
                 for (int i = 0; i < HomeAICounter; i++)
                 {
@@ -406,7 +416,7 @@ public class ScenarioCreation_Function : MonoBehaviour
         writeData(scenarios);
     }
 
-    private ScenarioContainer loadData()
+        private ScenarioContainer loadData()
     {
         if (!File.Exists(filePath))
         {
@@ -418,6 +428,8 @@ public class ScenarioCreation_Function : MonoBehaviour
         reader.Close();
         return deserialized;
     }
+
+
     private void writeData(ScenarioContainer scenarios)
         {
             if (File.Exists(filePath))
@@ -500,6 +512,7 @@ public class ScenarioCreation_Function : MonoBehaviour
                 player.position[0], player.rotation[0], player.position[1], player.rotation[1]
                 );
 
+            playerObject.GetComponent<AI_Avatar>().IsPositionReference = player.PlayerReference;
             playerObject.GetComponent<AI_Avatar>().BallReceiver = player.BallReceiver;
             if (ScenarioEditorObj.activeSelf == true)
             {
@@ -514,6 +527,7 @@ public class ScenarioCreation_Function : MonoBehaviour
           player.position[0], player.rotation[0], player.position[1], player.rotation[1]
 
          );
+            playerObject.GetComponent<AI_Avatar>().IsPositionReference = player.PlayerReference;
             playerObject.GetComponent<AI_Avatar>().BallReceiver = player.BallReceiver;
             if (ScenarioEditorObj.activeSelf == true)
             {

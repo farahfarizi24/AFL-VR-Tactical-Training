@@ -16,6 +16,10 @@ public class PlayerData
 
     [XmlElement("BallReceiver")]
     public bool BallReceiver;
+
+    [XmlElement("PlayerReference")]
+    public bool PlayerReference;
+
     /// <summary>
     /// Haven't been implemented
     /// </summary>
@@ -31,7 +35,7 @@ public class PlayerData
 
     public void getDataFromPlayer(GameObject player)
     {//Now you want to make sure the player has a list of position and rotation
-
+        PlayerReference = player.GetComponent<AI_Avatar>().IsPositionReference;
         BallReceiver = player.GetComponent<AI_Avatar>().BallReceiver;
         for(int i = 0; i < 2; i++)
         {
