@@ -173,6 +173,8 @@ GameObject:
   - component: {fileID: 3438742438044637608}
   - component: {fileID: 3242873773852711433}
   - component: {fileID: 8875590976279404431}
+  - component: {fileID: 5632046399563177239}
+  - component: {fileID: 5461401299831963359}
   m_Layer: 10
   m_Name: AFLBALL_Active
   m_TagString: BallContainer
@@ -284,33 +286,27 @@ MonoBehaviour:
   hightlightMaterial: {fileID: 0}
   isGrabbable: 1
   CopySettings: {fileID: 0}
+  grabType: 0
+  handType: 0
   singleHandOnly: 0
   allowHeldSwapping: 1
-<<<<<<< HEAD
   instantGrab: 1
   useGentleGrab: 0
   maintainGrabOffset: 0
   ignoreWeight: 0
-=======
-  instantGrab: 0
-  ignoreWeight: 0
-  maintainGrabOffset: 0
->>>>>>> parent of 0bcc914 (Controller grab ball from distance)
   parentOnGrab: 1
   throwPower: 1
   jointBreakForce: 1800
   showAdvancedSettings: 0
-  grabType: 0
-  handType: 0
   makeChildrenGrabbable: 1
-  pullApartBreakOnly: 1
-  customGrabJoint: {fileID: 0}
-  ignoreReleaseTime: 0.5
   grabPriorityWeight: 1
+  ignoreReleaseTime: 0.5
   heldPositionOffset: {x: 0, y: 0, z: 0}
   heldRotationOffset: {x: 0, y: 0, z: 0}
+  customGrabJoint: {fileID: 0}
   jointedBodies: []
   heldIgnoreColliders: []
+  pullApartBreakOnly: 1
   showEvents: 1
   onGrab:
     m_PersistentCalls:
@@ -318,7 +314,6 @@ MonoBehaviour:
   onRelease:
     m_PersistentCalls:
       m_Calls: []
-  showAdvancedEvents: 0
   onSqueeze:
     m_PersistentCalls:
       m_Calls: []
@@ -414,7 +409,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
-<<<<<<< HEAD
 --- !u!114 &5632046399563177239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,8 +589,6 @@ MonoBehaviour:
   StopSelecting:
     m_PersistentCalls:
       m_Calls: []
-=======
->>>>>>> parent of 0bcc914 (Controller grab ball from distance)
 --- !u!1 &3859707344979680615
 GameObject:
   m_ObjectHideFlags: 0

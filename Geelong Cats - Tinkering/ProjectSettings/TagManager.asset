@@ -19,7 +19,6 @@ TagManager:
   - ScenarioEditor
   - ActivePlayer
   - PlayerBody
-<<<<<<< HEAD
   - LeftHandController
   - RightHandController
   - coach
@@ -31,8 +30,6 @@ TagManager:
   - PositionPin
   - MarkerPin
   - FieldMarkerTransform
-=======
->>>>>>> parent of 0bcc914 (Controller grab ball from distance)
   layers:
   - Default
   - TransparentFX
