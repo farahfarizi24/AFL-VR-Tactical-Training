@@ -64,6 +64,8 @@ namespace com.DU.CE.AI
                 previousModel.teamDidChange -= InitializeTeam;
                 previousModel.isSelectedDidChange -= OnSelectChanged;
                 previousModel.isActivatedDidChange -= OnActivated;
+                previousModel.isBallReceiverDidChange -= OnBallReceiverChanged;
+                previousModel.isPlayerReferenceDidChange -= OnPlayerReferenceChanged;
             }
 
 
@@ -76,7 +78,8 @@ namespace com.DU.CE.AI
                     currentModel.number = m_teamNumber;
                     currentModel.isSelected = m_interactable.isSelected;
                     currentModel.isActivated = false;
-
+                    currentModel.isPlayerReference = IsPositionReference;
+                    currentModel.isBallReceiver = BallReceiver;
                     // Instantiate a Board Pin
                     m_boardSock.AIInstantiateCall(transform);
 
@@ -88,7 +91,8 @@ namespace com.DU.CE.AI
                 currentModel.numberDidChange += InitializeNumber;
                 currentModel.isSelectedDidChange += OnSelectChanged;
                 currentModel.isActivatedDidChange += OnActivated;
-
+                currentModel.isBallReceiverDidChange += OnBallReceiverChanged;
+                currentModel.isPlayerReferenceDidChange += OnPlayerReferenceChanged;
                 m_team = (ETEAM)model.team;
                 m_teamNumber = model.number;
                 m_numberText.SetText(model.number.ToString());
@@ -153,7 +157,16 @@ namespace com.DU.CE.AI
         }
 
         
+        public void OnBallReceiverChanged(NCM_AvatarModel model, bool toggle)
+        {
+            BallReceiver = toggle;
+            setBallReceiver(toggle);
+        }
 
+        public void OnPlayerReferenceChanged(NCM_AvatarModel model, bool toggle)
+        {
+            IsPositionReference = toggle;
+        }
         public void ChangeNetworkActivation(bool _toggle)
         {
             model.isActivated = _toggle;
@@ -263,6 +276,22 @@ namespace com.DU.CE.AI
             OutlineScript.enabled = true;
             Color32 col = new Color32(231, 49, 203, 255);
             m_linkedPin.SetPinColour(col);
+        }
+
+        public void setBallReceiver(bool toggle)
+        {
+            if (toggle == false)
+            {
+                Color32 col = new Color32(255, 255, 255, 255);
+                OutlineScript.enabled = false;
+            }
+            else
+            {
+                OutlineScript.OutlineColor = Color.yellow;
+                OutlineScript.enabled = true;
+                Color32 col = new Color32(231, 49, 203, 255);
+                m_linkedPin.SetPinColour(col);
+            }
         }
 
         #endregion

@@ -34,6 +34,12 @@ namespace com.DU.CE.NET.NCM
 
         [RealtimeProperty(4, true, true)]
         private bool _isActivated;
+
+        [RealtimeProperty(5, true, true)]
+        private bool _isBallReceiver;
+
+        [RealtimeProperty(6, true, true)]
+        private bool _isPlayerReference;
     }
 }
 
@@ -75,7 +81,40 @@ namespace com.DU.CE.NET.NCM {
                 FireIsSelectedDidChange(value);
             }
         }
-        
+
+        public bool isBallReceiver
+        {
+            get
+            {
+                return _cache.LookForValueInCache(_isBallReceiver, entry => entry.isBallReceiverSet, entry => entry.isBallReceiver);
+            }
+            set
+            {
+                if (this.isBallReceiver == value) return;
+                _cache.UpdateLocalCache(entry => { entry.isBallReceiverSet = true; entry.isBallReceiver = value; return entry; });
+                InvalidateReliableLength();
+                FireBallReceiverDidChange(value);
+            }
+
+        }
+
+
+        public bool isPlayerReference
+        {
+            get
+            {
+                return _cache.LookForValueInCache(_isPlayerReference, entry => entry.isPlayerReferenceSet, entry => entry.isPlayerReference);
+            }
+            set
+            {
+                if (this.isPlayerReference == value) return;
+                _cache.UpdateLocalCache(entry => { entry.isPlayerReferenceSet = true; entry.isPlayerReference = value; return entry; });
+                InvalidateReliableLength();
+                FirePlayerReferenceDidChange(value);
+            }
+
+        }
+
         public bool isActivated {
             get {
                 return _cache.LookForValueInCache(_isActivated, entry => entry.isActivatedSet, entry => entry.isActivated);
@@ -93,6 +132,8 @@ namespace com.DU.CE.NET.NCM {
         public event PropertyChangedHandler<int> teamDidChange;
         public event PropertyChangedHandler<bool> isSelectedDidChange;
         public event PropertyChangedHandler<bool> isActivatedDidChange;
+        public event PropertyChangedHandler<bool> isPlayerReferenceDidChange;
+        public event PropertyChangedHandler<bool> isBallReceiverDidChange;
         
         private struct LocalCacheEntry {
             public bool numberSet;
@@ -103,6 +144,10 @@ namespace com.DU.CE.NET.NCM {
             public bool isSelected;
             public bool isActivatedSet;
             public bool isActivated;
+            public bool isPlayerReferenceSet;
+            public bool isPlayerReference;
+            public bool isBallReceiverSet;
+            public bool isBallReceiver;
         }
         
         private LocalChangeCache<LocalCacheEntry> _cache = new LocalChangeCache<LocalCacheEntry>();
@@ -112,6 +157,8 @@ namespace com.DU.CE.NET.NCM {
             Team = 2,
             IsSelected = 3,
             IsActivated = 4,
+            IsBallReceiver = 5,
+            IsPlayerReference=6
         }
         
         public NCM_AvatarModel() : this(null) {
@@ -155,7 +202,31 @@ namespace com.DU.CE.NET.NCM {
                 UnityEngine.Debug.LogException(exception);
             }
         }
-        
+
+        private void FirePlayerReferenceDidChange(bool value)
+        {
+            try
+            {
+                isPlayerReferenceDidChange?.Invoke(this, value);
+            }
+            catch (System.Exception exception)
+            {
+                UnityEngine.Debug.LogException(exception);
+            }
+        }
+
+        private void FireBallReceiverDidChange(bool value)
+        {
+            try
+            {
+                isBallReceiverDidChange?.Invoke(this, value);
+            }
+            catch (System.Exception exception)
+            {
+                UnityEngine.Debug.LogException(exception);
+            }
+        }
+
         protected override int WriteLength(StreamContext context) {
             int length = 0;
             if (context.fullModel) {
@@ -164,6 +235,8 @@ namespace com.DU.CE.NET.NCM {
                 length += WriteStream.WriteVarint32Length((uint)PropertyID.Team, (uint)_team);
                 length += WriteStream.WriteVarint32Length((uint)PropertyID.IsSelected, _isSelected ? 1u : 0u);
                 length += WriteStream.WriteVarint32Length((uint)PropertyID.IsActivated, _isActivated ? 1u : 0u);
+                length += WriteStream.WriteVarint32Length((uint)PropertyID.IsBallReceiver, _isBallReceiver ? 1u : 0u);
+                length += WriteStream.WriteVarint32Length((uint)PropertyID.IsPlayerReference, _isPlayerReference ? 1u : 0u);
             } else if (context.reliableChannel) {
                 LocalCacheEntry entry = _cache.localCache;
                 if (entry.numberSet) {
@@ -178,6 +251,15 @@ namespace com.DU.CE.NET.NCM {
                 if (entry.isActivatedSet) {
                     length += WriteStream.WriteVarint32Length((uint)PropertyID.IsActivated, entry.isActivated ? 1u : 0u);
                 }
+                if (entry.isBallReceiverSet)
+                {
+                    length += WriteStream.WriteVarint32Length((uint)PropertyID.IsBallReceiver, entry.isBallReceiver ? 1u : 0u);
+                }
+
+                if (entry.isPlayerReferenceSet)
+                {
+                    length += WriteStream.WriteVarint32Length((uint)PropertyID.IsPlayerReference, entry.isPlayerReference ? 1u : 0u);
+                }
             }
             return length;
         }
@@ -190,6 +272,8 @@ namespace com.DU.CE.NET.NCM {
                 stream.WriteVarint32((uint)PropertyID.Team, (uint)_team);
                 stream.WriteVarint32((uint)PropertyID.IsSelected, _isSelected ? 1u : 0u);
                 stream.WriteVarint32((uint)PropertyID.IsActivated, _isActivated ? 1u : 0u);
+                stream.WriteVarint32((uint)PropertyID.IsPlayerReference, _isPlayerReference ? 1u : 0u);
+                stream.WriteVarint32((uint)PropertyID.IsBallReceiver, _isBallReceiver ? 1u : 0u);
             } else if (context.reliableChannel) {
                 LocalCacheEntry entry = _cache.localCache;
                 if (entry.numberSet || entry.teamSet || entry.isSelectedSet || entry.isActivatedSet) {
@@ -212,7 +296,19 @@ namespace com.DU.CE.NET.NCM {
                     stream.WriteVarint32((uint)PropertyID.IsActivated, entry.isActivated ? 1u : 0u);
                     didWriteProperties = true;
                 }
-                
+
+                if (entry.isPlayerReferenceSet)
+                {
+                    stream.WriteVarint32((uint)PropertyID.IsPlayerReference, entry.isPlayerReference ? 1u : 0u);
+                    didWriteProperties = true;
+                }
+
+                if (entry.isBallReceiverSet)
+                {
+                    stream.WriteVarint32((uint)PropertyID.IsBallReceiver, entry.isBallReceiver ? 1u : 0u);
+                    didWriteProperties = true;
+                }
+
                 if (didWriteProperties) InvalidateReliableLength();
             }
         }
@@ -256,6 +352,33 @@ namespace com.DU.CE.NET.NCM {
                         }
                         break;
                     }
+
+
+                    case (uint)PropertyID.IsBallReceiver:
+                        {
+                            bool previousValue =_isBallReceiver;
+                            _isBallReceiver = (stream.ReadVarint32() != 0);
+                            bool isActivatedExistsInChangeCache = _cache.ValueExistsInCache(entry => entry.isBallReceiverSet);
+                            if (!isActivatedExistsInChangeCache && _isBallReceiver!= previousValue)
+                            {
+                                FireBallReceiverDidChange(_isBallReceiver);
+                            }
+                            break;
+                        }
+
+                    case (uint)PropertyID.IsPlayerReference:
+                        {
+                            bool previousValue = _isPlayerReference;
+                            _isPlayerReference = (stream.ReadVarint32() != 0);
+                            bool isActivatedExistsInChangeCache = _cache.ValueExistsInCache(entry => entry.isPlayerReferenceSet);
+                            if (!isActivatedExistsInChangeCache && _isPlayerReference != previousValue)
+                            {
+                                FirePlayerReferenceDidChange(_isPlayerReference);
+                            }
+                            break;
+                        }
+
+
                     default: {
                         stream.SkipProperty();
                         break;
