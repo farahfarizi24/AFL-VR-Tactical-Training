@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1018621903350043968
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8018218254699741012}
-  m_Layer: 22
-  m_Name: GrabberTransform
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8018218254699741012
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018621903350043968}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8830634330894275663}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1395618704738160550
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,36 +273,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5120043814992748014}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2432208646746191364
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4173312731127485177}
-  m_Layer: 22
-  m_Name: LeftHandGrabTransform
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4173312731127485177
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2432208646746191364}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2537225453445272891}
-  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2557834757685474602
 GameObject:
@@ -2926,6 +2866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 933129fded864924fbff5f7b9f84e8e1, type: 3}
+<<<<<<< HEAD:Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_USER_COACH.prefab
 --- !u!1 &4877281009115053054 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 740481456489177416, guid: 933129fded864924fbff5f7b9f84e8e1,
@@ -2950,6 +2891,8 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> parent of 0bcc914 (Controller grab ball from distance):Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_Player.prefab
 --- !u!4 &1537283914390158157 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6682397752118682107, guid: 933129fded864924fbff5f7b9f84e8e1,
@@ -3118,12 +3061,23 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_USER_COACH.prefab
 --- !u!4 &2537225453445272891 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -1522449968463491187, guid: 933129fded864924fbff5f7b9f84e8e1,
+=======
+--- !u!1 &5148752604183094609 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8170327985154293785, guid: 933129fded864924fbff5f7b9f84e8e1,
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &628743922678853142 stripped
+>>>>>>> parent of 0bcc914 (Controller grab ball from distance):Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_Player.prefab
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4706434846886982816, guid: 933129fded864924fbff5f7b9f84e8e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 5325826287514852022}
+  m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_USER_COACH.prefab
 --- !u!4 &628743922678853142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4706434846886982816, guid: 933129fded864924fbff5f7b9f84e8e1,
@@ -3133,6 +3087,11 @@ Transform:
 --- !u!1 &1575991039680227133 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6644543700914683275, guid: 933129fded864924fbff5f7b9f84e8e1,
+=======
+--- !u!4 &1698446044203470423 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2415278057915362079, guid: 933129fded864924fbff5f7b9f84e8e1,
+>>>>>>> parent of 0bcc914 (Controller grab ball from distance):Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_Player.prefab
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
@@ -3298,9 +3257,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_USER_COACH.prefab
 --- !u!4 &545118997527616600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3568675967256639762, guid: 933129fded864924fbff5f7b9f84e8e1,
+=======
+--- !u!1 &2889803148782932908 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2165239190294263526, guid: 933129fded864924fbff5f7b9f84e8e1,
+>>>>>>> parent of 0bcc914 (Controller grab ball from distance):Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_Player.prefab
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
@@ -3322,6 +3287,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_USER_COACH.prefab
 --- !u!1 &3174036458639412391 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7342366701936563729, guid: 933129fded864924fbff5f7b9f84e8e1,
@@ -3331,6 +3297,11 @@ GameObject:
 --- !u!1 &5148752604183094609 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8170327985154293785, guid: 933129fded864924fbff5f7b9f84e8e1,
+=======
+--- !u!1 &1575991039680227133 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6644543700914683275, guid: 933129fded864924fbff5f7b9f84e8e1,
+>>>>>>> parent of 0bcc914 (Controller grab ball from distance):Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_Player.prefab
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
@@ -3424,21 +3395,43 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1698446044203470423 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -2415278057915362079, guid: 933129fded864924fbff5f7b9f84e8e1,
-    type: 3}
-  m_PrefabInstance: {fileID: 5325826287514852022}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4780663203684754415 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8380793116740044455, guid: 933129fded864924fbff5f7b9f84e8e1,
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_USER_COACH.prefab
 --- !u!1 &2889803148782932908 stripped
+=======
+--- !u!4 &2537225453445272891 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1522449968463491187, guid: 933129fded864924fbff5f7b9f84e8e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 5325826287514852022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4877281009115053054 stripped
+>>>>>>> parent of 0bcc914 (Controller grab ball from distance):Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_Player.prefab
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2165239190294263526, guid: 933129fded864924fbff5f7b9f84e8e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 5325826287514852022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5544835719267804852 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8855743177381348350, guid: 933129fded864924fbff5f7b9f84e8e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 5325826287514852022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6065309286336128004 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7078132064298205518, guid: 933129fded864924fbff5f7b9f84e8e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 5325826287514852022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &545118997527616600 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3568675967256639762, guid: 933129fded864924fbff5f7b9f84e8e1,
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
@@ -3716,7 +3709,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4780663203684754415}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 20
   m_Drag: 5
   m_AngularDrag: 12
   m_UseGravity: 0
@@ -3757,6 +3750,7 @@ MonoBehaviour:
   - 1
   - 1
   - 1
+<<<<<<< HEAD:Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_USER_COACH.prefab
 --- !u!114 &1890120329690631255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3847,6 +3841,8 @@ MonoBehaviour:
   StopSelect:
     m_PersistentCalls:
       m_Calls: []
+=======
+>>>>>>> parent of 0bcc914 (Controller grab ball from distance):Geelong Cats - Tinkering/Assets/_Main/Resources/Playable_Player.prefab
 --- !u!114 &2528672120214433632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3914,22 +3910,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UserStateMachine: {fileID: 11400000, guid: f1dfd97f0c037074dae25b96061f9a30, type: 2}
---- !u!114 &6114027418183487741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4780663203684754415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 347efddb19627c941bbe201c025bc04e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pointGrab: {fileID: 2524627903312072147}
-  link: {fileID: 8276320801930416889}
-  pointInput: 0
-  selectInput: 4
 --- !u!114 &6559536920956116656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4433,9 +4413,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6113478862100838929}
   serializedVersion: 2
-  m_Mass: 10
-  m_Drag: 5
-  m_AngularDrag: 12
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -4636,72 +4616,6 @@ MonoBehaviour:
   - 0
   - 0
   - 0
---- !u!114 &7937736430386263251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6113478862100838929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d96c01b1450af242a0b7a3863be5413, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ThisLineRenderer: {fileID: 0}
-  LineRendererTag: RightHandController
-  ThisHandGrabber: {fileID: 8485134214491109609}
-  Temp_LineRenderer: {fileID: 0}
---- !u!114 &8485134214491109609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6113478862100838929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1827e9caa3a42174ea1ead7cf86e7b2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  primaryHand: {fileID: 2253245310071390444}
-  secondaryHand: {fileID: 6559536920956116656}
-  forwardPointer: {fileID: 8018218254699741012}
-  line: {fileID: 0}
-  maxRange: 5
-  layers:
-    serializedVersion: 2
-    m_Bits: 0
-  defaultTargetedMaterial: {fileID: 0}
-  defaultSelectedMaterial: {fileID: 0}
-  useInstantPull: 0
-  useFlickPull: 1
-  flickThreshold: 7
-  pullGrabDistance: 0.1
-  instantGrabAssist: 1
-  catchAssistRadius: 0.2
-  showEvents: 1
-  OnPull:
-    m_PersistentCalls:
-      m_Calls: []
-  StartPoint:
-    m_PersistentCalls:
-      m_Calls: []
-  StopPoint:
-    m_PersistentCalls:
-      m_Calls: []
-  StartTarget:
-    m_PersistentCalls:
-      m_Calls: []
-  StopTarget:
-    m_PersistentCalls:
-      m_Calls: []
-  StartSelect:
-    m_PersistentCalls:
-      m_Calls: []
-  StopSelect:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &8869716320850696506
 MonoBehaviour:
   m_ObjectHideFlags: 0
