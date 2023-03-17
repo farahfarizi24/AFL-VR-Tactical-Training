@@ -763,6 +763,7 @@ MonoBehaviour:
   NavMeshCount: 0
   state: 
   BallReceiver: 0
+  IsPositionReference: 0
   AvatarPosition: []
   AvatarRotation: []
 --- !u!114 &8608479979525973112
@@ -3884,6 +3885,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: a8591e260315ff144a4a73eb19c3122f, type: 2}
+    - target: {fileID: 7342366701936563729, guid: 933129fded864924fbff5f7b9f84e8e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 933129fded864924fbff5f7b9f84e8e1, type: 3}
 --- !u!4 &1172916507153400075 stripped
@@ -4165,6 +4171,11 @@ PrefabInstance:
       propertyPath: AI_ballkick
       value: 
       objectReference: {fileID: 3289739800395676736}
+    - target: {fileID: 5831891589416266814, guid: aced2c93ff692df48a488f2b9f84bda2,
+        type: 3}
+      propertyPath: ThisAIObject
+      value: 
+      objectReference: {fileID: 2480760656906927810}
     - target: {fileID: 5831891589416266814, guid: aced2c93ff692df48a488f2b9f84bda2,
         type: 3}
       propertyPath: PossessionPrompt

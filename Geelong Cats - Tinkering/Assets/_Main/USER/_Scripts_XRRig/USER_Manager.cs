@@ -36,7 +36,7 @@ namespace com.DU.CE.USER
 
             m_UserStateMachineSock.OnStateChange += OnUserStateChange;
             m_UserStateMachineSock.OnHandStateChange += OnHandStateChange;
-
+            //m_localUserSock.OnRequestTeleport += OnTeleportRequest;
             m_BoardSock.OnTeleportRequest += OnTeleportRequest;
         }
 

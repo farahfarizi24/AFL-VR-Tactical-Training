@@ -38,8 +38,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RendererFeatures:
   - {fileID: 5415428533647681717}
-  - {fileID: -7991299002296966427}
-  m_RendererFeatureMap: b5a895268f77274be5e227aae5331991
+  - {fileID: 8990751826922450644}
+  m_RendererFeatureMap: b5a895268f77274bd42e68cb2691c57c
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
@@ -127,6 +127,30 @@ MonoBehaviour:
     BlurIterations: 0
     DilateIterations: 3
     BlurShift: 0
+    DilateShift: 1
+    LayerMask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    UsingInfoBuffer: 0
+--- !u!114 &8990751826922450644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203f2736dd0257749ac5ed62d5809e6f, type: 3}
+  m_Name: NewSRPOutlineFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    PrimaryRendererScale: 1
+    InfoBufferScale: 1
+    BlurIterations: 1
+    DilateIterations: 1
+    BlurShift: 1
     DilateShift: 1
     LayerMask:
       serializedVersion: 2

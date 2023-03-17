@@ -4644,7 +4644,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PlayerNCLocalAvatarPrefab
       value: 
-      objectReference: {fileID: 8184238515867011825, guid: fc8486c47a328674999b00344b90cab9,
+      objectReference: {fileID: 8163357266020540742, guid: e193c15979b135a47b938bbe1d930501,
         type: 3}
     - target: {fileID: 47065443185621546, guid: 16c105c9e68675c4c917e4d868f7dedd,
         type: 3}

@@ -10,7 +10,7 @@ public class AI_UI_actions : MonoBehaviour
     public GameObject PossessionPrompt;
     public GameObject ThisUserObject=null;
     public GameObject ThisObjParent = null;
-    public GameObject ThisAIObject = null;
+    public GameObject ThisAIObject;
     public bool CurrentlyPossessing;
     public GameObject baseUI;
     public Button Kicking;
@@ -44,13 +44,14 @@ public class AI_UI_actions : MonoBehaviour
         if(context.started && CurrentlyPossessing)
         {
           
-            ThisAIObject.transform.SetParent(ThisObjParent.transform);
+           // ThisAIObject.transform.SetParent(ThisObjParent.transform);
             PossessionPrompt.SetActive(false);
-            ThisAIObject = null;
-            ThisObjParent = null;
+           // ThisAIObject = null;
+           // ThisObjParent = null;
+            ThisAIObject.SetActive(true);
             CurrentlyPossessing = false;
-            child.SetActive(true);
-            child = null;
+           // child.SetActive(true);
+          //  child = null;
         }
     }
     void KickingTaskOnClick()
@@ -67,20 +68,26 @@ public class AI_UI_actions : MonoBehaviour
     void PossessTaskOnClick()
     {
         Debug.Log("--- Possess initiated");
-      ThisAIObject = transform.parent.parent.gameObject;
+       
+       
         ThisUserObject = GameObject.FindGameObjectWithTag("Player");
         ThisUserObject.transform.position = new Vector3
             (ThisAIObject.transform.position.x,
              ThisUserObject.transform.position.y, ThisAIObject.transform.position.z+0.5f);
+       // ThisUserObject.transform.rotation = ThisAIObject.transform.rotation;
 
+        ThisAIObject.SetActive(false);
         //transform rotation
         //Parent AI object to user object so they move together
-        ThisUserObject.transform.rotation = ThisAIObject.transform.rotation;
+        //In the new version, what's important is for the transform to change player so the one under is not needed
+        /*
+        ThisAIObject = transform.parent.parent.gameObject;
+       
         ThisObjParent = ThisAIObject.transform.parent.gameObject;
         ThisAIObject.transform.SetParent(ThisUserObject.transform);
         //disable the body of theUser Object
         child = GameObject.FindGameObjectWithTag("PlayerBody");
-        child.SetActive(false);
+        child.SetActive(false);*/
         CurrentlyPossessing = true;
         PossessionPrompt.SetActive(true);
     }

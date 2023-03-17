@@ -20,17 +20,7 @@ namespace com.DU.CE.USER
             m_HandUICanvas.enabled = false;
 
             p_StateMachineSock.OnStateChange += OnUserStateChange;
-        }
 
-        private void OnDisable()
-        {
-            p_StateMachineSock.OnStateChange += OnUserStateChange;
-
-            m_uiSock.OnHandUIToggle -= OnHandUIToggle;
-            m_uiSock.OnBoardLocUIToggle -= OnBoardUIToggle;
-
-            if (p_role.Equals(EUSERROLE.COACH))
-                (m_uiSock as SOC_UserUICoach).OnFieldLocUIToggle += OnFieldUIToggle;
         }
 
         protected override void OnUserStateChange(EUSERSTATE oldState, EUSERSTATE newState)
@@ -85,6 +75,17 @@ namespace com.DU.CE.USER
             m_HandUICanvas.enabled = _toggle;
         }
 
+
+        private void OnDisable()
+        {
+            p_StateMachineSock.OnStateChange += OnUserStateChange;
+
+            m_uiSock.OnHandUIToggle -= OnHandUIToggle;
+            m_uiSock.OnBoardLocUIToggle -= OnBoardUIToggle;
+
+            if (p_role.Equals(EUSERROLE.COACH))
+                (m_uiSock as SOC_UserUICoach).OnFieldLocUIToggle += OnFieldUIToggle;
+        }
 
         private void OnBoardUIToggle(bool _toggle, Vector3 _position)
         {

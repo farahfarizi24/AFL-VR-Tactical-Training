@@ -8,7 +8,7 @@ namespace com.DU.CE.USER
     public class USER_LocalUser : MonoBehaviour
     {
         public EUSERROLE Role { get => m_UserSock.UserRole; }
-
+        public GameObject ModelObject;
         [SerializeField] private SOC_User m_UserSock = null;
         public SOC_User UserSock { get => m_UserSock; }
 
@@ -18,6 +18,11 @@ namespace com.DU.CE.USER
         private void OnEnable()
         {
             m_UserSock.UISock.OnUIRescaleRig += RescaleIK;
+
+            if (Role.Equals(EUSERROLE.COACH))
+            {
+                ModelObject.SetActive(false);
+            }
         }
 
         private void OnDisable()

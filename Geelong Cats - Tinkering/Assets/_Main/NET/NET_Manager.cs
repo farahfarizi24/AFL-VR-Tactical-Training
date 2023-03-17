@@ -122,13 +122,14 @@ namespace com.DU.CE.NET
             // Local avatar always added in last
             if (isLocalAvatar)
             {
-                if (m_NetManagerSock.Coach == null)
+
+               /* if (m_NetManagerSock.Coach == null)
                 {
                     NCRealtime.Disconnect();
                     m_NetManagerSock.Disconnect(0, "No Coach in the room");
                     return;
                 }
-
+               */
                 m_NetManagerSock.SetLocalAvatar(avatar.transform);
                 m_LvlStateMachine.OnRequestStateChange(ELVLSTATE.SETUP_USER);
                 return;
