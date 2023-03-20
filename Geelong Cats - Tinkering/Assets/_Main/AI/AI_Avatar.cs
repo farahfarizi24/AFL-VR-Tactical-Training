@@ -308,7 +308,7 @@ namespace com.DU.CE.AI
         {
             Debug.Log("ON BALL RECEIVER CHANGED");
             BallReceiver = toggle;
-            setBallReceiver(toggle);
+           // setBallReceiver(toggle);
         }
 
         #endregion

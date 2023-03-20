@@ -3774,10 +3774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d96c01b1450af242a0b7a3863be5413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThisLineRenderer: {fileID: 0}
-  LineRendererTag: LeftHandController
-  ThisHandGrabber: {fileID: 2524627903312072147}
-  Temp_LineRenderer: {fileID: 0}
 --- !u!114 &2524627903312072147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3785,7 +3781,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4780663203684754415}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1827e9caa3a42174ea1ead7cf86e7b2f, type: 3}
   m_Name: 
@@ -4653,10 +4649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d96c01b1450af242a0b7a3863be5413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThisLineRenderer: {fileID: 0}
-  LineRendererTag: RightHandController
-  ThisHandGrabber: {fileID: 8485134214491109609}
-  Temp_LineRenderer: {fileID: 0}
 --- !u!114 &8485134214491109609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4664,7 +4656,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6113478862100838929}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1827e9caa3a42174ea1ead7cf86e7b2f, type: 3}
   m_Name: 
