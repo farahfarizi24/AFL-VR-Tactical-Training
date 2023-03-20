@@ -1592,7 +1592,7 @@ PrefabInstance:
         type: 3}
       propertyPath: shootPoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 142249357867077546}
     - target: {fileID: 6554291052525085822, guid: 48ee8cb17cbedc6439eb9bd37312d14e,
         type: 3}
       propertyPath: lineCanShootMaterial.a

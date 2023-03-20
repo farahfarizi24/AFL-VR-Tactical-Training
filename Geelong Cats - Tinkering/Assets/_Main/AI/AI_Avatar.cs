@@ -156,15 +156,26 @@ namespace com.DU.CE.AI
 
                 }
 
+                if (BallReceiver && !OutlineScript.enabled)
+                {
+                    OutlineScript.OutlineColor = Color.yellow;
+
+                    OutlineScript.enabled = true;
+                }
+
                 if(IsPositionReference != prevPositionReference)
                 {
+                    OutlineScript.OutlineColor = Color.green;
                     SetPlayerReference(IsPositionReference);
                     prevPositionReference = IsPositionReference;
                 }
 
+                if (IsPositionReference && !OutlineScript.enabled)
+                {
+                    OutlineScript.enabled = true;
+                }
 
-             
-               
+
 
 
             }

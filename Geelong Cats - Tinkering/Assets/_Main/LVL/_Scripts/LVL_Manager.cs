@@ -59,7 +59,7 @@ namespace com.DU.CE.LVL
             if(m_NetManagerSock.LocalAvatar.GetComponent<NET_LocalAvatar>().UserRole == EUSERROLE.COACH)
             {
                 m_StateMachineSock.OnRequestStateChange(ELVLSTATE.ONCONNECT_COACH);
-
+                CoachInterface.SetActive(true);
             }
             else
             {
