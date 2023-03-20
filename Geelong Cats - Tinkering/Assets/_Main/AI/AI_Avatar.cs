@@ -161,11 +161,13 @@ namespace com.DU.CE.AI
                     SetPlayerReference(IsPositionReference);
                     prevPositionReference = IsPositionReference;
                 }
-                if (IsPositionReference)
+
+
+             /*   if (IsPositionReference)
                 {
                     OutlineScript.OutlineColor = Color.green;
                     OutlineScript.enabled = true;
-                }
+                }*/
                
 
 
@@ -173,39 +175,8 @@ namespace com.DU.CE.AI
         }
 
         
-        public void OnBallReceiverChanged(NCM_AvatarModel model, bool toggle)
-        {
-            Debug.Log("ON BALL RECEIVER CHANGED");
-            BallReceiver = toggle;
-            setBallReceiver(toggle);
-        }
+  
 
-        public void OnPlayerReferenceChanged(NCM_AvatarModel model, bool toggle)
-        {
-            Debug.Log("ON POSITION RECEIVER CHANGED");
-            IsPositionReference = toggle;
-        }
-
-     
-
-        public void SetPlayerReference(bool PlayerReference)
-        {
-            if (PlayerReference == false)
-            {
-
-                m_linkedPin.UnsetPinRing();
-            }
-            else
-            {
-
-
-                m_linkedPin.SetPinRing();
-
-            }
-            model.isPlayerReference = PlayerReference;
-
-
-        }
         public void ChangeNetworkActivation(bool _toggle)
         {
             model.isActivated = _toggle;
@@ -334,6 +305,13 @@ namespace com.DU.CE.AI
             model.isBallReceiver = BallReceiver;
         }
 
+        public void OnBallReceiverChanged(NCM_AvatarModel model, bool toggle)
+        {
+            Debug.Log("ON BALL RECEIVER CHANGED");
+            BallReceiver = toggle;
+            setBallReceiver(toggle);
+        }
+
         #endregion
 
 
@@ -341,6 +319,39 @@ namespace com.DU.CE.AI
 
 
 
+
+        #region Player Reference
+        public void OnPlayerReferenceChanged(NCM_AvatarModel model, bool toggle)
+        {
+            Debug.Log("ON POSITION RECEIVER CHANGED");
+            IsPositionReference = toggle;
+        }
+
+
+
+        public void SetPlayerReference(bool PlayerReference)
+        {
+            if (PlayerReference == false)
+            {
+
+                OutlineScript.OutlineColor = Color.green;
+                OutlineScript.enabled = false;
+                m_linkedPin.UnsetPinRing();
+            }
+            else
+            {
+
+                OutlineScript.OutlineColor = Color.green;
+                OutlineScript.enabled = true;
+                m_linkedPin.SetPinRing();
+
+            }
+            model.isPlayerReference = PlayerReference;
+
+          
+        }
+
+        #endregion
 
 
 
@@ -383,7 +394,6 @@ namespace com.DU.CE.AI
            
         }
 
-        #region Player Reference
         public void ResetPlayerReference()
         {
 
@@ -432,7 +442,7 @@ namespace com.DU.CE.AI
             }
         }
 
-        #endregion
+   
 
         public void ResetBallReceiver()
         {

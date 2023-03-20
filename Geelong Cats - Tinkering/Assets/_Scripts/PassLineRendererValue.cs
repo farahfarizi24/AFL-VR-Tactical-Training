@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Autohand
 {
     public class PassLineRendererValue : MonoBehaviour
-    {
+    {/*
         public GameObject ThisLineRenderer =null;
         public string LineRendererTag;
         public HandDistanceGrabber ThisHandGrabber;
@@ -21,6 +21,7 @@ namespace Autohand
 
         }
 
+    }*/
     }
 }
 

@@ -15,7 +15,7 @@ namespace com.DU.CE.INT
         [SerializeField] private GameObject m_pinMesh = null;
         [SerializeField] private GameObject m_pinArrow = null;
         public GameObject PinBody = null;
-        public GameObject PinRing = null;
+        public GameObject PinRing;
         [Space]
         [SerializeField] private TextMeshPro m_tmpTeamNumber = null;
         [SerializeField] private MeshRenderer[] m_meshRenders = null;
@@ -374,12 +374,7 @@ namespace com.DU.CE.INT
         {
             PinRing.SetActive(false);
         }
-        void INT_IBoardLinkedPin.setBasePinColour(Color32 color)
-        {
-            var Ring = PinRing.GetComponent<MeshRenderer>();
-            Ring.material.color = color;
-
-        }
+    
 
         void INT_IBoardLinkedPin.UpdateForLoad(Vector3 _destinationPosition, Vector3 destinationRotation)
         {

@@ -22,7 +22,7 @@ namespace com.DU.CE.INT
         void LinkObject(Transform linkedObject);
         void SetupPin(ETEAM team, int playerNo);
         void SetPinColour(Color32 color);
-        void setBasePinColour(Color32 color);
+  
 
         void SetPinRing();
         void UnsetPinRing();
