@@ -34,6 +34,7 @@ namespace com.DU.CE.LVL
             {
                 case ELVLSTATE.SETUP_USER:
 
+                  
                     // Switch to role setup according to player input
                     SetupUser();
 
@@ -63,6 +64,7 @@ namespace com.DU.CE.LVL
             else
             {
                 m_StateMachineSock.OnRequestStateChange(ELVLSTATE.ONCONNECT_PLAYER);
+                CoachInterface.SetActive(false);
             }
         }
     }

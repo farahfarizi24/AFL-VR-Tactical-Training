@@ -152,7 +152,7 @@ namespace com.DU.CE.AI
                 {
                     setBallReceiver(BallReceiver);
                     prevBallReceiver = BallReceiver;
-                    Debug.Log("BALL RECEIVER CHANGED");
+                  
 
                 }
 
@@ -163,11 +163,7 @@ namespace com.DU.CE.AI
                 }
 
 
-             /*   if (IsPositionReference)
-                {
-                    OutlineScript.OutlineColor = Color.green;
-                    OutlineScript.enabled = true;
-                }*/
+             
                
 
 
@@ -286,21 +282,24 @@ namespace com.DU.CE.AI
             OutlineScript.enabled = true;
             Color32 col = new Color32(231, 49, 203, 255);
             m_linkedPin.SetPinColour(col);
+
+            
         }
 
         public void setBallReceiver(bool toggle)
         {
             if (toggle == false)
             {
-                Color32 col = new Color32(255, 255, 255, 255);
+          
                 OutlineScript.enabled = false;
             }
             else
             {
                 OutlineScript.OutlineColor = Color.yellow;
                 OutlineScript.enabled = true;
-                Color32 col = new Color32(231, 49, 203, 255);
-                m_linkedPin.SetPinColour(col);
+             //   Color32 col = new Color32(231, 49, 203, 255);
+             //   m_linkedPin.SetPinColour(col);
+
             }
             model.isBallReceiver = BallReceiver;
         }
@@ -336,20 +335,26 @@ namespace com.DU.CE.AI
 
                 OutlineScript.OutlineColor = Color.green;
                 OutlineScript.enabled = false;
-                m_linkedPin.UnsetPinRing();
+             //   m_linkedPin.UnsetPinRing();
+
+                
             }
             else
             {
 
                 OutlineScript.OutlineColor = Color.green;
                 OutlineScript.enabled = true;
-                m_linkedPin.SetPinRing();
+             //   m_linkedPin.SetPinRing();
+
+      
 
             }
             model.isPlayerReference = PlayerReference;
 
           
         }
+
+
 
         #endregion
 
@@ -368,8 +373,9 @@ namespace com.DU.CE.AI
 
         #region BoadPinObject Interface methods
 
-        private INT_IBoardLinkedPin m_linkedPin;
+        public INT_IBoardLinkedPin m_linkedPin;
 
+        
         void INT_ILinkedPinObject.LinkPin(INT_IBoardLinkedPin pin)
         {
             m_linkedPin = pin;
