@@ -40,7 +40,9 @@ namespace com.DU.CE.AI
         private float m_rotationY = 0f;
         public string state = "";
         public bool BallReceiver = false;
+        public bool prevBallReceiver = false;
         public bool IsPositionReference = false;
+        public bool prevPositionReference = false;
         #endregion
 
         
@@ -95,6 +97,8 @@ namespace com.DU.CE.AI
                 currentModel.isPlayerReferenceDidChange += OnPlayerReferenceChanged;
                 m_team = (ETEAM)model.team;
                 m_teamNumber = model.number;
+                BallReceiver = model.isBallReceiver;
+                IsPositionReference = model.isPlayerReference;
                 m_numberText.SetText(model.number.ToString());
                 Activate(currentModel.isActivated);
             }
@@ -144,7 +148,19 @@ namespace com.DU.CE.AI
 
                 }
 
+                if( BallReceiver != prevBallReceiver)
+                {
+                    setBallReceiver(BallReceiver);
+                    prevBallReceiver = BallReceiver;
+                    Debug.Log("BALL RECEIVER CHANGED");
 
+                }
+
+                if(IsPositionReference != prevPositionReference)
+                {
+                    SetPlayerReference(IsPositionReference);
+                    prevPositionReference = IsPositionReference;
+                }
                 if (IsPositionReference)
                 {
                     OutlineScript.OutlineColor = Color.green;
@@ -159,13 +175,36 @@ namespace com.DU.CE.AI
         
         public void OnBallReceiverChanged(NCM_AvatarModel model, bool toggle)
         {
+            Debug.Log("ON BALL RECEIVER CHANGED");
             BallReceiver = toggle;
             setBallReceiver(toggle);
         }
 
         public void OnPlayerReferenceChanged(NCM_AvatarModel model, bool toggle)
         {
+            Debug.Log("ON POSITION RECEIVER CHANGED");
             IsPositionReference = toggle;
+        }
+
+     
+
+        public void SetPlayerReference(bool PlayerReference)
+        {
+            if (PlayerReference == false)
+            {
+
+                m_linkedPin.UnsetPinRing();
+            }
+            else
+            {
+
+
+                m_linkedPin.SetPinRing();
+
+            }
+            model.isPlayerReference = PlayerReference;
+
+
         }
         public void ChangeNetworkActivation(bool _toggle)
         {
@@ -292,6 +331,7 @@ namespace com.DU.CE.AI
                 Color32 col = new Color32(231, 49, 203, 255);
                 m_linkedPin.SetPinColour(col);
             }
+            model.isBallReceiver = BallReceiver;
         }
 
         #endregion
