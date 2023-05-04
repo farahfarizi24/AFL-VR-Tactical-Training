@@ -358,10 +358,14 @@ namespace com.DU.CE.INT
             m_linkedObject.LinkPin(this);
         }
 
-        void INT_IBoardLinkedPin.SetPinColour(Color32 color)
+        void INT_IBoardLinkedPin.SetPinColour(Color32 color, bool PinStatus)
         {
             var Body = PinBody.GetComponent<MeshRenderer>();
             Body.material.color = color;
+            GameObject body = PinBody;
+            body.SetActive(PinStatus);
+           
+
            // PinBody.GetComponent<MeshRenderer>().SetColor("_Color", color);
         }
 

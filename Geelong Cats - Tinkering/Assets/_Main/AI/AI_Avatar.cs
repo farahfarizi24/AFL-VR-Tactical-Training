@@ -292,7 +292,7 @@ namespace com.DU.CE.AI
             OutlineScript.OutlineColor = Color.yellow;
             OutlineScript.enabled = true;
             Color32 col = new Color32(231, 49, 203, 255);
-            m_linkedPin.SetPinColour(col);
+            m_linkedPin.SetPinColour(col, true);
 
             
         }
@@ -467,7 +467,7 @@ namespace com.DU.CE.AI
             BallReceiver = false;
             Color32 col = new Color32(255, 255, 255, 255);
 
-            m_linkedPin.SetPinColour(col);
+            m_linkedPin.SetPinColour(col,false);
         }
         void INT_ILinkedPinObject.SetBallReceiver(bool status)
         {
@@ -478,12 +478,12 @@ namespace com.DU.CE.AI
 
                 col = new Color32(255,255,255,255);
                 
-                m_linkedPin.SetPinColour(col);
+                m_linkedPin.SetPinColour(col,true);
             }
             else
             {
                 col = new Color32(231, 49, 203, 255);
-                m_linkedPin.SetPinColour(col);
+                m_linkedPin.SetPinColour(col,false);
             }
         }
         
