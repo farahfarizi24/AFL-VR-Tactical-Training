@@ -22,7 +22,16 @@ public class BallSensor : MonoBehaviour
 
 
     {
-        SensorTrigger = true;
-        Debug.Log("Sensor Trigger Active");
+       if(other.gameObject.CompareTag("BallContainer"))
+        {
+            SensorTrigger = true;
+            Debug.Log("Sensor Trigger Active");
+        }
+    
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        SensorTrigger = false;
     }
 }

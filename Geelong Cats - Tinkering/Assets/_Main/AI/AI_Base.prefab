@@ -763,7 +763,9 @@ MonoBehaviour:
   NavMeshCount: 0
   state: 
   BallReceiver: 0
+  prevBallReceiver: 0
   IsPositionReference: 0
+  prevPositionReference: 0
   AvatarPosition: []
   AvatarRotation: []
 --- !u!114 &8608479979525973112
@@ -3323,7 +3325,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!1 &8624087762501236650
 GameObject:
   m_ObjectHideFlags: 0

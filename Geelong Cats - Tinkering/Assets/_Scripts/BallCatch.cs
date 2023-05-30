@@ -33,22 +33,28 @@ public class BallCatch : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("BallDestination")) { BallCatcher = true; Debug.Log("Ball Destination entered, catcher true");
+        if (collider.gameObject.CompareTag("BallDestination")) { 
+            BallCatcher = true; 
+            Debug.Log("Ball Destination entered, catcher true");
             BallDestination = collider.gameObject;
+           
+            
             SetCatchingAnim();
         }
 
-        if (collider.gameObject.CompareTag("Ball") && BallCatcher == true)
+        if (collider.gameObject.CompareTag("BallContainer") && BallCatcher == true)
         {
-            mainBodyrb = MainBody.GetComponent<Rigidbody>();
             rb = collider.GetComponentInParent<Rigidbody>();
-         
-            //change ball ownership
-            BallOwnership = collider.transform.parent.gameObject;
-            //Debug.Log(" This person is holding Ball");
 
+           
+           Debug.Log(" This person is holding Ball");
+      
             BallHolder = true;
-
+            if (ballSensor.SensorTrigger == true)
+            {
+                collider.transform.parent = BallOwnership.transform;
+                BallOwnership.transform.GetChild(0).position = BallOwnership.transform.position;
+            }
             //  Debug.Log("Layerweight complete");
 
             
@@ -56,12 +62,13 @@ public class BallCatch : MonoBehaviour
 
             //BallOwnership.transform.localPosition = BallHoldPoint.transform.localPosition;
             //wait until Ball is triggering another sensor
-            if (ballSensor.SensorTrigger == true)
+            
+            /*if (ballSensor.SensorTrigger == true)
             {
                 Debug.Log("IE numerator check sensor trigger");
                 SetBallOwnership();
 
-            }
+            }*/
 
             // Set Ball as a child of a hand object
 
@@ -83,6 +90,7 @@ public class BallCatch : MonoBehaviour
         if (BallDestination.transform.position.y > 1.5)
         {
             anim.SetTrigger("HighCatch");
+
             Courutine = WaitForActionAnimToFinish("HighCatch");
             StartCoroutine(Courutine);
         }
@@ -94,6 +102,7 @@ public class BallCatch : MonoBehaviour
             StartCoroutine(Courutine);
         }
     }
+  
     IEnumerator WaitForActionAnimToFinish(string TriggerName)
     {
        // float animationLength = anim.GetCurrentAnimatorStateInfo(1).length + anim.GetCurrentAnimatorStateInfo(1).normalizedTime;
@@ -102,10 +111,11 @@ public class BallCatch : MonoBehaviour
       
 
         yield return new WaitForSeconds(2.5f);
-       //Ball ownership is triggered from characteranimationscript.cs
+        //Ball ownership is triggered from characteranimationscript.cs
 
-      
-       
+
+   
+
 
         anim.SetLayerWeight(anim.GetLayerIndex("BodyLayer"), 1f);
         anim.SetLayerWeight(anim.GetLayerIndex("ArmLayer"), 1f);
@@ -114,23 +124,24 @@ public class BallCatch : MonoBehaviour
 
         anim.SetLayerWeight(anim.GetLayerIndex("ActionLayer"), 0f);
         anim.ResetTrigger(TriggerName);
-        
-
-
+        mainBodyrb = MainBody.GetComponent<Rigidbody>();
+        rb.isKinematic = true;
+        mainBodyrb.isKinematic = true;
+        BallHolder = true;
+        SetBallOwnership();
     }
     public void SetBallOwnership()
     {
-
+        Debug.Log("BALL is received");
         // turn on kinematics so player is not influenced by the ball
-      
 
-        // BallOwnership = collider.transform.parent.gameObject;
-        BallOwnership.transform.position = BallHoldPoint.transform.position;
+       
         BallOwnership.transform.parent = BallHoldPoint.transform;
+        BallOwnership.transform.position = BallHoldPoint.transform.position;
+        BallOwnership.transform.GetChild(0).position = BallOwnership.transform.position;
 
-        rb.isKinematic = true;
-
-        mainBodyrb.isKinematic = true;
+        ballSensor.SensorTrigger = false;
+        
         anim.SetBool(HoldBall, true);
         Debug.Log("Ball ownership completed");
      
