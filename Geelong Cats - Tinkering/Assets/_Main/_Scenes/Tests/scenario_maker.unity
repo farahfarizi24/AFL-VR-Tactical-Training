@@ -1488,7 +1488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &582856992
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3880,7 +3880,7 @@ MonoBehaviour:
   p_NetSpawnerSock: {fileID: 11400000, guid: 460bb09c779856049acee27d2c0ccef1, type: 2}
   p_LevelStateMachineSock: {fileID: 11400000, guid: 6e2eab29f3cf71d45a07ecd545797b7c,
     type: 2}
-  m_rugbyBallPrefab: {fileID: 8002836930571127193, guid: bc4f9ed4d84386a43bc6014644dc43e5,
+  m_rugbyBallPrefab: {fileID: 3264108119439838905, guid: 3dc5432a2b9ae0346a4897fbc5170759,
     type: 3}
   spawnPoint: {fileID: 1809035810}
 --- !u!4 &2074435756
@@ -4475,6 +4475,11 @@ PrefabInstance:
       propertyPath: m_TrackingStateAction.m_Action.m_Name
       value: Tracking State
       objectReference: {fileID: 0}
+    - target: {fileID: 407196670372873078, guid: 17fc4b1346fbd6848b418c5597b77190,
+        type: 3}
+      propertyPath: m_ForceIntoRT
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 626880637401339526, guid: 17fc4b1346fbd6848b418c5597b77190,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -4925,6 +4930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab443ca24853f1446849f3aca50aafc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CoachInterface: {fileID: 0}
   m_StateMachineSock: {fileID: 11400000, guid: 6e2eab29f3cf71d45a07ecd545797b7c, type: 2}
   m_NetManagerSock: {fileID: 11400000, guid: 3e4bd6b8cd1c4e64989a64c427c32952, type: 2}
   m_StadiumPropertiesSock: {fileID: 11400000, guid: 409f75c0562bbfc40a52160583b981ba,

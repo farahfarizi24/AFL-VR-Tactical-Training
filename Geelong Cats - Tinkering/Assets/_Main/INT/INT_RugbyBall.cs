@@ -141,7 +141,7 @@ namespace com.DU.CE.INT
         internal void OnNetworkLineRenderToggle(bool _toggle)
         {
             //Enable trail renderer
-           // m_trailRenderer.enabled = _toggle;
+            m_trailRenderer.enabled = _toggle;
         }
     }
 }
