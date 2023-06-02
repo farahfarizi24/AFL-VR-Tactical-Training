@@ -291,7 +291,7 @@ namespace com.DU.CE.AI
         {
             OutlineScript.OutlineColor = Color.yellow;
             OutlineScript.enabled = true;
-            Color32 col = new Color32(231, 49, 203, 255);
+            Color32 col = new Color32(236, 245, 0, 255);
             m_linkedPin.SetPinColour(col, true);
 
             
@@ -325,6 +325,13 @@ namespace com.DU.CE.AI
         #endregion
 
 
+        #region Set Player Outline on and off
+
+        public void SetOutline(bool status)
+        {
+            OutlineScript.enabled = status;
+        }
+        #endregion
 
 
 
@@ -344,7 +351,7 @@ namespace com.DU.CE.AI
             if (PlayerReference == false)
             {
 
-                OutlineScript.OutlineColor = Color.green;
+                OutlineScript.OutlineColor = Color.cyan;
                 OutlineScript.enabled = false;
              //   m_linkedPin.UnsetPinRing();
 
@@ -353,7 +360,7 @@ namespace com.DU.CE.AI
             else
             {
 
-                OutlineScript.OutlineColor = Color.green;
+                OutlineScript.OutlineColor = Color.cyan;
                 OutlineScript.enabled = true;
              //   m_linkedPin.SetPinRing();
 
