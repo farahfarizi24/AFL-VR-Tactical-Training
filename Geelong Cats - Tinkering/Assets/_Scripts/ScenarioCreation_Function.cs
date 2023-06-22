@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using com.DU.CE.INT;
+using com.DU.CE.LVL;
 using UnityEngine.UI;
 using com.DU.CE.AI;
 using System.Xml.Serialization;
@@ -23,6 +24,10 @@ public class ScenarioCreation_Function : MonoBehaviour
         private int HomeAICounter = 0;
     string filePath;
     public RunScenario RunScenarioScript;
+    public Toggle isReviewMode;
+    public GameObject ScenarioEditorSelection;
+
+
     /// <summary>
     ///  Under is the list of variable to be stored for each AI
     ///
@@ -47,10 +52,13 @@ public class ScenarioCreation_Function : MonoBehaviour
         public int BallTargetAINum;//denotes which AI is the target for final ball position,
                                    //this will be counted the same with their Counter number
 
+    public ScenarioCreation_UI UICreationScript;
     public GameObject ScenarioEditorObj;
     /// <summary>
     /// Button 
-    /// </summary>
+    /// </summary>;
+    public Button BackButton;
+    public Button ReviewButton;
     public Button HomeCreate;
         public Button AwayCreate;
         public Button SaveFinalPosition;
@@ -77,7 +85,8 @@ public class ScenarioCreation_Function : MonoBehaviour
             RunScenarioBTN.onClick.AddListener(QuickRunScenario);
             BallTarget.onClick.AddListener(SetBallTarget);
             MarkPlayer.onClick.AddListener(SetMarkerPlayer);
-
+        BackButton.onClick.AddListener(BackToSelection);
+        ReviewButton.onClick.AddListener(ReviewMode);
             SaveEntireScenario.onClick.AddListener(delegate { SaveScenario(ScenarioNumber); });
 
         BallTargetting = false;
@@ -86,7 +95,20 @@ public class ScenarioCreation_Function : MonoBehaviour
         }
 
 
+    #region Back to Selection
 
+    public void BackToSelection()
+    {
+        ScenarioEditorObj.SetActive(false);
+        UICreationScript.CreateNewScenario();
+    }
+
+    public void ReviewMode()
+    {
+
+    }
+
+    #endregion
     #region Marker Player
 
     public void SetMarkerPlayer()
@@ -213,9 +235,14 @@ public class ScenarioCreation_Function : MonoBehaviour
         {
        
         LoadScenario(ScenarioNumber);
-        ScenarioRunToggle = true;
-
+      
+        ScenarioRunToggle = true; 
+    
+    
     }
+
+
+        
 
 
 
@@ -669,9 +696,9 @@ public class ScenarioCreation_Function : MonoBehaviour
         {
             ScenarioCompletedToggle=false;
             StartCoroutine(PerformFinalCountdown());
-           
-         
-           
+            LVL_SoundManager.PlayMusic("EndWhistle");
+
+
         }
 
     }
@@ -696,9 +723,9 @@ public class ScenarioCreation_Function : MonoBehaviour
 
                 yield return null;
             }
-
-            AnalysePerformance();
             TimerTxt.SetActive(false);
+            AnalysePerformance();
+            
         }
     }
 
@@ -706,14 +733,14 @@ public class ScenarioCreation_Function : MonoBehaviour
     {
         Debug.Log("Is ball being held by incorrect person");
         //Rerun the scenario with highlight
-        RunScenarioScript.RerunScenario();
+       // RunScenarioScript.RerunScenario();
         SetPlayerHighlight();
         // if ball is being held by correct person put a prompt sasying that they do well
         //else tell them which one is good give them ability to replay while having the trail and highlight on
 
         //This run the next in line for the queue;
 
-        // RunScenarioScript.RunQueue();
+         //RunScenarioScript.RunQueue();
     }
 
     #endregion
@@ -748,6 +775,7 @@ public class ScenarioCreation_Function : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         Debug.Log("Start Scenario Coroutine");
+        LVL_SoundManager.PlayMusic("StartWhistle");
         foreach (var player in AIObject)
         {
             var playerObject = GameObject.Find(player.name);

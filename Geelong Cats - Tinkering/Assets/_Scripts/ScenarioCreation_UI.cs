@@ -158,7 +158,7 @@ public class ScenarioCreation_UI : MonoBehaviour
 
     }
 
-    private void CreateNewScenario()
+    public void CreateNewScenario()
     {
         Logo.SetActive(false);
         ScenarioMenuObj.SetActive(false);
