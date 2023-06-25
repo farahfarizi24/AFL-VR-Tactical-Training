@@ -43,6 +43,13 @@ namespace com.DU.CE.AI
         public bool prevBallReceiver = false;
         public bool IsPositionReference = false;
         public bool prevPositionReference = false;
+
+
+        //This control whether scenario or running or not, when scenario is running all outline should be hidden
+        //but if scenario on review all outline can be shown again
+        public bool isScenarioRunning;
+        public bool isReviewRunning;
+        public bool isCreatingState;
         #endregion
 
         
@@ -156,12 +163,14 @@ namespace com.DU.CE.AI
 
                 }
 
-                if (BallReceiver && !OutlineScript.enabled)
+                if (BallReceiver && !OutlineScript.enabled && !isScenarioRunning)
                 {
                     OutlineScript.OutlineColor = Color.yellow;
 
                     OutlineScript.enabled = true;
                 }
+
+               
 
                 if(IsPositionReference != prevPositionReference)
                 {
@@ -170,12 +179,16 @@ namespace com.DU.CE.AI
                     prevPositionReference = IsPositionReference;
                 }
 
-                if (IsPositionReference && !OutlineScript.enabled)
+                if (IsPositionReference && !OutlineScript.enabled && !isScenarioRunning)
                 {
                     OutlineScript.enabled = true;
                 }
 
-
+                if(BallReceiver || IsPositionReference)
+                {
+                    if (isReviewRunning || isCreatingState) OutlineScript.enabled = true;
+                    else if (isScenarioRunning) OutlineScript.enabled = false;
+                }
 
 
             }
@@ -360,7 +373,8 @@ namespace com.DU.CE.AI
 
                 OutlineScript.OutlineColor = Color.cyan;
                 OutlineScript.enabled = false;
-             //   m_linkedPin.UnsetPinRing();
+             
+                //   m_linkedPin.UnsetPinRing();
 
                 
             }

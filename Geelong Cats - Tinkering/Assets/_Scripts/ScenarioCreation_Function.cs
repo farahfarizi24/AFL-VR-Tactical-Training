@@ -530,7 +530,7 @@ public class ScenarioCreation_Function : MonoBehaviour
             findDiffPlayers(awayPlayers, scenario.awayplayers, false);
             AISock?.ChangeHomeTeamSize(scenario.awayplayers.Count);
         }
-
+        
         foreach (var player in scenario.homeplayers)
         {
             var playerObject = GameObject.Find(player.name);
@@ -697,7 +697,7 @@ public class ScenarioCreation_Function : MonoBehaviour
             ScenarioCompletedToggle=false;
             StartCoroutine(PerformFinalCountdown());
             LVL_SoundManager.PlayMusic("EndWhistle");
-
+            
 
         }
 
@@ -710,37 +710,39 @@ public class ScenarioCreation_Function : MonoBehaviour
     
     IEnumerator PerformFinalCountdown()
     {
-        if (TimerTxt.activeSelf != true)
+        yield return new WaitForSeconds(5);
+
+        foreach (var player in AIObject)
         {
+            var playerObject = GameObject.Find(player.name);
 
-            TimerTxt.SetActive(true);
-            for (ActionCountdown = 10; ActionCountdown > 0; ActionCountdown -= Time.deltaTime)
-            {
-                string time = ActionCountdown.ToString("F1");
-                string text = "Time left: " + time;
-                TimerTxt.GetComponent<TextMeshProUGUI>().
-             SetText(text);
-
-                yield return null;
-            }
-            TimerTxt.SetActive(false);
-            AnalysePerformance();
-            
+          
+            playerObject.GetComponent<AI_Avatar>().isScenarioRunning = false;
         }
+            /* if (TimerTxt.activeSelf != true)
+             {
+
+                 TimerTxt.SetActive(true);
+                 for (ActionCountdown = 10; ActionCountdown > 0; ActionCountdown -= Time.deltaTime)
+                 {
+                     string time = ActionCountdown.ToString("F1");
+                     string text = "Time left: " + time;
+                    // TimerTxt.GetComponent<TextMeshProUGUI>().SetText(text);
+
+                     yield return null;
+                 }
+                 TimerTxt.SetActive(false);*/
+            AnalysePerformance();
+
+
     }
 
     private void AnalysePerformance()
     {
         Debug.Log("Is ball being held by incorrect person");
-        //Rerun the scenario with highlight
-       // RunScenarioScript.RerunScenario();
+       
         SetPlayerHighlight();
-        // if ball is being held by correct person put a prompt sasying that they do well
-        //else tell them which one is good give them ability to replay while having the trail and highlight on
-
-        //This run the next in line for the queue;
-
-         //RunScenarioScript.RunQueue();
+        
     }
 
     #endregion
@@ -773,7 +775,7 @@ public class ScenarioCreation_Function : MonoBehaviour
 
     IEnumerator StartScenarioCoroutine()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         Debug.Log("Start Scenario Coroutine");
         LVL_SoundManager.PlayMusic("StartWhistle");
         foreach (var player in AIObject)
@@ -783,6 +785,7 @@ public class ScenarioCreation_Function : MonoBehaviour
          OnChangePlayerPosition?.Invoke(playerObject, player.GetComponent<AI_Avatar>().AvatarPosition[1], 
              player.GetComponent<AI_Avatar>().AvatarRotation[1]);
             playerObject.GetComponent<INT_ILinkedPinObject>().SetFinalPosition();
+            playerObject.GetComponent<AI_Avatar>().isScenarioRunning = true;
       
         }
         ScenarioCompletedToggle = true;
