@@ -186,8 +186,13 @@ namespace com.DU.CE.AI
 
                 if(BallReceiver || IsPositionReference)
                 {
-                    if (isReviewRunning || isCreatingState) OutlineScript.enabled = true;
-                    else if (isScenarioRunning) OutlineScript.enabled = false;
+                 
+                    if (isScenarioRunning) OutlineScript.enabled = false;
+                }
+
+                if (BallReceiver)
+                {
+                    if (isCreatingState) OutlineScript.enabled = false;
                 }
 
 

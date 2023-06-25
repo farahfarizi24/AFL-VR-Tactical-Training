@@ -66,6 +66,7 @@ public class ScenarioCreation_Function : MonoBehaviour
         public Button RunScenarioBTN;
         public Button BallTarget;
     public Button MarkPlayer;
+    public Button InitiatePosition;
    // public Button MarkerPin;
     public Button SaveEntireScenario;
     public bool BallTargetting;
@@ -87,6 +88,7 @@ public class ScenarioCreation_Function : MonoBehaviour
             MarkPlayer.onClick.AddListener(SetMarkerPlayer);
         BackButton.onClick.AddListener(BackToSelection);
         ReviewButton.onClick.AddListener(ReviewMode);
+        InitiatePosition.onClick.AddListener(InitiateScenario);
             SaveEntireScenario.onClick.AddListener(delegate { SaveScenario(ScenarioNumber); });
 
         BallTargetting = false;
@@ -95,7 +97,7 @@ public class ScenarioCreation_Function : MonoBehaviour
         }
 
 
-    #region Back to Selection
+    #region Review, Back and Initiate
 
     public void BackToSelection()
     {
@@ -109,6 +111,20 @@ public class ScenarioCreation_Function : MonoBehaviour
         LoadScenario(ScenarioNumber);
 
         ScenarioRunToggle = true;
+    }
+
+
+    public void InitiateScenario()
+    {   
+        LoadScenario(ScenarioNumber);
+        for (int i = 0; i < AIObject.Count(); i++)
+        {
+            
+                AIObject[i].GetComponent<AI_Avatar>().isCreatingState = true;
+            
+
+
+        }
     }
 
     #endregion
@@ -238,7 +254,14 @@ public class ScenarioCreation_Function : MonoBehaviour
         {
        
         LoadScenario(ScenarioNumber);
-      
+        for (int i = 0; i < AIObject.Count(); i++)
+        {
+
+            AIObject[i].GetComponent<AI_Avatar>().isCreatingState = false;
+
+
+
+        }
         ScenarioRunToggle = true; 
     
     
@@ -699,7 +722,7 @@ public class ScenarioCreation_Function : MonoBehaviour
         {
             ScenarioCompletedToggle=false;
             StartCoroutine(PerformFinalCountdown());
-            LVL_SoundManager.PlayMusic("EndWhistle");
+          //  LVL_SoundManager.PlayMusic("EndWhistle");
             
 
         }
@@ -714,7 +737,7 @@ public class ScenarioCreation_Function : MonoBehaviour
     IEnumerator PerformFinalCountdown()
     {
         yield return new WaitForSeconds(5);
-
+        LVL_SoundManager.PlayMusic("EndWhistle");
         foreach (var player in AIObject)
         {
             var playerObject = GameObject.Find(player.name);
@@ -779,7 +802,7 @@ public class ScenarioCreation_Function : MonoBehaviour
 
     IEnumerator StartScenarioCoroutine()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
         Debug.Log("Start Scenario Coroutine");
         LVL_SoundManager.PlayMusic("StartWhistle");
         foreach (var player in AIObject)
