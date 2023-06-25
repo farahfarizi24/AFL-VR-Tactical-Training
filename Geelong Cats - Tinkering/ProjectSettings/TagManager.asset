@@ -30,6 +30,10 @@ TagManager:
   - PositionPin
   - MarkerPin
   - FieldMarkerTransform
+  - LeftReticule
+  - RightReticule
+  - Audio
+  - Review
   layers:
   - Default
   - TransparentFX
