@@ -20,11 +20,22 @@ public class ScenarioManager : ScriptableObject
 
     public int currentScenarioNum = 1;
 
+    string UserFilePath;
     string filePath;
     private void OnEnable()
     {
         filePath = Application.persistentDataPath + "/gamedate.txt";
         Debug.Log(filePath);
+
+        String DateTime = System.DateTime.UtcNow.ToString("HH_mm_ff_dd_MMMMM");
+        UserFilePath = Application.persistentDataPath +"/"+DateTime+"_userdata.txt";
+
+        if (!File.Exists(UserFilePath))
+        {
+          
+           File.WriteAllText(UserFilePath, "Current time: "+ DateTime);
+            Debug.Log(UserFilePath);
+        }
     }
     public void TestingSave()
     {
