@@ -1523,6 +1523,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: KickingManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4501445035519665866, guid: 48ee8cb17cbedc6439eb9bd37312d14e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4848119181006664215, guid: 48ee8cb17cbedc6439eb9bd37312d14e,
         type: 3}
       propertyPath: m_RootOrder
@@ -3769,10 +3774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d96c01b1450af242a0b7a3863be5413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThisLineRenderer: {fileID: 0}
-  LineRendererTag: LeftHandController
-  ThisHandGrabber: {fileID: 2524627903312072147}
-  Temp_LineRenderer: {fileID: 0}
 --- !u!114 &2524627903312072147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4648,10 +4649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d96c01b1450af242a0b7a3863be5413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThisLineRenderer: {fileID: 0}
-  LineRendererTag: RightHandController
-  ThisHandGrabber: {fileID: 8485134214491109609}
-  Temp_LineRenderer: {fileID: 0}
 --- !u!114 &8485134214491109609
 MonoBehaviour:
   m_ObjectHideFlags: 0
