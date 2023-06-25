@@ -24,7 +24,7 @@ public class ScenarioCreation_Function : MonoBehaviour
         private int HomeAICounter = 0;
     string filePath;
     public RunScenario RunScenarioScript;
-    public Toggle isReviewMode;
+    public bool isReviewing;
     public GameObject ScenarioEditorSelection;
 
 
@@ -105,7 +105,10 @@ public class ScenarioCreation_Function : MonoBehaviour
 
     public void ReviewMode()
     {
+        isReviewing = true;
+        LoadScenario(ScenarioNumber);
 
+        ScenarioRunToggle = true;
     }
 
     #endregion
@@ -718,6 +721,7 @@ public class ScenarioCreation_Function : MonoBehaviour
 
           
             playerObject.GetComponent<AI_Avatar>().isScenarioRunning = false;
+            isReviewing = false;
         }
             /* if (TimerTxt.activeSelf != true)
              {
@@ -785,6 +789,7 @@ public class ScenarioCreation_Function : MonoBehaviour
          OnChangePlayerPosition?.Invoke(playerObject, player.GetComponent<AI_Avatar>().AvatarPosition[1], 
              player.GetComponent<AI_Avatar>().AvatarRotation[1]);
             playerObject.GetComponent<INT_ILinkedPinObject>().SetFinalPosition();
+            if (!isReviewing)
             playerObject.GetComponent<AI_Avatar>().isScenarioRunning = true;
       
         }
