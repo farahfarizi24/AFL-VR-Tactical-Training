@@ -50,11 +50,8 @@ public class BallCatch : MonoBehaviour
            Debug.Log(" This person is holding Ball");
       
             BallHolder = true;
-            if (ballSensor.SensorTrigger == true)
-            {
-                collider.transform.parent = BallOwnership.transform;
-                BallOwnership.transform.GetChild(0).position = BallOwnership.transform.position;
-            }
+            collider.transform.parent = BallOwnership.transform;
+           
             //  Debug.Log("Layerweight complete");
 
             
@@ -92,6 +89,11 @@ public class BallCatch : MonoBehaviour
             anim.SetTrigger("HighCatch");
 
             Courutine = WaitForActionAnimToFinish("HighCatch");
+            if (ballSensor.SensorTrigger == true)
+            {
+
+               BallOwnership.transform.GetChild(0).position = BallOwnership.transform.position;
+            }
             StartCoroutine(Courutine);
         }
         else
@@ -99,18 +101,23 @@ public class BallCatch : MonoBehaviour
 
             anim.SetTrigger("LowCatch");
             Courutine = WaitForActionAnimToFinish("LowCatch");
+            if (ballSensor.SensorTrigger == true)
+            {
+
+                BallOwnership.transform.GetChild(0).position = BallOwnership.transform.position;
+            }
             StartCoroutine(Courutine);
         }
     }
   
     IEnumerator WaitForActionAnimToFinish(string TriggerName)
     {
-       // float animationLength = anim.GetCurrentAnimatorStateInfo(1).length + anim.GetCurrentAnimatorStateInfo(1).normalizedTime;
+        // float animationLength = anim.GetCurrentAnimatorStateInfo(1).length + anim.GetCurrentAnimatorStateInfo(1).normalizedTime;
         //TODO on here, make ball move towards the player
 
-      
+        yield return new WaitForSeconds(0.5f);
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.0f);
         //Ball ownership is triggered from characteranimationscript.cs
 
 
