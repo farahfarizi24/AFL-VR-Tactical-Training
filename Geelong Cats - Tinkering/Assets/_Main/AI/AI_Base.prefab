@@ -908,6 +908,8 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
+  ThisAIObject: {fileID: 2480760656906927810}
+  currentlypossessing: 0
   ActionUI: {fileID: 2221386843639240627}
   isOnHover: 0
   toggleReference: {fileID: -7559554469750687902, guid: 7a77aace10269d04b82d49a70f7cee77,
@@ -4183,6 +4185,11 @@ PrefabInstance:
       propertyPath: PossessionPrompt
       value: 
       objectReference: {fileID: 1028188867084618969}
+    - target: {fileID: 6183850142816894132, guid: aced2c93ff692df48a488f2b9f84bda2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6607916517151097501, guid: aced2c93ff692df48a488f2b9f84bda2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

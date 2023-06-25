@@ -327,8 +327,15 @@ namespace com.DU.CE.AI
 
         #region Set Player Outline on and off
 
-        public void SetOutline(bool status)
+        public void SetBallReceiverOutline(bool status)
         {
+            //will only be turned on during review
+            OutlineScript.enabled = status;
+        }
+        public void SetPlayerReferenceOutline(bool status)
+        {
+            
+            //will only be turned on during review and at the beginning of the stage
             OutlineScript.enabled = status;
         }
         #endregion

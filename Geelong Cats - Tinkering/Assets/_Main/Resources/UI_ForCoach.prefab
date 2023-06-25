@@ -7525,7 +7525,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!222 &5558027846966348633
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9256,7 +9256,7 @@ PrefabInstance:
     - target: {fileID: 2491493160714155386, guid: f9dace5e0889b3f4aab8faf9a4bc1f34,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2696764977540017927, guid: f9dace5e0889b3f4aab8faf9a4bc1f34,
         type: 3}

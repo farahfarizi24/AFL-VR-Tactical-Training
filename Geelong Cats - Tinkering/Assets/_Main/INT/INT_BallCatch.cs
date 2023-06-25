@@ -13,41 +13,110 @@ namespace com.DU.CE.AI
         [SerializeField] private InputActionProperty m_rightHand;
         [SerializeField] private InputActionProperty m_leftHand;
 
-
         // private AI_Avatar m_manager;
         private USER_CustomRayInteractor m_interactor = null;
-        
+        public Collision checkCollisionRight;
+        public Collision checkCollisionLeft;
         public bool isOnHover = false;
         public InputActionReference toggleReference = null;
-
-
+        public InputActionReference RightGrab;
+        public InputActionReference LeftGrab;
+        public bool BallisOwned;
+        public bool isHoveringRight = false;
+        public bool isHoveringLeft = false;
         protected override void Awake()
         {
             base.Awake();
             toggleReference.action.started += GetBall;
 
+         //   RightGrab.action.started += RightGrabPress;
+          //  LeftGrab.action.started += LeftGrabPress;
+
+
         }
+
 
         private void OnDestroy()
         {
             toggleReference.action.started -= GetBall;
+
+         //   RightGrab.action.started -= RightGrabPress;
+         //   LeftGrab.action.started -= LeftGrabPress;
         }
 
-        private void GetBall(InputAction.CallbackContext context)
+       /* private void RightGrabPress(InputAction.CallbackContext context)
         {
+            Debug.Log("ENTERED");
+           
+            if (isHoveringRight)
+            {
+                BallisOwned=true;
+                Debug.Log("PRESS ENTERED");
+            }
+
+        }
+        private void LeftGrabPress(InputAction.CallbackContext context)
+        {
+            Debug.Log("ENTERED");
+
+            if (isHoveringLeft)
+            {
+
+                BallisOwned = true;
+                Debug.Log("PRESS ENTERED");
+            }
+        }
+       */
+    
+
+        private void OnCollisionEnter(Collision collision)
+        {
+
+            if (collision.gameObject.tag == "RightReticule")
+            {
+                Debug.Log("Collision right");
+                checkCollisionRight = collision;
+                isHoveringRight = true;
+            }
+            if (collision.gameObject.tag == "LeftReticule")
+            {
+                Debug.Log("Collision left");
+                checkCollisionRight = collision;
+                isHoveringLeft = true;
+            }
+        }
+
+        /*  private void OnCollisionExit(Collision collision)
+          {
+
+              if (collision.gameObject.tag == "RightReticule")
+              {
+                  Debug.Log("RightReticuleCOllision");
+                  checkCollisionRight = collision;
+                  isHoveringRight = false;
+              }
+              if (collision.gameObject.tag == "LeftReticule")
+              {
+                  Debug.Log("LefttReticuleCOllision");
+                  checkCollisionRight = collision;
+                  isHoveringLeft = false;
+              }
+          }*/
+        private void GetBall(InputAction.CallbackContext context)
+        { 
             if (isOnHover)
             {
 
                 // PARENT THE BALL
 
-                Debug.Log("Ready to grab ball");
+                Debug.Log("Grabbing ball");
             }
 
         }
         #region XR Callbacks
 
 
-
+       
         protected override void OnHoverEntered(HoverEnterEventArgs args)
         {
             //  m_manager.OnHoverChanged(true);
@@ -72,11 +141,15 @@ namespace com.DU.CE.AI
 
             if (m_interactor.Hand.Equals(EUSERHAND.LEFT))
             {
-                m_rightHand.action.performed += OnRigthHandGrab;
+                isHoveringLeft = true;
+                Debug.Log("On left hand grab"); 
+                m_leftHand.action.performed += OnLeftHandGrab;
             }
             else
             {
-                m_leftHand.action.performed += OnLeftHandGrab;
+                isHoveringRight = true;
+                Debug.Log("On right hand grab"); m_rightHand.action.performed += OnRigthHandGrab;
+               
             }
         }
 
@@ -86,10 +159,12 @@ namespace com.DU.CE.AI
 
             if (m_interactor.Hand.Equals(EUSERHAND.LEFT))
             {
+         
                 m_rightHand.action.performed -= OnRigthHandGrab;
             }
             else
             {
+              
                 m_leftHand.action.performed -= OnLeftHandGrab;
             }
             m_interactor = null;
@@ -98,6 +173,8 @@ namespace com.DU.CE.AI
         private void OnRigthHandGrab(InputAction.CallbackContext obj)
         {
             throw new NotImplementedException();
+
+
         }
 
         private void OnLeftHandGrab(InputAction.CallbackContext obj)

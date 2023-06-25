@@ -74,20 +74,8 @@ public class AI_UI_actions : MonoBehaviour
         ThisUserObject.transform.position = new Vector3
             (ThisAIObject.transform.position.x,
              ThisUserObject.transform.position.y, ThisAIObject.transform.position.z+0.5f);
-       // ThisUserObject.transform.rotation = ThisAIObject.transform.rotation;
 
         ThisAIObject.SetActive(false);
-        //transform rotation
-        //Parent AI object to user object so they move together
-        //In the new version, what's important is for the transform to change player so the one under is not needed
-        /*
-        ThisAIObject = transform.parent.parent.gameObject;
-       
-        ThisObjParent = ThisAIObject.transform.parent.gameObject;
-        ThisAIObject.transform.SetParent(ThisUserObject.transform);
-        //disable the body of theUser Object
-        child = GameObject.FindGameObjectWithTag("PlayerBody");
-        child.SetActive(false);*/
         CurrentlyPossessing = true;
         PossessionPrompt.SetActive(true);
     }

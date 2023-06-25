@@ -12,7 +12,8 @@ namespace com.DU.CE.AI
     {
         [SerializeField] private InputActionProperty m_rightPathPlace;
         [SerializeField] private InputActionProperty m_leftPathPlace;
-
+        public GameObject ThisAIObject;
+        public bool currentlypossessing;
         private AI_Avatar m_manager;
         private USER_CustomRayInteractor m_interactor = null;
         public GameObject ActionUI;
@@ -23,7 +24,7 @@ namespace com.DU.CE.AI
         {
             base.Awake();
             toggleReference.action.started += SelectAI;
-
+            currentlypossessing = false;
             m_manager = GetComponentInParent<AI_Avatar>();
         }
 
@@ -40,7 +41,13 @@ namespace com.DU.CE.AI
 
                 ActionUI.gameObject.SetActive(isActive);
                 Debug.Log("Button is is presed");
+
+
+             
+                ThisAIObject.SetActive(false);
+                currentlypossessing = true;
             }
+            
          
         }
         #region XR Callbacks
