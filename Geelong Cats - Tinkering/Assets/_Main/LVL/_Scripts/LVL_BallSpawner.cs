@@ -9,7 +9,7 @@ namespace com.DU.CE.LVL
         [SerializeField] private GameObject m_rugbyBallPrefab;
         public Transform spawnPoint;
         private Transform m_rugbyBall = null;
-        public bool m_isSpawned;
+        private bool m_isSpawned;
 
         protected override IEnumerator OnCoachSetup()
         {
@@ -37,7 +37,7 @@ namespace com.DU.CE.LVL
             base.OnDisable();
         }
 
-        public void Initialize()
+        internal void Initialize()
         {
             if (m_isSpawned)
                 return;
