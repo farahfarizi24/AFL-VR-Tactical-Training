@@ -38,11 +38,27 @@ namespace com.DU.CE.LVL
         {
             GameObject SpawnerObject = GameObject.FindGameObjectWithTag("BallSpawner");
 
+<<<<<<< HEAD
             SpawnerObject.GetComponent<LVL_BallSpawner>().m_isSpawned=false;
             SpawnerObject.GetComponent<LVL_BallSpawner>().Initialize();
            
         }
 
+=======
+            m_rugbyBall = p_NetSpawnerSock.InstantiateNetObject(Ball_prefab.name, true, false).transform;
+            m_rugbyBall.transform.position = spawnPoint.position;
+        }
+
+        protected override IEnumerator OnCoachSetup()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override IEnumerator OnPlayerSetup()
+        {
+            throw new System.NotImplementedException();
+        }
+>>>>>>> parent of f4cb2e2 (Update BallSpawn.cs)
     }
 
 }
