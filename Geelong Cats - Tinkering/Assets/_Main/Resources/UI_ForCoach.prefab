@@ -9585,7 +9585,7 @@ PrefabInstance:
     - target: {fileID: 3130545258766600372, guid: f9dace5e0889b3f4aab8faf9a4bc1f34,
         type: 3}
       propertyPath: m_text
-      value: Add Away Player
+      value: ' Add Opponent Player'
       objectReference: {fileID: 0}
     - target: {fileID: 3910332554552040737, guid: f9dace5e0889b3f4aab8faf9a4bc1f34,
         type: 3}

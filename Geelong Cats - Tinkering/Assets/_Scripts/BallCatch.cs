@@ -51,23 +51,9 @@ public class BallCatch : MonoBehaviour
       
             BallHolder = true;
             collider.transform.parent = BallOwnership.transform;
-           
-            //  Debug.Log("Layerweight complete");
-
-            
-      
-
-            //BallOwnership.transform.localPosition = BallHoldPoint.transform.localPosition;
-            //wait until Ball is triggering another sensor
-            
-            /*if (ballSensor.SensorTrigger == true)
-            {
-                Debug.Log("IE numerator check sensor trigger");
-                SetBallOwnership();
-
-            }*/
-
-            // Set Ball as a child of a hand object
+            mainBodyrb.isKinematic = true;
+            rb.isKinematic = true;
+          
 
         }
 
