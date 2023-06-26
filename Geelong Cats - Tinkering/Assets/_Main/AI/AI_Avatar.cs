@@ -50,6 +50,7 @@ namespace com.DU.CE.AI
         public bool isScenarioRunning;
         public bool isReviewRunning;
         public bool isCreatingState;
+        public GameObject AIModel;
         #endregion
 
         
