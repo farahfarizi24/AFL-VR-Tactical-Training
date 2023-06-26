@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace com.DU.CE.LVL
 {
-    public class BallSpawn : LVL_ASpawner
+    public class BallSpawn : MonoBehaviour
     {
         public GameObject Ball_prefab;
         public Transform spawnPoint;
@@ -36,22 +36,13 @@ namespace com.DU.CE.LVL
 
         public void SpawnBall(InputAction.CallbackContext context)
         {
+            GameObject SpawnerObject = GameObject.FindGameObjectWithTag("BallSpawner");
 
-          //  Ball_prefab = p_NetSpawnerSock.InstantiateNetObject(Ball_prefab.name, true, false);
-            m_rugbyBall = p_NetSpawnerSock.InstantiateNetObject(Ball_prefab.name, true, false).transform;
-            m_rugbyBall.transform.position = spawnPoint.position;
+            SpawnerObject.GetComponent<LVL_BallSpawner>().m_isSpawned=false;
+            SpawnerObject.GetComponent<LVL_BallSpawner>().Initialize();
+           
         }
 
-        protected override IEnumerator OnCoachSetup()
-        {
-         
-            yield return null;
-        }
-
-        protected override IEnumerator OnPlayerSetup()
-        {
-            yield return null;
-        }
     }
 
 }
