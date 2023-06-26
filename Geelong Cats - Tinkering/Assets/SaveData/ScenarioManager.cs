@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using UnityEngine;
+using System.Collections;
 
 [CreateAssetMenu(menuName = "Scenario/manager")]
 public class ScenarioManager : ScriptableObject
@@ -20,14 +21,16 @@ public class ScenarioManager : ScriptableObject
 
     public int currentScenarioNum = 1;
 
-    string UserFilePath;
+    public string UserFilePath;
     string filePath;
+
+   
     private void OnEnable()
     {
         filePath = Application.persistentDataPath + "/gamedate.txt";
         Debug.Log(filePath);
 
-        String DateTime = System.DateTime.UtcNow.ToString("HH_mm_ff_dd_MMMMM");
+       /*String DateTime = System.DateTime.UtcNow.ToString("HH_mm_ff_dd_MMMMM");
         UserFilePath = Application.persistentDataPath +"/"+DateTime+"_userdata.txt";
 
         if (!File.Exists(UserFilePath))
@@ -35,8 +38,13 @@ public class ScenarioManager : ScriptableObject
           
            File.WriteAllText(UserFilePath, "Current time: "+ DateTime);
             Debug.Log(UserFilePath);
-        }
+        }*/
     }
+
+
+  
+
+
     public void TestingSave()
     {
         SelecetScenario(1);
