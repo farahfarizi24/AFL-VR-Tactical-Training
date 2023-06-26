@@ -69,7 +69,7 @@ namespace com.DU.CE.LVL
         {
 
 
-            ball = p_NetSpawnerSock.InstantiateNetObject("INT_RugbyBall 1", true, false);
+            ball = p_NetSpawnerSock.InstantiateNetObject("AFLBALL_Active", true, false);
 
         }
 
