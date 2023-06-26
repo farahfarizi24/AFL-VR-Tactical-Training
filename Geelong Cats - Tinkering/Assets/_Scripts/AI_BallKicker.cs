@@ -63,7 +63,7 @@ public class AI_BallKicker : MonoBehaviour
        if(cursorInstance!= null)
         {
             Debug.Log("LAUNCHBALL");
-            LaunchBall();
+       //     LaunchBall();
         }
             
       
