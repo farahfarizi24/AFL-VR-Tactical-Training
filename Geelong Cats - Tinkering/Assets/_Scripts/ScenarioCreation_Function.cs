@@ -760,7 +760,7 @@ public class ScenarioCreation_Function : MonoBehaviour
             playerObject.GetComponent<AI_Avatar>().isReviewRunning = false;
 
             playerObject.GetComponent<AI_Avatar>().isScenarioRunning = false;
-            
+            playerObject.GetComponent<AI_Avatar>().AIModel.SetActive(true);
         }
     
         /* if (TimerTxt.activeSelf != true)
