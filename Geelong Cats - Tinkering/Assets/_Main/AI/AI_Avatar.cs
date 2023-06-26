@@ -203,20 +203,21 @@ namespace com.DU.CE.AI
                 if(BallReceiver || IsPositionReference)
                 {
 
-                    if (isScenarioRunning) { OutlineScript.enabled = false; HighlightOn = false; }
+                    if (isScenarioRunning) 
+                    { OutlineScript.enabled = false; HighlightOn = false; }
                    // if (isReviewRunning) OutlineScript.enabled = true;
                 }
 
                 if(BallReceiver && isReviewRunning)
                 {
-                    OutlineScript.enabled = true;
+                   // OutlineScript.enabled = true;
                     HighlightOn = true;
                 }
 
                 if (BallReceiver)
                 {
                     if (isCreatingState) 
-                    { OutlineScript.enabled = false;
+                    { //OutlineScript.enabled = false;
                         HighlightOn = false; }
                 }
 
@@ -388,14 +389,14 @@ namespace com.DU.CE.AI
             if (toggle == false)
             {
           
-                OutlineScript.enabled = false;
-                HighlightOn = false;
+              //  OutlineScript.enabled = false;
+            //    HighlightOn = false;
             }
             else
             {
                 OutlineScript.OutlineColor = Color.yellow;
-                OutlineScript.enabled = true;
-                HighlightOn = true;
+             //   OutlineScript.enabled = true;
+               // HighlightOn = true;
              //   Color32 col = new Color32(231, 49, 203, 255);
              //   m_linkedPin.SetPinColour(col);
 
@@ -419,8 +420,8 @@ namespace com.DU.CE.AI
         public void SetBallReceiverOutline(bool status)
         {
             //will only be turned on during review
-            OutlineScript.enabled = status;
-            HighlightOn = status;
+          //  OutlineScript.enabled = status;
+          //  HighlightOn = status;
         }
         public void SetPlayerReferenceOutline(bool status)
         {
