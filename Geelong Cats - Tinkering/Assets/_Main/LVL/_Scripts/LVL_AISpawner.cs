@@ -166,7 +166,7 @@ namespace com.DU.CE.LVL
 
             p_LevelStateMachineSock.OnRequestStateChange(ELVLSTATE.SETUP_USERCOMPONENTS);
 
-            this.gameObject.SetActive(false);
+           // this.gameObject.SetActive(false);
         }
 
         // Called by parent class

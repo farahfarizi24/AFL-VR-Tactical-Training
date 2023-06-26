@@ -673,7 +673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25291fbeeeb3fcd428080bdd091aac2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ModelObject: {fileID: 0}
+  ModelObject: {fileID: 2236562906717497299}
   m_UserSock: {fileID: 11400000, guid: 5d3d18b0a55b6f149ae341e05e04bf28, type: 2}
   m_IKResolver: {fileID: 7230028093578974739}
   m_NameTextField: {fileID: 133032379109823284}
@@ -956,6 +956,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3f0d1cb16dd46d44baedd82817c8d52, type: 3}
+--- !u!1 &2236562906717497299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c3f0d1cb16dd46d44baedd82817c8d52,
+    type: 3}
+  m_PrefabInstance: {fileID: 1425591372097460866}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2237135617634530756
 PrefabInstance:
   m_ObjectHideFlags: 0
