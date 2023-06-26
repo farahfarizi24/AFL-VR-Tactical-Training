@@ -214,7 +214,9 @@ namespace com.DU.CE.AI
 
                 if (BallReceiver)
                 {
-                    if (isCreatingState) { OutlineScript.enabled = false; HighlightOn = false; }
+                    if (isCreatingState) 
+                    { OutlineScript.enabled = false;
+                        HighlightOn = false; }
                 }
 
                 
@@ -271,6 +273,7 @@ namespace com.DU.CE.AI
             if (value)
             {
               OutlineScript.enabled = true;
+                HighlightOn = true;
              //   m_outline.OutlineColor = Color.yellow;
                 m_numberText.color = Color.yellow;
 
@@ -279,6 +282,7 @@ namespace com.DU.CE.AI
             else
             {
               OutlineScript.enabled = false;
+                HighlightOn = false;
                 m_numberText.color = Color.white;
             }
         }
@@ -296,12 +300,13 @@ namespace com.DU.CE.AI
             if (value)
             {
                OutlineScript.enabled = true;
-              //  m_outline.OutlineColor = Color.green;
+                HighlightOn = true;
+                //  m_outline.OutlineColor = Color.green;
                 m_numberText.color = Color.green;
             }
             else
             {
-              OutlineScript.enabled = false;
+              OutlineScript.enabled = false; HighlightOn = false;
                 m_numberText.color = Color.white;
 
                 m_linkedPin.UpdatePinPosition();
@@ -325,21 +330,25 @@ namespace com.DU.CE.AI
         void INT_ILinkedPinObject.SetHighlight()
         {
             OutlineScript.enabled = true;
+            HighlightOn = true;
             OutlineScript.OutlineColor = Color.yellow;
         }
         void INT_ILinkedPinObject.ResetHighlight()
         {
             OutlineScript.enabled = false;
+            HighlightOn = false;
         }
 
         public void UnsetHighlight()
         {
             OutlineScript.enabled = false;
+            HighlightOn = false;
         }
         public void UnlinkedSetHighlight()
         {
             OutlineScript.OutlineColor = Color.yellow;
             OutlineScript.enabled = true;
+            HighlightOn = true;
             Color32 col = new Color32(236, 245, 0, 255);
             m_linkedPin.SetPinColour(col, true);
 
@@ -351,10 +360,12 @@ namespace com.DU.CE.AI
             if(toggle == false)
             {
                 OutlineScript.enabled = false;
+                HighlightOn = false;
             }
             else
             {
                 OutlineScript.enabled = true;
+                HighlightOn = true;
             }
             model.isHighlightActivated = HighlightOn;
         }
@@ -366,11 +377,13 @@ namespace com.DU.CE.AI
             {
           
                 OutlineScript.enabled = false;
+                HighlightOn = false;
             }
             else
             {
                 OutlineScript.OutlineColor = Color.yellow;
                 OutlineScript.enabled = true;
+                HighlightOn = true;
              //   Color32 col = new Color32(231, 49, 203, 255);
              //   m_linkedPin.SetPinColour(col);
 
@@ -395,12 +408,14 @@ namespace com.DU.CE.AI
         {
             //will only be turned on during review
             OutlineScript.enabled = status;
+            HighlightOn = status;
         }
         public void SetPlayerReferenceOutline(bool status)
         {
             
             //will only be turned on during review and at the beginning of the stage
             OutlineScript.enabled = status;
+            HighlightOn = status;
         }
 
         
@@ -426,19 +441,19 @@ namespace com.DU.CE.AI
 
                 OutlineScript.OutlineColor = Color.cyan;
                 OutlineScript.enabled = false;
-             
+                HighlightOn = false;
                 //   m_linkedPin.UnsetPinRing();
 
-                
+
             }
             else
             {
 
                 OutlineScript.OutlineColor = Color.cyan;
-                OutlineScript.enabled = true;
-             //   m_linkedPin.SetPinRing();
+                OutlineScript.enabled = true; HighlightOn = true;
+                //   m_linkedPin.SetPinRing();
 
-      
+
 
             }
             model.isPlayerReference = PlayerReference;
@@ -501,6 +516,7 @@ namespace com.DU.CE.AI
 
             Color32 col = new Color32(255, 255, 255, 255);
             OutlineScript.enabled = false;
+            HighlightOn = false;
             m_linkedPin.UnsetPinRing();
 
 
