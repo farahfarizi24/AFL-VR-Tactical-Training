@@ -38,6 +38,7 @@ public class BallCatch : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         BallHolder = false;
+        anim.SetBool(HoldBall, false);
         BallOwnership.transform.SetParent(null);
         mainBodyrb.isKinematic = true;
         rb.isKinematic = false;
@@ -49,8 +50,8 @@ public class BallCatch : MonoBehaviour
             BallCatcher = true; 
             Debug.Log("Ball Destination entered, catcher true");
             BallDestination = collider.gameObject;
-           
             
+
             SetCatchingAnim();
         }
 
@@ -71,6 +72,19 @@ public class BallCatch : MonoBehaviour
 
     }
 
+
+    private void GrabBall()
+    {
+
+        BallOwnership.transform.parent = BallHoldPoint.transform;
+        BallOwnership.transform.position = BallHoldPoint.transform.position;
+        BallOwnership.transform.GetChild(0).position = BallOwnership.transform.position;
+
+        ballSensor.SensorTrigger = false;
+
+        anim.SetBool(HoldBall, true);
+    }
+
     private void OnTriggerExit(Collider other)
     {
      //   if (other.gameObject.CompareTag("BallDestination")) { BallCatcher = false; Debug.Log("Ball Destination exited, catcher false"); }
@@ -84,26 +98,28 @@ public class BallCatch : MonoBehaviour
 
         if (BallDestination.transform.position.y > 1.5)
         {
-            anim.SetTrigger("HighCatch");
-
-            Courutine = WaitForActionAnimToFinish("HighCatch");
-            if (ballSensor.SensorTrigger == true)
-            {
-
-               BallOwnership.transform.GetChild(0).position = BallOwnership.transform.position;
-            }
-            StartCoroutine(Courutine);
-        }
-        else
-        {
-
-            anim.SetTrigger("LowCatch");
-            Courutine = WaitForActionAnimToFinish("LowCatch");
             if (ballSensor.SensorTrigger == true)
             {
 
                 BallOwnership.transform.GetChild(0).position = BallOwnership.transform.position;
             }
+            anim.SetTrigger("HighCatch");
+
+            Courutine = WaitForActionAnimToFinish("HighCatch");
+        
+            StartCoroutine(Courutine);
+        }
+        else
+        {
+            if (ballSensor.SensorTrigger == true)
+            {
+
+                BallOwnership.transform.GetChild(0).position = BallOwnership.transform.position;
+            }
+
+            anim.SetTrigger("LowCatch");
+            Courutine = WaitForActionAnimToFinish("LowCatch");
+            
             StartCoroutine(Courutine);
         }
     }
