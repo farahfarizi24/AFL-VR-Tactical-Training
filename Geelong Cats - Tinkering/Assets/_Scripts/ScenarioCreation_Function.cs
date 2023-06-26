@@ -68,7 +68,7 @@ public class ScenarioCreation_Function : MonoBehaviour
     public Button MarkPlayer;
     public Button InitiatePosition;
     public Button DeleteBall;
-
+    public GameObject dustbin;
    public GameObject[] balls;
     // public Button MarkerPin;
     public Button SaveEntireScenario;
@@ -114,10 +114,10 @@ public class ScenarioCreation_Function : MonoBehaviour
         Debug.Log("Deleting Ball");
        
         balls = GameObject.FindGameObjectsWithTag("BallContainer");
-
+        dustbin = GameObject.FindGameObjectWithTag("Dustbin");
         foreach (GameObject ball in balls)
         {
-            Destroy(ball);
+            ball.transform.position = dustbin.transform.position;
           
         }
     }
