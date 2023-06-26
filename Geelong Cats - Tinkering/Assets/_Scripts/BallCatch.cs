@@ -28,7 +28,19 @@ public class BallCatch : MonoBehaviour
     void Update()
     {
 
+        if (BallHolder == true)
+        {
+            StartCoroutine(HoldBeforeDroppingTheBall());
+        }
+    }
 
+    IEnumerator HoldBeforeDroppingTheBall()
+    {
+        yield return new WaitForSeconds(3);
+        BallHolder = false;
+        BallOwnership.transform.SetParent(null);
+        mainBodyrb.isKinematic = true;
+        rb.isKinematic = false;
     }
 
     private void OnTriggerEnter(Collider collider)
