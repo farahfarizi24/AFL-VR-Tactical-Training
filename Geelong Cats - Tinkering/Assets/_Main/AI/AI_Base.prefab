@@ -765,6 +765,8 @@ MonoBehaviour:
   prevBallReceiver: 0
   IsPositionReference: 0
   prevPositionReference: 0
+  HighlightOn: 0
+  prevHighlightOn: 0
   isScenarioRunning: 0
   isReviewRunning: 0
   isCreatingState: 0
@@ -2370,7 +2372,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.44
+  m_Radius: 0.87
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
