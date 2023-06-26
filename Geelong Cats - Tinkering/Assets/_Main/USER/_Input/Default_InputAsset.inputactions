@@ -142,6 +142,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LeftButtons",
+                    "type": "Button",
+                    "id": "ab3cc64a-32e2-4bbe-93f4-804332317ae1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -252,6 +261,28 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "LeftTriggerPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e3fa533b-4fbe-4c89-bf2c-62956456ab9c",
+                    "path": "<OculusTouchController>/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftButtons",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c9a13bb-95c1-4f9d-a24b-4101dd683982",
+                    "path": "<OculusTouchController>/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftButtons",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -400,6 +431,15 @@
                     "name": "RightTriggerPress",
                     "type": "Button",
                     "id": "0fac12d5-2645-4f86-b683-c79552bb7607",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightButtons",
+                    "type": "Button",
+                    "id": "1349e929-7262-4ce7-85bd-cf1b3ec4da51",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -602,6 +642,28 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "RightTriggerPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e596b34e-5a1c-471a-bbf3-100a2372ca76",
+                    "path": "<OculusTouchController>/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightButtons",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "388c239a-53c3-4286-976a-234006d69934",
+                    "path": "<OculusTouchController>/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightButtons",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

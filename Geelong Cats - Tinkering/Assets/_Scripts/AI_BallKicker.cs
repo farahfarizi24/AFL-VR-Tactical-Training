@@ -20,6 +20,8 @@ public class AI_BallKicker : MonoBehaviour
    private GameObject EndPointCursor = null;
     public InputActionReference RightTrigger;
     public InputActionReference LeftTrigger ;
+    
+
     public BallCatch ThisAIBallOwnership;
     public Color lineCanShootMaterial, lineCantShootMaterial, lineInvisible;
     public GameObject ballObject;
@@ -69,7 +71,7 @@ public class AI_BallKicker : MonoBehaviour
     private void LeftTriggerPress(InputAction.CallbackContext context)
     {
        
-            cursorInstance.transform.GetChild(0).gameObject.SetActive(false);
+          //  cursorInstance.transform.GetChild(0).gameObject.SetActive(false);
 
 
     }

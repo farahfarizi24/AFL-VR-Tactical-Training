@@ -35,6 +35,7 @@ TagManager:
   - Audio
   - Review
   - Player_Collider
+  - BallSpawner
   layers:
   - Default
   - TransparentFX
