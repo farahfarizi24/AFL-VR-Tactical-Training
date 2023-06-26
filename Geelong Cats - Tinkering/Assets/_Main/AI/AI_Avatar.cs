@@ -44,7 +44,8 @@ namespace com.DU.CE.AI
         public bool IsPositionReference = false;
         public bool prevPositionReference = false;
 
-
+        public bool HighlightOn = false;
+        public bool prevHighlightOn = false;
         //This control whether scenario or running or not, when scenario is running all outline should be hidden
         //but if scenario on review all outline can be shown again
         public bool isScenarioRunning;
@@ -76,6 +77,7 @@ namespace com.DU.CE.AI
                 previousModel.isActivatedDidChange -= OnActivated;
                 previousModel.isBallReceiverDidChange -= OnBallReceiverChanged;
                 previousModel.isPlayerReferenceDidChange -= OnPlayerReferenceChanged;
+                previousModel.isHighlightActivatedDidChange -= OnHighlightActivatedChanged;
             }
 
 
@@ -90,6 +92,7 @@ namespace com.DU.CE.AI
                     currentModel.isActivated = false;
                     currentModel.isPlayerReference = IsPositionReference;
                     currentModel.isBallReceiver = BallReceiver;
+                    currentModel.isHighlightActivated = HighlightOn;
                     // Instantiate a Board Pin
                     m_boardSock.AIInstantiateCall(transform);
 
@@ -97,16 +100,20 @@ namespace com.DU.CE.AI
                 }
 
                 // Register for NormCore events
+                currentModel.isHighlightActivatedDidChange += ChangeHighlight;
                 currentModel.teamDidChange += InitializeTeam;
                 currentModel.numberDidChange += InitializeNumber;
                 currentModel.isSelectedDidChange += OnSelectChanged;
                 currentModel.isActivatedDidChange += OnActivated;
                 currentModel.isBallReceiverDidChange += OnBallReceiverChanged;
                 currentModel.isPlayerReferenceDidChange += OnPlayerReferenceChanged;
+                currentModel.isHighlightActivatedDidChange += OnHighlightActivatedChanged;
+
                 m_team = (ETEAM)model.team;
                 m_teamNumber = model.number;
                 BallReceiver = model.isBallReceiver;
                 IsPositionReference = model.isPlayerReference;
+                HighlightOn = model.isHighlightActivated;
                 m_numberText.SetText(model.number.ToString());
                 Activate(currentModel.isActivated);
             }
@@ -164,6 +171,12 @@ namespace com.DU.CE.AI
 
                 }
 
+                if(HighlightOn != prevHighlightOn)
+                {
+                    prevHighlightOn = HighlightOn;
+                    setHighlightStatus(HighlightOn);
+                }
+
                 if (BallReceiver && !OutlineScript.enabled && !isScenarioRunning)
                 {
                     OutlineScript.OutlineColor = Color.yellow;
@@ -183,23 +196,25 @@ namespace com.DU.CE.AI
                 if (IsPositionReference && !OutlineScript.enabled && !isScenarioRunning)
                 {
                     OutlineScript.enabled = true;
+                    HighlightOn = true;
                 }
 
                 if(BallReceiver || IsPositionReference)
                 {
-                 
-                    if (isScenarioRunning) OutlineScript.enabled = false;
+
+                    if (isScenarioRunning) { OutlineScript.enabled = false; HighlightOn = false; }
                    // if (isReviewRunning) OutlineScript.enabled = true;
                 }
 
                 if(BallReceiver && isReviewRunning)
                 {
                     OutlineScript.enabled = true;
+                    HighlightOn = true;
                 }
 
                 if (BallReceiver)
                 {
-                    if (isCreatingState) OutlineScript.enabled = false;
+                    if (isCreatingState) { OutlineScript.enabled = false; HighlightOn = false; }
                 }
 
                 
@@ -268,6 +283,11 @@ namespace com.DU.CE.AI
             }
         }
 
+        private void OnHighlightActivatedChanged(NCM_AvatarModel model, bool value)
+        {
+            Debug.Log("OnHighlightActivatedChanged");
+            OutlineScript.enabled = value;
+        }
         private void OnSelectChanged(NCM_AvatarModel model, bool value)
         {
           //  m_rigidBody.isKinematic = value;
@@ -288,8 +308,11 @@ namespace com.DU.CE.AI
             }
         }
 
+
+
         #endregion
 
+    
 
 
         //////THis script below toggle the highlights ona nd off
@@ -323,6 +346,20 @@ namespace com.DU.CE.AI
             
         }
 
+        public void setHighlightStatus(bool toggle)
+        {
+            if(toggle == false)
+            {
+                OutlineScript.enabled = false;
+            }
+            else
+            {
+                OutlineScript.enabled = true;
+            }
+            model.isHighlightActivated = HighlightOn;
+        }
+
+
         public void setBallReceiver(bool toggle)
         {
             if (toggle == false)
@@ -348,6 +385,7 @@ namespace com.DU.CE.AI
            // setBallReceiver(toggle);
         }
 
+
         #endregion
 
 
@@ -364,6 +402,8 @@ namespace com.DU.CE.AI
             //will only be turned on during review and at the beginning of the stage
             OutlineScript.enabled = status;
         }
+
+        
         #endregion
 
 

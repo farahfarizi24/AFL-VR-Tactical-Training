@@ -40,6 +40,10 @@ namespace com.DU.CE.NET.NCM
 
         [RealtimeProperty(6, true, true)]
         private bool _isPlayerReference;
+
+
+        [RealtimeProperty(7, true, true)]
+        private bool _isHighlightActivated;
     }
 }
 
@@ -115,6 +119,24 @@ namespace com.DU.CE.NET.NCM {
 
         }
 
+
+        public bool isHighlightActivated
+        {
+            get
+            {
+                return _cache.LookForValueInCache(_isHighlightActivated, entry => entry.isHighlightActivatedSet, entry => entry.isHighlightActivated);
+            }
+            set
+            {
+                if (this.isHighlightActivated == value) return;
+                _cache.UpdateLocalCache(entry => { entry.isHighlightActivatedSet = true; entry.isHighlightActivated = value; return entry; });
+                InvalidateReliableLength();
+                FireIsHighlightDidChange(value);
+            }
+
+        }
+
+
         public bool isActivated {
             get {
                 return _cache.LookForValueInCache(_isActivated, entry => entry.isActivatedSet, entry => entry.isActivated);
@@ -134,7 +156,7 @@ namespace com.DU.CE.NET.NCM {
         public event PropertyChangedHandler<bool> isActivatedDidChange;
         public event PropertyChangedHandler<bool> isPlayerReferenceDidChange;
         public event PropertyChangedHandler<bool> isBallReceiverDidChange;
-        
+        public event PropertyChangedHandler<bool> isHighlightActivatedDidChange;
         private struct LocalCacheEntry {
             public bool numberSet;
             public int number;
@@ -148,6 +170,8 @@ namespace com.DU.CE.NET.NCM {
             public bool isPlayerReference;
             public bool isBallReceiverSet;
             public bool isBallReceiver;
+            public bool isHighlightActivated;
+            public bool isHighlightActivatedSet;
         }
         
         private LocalChangeCache<LocalCacheEntry> _cache = new LocalChangeCache<LocalCacheEntry>();
@@ -158,7 +182,8 @@ namespace com.DU.CE.NET.NCM {
             IsSelected = 3,
             IsActivated = 4,
             IsBallReceiver = 5,
-            IsPlayerReference=6
+            IsPlayerReference=6,
+                IsHighlightActivated=7
         }
         
         public NCM_AvatarModel() : this(null) {
@@ -215,6 +240,17 @@ namespace com.DU.CE.NET.NCM {
             }
         }
 
+        private void FireIsHighlightDidChange(bool value)
+        {
+            try
+            {
+                isHighlightActivatedDidChange?.Invoke(this, value);
+            }
+            catch (System.Exception exception)
+            {
+                UnityEngine.Debug.LogException(exception);
+            }
+        }
         private void FireBallReceiverDidChange(bool value)
         {
             try
@@ -237,7 +273,10 @@ namespace com.DU.CE.NET.NCM {
                 length += WriteStream.WriteVarint32Length((uint)PropertyID.IsActivated, _isActivated ? 1u : 0u);
                 length += WriteStream.WriteVarint32Length((uint)PropertyID.IsBallReceiver, _isBallReceiver ? 1u : 0u);
                 length += WriteStream.WriteVarint32Length((uint)PropertyID.IsPlayerReference, _isPlayerReference ? 1u : 0u);
-            } else if (context.reliableChannel) {
+                length += WriteStream.WriteVarint32Length((uint)PropertyID.IsHighlightActivated, _isHighlightActivated ? 1u : 0u);
+
+            }
+            else if (context.reliableChannel) {
                 LocalCacheEntry entry = _cache.localCache;
                 if (entry.numberSet) {
                     length += WriteStream.WriteVarint32Length((uint)PropertyID.Number, (uint)entry.number);
@@ -260,6 +299,11 @@ namespace com.DU.CE.NET.NCM {
                 {
                     length += WriteStream.WriteVarint32Length((uint)PropertyID.IsPlayerReference, entry.isPlayerReference ? 1u : 0u);
                 }
+
+                if (entry.isHighlightActivatedSet)
+                {
+                    length += WriteStream.WriteVarint32Length((uint)PropertyID.IsHighlightActivated, entry.isHighlightActivated ? 1u : 0u);
+                }
             }
             return length;
         }
@@ -274,7 +318,10 @@ namespace com.DU.CE.NET.NCM {
                 stream.WriteVarint32((uint)PropertyID.IsActivated, _isActivated ? 1u : 0u);
                 stream.WriteVarint32((uint)PropertyID.IsPlayerReference, _isPlayerReference ? 1u : 0u);
                 stream.WriteVarint32((uint)PropertyID.IsBallReceiver, _isBallReceiver ? 1u : 0u);
-            } else if (context.reliableChannel) {
+                stream.WriteVarint32((uint)PropertyID.IsHighlightActivated, _isHighlightActivated ? 1u : 0u);
+
+            }
+            else if (context.reliableChannel) {
                 LocalCacheEntry entry = _cache.localCache;
                 if (entry.numberSet || entry.teamSet || entry.isSelectedSet || entry.isActivatedSet) {
                     _cache.PushLocalCacheToInflight(context.updateID);
@@ -306,6 +353,12 @@ namespace com.DU.CE.NET.NCM {
                 if (entry.isBallReceiverSet)
                 {
                     stream.WriteVarint32((uint)PropertyID.IsBallReceiver, entry.isBallReceiver ? 1u : 0u);
+                    didWriteProperties = true;
+                }
+
+                if (entry.isHighlightActivatedSet)
+                {
+                    stream.WriteVarint32((uint)PropertyID.IsHighlightActivated, entry.isHighlightActivated ? 1u : 0u);
                     didWriteProperties = true;
                 }
 
@@ -343,15 +396,29 @@ namespace com.DU.CE.NET.NCM {
                         }
                         break;
                     }
-                    case (uint)PropertyID.IsActivated: {
-                        bool previousValue = _isActivated;
-                        _isActivated = (stream.ReadVarint32() != 0);
-                        bool isActivatedExistsInChangeCache = _cache.ValueExistsInCache(entry => entry.isActivatedSet);
-                        if (!isActivatedExistsInChangeCache && _isActivated != previousValue) {
-                            FireIsActivatedDidChange(_isActivated);
+                    case (uint)PropertyID.IsActivated:
+                        {
+                            bool previousValue = _isActivated;
+                            _isActivated = (stream.ReadVarint32() != 0);
+                            bool isActivatedExistsInChangeCache = _cache.ValueExistsInCache(entry => entry.isActivatedSet);
+                            if (!isActivatedExistsInChangeCache && _isActivated != previousValue)
+                            {
+                                FireIsActivatedDidChange(_isActivated);
+                            }
+                            break;
                         }
-                        break;
-                    }
+                     case (uint)PropertyID.IsHighlightActivated:
+                        {
+                            bool previousValue = _isHighlightActivated;
+                            _isHighlightActivated = (stream.ReadVarint32() != 0);
+                            bool isHighlightActivatedExistsInChangeCache = _cache.ValueExistsInCache(entry => entry.isHighlightActivatedSet);
+                            if (!isHighlightActivatedExistsInChangeCache && _isHighlightActivated != previousValue)
+                            {
+                                FireIsHighlightDidChange(_isHighlightActivated);
+                            }
+                            break;
+
+                        }
 
 
                     case (uint)PropertyID.IsBallReceiver:
@@ -396,6 +463,7 @@ namespace com.DU.CE.NET.NCM {
             _team = team;
             _isSelected = isSelected;
             _isActivated = isActivated;
+            _isHighlightActivated = isHighlightActivated;
             _cache.Clear();
         }
         
