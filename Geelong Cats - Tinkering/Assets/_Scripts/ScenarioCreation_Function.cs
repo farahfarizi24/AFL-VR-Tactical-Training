@@ -91,7 +91,7 @@ public class ScenarioCreation_Function : MonoBehaviour
             MarkPlayer.onClick.AddListener(SetMarkerPlayer);
         BackButton.onClick.AddListener(BackToSelection);
         ReviewButton.onClick.AddListener(ReviewMode);
-        ReviewButton.onClick.AddListener(DeleteAllBall);
+        DeleteBall.onClick.AddListener(DeleteAllBall);
         InitiatePosition.onClick.AddListener(InitiateScenario);
             SaveEntireScenario.onClick.AddListener(delegate { SaveScenario(ScenarioNumber); });
 
