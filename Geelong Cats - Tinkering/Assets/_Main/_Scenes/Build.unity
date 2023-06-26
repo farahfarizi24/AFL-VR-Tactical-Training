@@ -1624,7 +1624,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &582856992
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1723,7 +1723,7 @@ MonoBehaviour:
   flightTime: 3
   audioSource: {fileID: 0}
   endPoint: {fileID: 1156593110}
-  ball: {fileID: 0}
+  ball: {fileID: 3264108119439838905, guid: 3dc5432a2b9ae0346a4897fbc5170759, type: 3}
   howOftenToShoot: 5
   firstTimeDelay: 10
 --- !u!1 &649701122

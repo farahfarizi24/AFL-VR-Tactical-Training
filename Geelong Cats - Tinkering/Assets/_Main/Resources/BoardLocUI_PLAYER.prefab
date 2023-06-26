@@ -986,5 +986,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562343bf0b9a26a418e4dbd9e90052e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Canvas: {fileID: 0}
-  m_PinMesh: {fileID: 0}
+  m_Canvas: {fileID: 3133712655973254604}
+  m_PinMesh: {fileID: 2503299430930025505}
