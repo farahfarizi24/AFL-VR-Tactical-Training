@@ -290,7 +290,42 @@ namespace com.DU.CE.AI
         private void OnHighlightActivatedChanged(NCM_AvatarModel model, bool value)
         {
             Debug.Log("OnHighlightActivatedChanged");
-            OutlineScript.enabled = value;
+
+
+
+            if (IsPositionReference && !OutlineScript.enabled && !isScenarioRunning)
+            {
+                OutlineScript.OutlineColor = Color.cyan;
+                OutlineScript.enabled = true;
+               
+            }
+
+            if (BallReceiver || IsPositionReference)
+            {
+
+                if (isScenarioRunning) {
+                    OutlineScript.enabled = false; 
+                    
+                }
+                // if (isReviewRunning) OutlineScript.enabled = true;
+            }
+
+            if (BallReceiver && isReviewRunning)
+            {
+                OutlineScript.OutlineColor = Color.yellow;
+
+                OutlineScript.enabled = true;
+         
+            }
+
+            if (BallReceiver)
+            {
+                if (isCreatingState)
+                {
+                    OutlineScript.enabled = false;
+                   
+                }
+            }
         }
         private void OnSelectChanged(NCM_AvatarModel model, bool value)
         {
