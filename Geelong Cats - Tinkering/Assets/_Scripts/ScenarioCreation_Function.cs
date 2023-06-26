@@ -69,7 +69,8 @@ public class ScenarioCreation_Function : MonoBehaviour
     public Button InitiatePosition;
     public Button DeleteBall;
 
-   // public Button MarkerPin;
+   public GameObject[] balls;
+    // public Button MarkerPin;
     public Button SaveEntireScenario;
     public bool BallTargetting;
     public bool PlayerReferenceTarrgetting;
@@ -110,13 +111,11 @@ public class ScenarioCreation_Function : MonoBehaviour
 
     public void DeleteAllBall()
     {
-        
-        GameObject[] balls;
+        Debug.Log("Deleting Ball");
+       
         balls = GameObject.FindGameObjectsWithTag("BallContainer");
 
         foreach (GameObject ball in balls)
-
-            
         {
             Destroy(ball);
           
