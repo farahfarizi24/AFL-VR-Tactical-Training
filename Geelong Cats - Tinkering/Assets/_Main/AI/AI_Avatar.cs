@@ -183,11 +183,19 @@ namespace com.DU.CE.AI
                     OutlineScript.OutlineColor = Color.yellow;
 
                     OutlineScript.enabled = true;
+                    HighlightOn = true;
+
+                    if (HighlightOn != prevHighlightOn)
+                    {
+                        setHighlightStatus(HighlightOn);
+                        prevHighlightOn = HighlightOn;
+
+                    }
                 }
 
-               
 
-                if(IsPositionReference != prevPositionReference)
+
+                if (IsPositionReference != prevPositionReference)
                 {
                     OutlineScript.OutlineColor = Color.green;
                     SetPlayerReference(IsPositionReference);
@@ -198,12 +206,29 @@ namespace com.DU.CE.AI
                 {
                     OutlineScript.enabled = true;
                     HighlightOn = true;
+
+                    if (HighlightOn != prevHighlightOn)
+                    {
+                        setHighlightStatus(HighlightOn);
+                        prevHighlightOn = HighlightOn;
+
+                    }
                 }
 
                 if(BallReceiver || IsPositionReference)
                 {
 
-                    if (isScenarioRunning) { OutlineScript.enabled = false; HighlightOn = false; }
+                    if (isScenarioRunning) { OutlineScript.enabled = false; HighlightOn = false;
+
+
+                        if (HighlightOn != prevHighlightOn)
+                        {
+                            setHighlightStatus(HighlightOn);
+                            prevHighlightOn = HighlightOn;
+
+                        }
+
+                    }
                    // if (isReviewRunning) OutlineScript.enabled = true;
                 }
 
@@ -211,13 +236,29 @@ namespace com.DU.CE.AI
                 {
                     OutlineScript.enabled = true;
                     HighlightOn = true;
+
+                    if (HighlightOn != prevHighlightOn)
+                    {
+                        setHighlightStatus(HighlightOn);
+                        prevHighlightOn = HighlightOn;
+
+                    }
                 }
 
                 if (BallReceiver)
                 {
                     if (isCreatingState) 
                     { OutlineScript.enabled = false;
-                        HighlightOn = false; }
+                        HighlightOn = false;
+
+
+                        if (HighlightOn != prevHighlightOn)
+                        {
+                            setHighlightStatus(HighlightOn);
+                            prevHighlightOn = HighlightOn;
+
+                        }
+                    }
                 }
 
                 
