@@ -225,7 +225,7 @@ namespace com.DU.CE.AI
             // Disable Parent
             m_interactable.enabled = toggle;
             m_navMeshAgent.enabled = toggle;
-            m_rigidBody.isKinematic = !toggle;
+          //  m_rigidBody.isKinematic = !toggle;
             m_interactable.colliders[0].enabled = toggle;
             m_meshRenderer.enabled = toggle;
             m_uiElementsParent.SetActive(toggle);
@@ -270,7 +270,7 @@ namespace com.DU.CE.AI
 
         private void OnSelectChanged(NCM_AvatarModel model, bool value)
         {
-            m_rigidBody.isKinematic = value;
+          //  m_rigidBody.isKinematic = value;
             m_navMeshAgent.isStopped = true;
 
             if (value)

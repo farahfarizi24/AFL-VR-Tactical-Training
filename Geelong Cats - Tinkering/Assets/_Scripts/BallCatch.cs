@@ -136,6 +136,8 @@ public class BallCatch : MonoBehaviour
         ballSensor.SensorTrigger = false;
         
         anim.SetBool(HoldBall, true);
+        rb.isKinematic = true;
+        mainBodyrb.isKinematic = true;
         Debug.Log("Ball ownership completed");
      
     }
