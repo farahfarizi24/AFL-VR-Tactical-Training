@@ -173,8 +173,9 @@ namespace com.DU.CE.AI
 
                 if(HighlightOn != prevHighlightOn)
                 {
-                    prevHighlightOn = HighlightOn;
                     setHighlightStatus(HighlightOn);
+                    prevHighlightOn = HighlightOn;
+           
                 }
 
                 if (BallReceiver && !OutlineScript.enabled && !isScenarioRunning)
