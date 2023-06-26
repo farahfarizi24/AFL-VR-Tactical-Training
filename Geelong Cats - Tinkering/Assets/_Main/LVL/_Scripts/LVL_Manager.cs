@@ -8,6 +8,7 @@ namespace com.DU.CE.LVL
     {
         [Header("SOCs")]
         public GameObject CoachInterface;
+        public GameObject ConnectionScreen;
        // public GameObject ConnectionUI;
         [SerializeField] private SOC_LvlStateMachine m_StateMachineSock = null;
         [SerializeField] private SOC_NetManager m_NetManagerSock = null;
@@ -65,6 +66,8 @@ namespace com.DU.CE.LVL
             {
                 m_StateMachineSock.OnRequestStateChange(ELVLSTATE.ONCONNECT_PLAYER);
                 CoachInterface.SetActive(false);
+                ConnectionScreen.SetActive(false);
+
             }
         }
     }
