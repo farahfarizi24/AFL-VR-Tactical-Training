@@ -100,7 +100,7 @@ namespace com.DU.CE.AI
                 }
 
                 // Register for NormCore events
-                currentModel.isHighlightActivatedDidChange += ChangeHighlight;
+            
                 currentModel.teamDidChange += InitializeTeam;
                 currentModel.numberDidChange += InitializeNumber;
                 currentModel.isSelectedDidChange += OnSelectChanged;
