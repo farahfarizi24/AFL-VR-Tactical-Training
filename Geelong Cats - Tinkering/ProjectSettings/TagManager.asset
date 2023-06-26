@@ -37,6 +37,7 @@ TagManager:
   - Player_Collider
   - BallSpawner
   - Dustbin
+  - UserPlayer
   layers:
   - Default
   - TransparentFX

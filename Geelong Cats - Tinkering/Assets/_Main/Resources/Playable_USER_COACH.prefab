@@ -1087,6 +1087,7 @@ GameObject:
   - component: {fileID: 4082873965338778218}
   - component: {fileID: 4586054493989062375}
   - component: {fileID: 6913062448636689476}
+  - component: {fileID: 7578258046595302471}
   m_Layer: 0
   m_Name: Playable_USER_COACH
   m_TagString: coach
@@ -1246,6 +1247,18 @@ MonoBehaviour:
   hands:
   - {fileID: 4297071002490512529}
   - {fileID: 8276320801930416889}
+--- !u!114 &7578258046595302471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8163357266020540742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cf98a2f190e1c2439b97dea1003b872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1014457752367363907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3123,9 +3136,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2537225453445272891 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -1522449968463491187, guid: 933129fded864924fbff5f7b9f84e8e1,
+--- !u!1 &4780663203684754415 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8380793116740044455, guid: 933129fded864924fbff5f7b9f84e8e1,
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
@@ -3435,9 +3448,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4780663203684754415 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8380793116740044455, guid: 933129fded864924fbff5f7b9f84e8e1,
+--- !u!4 &2537225453445272891 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1522449968463491187, guid: 933129fded864924fbff5f7b9f84e8e1,
     type: 3}
   m_PrefabInstance: {fileID: 5325826287514852022}
   m_PrefabAsset: {fileID: 0}
