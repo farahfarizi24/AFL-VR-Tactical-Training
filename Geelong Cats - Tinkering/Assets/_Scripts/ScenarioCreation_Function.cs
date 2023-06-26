@@ -67,6 +67,8 @@ public class ScenarioCreation_Function : MonoBehaviour
         public Button BallTarget;
     public Button MarkPlayer;
     public Button InitiatePosition;
+    public Button DeleteBall;
+
    // public Button MarkerPin;
     public Button SaveEntireScenario;
     public bool BallTargetting;
@@ -88,6 +90,7 @@ public class ScenarioCreation_Function : MonoBehaviour
             MarkPlayer.onClick.AddListener(SetMarkerPlayer);
         BackButton.onClick.AddListener(BackToSelection);
         ReviewButton.onClick.AddListener(ReviewMode);
+        ReviewButton.onClick.AddListener(DeleteAllBall);
         InitiatePosition.onClick.AddListener(InitiateScenario);
             SaveEntireScenario.onClick.AddListener(delegate { SaveScenario(ScenarioNumber); });
 
@@ -103,6 +106,21 @@ public class ScenarioCreation_Function : MonoBehaviour
     {
         ScenarioEditorObj.SetActive(false);
         UICreationScript.CreateNewScenario();
+    }
+
+    public void DeleteAllBall()
+    {
+        
+        GameObject[] balls;
+        balls = GameObject.FindGameObjectsWithTag("BallContainer");
+
+        foreach (GameObject ball in balls)
+
+            
+        {
+            Destroy(ball);
+          
+        }
     }
 
     public void ReviewMode()
