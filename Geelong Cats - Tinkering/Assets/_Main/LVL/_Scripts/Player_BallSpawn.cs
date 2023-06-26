@@ -54,7 +54,8 @@ namespace com.DU.CE.LVL
         internal void SpawnBall()
         {
 
-            ball = p_NetSpawnerSock.InstantiateNetObject("AFLBALL_Active", true, false);
+            ball = GameObject.FindGameObjectWithTag("BallContainer");
+            ball.gameObject.transform.parent = ball.gameObject.transform;
             ball.transform.position = shootPoint.position;
         }
 
