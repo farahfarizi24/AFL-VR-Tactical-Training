@@ -605,6 +605,7 @@ GameObject:
   - component: {fileID: 8532398370776706457}
   - component: {fileID: 3038980974651441517}
   - component: {fileID: 4721069698336318275}
+  - component: {fileID: 6207923997406647634}
   m_Layer: 0
   m_Name: USER_LocalPlayer_Player
   m_TagString: Untagged
@@ -760,6 +761,18 @@ MonoBehaviour:
   hands:
   - {fileID: 8153115208048095175}
   - {fileID: 241297118534345698}
+--- !u!114 &6207923997406647634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8184238515867011825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c00b9f072fd9a04086cd16d10bed4ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &17948176242361704
 PrefabInstance:
   m_ObjectHideFlags: 0

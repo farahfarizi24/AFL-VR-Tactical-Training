@@ -61,6 +61,7 @@ namespace com.DU.CE.LVL
             {
                 m_StateMachineSock.OnRequestStateChange(ELVLSTATE.ONCONNECT_COACH);
                 CoachInterface.SetActive(true);
+
             }
             else
             {

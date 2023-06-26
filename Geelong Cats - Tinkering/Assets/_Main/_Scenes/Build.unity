@@ -1624,7 +1624,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &582856992
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5222,6 +5222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CoachInterface: {fileID: 8132845917947366610, guid: 10f20793e3d706e42bdf81e69ab5d37e,
     type: 3}
+  ConnectionScreen: {fileID: 2061227633}
   m_StateMachineSock: {fileID: 11400000, guid: 6e2eab29f3cf71d45a07ecd545797b7c, type: 2}
   m_NetManagerSock: {fileID: 11400000, guid: 3e4bd6b8cd1c4e64989a64c427c32952, type: 2}
   m_StadiumPropertiesSock: {fileID: 11400000, guid: 409f75c0562bbfc40a52160583b981ba,
