@@ -47,12 +47,18 @@ public class SaveSystem : MonoBehaviour
             for (int i = 0; i < playerObject.Length; i++)
             {
                 String DateTime = System.DateTime.UtcNow.ToString("HH_mm_ff_dd_MMMMM");
+                File.AppendAllText(UserFilePath, "\n");
                 File.AppendAllText(UserFilePath, "User:" + i);
+                File.AppendAllText(UserFilePath, "\n");
                 File.AppendAllText(UserFilePath, "Time:" + DateTime);
+                File.AppendAllText(UserFilePath, "\n");
                 vector = playerObject[i].transform.position;
                 File.AppendAllText(UserFilePath, "Position:" + vector.ToString("F3"));
+                File.AppendAllText(UserFilePath, "\n");
                 vector = playerObject[i].transform.rotation.eulerAngles;
                 File.AppendAllText(UserFilePath, "Rotation:" + vector.ToString("F3"));
+                File.AppendAllText(UserFilePath, "\n");
+                File.AppendAllText(UserFilePath, "\n");
 
             }
 
