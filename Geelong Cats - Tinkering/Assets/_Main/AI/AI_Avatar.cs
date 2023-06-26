@@ -296,10 +296,12 @@ namespace com.DU.CE.AI
             if (value)
             {
                 OutlineScript.enabled = true;
+                Debug.Log("Outline enabled");
             }
             else
             {
                 OutlineScript.enabled = false;
+                Debug.Log("Outline disabled");
             }
         }
         private void OnSelectChanged(NCM_AvatarModel model, bool value)
