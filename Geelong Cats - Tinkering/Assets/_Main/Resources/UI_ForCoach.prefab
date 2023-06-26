@@ -2765,7 +2765,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5915183520053135647
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7987,7 +7987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2039444261087488344
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8171,6 +8171,7 @@ MonoBehaviour:
   MarkPlayer: {fileID: 2749609416934354633}
   InitiatePosition: {fileID: 1103154655676843848}
   DeleteBall: {fileID: 6767581825026627146}
+  dustbin: {fileID: 0}
   balls: []
   SaveEntireScenario: {fileID: 1070032241001649183}
   BallTargetting: 0
