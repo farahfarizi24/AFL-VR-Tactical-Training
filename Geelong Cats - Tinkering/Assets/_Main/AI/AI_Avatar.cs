@@ -293,39 +293,13 @@ namespace com.DU.CE.AI
             Debug.Log("OnHighlightActivatedChanged");
 
 
-
-            if (IsPositionReference && !OutlineScript.enabled && !isScenarioRunning)
+            if (value)
             {
-                OutlineScript.OutlineColor = Color.cyan;
                 OutlineScript.enabled = true;
-               
             }
-
-            if (BallReceiver || IsPositionReference)
+            else
             {
-
-                if (isScenarioRunning) {
-                    OutlineScript.enabled = false; 
-                    
-                }
-                // if (isReviewRunning) OutlineScript.enabled = true;
-            }
-
-            if (BallReceiver && isReviewRunning)
-            {
-                OutlineScript.OutlineColor = Color.yellow;
-
-                OutlineScript.enabled = true;
-         
-            }
-
-            if (BallReceiver)
-            {
-                if (isCreatingState)
-                {
-                    OutlineScript.enabled = false;
-                   
-                }
+                OutlineScript.enabled = false;
             }
         }
         private void OnSelectChanged(NCM_AvatarModel model, bool value)
