@@ -188,6 +188,12 @@ namespace com.DU.CE.AI
                 {
                  
                     if (isScenarioRunning) OutlineScript.enabled = false;
+                   // if (isReviewRunning) OutlineScript.enabled = true;
+                }
+
+                if(BallReceiver && isReviewRunning)
+                {
+                    OutlineScript.enabled = true;
                 }
 
                 if (BallReceiver)
@@ -195,6 +201,7 @@ namespace com.DU.CE.AI
                     if (isCreatingState) OutlineScript.enabled = false;
                 }
 
+                
 
             }
         }

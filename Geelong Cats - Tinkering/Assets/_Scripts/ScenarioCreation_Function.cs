@@ -107,24 +107,37 @@ public class ScenarioCreation_Function : MonoBehaviour
 
     public void ReviewMode()
     {
+        TurnOffCreatingState();
         isReviewing = true;
+
         LoadScenario(ScenarioNumber);
 
         ScenarioRunToggle = true;
     }
 
+    public void TurnOffCreatingState()
+    {
+        for (int i = 0; i < AIObject.Count(); i++)
+        {
 
+            AIObject[i].GetComponent<AI_Avatar>().isCreatingState = false;
+
+
+
+        }
+    }
     public void InitiateScenario()
     {   
-        LoadScenario(ScenarioNumber);
+       
         for (int i = 0; i < AIObject.Count(); i++)
         {
             
                 AIObject[i].GetComponent<AI_Avatar>().isCreatingState = true;
-            
+
 
 
         }
+        LoadScenario(ScenarioNumber);
     }
 
     #endregion
@@ -252,17 +265,18 @@ public class ScenarioCreation_Function : MonoBehaviour
 
         public void QuickRunScenario()
         {
-       
-        LoadScenario(ScenarioNumber);
+        TurnOffCreatingState();
         for (int i = 0; i < AIObject.Count(); i++)
         {
-
-            AIObject[i].GetComponent<AI_Avatar>().isCreatingState = false;
-
+           AIObject[i].GetComponent<AI_Avatar>().isScenarioRunning = true;
 
 
         }
-        ScenarioRunToggle = true; 
+        ScenarioRunToggle = true;
+
+        LoadScenario(ScenarioNumber);
+       
+        
     
     
     }
@@ -738,28 +752,31 @@ public class ScenarioCreation_Function : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         LVL_SoundManager.PlayMusic("EndWhistle");
+        isReviewing = false;
         foreach (var player in AIObject)
         {
             var playerObject = GameObject.Find(player.name);
 
-          
+            playerObject.GetComponent<AI_Avatar>().isReviewRunning = false;
+
             playerObject.GetComponent<AI_Avatar>().isScenarioRunning = false;
-            isReviewing = false;
+            
         }
-            /* if (TimerTxt.activeSelf != true)
+    
+        /* if (TimerTxt.activeSelf != true)
+         {
+
+             TimerTxt.SetActive(true);
+             for (ActionCountdown = 10; ActionCountdown > 0; ActionCountdown -= Time.deltaTime)
              {
+                 string time = ActionCountdown.ToString("F1");
+                 string text = "Time left: " + time;
+                // TimerTxt.GetComponent<TextMeshProUGUI>().SetText(text);
 
-                 TimerTxt.SetActive(true);
-                 for (ActionCountdown = 10; ActionCountdown > 0; ActionCountdown -= Time.deltaTime)
-                 {
-                     string time = ActionCountdown.ToString("F1");
-                     string text = "Time left: " + time;
-                    // TimerTxt.GetComponent<TextMeshProUGUI>().SetText(text);
-
-                     yield return null;
-                 }
-                 TimerTxt.SetActive(false);*/
-            AnalysePerformance();
+                 yield return null;
+             }
+             TimerTxt.SetActive(false);*/
+        AnalysePerformance();
 
 
     }
@@ -813,8 +830,9 @@ public class ScenarioCreation_Function : MonoBehaviour
              player.GetComponent<AI_Avatar>().AvatarRotation[1]);
             playerObject.GetComponent<INT_ILinkedPinObject>().SetFinalPosition();
             if (!isReviewing)
-            playerObject.GetComponent<AI_Avatar>().isScenarioRunning = true;
-      
+                playerObject.GetComponent<AI_Avatar>().isScenarioRunning = true;
+            if(isReviewing) playerObject.GetComponent<AI_Avatar>().isReviewRunning = true;
+
         }
         ScenarioCompletedToggle = true;
   
