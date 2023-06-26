@@ -37,18 +37,20 @@ namespace com.DU.CE.LVL
         public void SpawnBall(InputAction.CallbackContext context)
         {
 
+          //  Ball_prefab = p_NetSpawnerSock.InstantiateNetObject(Ball_prefab.name, true, false);
             m_rugbyBall = p_NetSpawnerSock.InstantiateNetObject(Ball_prefab.name, true, false).transform;
             m_rugbyBall.transform.position = spawnPoint.position;
         }
 
         protected override IEnumerator OnCoachSetup()
         {
-            throw new System.NotImplementedException();
+         
+            yield return null;
         }
 
         protected override IEnumerator OnPlayerSetup()
         {
-            throw new System.NotImplementedException();
+            yield return null;
         }
     }
 
