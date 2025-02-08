@@ -152,7 +152,7 @@ namespace EPOOutline
             Predicate<Outlinable> editorPredicate = obj =>
                 {
 #if UNITY_EDITOR
-                    var stage = UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
+                    var stage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
 
                     return stage == null || stage.IsPartOfPrefabContents(obj.gameObject);
 #else
@@ -163,7 +163,7 @@ namespace EPOOutline
             Predicate<Outlinable> gamePredicate = obj =>
                 {
 #if UNITY_EDITOR
-                    var stage = UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
+                    var stage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
 
                     return stage == null || !stage.IsPartOfPrefabContents(obj.gameObject);
 #else
