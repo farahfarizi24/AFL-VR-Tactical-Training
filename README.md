@@ -1,8 +1,8 @@
 # AFL VR Tactical Training
 
 This software is built in collaboration with an Australian Football League team as part of Farah Farizi's (repository owner) research supporting her PhD candidature. Software is deployable in Meta Quest 1, 2, 3, and Pro devices, and will require two controllers to operate.
-
-[Latest prototype video](https://drive.google.com/file/d/1sexfwHZHr3-1ksgPxO-reH3E9gBr9Pkk/view?usp=sharing)
+[![Cycle cave set up image](VRAFLImage.png)](https://drive.google.com/file/d/1GdpGhumgBdW0KTfHtgOIXVQxr1_lTiDW/view?usp=sharing)
+Click the image above to preview the demonstration video
 
 ## Software Overview
 * An Internet connection is required
